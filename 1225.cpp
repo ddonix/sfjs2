@@ -16,12 +16,12 @@ int main(int argc, char **argv)
 			res[j] = 0;
 		for(j = 1; j <= m; j++)
 		{
-			sprintf(buff, "%d", i);
+			sprintf(buff, "%d", j);
 			for(k = 0; buff[k] != 0; k++)
 				res[buff[k]-'0']++;
 		}
 		for(j = 0; j < 9; j++)
-			printf("%d ", res[i]);
+			printf("%d ", res[j]);
 		printf("%d\n", res[9]);
 	}
 }
