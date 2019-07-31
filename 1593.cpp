@@ -12,16 +12,23 @@ vector<string> data[MAXLINE];
 
 int main()
 {
-	int i;
-	string s;
+	int i,j;
+	string s,t;
 
 	int cn;
+	int rn;
+	
 	int cnm[MAXCOL];
 
 	i = 0;
 	while(cin>>s)
 	{
 		istringstream ss(s);
+		j = 0;
+		while(ss>>t)
+		{
+			data[i].push_back(t);
+		}
 	}
 	return 0;
 }
