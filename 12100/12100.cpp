@@ -10,20 +10,23 @@ int main()
 	while(ka--)
 	{
 		int n,m,t;
-		int mp;
+		int mp,maxp;
 		int time;
 		bool flag;
 		list<int> l;
 		list<int>::iterator it;
 		
 		cin>>n>>m;
+		maxp = 1;
 		for(int i = 0; i < n; i++)
 		{
 			cin>>t;
+			if(t > maxp)
+				maxp = t;
 			if (i == m)
 			{
 				mp = t;
-				t += 10;
+				t = -t;
 			}
 			l.push_back(t);
 		}
@@ -32,11 +35,37 @@ int main()
 		while(flag)
 		{
 			t = l.front();
-			it = l.begin();
-			for(it++; it != l.end(); it++)
+			l.pop_front();
+			if(t < 0)
 			{
-				if (*it > mp)
+				if (mp >= maxp)
+				{
+					time++;
+					flag = false;
 					break;
+				}
+				else
+				{
+					l.push_back(t);
+				}
+			}
+			else
+			{
+				if (t >= maxp)
+				{
+					time++;
+					maxp = 1;
+					for(it = l.begin(); it != l.end(); it++)
+					{
+						int p = (*it > 0) ? *it : -1*(*it);
+						if(p > maxp) 
+							maxp = p;
+					}
+				}
+				else
+				{
+					l.push_back(t);
+				}
 			}
 
 		}
