@@ -1,5 +1,5 @@
 #include <iostream>
-#include <set>
+#include <vector>
 
 using namespace std;
 
@@ -9,54 +9,62 @@ int main()
 	cin>>t;
 	while(t--)
 	{
-		int n;
+		int n,i;
 		int min, max, middle;
 		int x,y;
-		set<long long> s;
+		vector<int> v;
 		cin>>n;
 
-		min = 10000;
-		max = -10000;
-		for(int i = 0; i < n; i++)
+		v.resize(n);
+		
+		min = 20002;
+		max = 0;
+		for(i = 0; i < n; i++)
 		{
 			cin>>x>>y;
+			x += 10001;
+			y += 10001;
+			
 			if (x > max)
 				max = x;
 			if (x < min)
 				min = x;
-			s.insert(x | (long long) y << 32);
+			v[i] = ((unsigned int)x |((unsigned int)y << 16));
 		}
-		if((min+max)%2)
+		bool flag;
+
+		middle = min+max;
+		flag = true;
+		
+		for(i = 0; i < n; i++)
 		{
-			cout<<"NO"<<endl;
-			continue;
-		}
-		else
-		{
-			bool flag = true;
-			middle = min+max;
-			cout<<middle<<endl;
-			set<long long>::iterator it = s.begin();
-			while(it++ != s.end())
+			unsigned int t = v[i];
+			if (0 == t)
+				continue;
+			
+			unsigned int l = t & 0x0000ffff;
+			if (l+l == middle)
+				continue;
+			
+			unsigned int t1 = ((unsigned int)(middle-l) | (t & 0xffff0000)); 
+			int j;
+			for(j = i+1; j < n; j++)
 			{
-				long long t = *it, t1;
-				int l;
-				
-				l = int(t & 0xffffffff);
-				if (l == middle)	
-					continue;
-				cout<<t;
-				if (s.count((long long)(middle-l) | (t & 0xffffffff00000000)) < 1)
+				if(v[j] == t1)
 				{
-					flag = false;
-					cout<<"NNN "<<l<<" "<<middle-l<<endl;
+					v[j] = 0;
 					break;
 				}
 			}
-			if (flag)
-				cout<<"YES"<<endl;
-			else
-				cout<<"NO"<<endl;
+			if (j == n)
+			{
+				flag = false;
+				break;
+			}
 		}
+		if (flag)
+			cout<<"YES"<<endl;
+		else
+			cout<<"NO"<<endl;
 	}
 }
