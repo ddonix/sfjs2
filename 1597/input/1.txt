@@ -1,0 +1,104 @@
+4
+one   repeat  repeat  repeat
+A manufacturer, importer, or seller of
+digital media devices may not (1) sell,
+or offer for sale, in interstate commerce,
+or (2) cause to be transported in, or in a
+manner affecting, interstate commerce,
+a digital media device unless the device
+includes and utilizes standard security
+technologies that adhere to the security
+system standards.
+**********
+one two   repeat  repeat  repeat   repeat
+Of course, Lisa did not necessarily
+intend to read his books. She might
+want the computer only to write her
+midterm. But Dan knew she came from
+a middle-class family and could hardly
+afford the tuition, let alone her reading
+fees. Books might be the only way she
+could graduate
+**********
+one two three   repeat   repeat  repeat  repeat   repeat
+Research in analysis (i.e., the evaluation
+of the strengths and weaknesses of
+computer system) is essential to the
+development of effective security, both
+for works protected by copyright law
+and for information in general. Such
+research can progress only through the
+open publication and exchange of
+complete scientific results
+**********
+one two three   four   repeat  repeat   repeat  repeat  repeat   repeat
+I am very very very happy!
+What about you?
+**********
+66
+computer
+books AND computer
+books OR protected
+NOT security
+very
+slick
+one
+two
+three
+four
+repeat
+NOT one
+NOT two
+NOT three
+NOT four
+NOT repeat
+one AND one
+one AND two
+one AND three
+one AND four
+one AND repeat
+two AND one
+two AND two
+two AND three
+two AND four
+two AND repeat
+three AND one
+three AND two
+three AND three
+three AND four
+three AND repeat
+four AND one
+four AND two
+four AND three
+four AND four
+four AND repeat
+repeat AND one
+repeat AND two
+repeat AND three
+repeat AND four
+repeat AND repeat
+one OR one
+one OR two
+one OR three
+one OR four
+one OR repeat
+two OR one
+two OR two
+two OR three
+two OR four
+two OR repeat
+three OR one
+three OR two
+three OR three
+three OR four
+three OR repeat
+four OR one
+four OR two
+four OR three
+four OR four
+four OR repeat
+repeat OR one
+repeat OR two
+repeat OR three
+repeat OR four
+repeat OR repeat
