@@ -2,94 +2,92 @@
 #include <algorithm>
 #include <vector>
 #include <string>
-#include <map>
 #include <stack>
+#include <map>
 
 using namespace std;
-	
-map<string, string> m;
-
-struct Author 
+struct Book
 {
-	string name;
-	vector<string> book;
-
-	Author(const string &s, const string &b)
+	string author;
+	int state;		//the state of a book. 	
+				//0:on shelve,  1:borrow,  2:on table
+				//
+	Book()
 	{
-		name = s;
-		book.push_back(b);
 	}
-
-	bool operator < (Author & right) const
+	
+	Book(const string &a)
 	{
-		return name < right.name;
+		author = a;
+		state = 0;
 	}
 };
 
-struct FindByAuthorTitle
+map<string, Book> m;
+bool cmp(const string &a, const string &b)
 {
-	FindByAuthorTitle(const string &s, int t) : str(s), type(t)
-	{}
-	
-	bool operator()(const Author & b)
-	{
-		if (type)
-			return m[str] == b.name;
-		return str == b.name;
-	}
-	string str;
-	int type;
-};
+	if (m[a].author == m[b].author)
+		return a < b;
+	return m[a].author < m[b].author;
+}
 
 int main()
 {
-	vector<Author> db;
-	vector<Author>::iterator it;
-	vector<string>::iterator it2;
+	vector<string> db;
+	vector<string>::iterator it;
 	string::size_type p;
-
 	string s, title, author;
-	
-	while(getline(cin,s) && s != "END" && s != "END\r")
+
+	while(getline(cin,s) && s[0] != 'E')
 	{
        		p = s.find("\"", 1);
-		title = s.substr(1, p-1);
+		title = s.substr(0, p+1);
 		author = s.substr(p+5);
-
-		m[title] = author;
-		it = find_if(db.begin(), db.end(), FindByAuthorTitle(author, 0));
-		if (it == db.end())
-			db.push_back(Author(author, title));
-		else
-			(*it).book.push_back(title);
+		
+		m[title] = Book(author);
+		db.push_back(title);
 	}
-	for(it = db.begin(); it != db.end(); it++)
-		sort((*it).book.begin(), (*it).book.end());
-	sort(db.begin(), db.end());
+	sort(db.begin(), db.end(), cmp);
 	
-	stack<string> rt;
-	while(getline(cin,s) && s != "END" && s != "END\r")
+	while(cin>>s && s[0] != 'E')
 	{
 		string s1;
-		cout<<s<<endl;
-		if (s[0] == 'B')
+		if (s[0] != 'S')
 		{
-			cout<<s1<<endl;
-			s1 = s.substr(8, s.length()-10);
-			it = find_if(db.begin(), db.end(), FindByAuthorTitle(s1, 1));
-			it2 = find((*it).book.begin(), (*it).book.end(), s1);
-			(*it).book.erase(it2);
+			getchar();
+			getline(cin,s1);
+			s1 = s1.substr(0,s1.find('\"', 1)+1);
+			it = find(db.begin(), db.end(), s1);
+			if (s[0] == 'B')
+				m[*it].state = 1;
+			else
+				m[*it].state = 2;
 		}
-		else if (s[0] == 'R')
+		else 
 		{
-			s1 = s.substr(8, s.length()-10);
-			rt.push(s1);
-			cout<<s1<<endl;
-		}
-		else
-		{
-		
+			for(int i = 0; i < db.size(); i++)
+			{
+				int j;
+				if(m[db[i]].state != 2)
+					continue;
+				cout<<"Put "<<db[i];
+				for(j = i; j > 0; j--)
+				{
+					if (m[db[j]].state == 0)
+						break;
+				}
+
+				if (m[db[j]].state == 0)
+				{
+					cout<<" after "<<db[j]<<endl;
+				}
+				else
+				{
+					cout<<" first"<<endl;
+				}
+				m[db[i]].state = 0;
+			}
+			cout<<"END"<<endl;
 		}
 	}
-	cout<<"END"<<endl;
 }

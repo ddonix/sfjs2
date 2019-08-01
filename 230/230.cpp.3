@@ -1,0 +1,129 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <map>
+#include <stack>
+
+using namespace std;
+
+map<string, string> m;
+
+struct Book 
+{
+	string title;
+	string author;
+
+	Book(const string & t, const string &a)
+	{
+		title = t;
+		author = a;
+	}
+	
+	bool operator < (Book & right) const
+	{
+		if (author < right.author)
+			return true;
+		if (author > right.author)
+			return false;
+		return title < right.title;
+	}
+};
+
+struct Find
+{
+	Find(const string &s, int t) : str(s), type(t)
+	{}
+	
+	bool operator()(const Book & b)
+	{
+		if (0 == type)
+			return str == b.title;
+		string a = m[str];
+//		cout<<endl<<"t:"<<str<<endl;
+//		cout<<"a:"<<a<<endl;
+		if (b.author < a)
+			return false;
+		if (b.author > a)
+			return true;
+		return b.title >= str;
+	}
+	string str;
+	int type; //0: str == title, 1:insert position
+};
+
+int main()
+{
+	vector<Book> db;
+	vector<Book>::iterator it;
+	string::size_type p;
+	string s, title, author;
+
+	int windows = 2;
+	
+	while(getline(cin,s) && s != "END" && s != "END\r")
+	{
+       		p = s.find("\"", 1);
+		title = s.substr(1, p-1);
+		author = s.substr(p+5);
+		
+		m[title] = author;
+		db.push_back(Book(title, author));
+	}
+	sort(db.begin(), db.end());
+	
+	stack<string> rt;
+	while(getline(cin,s) && s != "END" && s != "END\r")
+	{
+		string s1;
+		if(windows == 2)
+		{
+			if (s[s.length()-1] == '\r')
+				windows = 1;
+			else
+				windows = 0;
+		}
+		
+		if (s[0] == 'B')
+		{
+			if (windows)
+				s1 = s.substr(8, s.length()-10);
+			else
+				s1 = s.substr(8, s.length()-9);
+			
+			it = find_if(db.begin(), db.end(), Find(s1, 0));
+			db.erase(it);
+		}
+		else if (s[0] == 'R')
+		{
+			if (windows)
+				s1 = s.substr(8, s.length()-10);
+			else
+				s1 = s.substr(8, s.length()-9);
+			rt.push(s1);
+		}
+		else
+		{
+			while(!rt.empty())
+			{
+				s1 = rt.top();
+				rt.pop();
+				cout<<"Put \""<<s1<<"\" ";
+				it = find_if(db.begin(), db.end(), Find(s1, 1));
+				if (it == db.begin())
+					cout<<"first"<<endl;
+				else
+				{
+					it--;
+					cout<<"after \""<<(*it).title<<"\""<<endl;
+					it++;
+				}
+				db.insert(it, Book(s1, m[s1]));
+			}
+			cout<<"END"<<endl;
+		}
+	//	for(it = db.begin(); it != db.end(); it++)
+	//		for(it2 = (*it).book.begin(); it2 != (*it).book.end(); it2++)
+	//			cout<<*it2<<" * "<<(*it).name<<endl;
+	}
+}
