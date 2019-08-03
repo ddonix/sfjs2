@@ -25,7 +25,8 @@ struct MAP
 		s = (y1 < y2) ? y1 : y2;
 		
 		area  = (n-s)*(e-w);
-		ratio = (n-s)/(e-w);
+		ratio = (n-s)/(e-w) - 0.75;
+		ratio = (ratio > 0) ? ratio  : -ratio;
 	}
 	
 	MAP(const MAP & m)
@@ -43,54 +44,57 @@ struct MAP
 struct LOCATION
 {
 	double x, y;
+	
 	bool mflag;
 	vector<int> mindex;
 
 	LOCATION(){}
-	LOCATION(double xx, double yy):x(xx), y(yy) {}
+	LOCATION(double xx, double yy):x(xx), y(yy) 
+	{
+		mflag = false;
+	}
+	
 	LOCATION(const LOCATION & loca)
 	{
 		x = loca.x;
 		y = loca.y;
 		mflag = false;
 	}
-
-}; 
+};
 
 vector<MAP> maps;
 map<string, LOCATION> locations;
 
-MAP op(const MAP & m)
+class cmp
 {
-	return m;
-}
+public:	
+	cmp(double xx, double yy) : x(xx), y(yy) {}
+	bool operator()(int a, int b) const 
+	{
+		if (maps[a].area != maps[b].area)
+			return maps[a].area > maps[b].area;
+	
+		double length1, length2;
+		length1 = (2*x-maps[a].w-maps[a].e)*(2*y-maps[a].n-maps[a].s);
+		length2 = (2*x-maps[b].w-maps[b].e)*(2*y-maps[b].n-maps[b].s);
+		if (length1 != length2)
+			return length1 > length2;
+	
+		if (maps[a].ratio != maps[b].ratio)
+			return maps[a].ratio > maps[b].ratio;
+	
+		double lowr1, lowr2;
+		lowr1 = (maps[a].e-x)*(maps[a].e-x)+(y-maps[a].s)*(y-maps[a].s);
+		lowr2 = (maps[b].e-x)*(maps[b].e-x)+(y-maps[b].s)*(y-maps[b].s);
+		if (lowr1 != lowr2)
+			return lowr1 > lowr2;
 
-double currx, curry;
-bool cmp(int a, int b)
-{
-	if (maps[a].area != maps[b].area)
-		return maps[a].area > maps[b].area;
-	
-	double length1, length2;
-	length1 = (2*currx-maps[a].w-maps[a].e)*(2*curry-maps[a].n-maps[a].s);
-	length2 = (2*currx-maps[b].w-maps[b].e)*(2*curry-maps[b].n-maps[b].s);
-	if (length1 != length2)
-		return length1 > length2;
-	
-	double ratio1, ratio2;
-	ratio1 = maps[a].ratio >= 0.75 ? (maps[a].ratio - 0.75) : (0.75 - maps[a].ratio);
-	ratio2 = maps[b].ratio >= 0.75 ? (maps[b].ratio - 0.75) : (0.75 - maps[b].ratio);
-	if (ratio1 != ratio2)
-		return ratio1 > ratio2;
-	
-	double lowr1, lowr2;
-	lowr1 = (maps[a].e-currx)*(maps[a].e-currx)+(curry-maps[a].s)*(curry-maps[a].s);
-	lowr2 = (maps[b].e-currx)*(maps[b].e-currx)+(curry-maps[b].s)*(curry-maps[b].s);
-	if (lowr1 != lowr2)
-		return lowr1 > lowr2;
+		return maps[a].w > maps[b].w;
+	}
 
-	return maps[a].w > maps[b].w;
-}
+private:	
+	double x, y;
+};
 
 int main()
 {
@@ -121,10 +125,10 @@ int main()
 	{
 		int level;
 		cin>>level;
-		cout<<s<<" at detail level "<<level<<" ";
+		cout<<s<<" at detail level "<<level;
 		if(locations.count(s) < 1)
 		{
-			cout<<"unknown location"<<endl;
+			cout<<" unknown location"<<endl;
 			continue;
 		}
 		if(!locations[s].mflag)
@@ -138,13 +142,11 @@ int main()
 				if(x > maps[i].w && x < maps[i].e && y > maps[i].s && y < maps[i].n)
 					locations[s].mindex.push_back(i);
 			}
-			currx = x;
-			curry = y;
-			sort(locations[s].mindex.begin(), locations[s].mindex.end(), cmp);
+			sort(locations[s].mindex.begin(), locations[s].mindex.end(), cmp(x,y));
 			for(int i = 0; i < locations[s].mindex.size(); i++)
 			{
 				int j = locations[s].mindex[i];
-	//			cout<<maps[j].name<<" "<<maps[j].area<<endl;
+			//	cout<<maps[j].name<<" "<<maps[j].area<<endl;
 			}
 			locations[s].mflag = true;
 		}
@@ -156,6 +158,9 @@ int main()
 			cout<<" no map at that detail level; using "<<maps[i].name<<endl;
 		}
 		else
-			cout<<" using "<<maps[level-1].name<<endl;
+		{
+			int i = locations[s].mindex[level-1];
+			cout<<" using "<<maps[i].name<<endl;
+		}
 	}
 }

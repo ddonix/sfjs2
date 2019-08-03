@@ -1,0 +1,141 @@
+#include <iostream>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+
+using namespace std;
+
+struct Req
+{
+	int num;//		> 0
+	int t_f;//first time. 	>= 0
+	int t_t;//tast time.	> 0
+	int t_b;//between.	> 0
+
+	Req(){}
+	Req(int n, int f, int t, int b):num(n), t_f(f), t_t(t), t_b(b) {}
+
+	set<int> p;	//
+};
+
+struct Per
+{
+	int start_t;	//
+	int prev_t;	//
+	int task;	//
+	Per()
+	{
+		prev_t = start_t = -1;
+	}
+};
+
+struct Task
+{
+	int a;
+	int r;
+
+	int state;		//-1：没安排
+				//0： 已完成
+				//1:  state在进行
+	int b;
+	int e;
+	
+	Task(int aa, int rr) : a(aa), r(rr), state(-1), b(-1), e(-1) {}
+
+	bool operator < (const Task & right) const
+	{
+		return a < right.a;
+	}
+};
+
+int g_time = 0;
+
+int main()
+{
+	int ka = 1;
+	int t;
+	while(cin>>t && t)
+	{
+		map<int, Req> req;
+		map<int, Per> per;
+		vector<Task> task;
+		int t1;
+		
+		for(int i = 0; i < t; i++)
+		{
+			int id, num, f, t, b;
+			cin>>id>>num>>f>>t>>b;
+			req[id] = Req(num, f, t, b);
+			for(int j = 0; j < num; j++)
+				task.push_back(Task(f+b*j, id));
+		}
+		sort(task.begin(), task.end());
+		for(int i = 0; i < task.size(); i++)
+			cout<<task[i].arr<<" "<<task[i].topic<<endl;
+		
+		cin>>t;
+		for(int i = 0; i < t; i++)
+		{
+			int id, nr, r;
+			cin>>id>>nr;
+			per[id] = Per();
+			
+			for(int j = 0; j < nr; j++)
+			{
+				cin>>r;
+				req[r].p.insert(id);
+			}
+		}
+
+		cout<<"Scenario "<<ka++<<": All requests are serviced within ";
+		g_time = 0;
+		while(1)
+		{
+			vector<int> per_pre;
+			int r = 0;
+			cout<<"g_time:"<<g_time<<endl;
+			for(map<int, Per>::iterator it = per.begin(); it != per.end(); it++)
+			{
+				if ((*it).second.start_t != -1)
+				{
+					int t = (*it).second.task;
+					int r = task[t].topic;
+					if ((g_time - (*it).second.start_t) == req[r].t_t)
+					{
+						(*it).second.prev_t = (*it).second.start_t;
+						(*it).second.start_t = -1;
+					}
+					task[t].state = 0;
+				}
+			}
+			
+			for(int i = 0; i < task.size(); i++)
+			{
+				if(task[i].state == 0)
+					continue;
+				r = 1;
+				if(task[i].state > 0 || (task[i].arr > g_time))
+					continue;
+				vector<int> maybe;
+				int r = task[i].topic;
+				set<int>::iterator it; 
+				for(it = req[r].p.begin(); it != req[r].p.end(); it++)
+				{
+					if(per[*it].start_t < 0)
+						maybe.push_back(*it);
+				}
+				if(maybe.empty())
+					continue;
+				cout<<"S:task "<<i<<" "<<task[i].topic<<endl;
+				task[i].state = 1;
+				per[maybe[0]].start_t = g_time;
+				per[maybe[0]].task = i;
+			}
+			if(r == 0)		//所有任务均完成
+				break;
+			g_time++;
+		}
+		cout<<g_time<<" minutes."<<endl;
+	}
+}

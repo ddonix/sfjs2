@@ -1,0 +1,186 @@
+#include <iostream>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+
+using namespace std;
+
+struct Req
+{
+	int num;//		> 0
+	int t_f;//first time. 	>= 0
+	int t_t;//tast time.	> 0
+	int t_b;//between.	> 0
+
+	Req(){}
+	Req(int n, int f, int t, int b):num(n), t_f(f), t_t(t), t_b(b) {}
+
+	set<int> p;	
+};
+
+struct Per
+{
+	int start_t;	//
+	int prev_t;	//
+	int in;
+	
+	Per(){}
+	
+	Per(int i)
+	{
+		prev_t = start_t = -1;
+	}
+};
+
+struct Task
+{
+	int a;
+	int r;
+
+	int state;		//-1：没安排
+				//0： 已完成
+				//1:  state在进行
+	int b;
+	int e;
+	
+	Task(int aa, int rr) : a(aa), r(rr), state(-1), b(-1), e(-1) {}
+	Task(int aa, int rr, int ss, int bb, int ee) : a(aa), r(rr), state(ss), b(bb), e(ee) {}
+
+	bool operator < (const Task & right) const
+	{
+		return a < right.a;
+	}
+};
+
+void insertEvent(vector<int> &v, int e)
+{
+	vector<int>::iterator it;
+	for(it = v.begin(); it != v.end(); it++)
+	{
+		if(*it == e)
+			return;
+		if(*it > e)
+			break;
+	}
+	v.insert(it, e);
+}
+
+int main()
+{
+	int ka = 1;
+	int t;
+	while(cin>>t && t)
+	{
+		map<int, Req> req;
+		map<int, Per> per;
+		map<int, vector<int> > task_all;
+		vector<Task> task_table;
+		vector<Task> task_wait;
+		vector<int> event;
+		int c_time;
+		
+		int t1;
+	
+		event.clear();
+		for(int i = 0; i < t; i++)
+		{
+			int id, num, f, t, b;
+			cin>>id>>num>>f>>t>>b;
+			req[id] = Req(num, f, t, b);
+			for(int j = 0; j < num; j++)
+			{
+				int t_a = f+b*j;
+				if(task_all.count(t_a) < 1)
+					task_all[t_a] = vector<int>();
+				task_all[t_a].push_back(id);
+			}
+		}
+		for(map<int, vector<int> >::iterator it = task_all.begin(); it != task_all.end(); it++)
+			event.push_back((*it).first);
+		//event.sort(event.begin(), event.end());
+
+		cin>>t;
+		for(int i = 0; i < t; i++)
+		{
+			int id, nr, r;
+			cin>>id>>nr;
+			per[id] = Per(i);
+			
+			for(int j = 0; j < nr; j++)
+			{
+				cin>>r;
+				req[r].p.insert(id);
+			}
+		}
+
+		cout<<"Scenario "<<ka++<<": All requests are serviced within ";
+		
+		int te = 0;
+		c_time = event[te++];
+		while(1)
+		{
+			vector<Task>::iterator it;
+			
+			it = task_table.begin(); 
+			while(it != task_table.end())
+			{
+				if ((*it).e == c_time)
+				{
+					int p = (*it).state;
+					per[p].start_t = -1;
+					it = task_table.erase(it);
+				}
+				else
+					it++;
+			}
+
+			if(task_all.count(c_time))
+			{
+				for(int i = 0; i < task_all[c_time].size(); i++)
+					task_wait.push_back(Task(c_time, task_all[c_time][i]));
+			}
+			
+			it = task_wait.begin(); 
+			while(it != task_wait.end())
+			{
+				vector<int> maybe;
+				int r = (*it).r;
+				for(set<int>::iterator it = req[r].p.begin(); it != req[r].p.end(); it++)
+				{
+					if(per[*it].start_t < 0)
+						maybe.push_back(*it);
+				}
+				if(maybe.empty())
+				{
+					it++;
+					continue;
+				}
+
+				int p = 0;
+				for(int j = 1; j < maybe.size(); j++)
+				{
+					if(per[maybe[j]].prev_t < per[maybe[p]].prev_t)
+						p = j;
+					else if(per[maybe[j]].prev_t == per[maybe[p]].prev_t)
+					{
+						if(per[maybe[j]].in < per[maybe[p]].in)
+							p = j;
+					}
+				}
+				p = maybe[p];
+				
+				insertEvent(event, c_time+req[r].t_t);
+				per[p].prev_t = per[p].start_t = c_time;
+				
+				task_table.push_back(
+						Task((*it).a, (*it).r, p, c_time, c_time+req[r].t_t));
+				it = task_wait.erase(it);
+			}
+			if(c_time == event.back())
+				break;
+			c_time = event[te++];
+		}
+		cout<<c_time<<" minutes."<<endl;
+	}
+}
