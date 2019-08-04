@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> 
 #include <vector>
 #include <map>
 #include <set>
@@ -9,24 +9,29 @@ using namespace std;
 
 struct Req
 {
-	Req(){}
+	Req() {}
 	Req(int t):t_t(t) {}
 
 	int t_t;
 	queue<int> task;
-	set<int> p;
 };
 
 struct Per
 {
-	int start_t;	//
-	int end_t;	//
-	int prev_t;	//
+	int pri;        //优先级，小的高 
+    int n;         //处理req个数
+    vector<int> r;  //处理req的id
 	
-	int pri;
+    int start_t;	//开始时间
+	int end_t;	    //结束时间
+	int prev_t;	    //前次开始时间
+
 	Per(){}
 	
-	Per(int i) : pri(i), prev_t(-1), start_t(-1), end_t(-1) {}
+	Per(int i, int nn) : pri(i), n(nn), prev_t(-1), start_t(-1), end_t(-1) 
+    {
+        r.resize(nn);
+    }
 
 	bool operator < (const Per & right) const
 	{
@@ -37,29 +42,18 @@ struct Per
 };
 
 map<int, Req> req;
-map<int, Per> per;
-const int INF = 0x7fffffff;
+vector<Per> per;
 int c_time;
-
-int get_reqt()
-{
-	int t=INF;
-	for(auto it = req.begin(); it != req.end(); it++)
-		if ((*it).second.task.front() < t)
-			t = (*it).second.task.front();
-	return t;
-}
+const int INF = 1000000;
 
 int main()
 {
 	int ka = 1;
-	int t;
-	int N;
-	while(cin>>t && t)
+	int N, M;
+	while(cin>>N && N)
 	{
-		cout<<"#"<<endl;
-		req.clear();
-		for(int i = 0; i < t; i++)
+        req.clear();
+        for(int i = 0; i < N; i++)
 		{
 			int r, num, f, t, b;
 			cin>>r>>num>>f>>t>>b;
@@ -68,97 +62,70 @@ int main()
 				req[r].task.push(f+b*j);
 		}
 		
-		per.clear();
-		cin>>t;
-		cout<<"*"<<endl;
-		for(int i = 0; i < t; i++)
+        
+		cin>>M;
+        per.clear();
+        per.resize(M);
+		for(int i = 0; i < M; i++)
 		{
-			int id, nr, r;
-			cin>>id>>nr;
-			per[id] = Per(i);
-			for(int j = 0; j < nr; j++)
+			int id, n, r;
+			cin>>id>>n;
+			per[i] = Per(i, n);
+			for(int j = 0; j < n; j++)
 			{
 				cin>>r;
-				req[r].p.insert(id);
+                per[i].r[j] = r;
 			}
 		}
 
 		cout<<"Scenario "<<ka++<<": All requests are serviced within ";
 		c_time = 0;
-		N = req.size();
-		int ct1, ct2;
 		while(N)
 		{
-			cout<<__LINE__<<endl;
-			for(auto it = per.begin(); it != per.end(); it++)
-			{
-				if((*it).second.end_t == c_time)
-				{
-					(*it).second.prev_t = (*it).second.start_t;
-					(*it).second.start_t = (*it).second.end_t = -1;
-				}
-			}
-
-			ct1 = INF;
-			cout<<__LINE__<<endl;
-			for(auto it = req.begin(); it != req.end(); it++)
-			{
-				if((*it).second.task.empty())
-				{
-					req.erase(it);
-					N--;
-					continue;
-				}
-				cout<<__LINE__<<endl;
-				(*it);
-				cout<<__LINE__<<endl;
-				(*it).second;
-				cout<<__LINE__<<endl;
-				(*it).second.task;
-				cout<<__LINE__<<endl;
-				cout<<(*it).second.task.empty()<<endl;
-				cout<<__LINE__<<endl;
-				cout<<(*it).second.task.front();
-				cout<<__LINE__<<endl;
-				int tt = (*it).second.task.front();
-				cout<<__LINE__<<endl;
-				if(tt > c_time)
-				{
-					if (ct1 > tt)
-						ct1 = tt;
-				}
-				else
-				{
-					vector<int> maybe;
-					auto it1=(*it).second.p.begin();
-					for(;it1 != (*it).second.p.end(); it1++)
-						if(per[*it1].start_t < 0)
-							maybe.push_back(*it1);
-					if(maybe.empty())	
-						continue;
-					int p = maybe[0];
-					for(int i = 1; i < maybe.size(); i++)
-					{
-						if(per[maybe[i]] < per[p])
-							p = maybe[i];
-					}
-					per[p].start_t = c_time;
-					per[p].end_t = c_time+(*it).second.t_t;
-					per[p].prev_t = -1;
-					(*it).second.task.pop();
-				}
-			}
-			c_time++;
+            int ct;
+            ct = INF;
+            sort(per.begin(), per.end());
+            for(auto & p:per)
+            {
+                if(p.start_t >= 0)
+                {
+                    if (p.end_t == c_time)
+                    {
+                        p.start_t = p.end_t = -1;
+                    }
+                }
+                if (p.start_t >= 0) 
+                {
+                    ct = (ct < p.end_t) ? ct : p.end_t;
+                    continue;
+                }
+                for(int i = 0; i < p.n; i++)
+                {
+                    Req & r = req[p.r[i]];
+                    if(r.task.empty())
+                        continue;
+                    int st = r.task.front();
+                    if(st > c_time)
+                    {
+                        ct = (ct < st) ? ct : st;
+                        continue;
+                    }
+                    p.prev_t = p.start_t = c_time;
+                    p.end_t = c_time+r.t_t;
+                    ct = (ct < p.end_t) ? ct : p.end_t;
+                    
+                    r.task.pop();
+                    if (r.task.empty())
+                        N--;
+                    break;
+                }
+            }
+            c_time = ct;
 		}
-		ct2 = c_time;
-		cout<<__LINE__<<endl;
-		for(auto it = per.begin(); it != per.end(); it++)
-			if((*it).second.end_t > ct2)
-			{
-				ct2 = (*it).second.end_t;
-				cout<<__LINE__<<endl;
-			}
-		cout<<__LINE__<<endl;
-		cout<<ct2<<" minutes."<<endl;
+        for(auto & p:per)
+        {
+            c_time = (p.end_t > c_time) ? p.end_t : c_time;
+        }
+		cout<<c_time<<" minutes."<<endl;
 	}
 }

@@ -1,5 +1,5 @@
-Scenario 1: All requests are serviced within 13902 minutes.
-Scenario 2: All requests are serviced within 4668 minutes.
+Scenario 1: All requests are serviced within 4668 minutes.
+Scenario 2: All requests are serviced within 13902 minutes.
 Scenario 3: All requests are serviced within 1587 minutes.
 Scenario 4: All requests are serviced within 6807 minutes.
 Scenario 5: All requests are serviced within 1122 minutes.
