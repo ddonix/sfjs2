@@ -1,0 +1,131 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+struct Order
+{
+	Order() :type(3) {};
+	Order(int s, int p,int t) : size(s), price(p), type(t) {}
+	
+	int size;
+	int price;
+	int type;		//0: buy, 1:sell, 2:cancel, >=3:null
+};
+
+bool cmpb(const Order & a, const Order b)
+{
+	if (b.type != 0)
+		return false;
+	else if(a.type != 0)
+		return true;
+	return a.price < b.price;
+}
+
+bool cmps(const Order & a, const Order b)
+{
+	if(b.type != 1)
+		return false;
+	else if(a.type != 1)
+		return true;
+	return a.price > b.price;
+}
+
+int main()
+{
+	int n;
+	while(cin>>n)
+	{
+		vector<Order>  vo;
+		int bs=0, bp=0, as=0, ap=9999, bi = 0, ai = 0;
+		string o;
+		int s, p, t;
+		
+		vo.resize(n+1);
+		for(int i = 1; i <= n; i++)
+		{
+			cin>>o;
+			if(o == "CANCEL")
+			{	
+				cin>>t;
+				if(vo[t].type == 0)
+				{
+					if (vo[t].price == bp)
+					{
+						if (vo[t].size > bs)
+						{
+							bs -= vo[t].size;
+						}
+						else
+						{
+							auto it = max_element(vo.begin(), vo.end(), cmpb);
+							bs = (*it).size;
+							bp = (*it).price;
+						}
+					}
+				}
+				else
+				{
+					if(vo[t].price == ap)
+					{
+						if (vo[t].size > as)
+							as -= vo[t].size;
+						else
+						{
+							auto it = max_element(vo.begin(), vo.end(), cmps);
+							as = (*it).size;
+							ap = (*it).price;
+						}
+					}
+				}
+				cout<<"QUOTO "<<bs<<" "<<bp<<" - "<<as<<" "<<ap<<endl;
+			}
+			else
+			{
+				cin>>s>>p;
+				bool trade = false;
+				if(o == "BUY")
+				{
+					vo[i] = Order(s, p, 0);
+					if (p == bp)
+						bs += s;
+					else if(p > bp)
+					{
+						bp = p;
+						bs = s;
+
+						if (bp >= ap)
+						{
+							int ts;
+							trade = true;
+							if (bs == as)
+							{
+								ts = as;
+								v
+							}
+							cout<<"TRADE"<<ts<<" "<<ap<<endl;
+
+						}
+					}
+					cout<<"QUOTO "<<bs<<" "<<bp<<" - "<<as<<" "<<ap<<endl;
+				}
+				else
+				{
+					vo[i] = Order(s, p, 1);
+					if (p < ap)
+					{
+						as = s;
+						ap = p;
+					}
+					cout<<"QUOTO "<<bs<<" "<<bp<<" - "<<as<<" "<<ap<<endl;
+				}
+				if (flag)
+					cout<<"QUOTO "<<bs<<" "<<bp<<" - "<<as<<" "<<ap<<endl;
+			}
+		}
+		for(int i = 1; i <= n; i++)
+			cout<<vo[i].type<<" "<<vo[i].price<<" "<<endl;
+	}
+}
