@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -8,6 +9,15 @@ struct Point
 {
 	int x;
 	int y;
+	bool operator<(const Point & right)
+	{
+		return true;
+	}
+	
+	bool operator>(const Point & right)
+	{
+		return true;
+	}
 };
 bool cmp(const Point & a, const Point & b)
 {
@@ -15,6 +25,6 @@ bool cmp(const Point & a, const Point & b)
 }
 int main()
 {
-	vector<Point> q;
-	make_heap(q.begin(), q.end(), cmp);
+	map<int , Point> q;
+	make_heap(q.begin(), q.end());
 }

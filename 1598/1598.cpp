@@ -51,41 +51,37 @@ int asks, askp;
 //make_heap has been called.
 void updatebid()
 {
-	auto it = vb.begin();
-	if (it == vb.end())
+	if (vb.empty())
 	{
 		bids = 0;
 		bidp = 0;
 	}
 	else
 	{
+		auto it = vb.begin();
 		bidp = (*it).price;
 		bids = (*it).size;
-		for(auto it = vb.begin()+1; it != vb.end(); it++)
-		{
+		for(it = vb.begin()+1; it != vb.end(); it++)
 			if ((*it).price == bidp)
 				bids += (*it).size;
-		}
 	}
 }
 
 void updateask()
 {
-	auto it = vs.begin();
-	if (it == vs.end())
+	if (vs.empty())
 	{
 		asks = 0;
 		askp = 99999;
 	}
 	else
 	{
+		auto it = vs.begin();
 		askp = (*it).price;
 		asks = (*it).size;
-		for(auto it = vs.begin()+1; it != vs.end(); it++)
-		{
+		for(it = vs.begin()+1; it != vs.end(); it++)
 			if ((*it).price == askp)
 				asks += (*it).size;
-		}
 	}
 }
 
@@ -101,19 +97,14 @@ int main()
 	bool first = true;
 	while(cin>>n)
 	{
-		vb.clear();
 		vs.clear();
-		sb.clear();
+		vb.clear();
 		ss.clear();	
+		sb.clear();
 		bids = bidp = asks=0;
 		askp=99999;
-		if (!first)
-			cout<<endl;
-		else
-			first = false;
 		for(int id = 1; id <= n; id++)
 		{
-			bool flag = false;
 			int s, p;
 			string o;
 			cin>>o;
@@ -124,7 +115,7 @@ int main()
 				if (sb.count(t))
 				{
 					auto it = find_if(vb.begin(), vb.end(), find_by_id(t));
-					if (it != vb.end() )
+					if (it != vb.end())
 					{
 						int s1 = (*it).size;
 						int p1 = (*it).price;
@@ -191,20 +182,14 @@ int main()
 				}
 				while (bidp >= askp && (asks != 0))
 				{
-					flag = true;
 					int size = (bids > asks) ? asks : bids;
-					int sss = 0;
-					while(sss < size)
+					while(size)
 					{
 						int s2;
 						auto itb = vb.begin();
 						auto its = vs.begin();
 						s2 = ((*itb).size < (*its).size) ? (*itb).size : (*its).size;
-						s2 = (s2 + sss > size) ? (size - sss) : s2;
-						sss += s2;
-						if (id == 223)
-						{
-						}
+						s2 = (s2 > size) ? size : s2;
 						if ((*itb).size == s2)
 						{
 							vb.erase(itb);
@@ -220,6 +205,7 @@ int main()
 						}
 						else
 							(*its).size -= s2;
+						size -= s2;
 						cout<<"TRADE "<<s2<<" "<<(o == "BUY" ? askp : bidp)<<endl;
 					}
 					updateba();
@@ -228,5 +214,6 @@ int main()
 			//cout<<"ID:"<<id<<"QUOTE "<<bids<<" "<<bidp<<" - "<<asks<<" "<<askp<<endl;
 			cout<<"QUOTE "<<bids<<" "<<bidp<<" - "<<asks<<" "<<askp<<endl;
 		}
+		cout<<endl;
 	}
 }
