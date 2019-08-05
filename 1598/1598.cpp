@@ -191,7 +191,7 @@ int main()
 
 						if ((*its).size == s2)
 						{
-							vs.erase(its);
+							vs.erase(its );
 						}
 						else
 							(*its).size -= s2;
