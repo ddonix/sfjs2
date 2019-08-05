@@ -48,7 +48,7 @@ set<int> ss;
 int bids, bidp;
 int asks, askp;
 
-void updatebid(bool era)
+void updatebid(bool heap, bool era)
 {
 	if (vb.empty())
 	{
@@ -57,7 +57,8 @@ void updatebid(bool era)
 	}
 	else
 	{
-		make_heap(vb.begin(), vb.end(), cmpb);
+		if (heap)
+			make_heap(vb.begin(), vb.end(), cmpb);
 		auto it = vb.begin();
 		bidp = (*it).price;
 		bids = (*it).size;
@@ -70,7 +71,7 @@ void updatebid(bool era)
 	}
 }
 
-void updateask(int era)
+void updateask(bool heap, bool era)
 {
 	if (vs.empty())
 	{
@@ -79,7 +80,8 @@ void updateask(int era)
 	}
 	else
 	{
-		make_heap(vs.begin(), vs.end(), cmps);
+		if (heap)
+			make_heap(vs.begin(), vs.end(), cmps);
 		auto it = vs.begin();
 		askp = (*it).price;
 		asks = (*it).size;
@@ -108,6 +110,10 @@ int main()
 		{
 			int s, p;
 			string o;
+			if(first)
+				first = false;
+			else
+				cout<<endl;
 			cin>>o;
 			if(o == "CANCEL")
 			{
@@ -127,7 +133,7 @@ int main()
 							if (s1 > bids)
 								bids -= s1;
 							else
-								updatebid(true);
+								updatebid(true, true);
 						}
 					}
 				}
@@ -145,7 +151,7 @@ int main()
 							if (s1 > asks)
 								asks -= s1;
 							else
-								updateask(true);
+								updateask(true, true);
 						}
 					}
 				}
@@ -160,7 +166,7 @@ int main()
 					if (p == bidp)
 						bids += s;
 					else if(p > bidp)
-						updatebid(false);
+						updatebid(true, false);
 				}
 				else
 				{
@@ -169,7 +175,7 @@ int main()
 					if (p == askp)
 						asks += s;
 					else if(p < askp)
-						updateask(false);
+						updateask(true, false);
 				}
 				while (bidp >= askp && (asks != 0))
 				{
@@ -179,32 +185,45 @@ int main()
 						int s2;
 						auto itb = vb.begin();
 						auto its = vs.begin();
-						bool bidupdate = false, askupdate = false;
 						s2 = ((*itb).size < (*its).size) ? (*itb).size : (*its).size;
 						s2 = (s2 > size) ? size : s2;
 						if ((*itb).size == s2)
 						{
 							vb.erase(itb);
+							make_heap(vb.begin(), vb.end(), cmpb);
 						}
 						else
 							(*itb).size -= s2;
 
 						if ((*its).size == s2)
 						{
-							vs.erase(its );
+							vs.erase(its);
+							make_heap(vs.begin(), vs.end(), cmps);
 						}
 						else
 							(*its).size -= s2;
 						size -= s2;
+						bids -= s2;
+						asks -= s2;
 						cout<<"TRADE "<<s2<<" "<<(o == "BUY" ? askp : bidp)<<endl;
-						updatebid(true);
-						updateask(true);
+					}
+					if (bids > asks)
+					{
+						updateask(false, true);
+					}
+					else if (bids < asks)
+					{
+						updatebid(false, true);
+					}
+					else
+					{
+						updatebid(false, true);
+						updateask(false, true);
 					}
 				}
 			}
 			//cout<<"ID:"<<id<<"QUOTE "<<bids<<" "<<bidp<<" - "<<asks<<" "<<askp<<endl;
 			cout<<"QUOTE "<<bids<<" "<<bidp<<" - "<<asks<<" "<<askp<<endl;
 		}
-		cout<<endl;
 	}
 }
