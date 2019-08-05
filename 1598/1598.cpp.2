@@ -188,32 +188,65 @@ int main()
 				{
 					flag = true;
 					int size = (bids > asks) ? asks : bids;
-					int sss = 0;
-					while(sss < size)
+					if (size == bids)
 					{
-						int s2;
-						auto itb = vb.begin();
-						auto its = vs.begin();
-						s2 = ((*itb).size < (*its).size) ? (*itb).size : (*its).size;
-						s2 = (s2 + sss > size) ? (size - sss) : s2;
-						sss += s2;
-						if ((*itb).size == s2)
+						for(auto it = vb.begin(); it != vb.end();)
 						{
-							vb.erase(itb);
+							if ((*it).price != bidp)
+								break;
+							vb.erase(it);
 							make_heap(vb.begin(), vb.end(), cmpb);
+							it = vb.begin();
 						}
-						else
-							(*itb).size -= s2;
-
-						if ((*its).size == s2)
-						{
-							vs.erase(its);
-							make_heap(vs.begin(), vs.end(), cmps);
-						}
-						else
-							(*its).size -= s2;
-						cout<<"TRADE "<<s2<<" "<<(o == "BUY" ? askp : bidp)<<endl;
 					}
+					if (size == asks)
+					{
+						for(auto it = vs.begin(); it != vs.end();)
+						{
+							if ((*it).price != askp)
+								break;
+							vs.erase(it);
+							make_heap(vs.begin(), vs.end(), cmps);
+							it = vs.begin();
+						}
+					}
+					if (bids > asks)
+					{
+						int sss = 0;
+						for(auto it = vb.begin(); it != vb.end();)
+						{
+							if ((*it).size + sss > size)
+							{
+								(*it).size -= (size - sss);
+								break;
+							}
+							else
+							{
+								sss += (*it).size;
+								vb.erase(it);
+								make_heap(vb.begin(), vb.end(), cmpb);
+							}
+						}
+					}
+					else if(bids < asks)
+					{
+						int sss = 0;
+						for(auto it = vs.begin(); it != vs.end();)
+						{
+							if ((*it).size + sss > size)
+							{
+								(*it).size -= (size - sss);
+								break;
+							}
+							else
+							{
+								sss += (*it).size;
+								vs.erase(it);
+								make_heap(vs.begin(), vs.end(), cmps);
+							}
+						}
+					}
+					cout<<"TRADE "<<size<<" "<<(o == "BUY" ? askp : bidp)<<endl;
 					updateba();
 				}
 			}
