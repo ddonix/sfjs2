@@ -14,14 +14,14 @@ const int ZS = 9;
 struct LLL
 {
 	int w;
-	unsigned long data[10000];
+	unsigned long data[10];
 
 	LLL()
 	{
 		w = 1;
 		data[0] = 0;
 	}
-
+	
 	LLL(unsigned long d)
 	{
 		if (d < JZ)
@@ -83,34 +83,20 @@ struct LLL
 		}
 		if(c)
 		{
-			temp.data[temp.w] = c;
 			temp.w++;
+			temp.data[w-1] = c;
 		}
 		return temp;
 	}
 
-	void print(void)
-	{
-		string r;
-		for(int i = w-1; i >= 0; i--)
-		{
-			stringstream ss;
-			ss<<data[i];
-			string s = ss.str()+" ";
-			r += s;
-		}
-		cout<<r<<endl;	
-	}
-
 	void getstr(char *r)
 	{
-		char temp[20];
-		sprintf(r, "%u", data[w-1]);
-		for(int i = w-2; i >= 0; i--)
+		char temp[11];
+		for(int i = w-1; i >= 0; i--)
 		{
-			sprintf(temp, "%09u", data[i]);
-			strcat(r, temp);
-			if(strlen(r) >= 40)
+			sprintf(temp, "%u", data[i]);
+			strcpy(r, temp);
+			if (strlen(r) >= 40)
 			{
 				r[40] = 0;
 				break;
@@ -172,20 +158,19 @@ int main()
 	LLL a(1), b(1), c;
 	insert("1", 0);
 	char buff[55];
-	for(int i = 2; i <= 100000; i++)
+	for(int i = 2; i < 100000;i++)
 	{
 		c = a+b;
 		a = b;
 		b = c;
-		buff[0] = 0;
 		c.getstr(buff);
 		insert(buff, i);
 	}
+	
 	int t;
 	cin>>t;
 	for(int i = 1; i <= t; i++)
 	{
-		buff[0] = 0;
 		cin>>buff;
 		int j = find(buff);
 		cout<<"Case #"<<i<<": "<<j<<endl;

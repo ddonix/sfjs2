@@ -106,14 +106,14 @@ int main()
 		sb.clear();
 		bids = bidp = asks=0;
 		askp=99999;
+		if(first)
+			first = false;
+		else
+			cout<<endl;
 		for(int id = 1; id <= n; id++)
 		{
 			int s, p;
 			string o;
-			if(first)
-				first = false;
-			else
-				cout<<endl;
 			cin>>o;
 			if(o == "CANCEL")
 			{

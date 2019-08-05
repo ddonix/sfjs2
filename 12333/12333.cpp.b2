@@ -1,29 +1,29 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <cstring>
 #include <vector>
 
 using namespace std;
 
 const int JZ = 1000000000;
 const int MAXB = 999999999;
-const int MAXZ = 10;
 const int ZS = 9;
 
 struct LLL
 {
 	int w;
-	unsigned long data[10000];
+	vector<unsigned long> data;
 
 	LLL()
 	{
 		w = 1;
+		data.resize(1);
 		data[0] = 0;
 	}
 
 	LLL(unsigned long d)
 	{
+		data.resize(2);
 		if (d < JZ)
 		{
 			w = 1;
@@ -37,6 +37,28 @@ struct LLL
 		}
 	}
 	
+	LLL(string d)
+	{
+		string str;
+		w = (d.length()-1)/9+1;
+		data.resize(w);
+		
+		int f = d.length()-(w-1)*9;
+		str = d.substr(0,f); 
+		for(int i = 0; i < w-1; i++)
+		{
+			str += ' ';
+			str += d.substr(f+i*9, 9);
+		}
+		stringstream ss(str);
+		for(int i = w-1; i >= 0; i--)
+		{	
+			unsigned long t;
+			ss>>t;
+			data[i] = t;
+		}
+	}
+
 	LLL operator +(const LLL & right)
 	{
 		LLL temp;
@@ -44,6 +66,7 @@ struct LLL
 		int w1 = (w < right.w) ? w : right.w;
 		int w2 = (w > right.w) ? w : right.w;
 		temp.w = w2;
+		temp.data.resize(w2);
 		
 		for(int i = 0; i < w1; i++)
 		{
@@ -59,16 +82,16 @@ struct LLL
 				temp.data[i] = t;
 			}
 		}
-		const unsigned long *x=0;
+		const vector<unsigned long> *x=0;
 		if (w < right.w)
-			x = right.data;
+			x = &right.data;
 		else if(w > right.w)
-			x = data;
+			x = &data;
 		if(x)
 		{
 			for(int i = w1; i < w2; i++)
 			{
-				t = x[i]+c;
+				t = (*x)[i]+c;
 				if (t > JZ)
 				{
 					c = 1;
@@ -83,8 +106,8 @@ struct LLL
 		}
 		if(c)
 		{
-			temp.data[temp.w] = c;
 			temp.w++;
+			temp.data[w-1] = c;
 		}
 		return temp;
 	}
@@ -102,19 +125,16 @@ struct LLL
 		cout<<r<<endl;	
 	}
 
-	void getstr(char *r)
+	void getstr(string &r)
 	{
-		char temp[20];
-		sprintf(r, "%u", data[w-1]);
-		for(int i = w-2; i >= 0; i--)
+		for(int i = w-1; i >= 0; i--)
 		{
-			sprintf(temp, "%09u", data[i]);
-			strcat(r, temp);
-			if(strlen(r) >= 40)
-			{
-				r[40] = 0;
+			stringstream ss;
+			ss<<data[i];
+			string s = ss.str();
+			r += s;
+			if (r.length() >= 40)
 				break;
-			}
 		}
 	}
 };
@@ -129,65 +149,50 @@ struct Node
 			child[i] = 0;
 		f = -1;
 	}
-	
-	Node(int ff) : f(ff)
-	{
-		for(int i = 0; i < 10; i++)
-			child[i] = 0;
-	}
 };
 
 struct Node root;
 
-int find(const char *s)
+bool find(string s)
 {
-	struct Node *r = &root;
-	struct Node *t;
-	for(int i = 0; i < strlen(s); i++)
+	int d = 0;
+	d = (s.length() < 40) ? s.length() : 40;
+	for(int i = 0; i < d; i++)
 	{
-		if (r->child[s[i]-'0'] == 0)
-			return -1;
-		r = r->child[s[i]-'0'];
+	
 	}
-	return r->f;
+	return true;
 }
 
-void insert(const char *s, int f)
+void insert(string s, int f)
 {
 	struct Node *r = &root;
 	struct Node *t;
-	int i,j;
-	for(i = 0; i < strlen(s); i++)
+	for(int i = 0; i < s.length(); i++)
 	{
-		j = s[i]-'0';
-		if (r->child[j] == 0)
-			r->child[j] = new Node(f);
-		r = r->child[j];
+		if (r->child[s[i]-'0'] == 0)
+		{
+			t = new Node();
+			t->f = f;
+			r->child[s[i]-'0'] = t;
+		}
+		r = r->child[s[i]-'0'];
 	}
 }
 
 int main()
 {
 
+	int t;
 	LLL a(1), b(1), c;
 	insert("1", 0);
-	char buff[55];
-	for(int i = 2; i <= 100000; i++)
+	for(int i = 2; i < 100000;i++)
 	{
 		c = a+b;
 		a = b;
 		b = c;
-		buff[0] = 0;
-		c.getstr(buff);
-		insert(buff, i);
-	}
-	int t;
-	cin>>t;
-	for(int i = 1; i <= t; i++)
-	{
-		buff[0] = 0;
-		cin>>buff;
-		int j = find(buff);
-		cout<<"Case #"<<i<<": "<<j<<endl;
+		string s;
+		c.getstr(s);
+		insert(s, i);
 	}
 }
