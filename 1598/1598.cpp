@@ -28,12 +28,16 @@ struct find_by_id
 
 bool cmpb(const Order & a, const Order b)
 {
-	return a.price <= b.price;
+	if (a.price != b.price)
+		return a.price < b.price;
+	return (a.id > b.id);
 }
 
 bool cmps(const Order & a, const Order b)
 {
-	return a.price >= b.price;
+	if (a.price != b.price)
+		return a.price > b.price;
+	return (a.id > b.id);
 }
 
 vector<Order>  vb;
@@ -94,6 +98,7 @@ void updateba()
 int main()
 {
 	int n;
+	bool first = true;
 	while(cin>>n)
 	{
 		vb.clear();
@@ -102,6 +107,10 @@ int main()
 		ss.clear();	
 		bids = bidp = asks=0;
 		askp=99999;
+		if (!first)
+			cout<<endl;
+		else
+			first = false;
 		for(int id = 1; id <= n; id++)
 		{
 			bool flag = false;
@@ -160,9 +169,7 @@ int main()
 					make_heap(vb.begin(), vb.end(), cmpb);
 					sb.insert(id);
 					if (p == bidp)
-					{
-						asks += s;
-					}
+						bids += s;
 					else if(p > bidp)
 					{
 						bids = s;
@@ -175,9 +182,7 @@ int main()
 					make_heap(vs.begin(), vs.end(), cmps);
 					ss.insert(id);
 					if (p == askp)
-					{
 						asks += s;
-					}
 					else if(p < askp)
 					{
 						asks = s;
@@ -197,6 +202,9 @@ int main()
 						s2 = ((*itb).size < (*its).size) ? (*itb).size : (*its).size;
 						s2 = (s2 + sss > size) ? (size - sss) : s2;
 						sss += s2;
+						if (id == 223)
+						{
+						}
 						if ((*itb).size == s2)
 						{
 							vb.erase(itb);
@@ -217,6 +225,7 @@ int main()
 					updateba();
 				}
 			}
+			//cout<<"ID:"<<id<<"QUOTE "<<bids<<" "<<bidp<<" - "<<asks<<" "<<askp<<endl;
 			cout<<"QUOTE "<<bids<<" "<<bidp<<" - "<<asks<<" "<<askp<<endl;
 		}
 	}
