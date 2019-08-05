@@ -48,8 +48,7 @@ set<int> ss;
 int bids, bidp;
 int asks, askp;
 
-//make_heap has been called.
-void updatebid()
+void updatebid(bool era)
 {
 	if (vb.empty())
 	{
@@ -58,16 +57,20 @@ void updatebid()
 	}
 	else
 	{
+		make_heap(vb.begin(), vb.end(), cmpb);
 		auto it = vb.begin();
 		bidp = (*it).price;
 		bids = (*it).size;
-		for(it = vb.begin()+1; it != vb.end(); it++)
-			if ((*it).price == bidp)
-				bids += (*it).size;
+		if(era)
+		{
+			for(it = vb.begin()+1; it != vb.end(); it++)
+				if ((*it).price == bidp)
+					bids += (*it).size;
+		}
 	}
 }
 
-void updateask()
+void updateask(int era)
 {
 	if (vs.empty())
 	{
@@ -76,19 +79,17 @@ void updateask()
 	}
 	else
 	{
+		make_heap(vs.begin(), vs.end(), cmps);
 		auto it = vs.begin();
 		askp = (*it).price;
 		asks = (*it).size;
-		for(it = vs.begin()+1; it != vs.end(); it++)
-			if ((*it).price == askp)
-				asks += (*it).size;
+		if (era)
+		{
+			for(it = vs.begin()+1; it != vs.end(); it++)
+				if ((*it).price == askp)
+					asks += (*it).size;
+		}
 	}
-}
-
-void updateba()
-{
-	updatebid();
-	updateask();
 }
 
 int main()
@@ -120,14 +121,13 @@ int main()
 						int s1 = (*it).size;
 						int p1 = (*it).price;
 						vb.erase(it);
-						make_heap(vb.begin(), vb.end(), cmpb);
 						
 						if (p1  == bidp)
 						{
 							if (s1 > bids)
 								bids -= s1;
 							else
-								updatebid();
+								updatebid(true);
 						}
 					}
 				}
@@ -139,14 +139,13 @@ int main()
 						int s1 = (*it).size;
 						int p1 = (*it).price;
 						vs.erase(it);
-						make_heap(vs.begin(), vs.end(), cmps);
 						
 						if (p1  == askp)
 						{
 							if (s1 > asks)
 								asks -= s1;
 							else
-								updateask();
+								updateask(true);
 						}
 					}
 				}
@@ -157,28 +156,20 @@ int main()
 				if(o == "BUY")
 				{
 					vb.push_back(Order(id, s, p));
-					make_heap(vb.begin(), vb.end(), cmpb);
 					sb.insert(id);
 					if (p == bidp)
 						bids += s;
 					else if(p > bidp)
-					{
-						bids = s;
-						bidp = p;
-					}
+						updatebid(false);
 				}
 				else
 				{
 					vs.push_back(Order(id, s, p));
-					make_heap(vs.begin(), vs.end(), cmps);
 					ss.insert(id);
 					if (p == askp)
 						asks += s;
 					else if(p < askp)
-					{
-						asks = s;
-						askp = p;
-					}
+						updateask(false);
 				}
 				while (bidp >= askp && (asks != 0))
 				{
@@ -188,12 +179,12 @@ int main()
 						int s2;
 						auto itb = vb.begin();
 						auto its = vs.begin();
+						bool bidupdate = false, askupdate = false;
 						s2 = ((*itb).size < (*its).size) ? (*itb).size : (*its).size;
 						s2 = (s2 > size) ? size : s2;
 						if ((*itb).size == s2)
 						{
 							vb.erase(itb);
-							make_heap(vb.begin(), vb.end(), cmpb);
 						}
 						else
 							(*itb).size -= s2;
@@ -201,14 +192,14 @@ int main()
 						if ((*its).size == s2)
 						{
 							vs.erase(its);
-							make_heap(vs.begin(), vs.end(), cmps);
 						}
 						else
 							(*its).size -= s2;
 						size -= s2;
 						cout<<"TRADE "<<s2<<" "<<(o == "BUY" ? askp : bidp)<<endl;
+						updatebid(true);
+						updateask(true);
 					}
-					updateba();
 				}
 			}
 			//cout<<"ID:"<<id<<"QUOTE "<<bids<<" "<<bidp<<" - "<<asks<<" "<<askp<<endl;
