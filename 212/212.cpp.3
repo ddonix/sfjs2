@@ -1,0 +1,188 @@
+#include <iostream>
+#include <cstdio>
+#include <queue>
+#include <cstring>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int no, nr, first, transt, opt, rpt, np;
+
+struct Patient
+{
+	char name[9];
+	int surgeryt;
+	int recovert;
+
+	int state; 	//0:wo;1:oing; 2:ring;3:ok
+
+	int orid;
+	int obt;
+	int oet;
+	
+	int rrid;
+	int rbt;
+	int ret;
+	
+	Patient() : state(0) {}
+	Patient(const char *n, int st, int rt) : state(0), surgeryt(st), recovert(rt)
+	{
+		strcpy(name, n);
+	}
+};
+
+struct Room
+{
+	int id;		//
+	
+	int state;	//0: avaliable, 1:using, 2:prepare
+	int p;		//patient
+	int et;		//end tiem
+	
+	Room() : state(0), usingt(0) {}
+	int usingt;
+};
+
+struct Find_by_state
+{
+	Find_by_state(int s) : state(s) {}
+	bool operator()(const Room &r) 
+	{
+		return state == r.state;
+	}
+	int state;
+};
+vector<Patient> patient;
+vector<Room> oroom;
+vector<Room> rroom;
+int c_time = 0;
+int endtime = 1;
+const int INF = 0x7fffffff;
+int main()
+{
+	cin>>no>>nr>>first>>transt>>opt>>rpt>>np;
+	patient.resize(np);
+	oroom.resize(no);
+	rroom.resize(nr);
+	for(int i = 0; i < np; i++)
+	{
+		char name[9];
+		int st, rt;
+		cin>>name>>st>>rt;
+		patient[i] = Patient(name, st, rt);
+	}
+	for(int i = 0; i < no; i++)
+		oroom[i].id = i;
+	for(int i = 0; i < nr; i++)
+		rroom[i].id = i;
+	
+	printf(" Patient          Operating Room          Recovery Room\n");
+	printf(" #  Name     Room#  Begin   End      Bed#  Begin    End\n");
+	printf(" ------------------------------------------------------\n");
+	
+	c_time = 0;
+	int okp = 0;
+	while(okp < np)
+	{
+		int newt = INF;
+
+		cout<<okp<<" "<<c_time<<endl;
+
+		for(int i = 0; i < no; i++)
+		{
+			if((1 == oroom[i].state) && (oroom[i].et == c_time))
+			{
+				oroom[i].state = 2;
+				oroom[i].et = c_time+opt;
+				newt = (newt < oroom[i].et) ? newt : oroom[i].et;
+				
+				Patient & p = patient[oroom[i].p];
+				p.state++;
+
+				//it != rroom.end()
+				auto it = find_if(rroom.begin(), rroom.end(), Find_by_state(0));
+				Room & r = *it;
+				
+				p.rrid = r.id;
+				p.rbt = c_time+transt;
+				p.ret = c_time+transt+p.recovert;
+				
+				r.state = 1;
+				r.p = i;
+				r.et = p.ret;
+				r.usingt += p.recovert;
+				
+				newt = (newt < r.et) ? newt : r.et;
+			}
+			else if((2 == oroom[i].state) && (oroom[i].et == c_time))
+			{
+				oroom[i].state = 0;
+			}
+			if(0 == oroom[i].state)
+			{
+				for(int j = 0; j < np; j++)
+				{
+					if (patient[j].state == 0)
+					{
+						Patient & p = patient[j];
+						Room & r = oroom[i];
+					
+						p.state = 1;
+						p.orid = r.id;
+						p.obt = c_time;
+						p.oet = c_time+p.surgeryt;
+						newt = (newt < p.oet) ? newt : p.oet;
+
+						r.state = 1;
+						r.p = j;
+						r.et = c_time+p.surgeryt;
+						r.usingt += p.surgeryt;
+						break;
+					}
+				}
+			}
+		}
+
+		for(int i = 0; i < nr; i++)
+		{
+			if((1 == rroom[i].state) && (rroom[i].et == c_time))
+			{
+				rroom[i].state = 2;
+				rroom[i].et = c_time+rpt;
+				newt = (newt < rroom[i].et) ? newt : rroom[i].et;
+
+				patient[rroom[i].p].state++;
+				okp++;
+			}
+			if((2 == rroom[i].state) && (rroom[i].et == c_time))
+			{
+				rroom[i].state = 0;
+			}
+		}
+		c_time++;// = newt;
+	}
+	for(int i = 0; i < np; i++)
+	{
+		Patient & p = patient[i];
+		printf("%2d  %-8s  %2d   %2d:%02d   %2d:%02d     %2d   %2d:%02d   %2d:%02d\n", i+1, p.name, 
+							p.orid+1, first+p.obt/60, p.obt%60, first+p.oet/60, p.oet%60,
+							p.rrid+1, first+p.rbt/60, p.rbt%60, first+p.ret/60, p.ret%60);
+	}
+
+	cout<<endl;
+	cout<<"Facility Utilization"<<endl;
+	cout<<"Type  # Minutes  \% Used"<<endl;
+	cout<<"-------------------------"<<endl;
+	if (np == 0)
+		c_time = 1;
+	c_time--;
+	for(int i = 0; i < no; i++)
+	{
+		printf("Room %2d%8d%8.2llf\n", i+1, oroom[i].usingt, (double)(100*oroom[i].usingt)/(double)c_time);
+	}
+	for(int i = 0; i < nr; i++)
+	{
+		printf("Bed  %2d%8d%8.2llf\n", i+1, rroom[i].usingt, (double)(100*rroom[i].usingt)/(double)c_time);
+	}
+}
