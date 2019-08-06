@@ -181,7 +181,7 @@ int main()
 	LLL a(1), b(1), c;
 	insert("1", 0);
 	char buff[55];
-	for(int i = 2; i <= 100000; i++)
+	for(int i = 2; i < 100000; i++)
 	{
 		c.add(a,b);
 		a = b;
