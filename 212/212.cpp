@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <queue>
-#include <string>
+#include <cstring>
 #include <vector>
 #include <algorithm>
 
@@ -11,7 +11,7 @@ int no, nr, first, transt, opt, rpt, np;
 
 struct Patient
 {
-	string name;
+	char name[9];
 	int surgeryt;
 	int recovert;
 
@@ -26,7 +26,10 @@ struct Patient
 	int ret;
 	
 	Patient() : state(0) {}
-	Patient(string n, int st, int rt) : name(n), state(0), surgeryt(st), recovert(rt){}
+	Patient(const char *n, int st, int rt) : state(0), surgeryt(st), recovert(rt)
+	{
+		strcpy(name, n);
+	}
 };
 
 struct Room
@@ -65,7 +68,7 @@ int main()
 	rroom.resize(nr);
 	for(int i = 0; i < np; i++)
 	{
-		string name;
+		char name[9];
 		int st, rt;
 		cin>>name>>st>>rt;
 		patient[i] = Patient(name, st, rt);
@@ -138,7 +141,7 @@ int main()
 					p.orid = r.id;
 					p.obt = c_time;
 					p.oet = c_time+p.surgeryt;
-					newt = p.oet;
+					newt = (newt < p.oet) ? newt : p.oet;
 
 					r.state = 1;
 					r.p = i;
@@ -166,16 +169,19 @@ int main()
 				r.usingt += p.recovert;
 			}
 		}
-		c_time++;// = newt;
+		c_time = newt; 
 	}
-	cout<<"Facility Utilization"<<endl;
-	cout<<"Type  # Minutes  \% Used"<<endl;
-	cout<<"-------------------------"<<endl;
 	for(int i = 0; i < np; i++)
 	{
 		Patient & p = patient[i];
-		printf("%d %s%d\n", i+1, p.name, p.orid);
+		printf("%2d %-8s    %-4d%2d:%02d   %2d:%02d      %-2d   %2d:%02d  %2d:%02d\n", i+1, p.name, 
+							p.orid, first+p.obt/60, p.obt%60, first+p.oet/60, p.oet%60,
+							p.rrid, first+p.rbt/60, p.rbt%60, first+p.ret/60, p.oet%60);
 	}
+	
+	cout<<"Facility Utilization"<<endl;
+	cout<<"Type  # Minutes  \% Used"<<endl;
+	cout<<"-------------------------"<<endl;
 	for(int i = 0; i < no; i++)
 	{
 		printf("Room %2d%8d%8.2llf\n", i, oroom[i].usingt, (double)oroom[i].usingt/endtime);
@@ -184,4 +190,5 @@ int main()
 	{
 		printf("Bed  %2d%8d%8.2llf\n", i, rroom[i].usingt, (double)rroom[i].usingt/endtime);
 	}
+
 }
