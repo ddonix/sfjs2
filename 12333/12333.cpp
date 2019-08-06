@@ -36,57 +36,66 @@ struct LLL
 			data[1] = d/JZ;
 		}
 	}
+
+	LLL & operator=(const LLL &right)
+	{
+		w = right.w;
+		for(int i = 0; i < w; i++)
+			data[i] = right.data[i];
+		return *this;
+	}
 	
-	LLL operator +(const LLL & right)
+	void add(const LLL & a1, const LLL & a2)
 	{
 		LLL temp;
 		unsigned long c = 0, t;
-		int w1 = (w < right.w) ? w : right.w;
-		int w2 = (w > right.w) ? w : right.w;
-		temp.w = w2;
+		int wmin, wmax;
 		
-		for(int i = 0; i < w1; i++)
+		wmin = (a1.w < a2.w) ? a1.w : a2.w;
+		wmax = (a1.w > a2.w) ? a1.w : a2.w;
+		this->w = wmax;
+	
+		for(int i = 0; i < wmin; i++)
 		{
-			t = data[i]+right.data[i]+c;
+			t = a1.data[i]+a2.data[i]+c;
 			if (t > JZ)
 			{
 				c = 1;
-				temp.data[i] = t-JZ;
+				this->data[i] = t-JZ;
 			}
 			else
 			{
 				c = 0;
-				temp.data[i] = t;
+				this->data[i] = t;
 			}
 		}
 		const unsigned long *x=0;
-		if (w < right.w)
-			x = right.data;
-		else if(w > right.w)
+		if (a1.w < a2.w)
+			x = a2.data;
+		else if(a1.w > a2.w)
 			x = data;
 		if(x)
 		{
-			for(int i = w1; i < w2; i++)
+			for(int i = wmin; i < wmax; i++)
 			{
 				t = x[i]+c;
 				if (t > JZ)
 				{
 					c = 1;
-					temp.data[i] = t-JZ;
+					this->data[i] = t-JZ;
 				}
 				else
 				{
 					c = 0;
-					temp.data[i] = t;
+					this->data[i] = t;
 				}
 			}
 		}
 		if(c)
 		{
-			temp.data[temp.w] = c;
-			temp.w++;
+			this->data[this->w] = c;
+			this->w++;
 		}
-		return temp;
 	}
 
 	void print(void)
@@ -174,7 +183,7 @@ int main()
 	char buff[55];
 	for(int i = 2; i <= 100000; i++)
 	{
-		c = a+b;
+		c.add(a,b);
 		a = b;
 		b = c;
 		buff[0] = 0;
