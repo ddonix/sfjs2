@@ -30,12 +30,11 @@ struct Patient
 
 struct Room
 {
-	bool avaliable;	//0: avaliable, 1:using
-	int at;		//avaliable tiem
-	
+	int state;	//0: avaliable, 1:using, 2:prepare
 	int p;		//patient
+	int et;		//end tiem
 	
-	Room() : avaliable(true), at(0), usingt(0) {}
+	Room() : state(0), usingt(0) {}
 	int usingt;
 };
 
@@ -73,25 +72,29 @@ int main()
 		{
 			for(int i = 0; i < no; i++)
 			{
-				if(!oroom[i].avaliable && (oroom[i].at == c_time))
+				if((1 == oroom[i].state) && (oroom[i].et == c_time))
 				{
-					oroom[i].avaliable = true;
-					oroom[i].at = c_time+opt;
+					oroom[i].state = 2;
+					oroom[i].et = c_time+opt;
+					newtime.push(oroom[i].et);
 					
 					int j;
-					for(j = 0; !rroom[j].avaliable; j++);
+					for(j = 0; rroom[j].state != 0; j++);
 					Room & r = rroom[j];
 					
 					Patient & p = patient[oroom[i].p];
 					p.rrid = j;
 				
-					r.avaliable = false;
+					r.state = 1;
 					r.p = i;
-					r.at = p.ret;
+					r.et = p.ret;
 					r.usingt += p.recovert;
-					newtime.push(r.at);
+					newtime.push(r.et);
 				}
-				else if(oroom[i].avaliable && (oroom[i].at <= c_time))
+				else if((2 == oroom[i].state) && (oroom[i].et == c_time))
+					oroom[i].state = 0;
+			
+				if(0 == oroom[i].state)
 				{
 					if(nextp == np)
 						continue;
@@ -104,25 +107,27 @@ int main()
 					p.rbt = p.oet+transt;
 					p.ret = p.rbt+p.recovert;
 
-					r.avaliable = false;
+					r.state = 1;
 					r.p = nextp;
-					r.at = c_time+p.surgeryt;
+					r.et = c_time+p.surgeryt;
 					r.usingt += p.surgeryt;
 					nextp++;
-					newtime.push(r.at);
+					newtime.push(r.et);
 				}
 			}
 
 			for(int i = 0; i < nr; i++)
 			{
-				if(!rroom[i].avaliable && (rroom[i].at == c_time))
+				if((1 == rroom[i].state) && (rroom[i].et == c_time))
 				{
-					rroom[i].avaliable = 0;
-					rroom[i].at = c_time+rpt;
-					newtime.push(rroom[i].at);
+					rroom[i].state = 2;
+					rroom[i].et = c_time+rpt;
+					newtime.push(rroom[i].et);
 
 					okp++;
 				}
+				if((2 == rroom[i].state) && (rroom[i].et == c_time))
+					rroom[i].state = 0;
 			}
 			do
 			{
