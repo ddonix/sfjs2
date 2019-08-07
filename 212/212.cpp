@@ -39,6 +39,18 @@ struct Room
 	int usingt;
 };
 
+struct event
+{
+	int time;
+	int action;
+	event(int t, int a) : time(t), action(a) {}
+	bool operator > (const event & right) const 
+	{
+		return time > right.time;
+	}
+
+};
+
 int main()
 {
 	int no, nr, first, transt, opt, rpt, np;
@@ -47,7 +59,8 @@ int main()
 		vector<Patient> patient;
 		vector<Room> oroom;
 		vector<Room> rroom;
-		priority_queue<int, vector<int>, greater<int> > newtime;
+		priority_queue<event, vector<event>, greater<event> > newtime2;
+		priority_queue<int, vector<int>, greater<int> > avaliablerroom;
 		int c_time = 0, newt;
 	
 		cin>>nr>>first>>transt>>opt>>rpt>>np;
@@ -55,6 +68,9 @@ int main()
 		oroom.resize(no);
 		rroom.resize(nr);
 	
+		for(int i = 0; i < nr; i++)
+			avaliablerroom.push(i);
+		
 		for(int i = 0; i < np; i++)
 		{
 			char name[9];
@@ -73,25 +89,25 @@ int main()
 		{
 			for(int i = 0; i < no; i++)
 			{
-				if(!oroom[i].avaliable && (oroom[i].at == c_time))
+				if(!oroom[i].avaliable && (oroom[i].at == c_time))		//
 				{
 					oroom[i].avaliable = true;
 					oroom[i].at = c_time+opt;
-					
-					int j;
-					for(j = 0; !rroom[j].avaliable; j++);
-					Room & r = rroom[j];
+					newtime.push(event(oroom[i].at, 1));
 					
 					Patient & p = patient[oroom[i].p];
-					p.rrid = j;
+					p.rrid = avaliablerroom.top();
+					avaliablerroom.pop();
+					
+					Room & r = rroom[p.rrid];
+					
 				
 					r.avaliable = false;
-					r.p = i;
-					r.at = p.ret;
+					r.at = p.ret+rpt;
 					r.usingt += p.recovert;
-					newtime.push(r.at);
+					newtime.push(event(r.at,2));
 				}
-				else if(oroom[i].avaliable && (oroom[i].at <= c_time))
+				else if(oroom[i].avaliable && (oroom[i].at == c_time))		//
 				{
 					if(nextp == np)
 						continue;
@@ -109,21 +125,15 @@ int main()
 					r.at = c_time+p.surgeryt;
 					r.usingt += p.surgeryt;
 					nextp++;
-					newtime.push(r.at);
+					newtime.push(event(r.at, 0));
 				}
 			}
-
 			for(int i = 0; i < nr; i++)
-			{
-				if(!rroom[i].avaliable && (rroom[i].at == c_time))
+				if(!rroom[i].avaliable && (rroom[i].at == c_time))		//
 				{
-					rroom[i].avaliable = 0;
-					rroom[i].at = c_time+rpt;
-					newtime.push(rroom[i].at);
-
-					okp++;
+					rroom[i].avaliable = true;
+					avaliablerroom.push(i);
 				}
-			}
 			do
 			{
 				newt = newtime.top();
