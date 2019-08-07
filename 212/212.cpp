@@ -30,25 +30,26 @@ struct Patient
 
 struct Room
 {
-	bool avaliable;	//0: avaliable, 1:using
-	int at;		//avaliable tiem
-	
 	int p;		//patient
 	
-	Room() : avaliable(true), at(0), usingt(0) {}
+	Room() : usingt(0) {}
 	int usingt;
 };
 
-struct event
+struct Event
 {
 	int time;
-	int action;
-	event(int t, int a) : time(t), action(a) {}
-	bool operator > (const event & right) const 
+	int action;		//0:surgery end; 1:oroom avaliable; 2:rroom avaliable
+	int rid;
+	Event(int t, int a, int id) : time(t), action(a), rid(id) {}
+	bool operator > (const Event & right) const
 	{
-		return time > right.time;
+		if (time != right.time)
+			return time > right.time;
+		if (action != right.action)
+			return action > right.action;
+		return rid > right.rid;
 	}
-
 };
 
 int main()
@@ -59,8 +60,9 @@ int main()
 		vector<Patient> patient;
 		vector<Room> oroom;
 		vector<Room> rroom;
-		priority_queue<event, vector<event>, greater<event> > newtime2;
+		priority_queue<Event, vector<Event>, greater<Event> > event;
 		priority_queue<int, vector<int>, greater<int> > avaliablerroom;
+		priority_queue<int, vector<int>, greater<int> > avaliableoroom;
 		int c_time = 0, newt;
 	
 		cin>>nr>>first>>transt>>opt>>rpt>>np;
@@ -68,6 +70,12 @@ int main()
 		oroom.resize(no);
 		rroom.resize(nr);
 	
+		
+		for(int i = 0; i < no; i++)
+		{
+			event.push(Event(0, 1, i));
+			avaliableoroom.push(i);
+		}
 		for(int i = 0; i < nr; i++)
 			avaliablerroom.push(i);
 		
@@ -85,61 +93,45 @@ int main()
 		c_time = 0;
 		int okp = 0;
 		int nextp = 0;
-		while(okp < np)
+		while(!event.empty())
 		{
-			for(int i = 0; i < no; i++)
+			Event e = event.top();
+			int i = e.rid;
+			c_time = e.time;
+			
+			event.pop();
+			if(0 == e.action)
 			{
-				if(!oroom[i].avaliable && (oroom[i].at == c_time))		//
-				{
-					oroom[i].avaliable = true;
-					oroom[i].at = c_time+opt;
-					newtime.push(event(oroom[i].at, 1));
-					
-					Patient & p = patient[oroom[i].p];
-					p.rrid = avaliablerroom.top();
-					avaliablerroom.pop();
-					
-					Room & r = rroom[p.rrid];
-					
+				Patient & p = patient[oroom[i].p];
+				p.rrid = avaliablerroom.top();
+				avaliablerroom.pop();
 				
-					r.avaliable = false;
-					r.at = p.ret+rpt;
-					r.usingt += p.recovert;
-					newtime.push(event(r.at,2));
-				}
-				else if(oroom[i].avaliable && (oroom[i].at == c_time))		//
-				{
-					if(nextp == np)
-						continue;
-					Patient & p = patient[nextp];
-					Room & r = oroom[i];
-					
-					p.orid = i;
-					p.obt = c_time;
-					p.oet = c_time+p.surgeryt;
-					p.rbt = p.oet+transt;
-					p.ret = p.rbt+p.recovert;
-
-					r.avaliable = false;
-					r.p = nextp;
-					r.at = c_time+p.surgeryt;
-					r.usingt += p.surgeryt;
-					nextp++;
-					newtime.push(event(r.at, 0));
-				}
+				Room & r = rroom[p.rrid];
+				r.usingt += p.recovert;
+				
+				event.push(Event(p.ret+rpt,2, p.rrid));
 			}
-			for(int i = 0; i < nr; i++)
-				if(!rroom[i].avaliable && (rroom[i].at == c_time))		//
-				{
-					rroom[i].avaliable = true;
-					avaliablerroom.push(i);
-				}
-			do
+			else if (1 == e.action)
 			{
-				newt = newtime.top();
-				newtime.pop();
-			}while(newt <= c_time);
-			c_time = newt;
+				if(nextp == np)
+					continue;
+				Patient & p = patient[nextp];
+					
+				p.orid = i;
+				p.obt = c_time;
+				p.oet = c_time+p.surgeryt;
+				p.rbt = p.oet+transt;
+				p.ret = p.rbt+p.recovert;
+
+				oroom[i].p = nextp;
+				oroom[i].usingt += p.surgeryt;
+				event.push(Event(p.oet, 0, i));
+				event.push(Event(p.oet+opt, 1, i));
+				
+				nextp++;
+			}
+			else
+				avaliablerroom.push(i);
 		}
 		for(int i = 0; i < np; i++)
 		{
