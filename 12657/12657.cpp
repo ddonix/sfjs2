@@ -1,25 +1,33 @@
 #include <iostream>
 
 using namespace std;
+
+int *Left;
+int *Right;
+
+void link(int l, int r)
+{
+	Right[l] = r;
+	Left[r] = l;
+}
+
 int main()
 {
     int v1[100002], v2[100002];
-    int *left = v1, *right = v2;
     int n,m;
     int ka = 1;
-    int ll, rr;
     
+    Left = v1; 
+    Right = v2;
     while(cin>>n)
     {
         cin>>m;
-        ll = 1;
-        rr = n;
         
-        for(int i = 1; i < n; i++)
-            left[i] = i-1;
+        for(int i = 1; i <= n+1; i++)
+            Left[i] = i-1;
         
         for(int i = 0; i <= n; i++)
-            right[i] = i+1;
+            Right[i] = i+1;
         
         int c, x, y;
         for(int i = 0; i < m; i++)
@@ -29,108 +37,79 @@ int main()
                 cin>>x>>y;
             if(1 == c)
             {
-                if(x == left[y])
+                if(x == Left[y])
                     continue;
 
-                if (left[y] == 0)
-                    ll = x;
-                
-                right[left[x]] = right[x];
-                left[right[x]] = left[x];
-                
-                right[x] = y;
-                left[x] = left[y];
-                
-                right[left[y]] = x;
-                left[y] = x;
-
+		link(Left[x], Right[x]);
+		link(Left[y], x);
+		link(x, y);
             }
             else if (2 == c)
             {
-                if (x == right[y])
+                if (x == Right[y])
                     continue;
 
-                if (right[y] == n+1)
-                    rr = x;
-                
-                right[left[x]] = right[x];
-                left[right[x]] = left[x];
-                
-                left[x] = y;
-                right[x] = right[y];
-
-                left[right[y]] = x;
-                right[y] = x;
+                link(Left[x], Right[x]);
+		link(x, Right[y]);
+		link(y, x);
             }
             else if (3 == c)
             {
-                if (ll == x)
-                    ll = y;
-                else if (ll == y)
-                    ll = x;
-                if (rr == y)
-                    rr = x;
-                else if(rr == x)
-                    rr = y;
-                if(right[x] == y)
+                if(x == Left[y])
                 {
-                    
-                    right[left[x]] = y;
-                    left[right[y]] = x;
+            	    link(Left[x], y);
+		    link(  
             
-                    right[x] = right[y];
-                    left[y] = left[x];
+                    Right[x] = Right[y];
+                    Left[y] = Left[x];
             
-                    left[x] = y;
-                    right[y] = x;
+                    Left[x] = y;
+                    Right[y] = x;
 
                 }
-                else if(left[x] == y)
+                else if(Left[x] == y)
                 {
-                    right[left[y]] = x;
-                    left[right[x]] = y;
+                    Right[Left[y]] = x;
+                    Left[Right[x]] = y;
 
-                    right[y] = right[x];
-                    left[x] = left[y];
+                    Right[y] = Right[x];
+                    Left[x] = Left[y];
 
-                    right[x] = y;
-                    left[y] = x;
+                    Right[x] = y;
+                    Left[y] = x;
                 }
                 else
                 {
-                    right[left[x]] = y;
-                    left[right[x]] = y;
+                    Right[Left[x]] = y;
+                    Left[Right[x]] = y;
 
-                    right[left[y]] = x;
-                    left[right[y]] = x;
+                    Right[Left[y]] = x;
+                    Left[Right[y]] = x;
 
                     int t1,t2;
-                    t1 = left[x];
-                    t2 = right[x];
+                    t1 = Left[x];
+                    t2 = Right[x];
 
-                    left[x] = left[y];
-                    right[x] = right[y];
+                    Left[x] = Left[y];
+                    Right[x] = Right[y];
 
-                    left[y] = t1;
-                    right[y] = t2;
+                    Left[y] = t1;
+                    Right[y] = t2;
                 }
             }
             else
             {
-                int tt = ll;
-                ll = rr;
-                rr = tt;
-                int * t = right;
-                right = left;
-                left = t;
+                int * t = Right;
+                Right = Left;
+                Left = t;
             }
         }
         
-        int t = ll;
-        while(t <= n)
+        int t = Right[0];
+	while(t <= n && t > 0)
         {
             cout<<t<<endl;
-            t= right[t];
+            t= Right[t];
         }
         cout<<"Case "<<ka++<<": "<<0<<endl;
     }
