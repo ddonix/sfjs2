@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <queue>
+#include <list>
+
+using namespace std;
+
+int main()
+{
+	char e[100002];
+	char s[100002];
+	int len;
+	while(cin>>e)
+	{
+		queue<pair<int,int> > q;
+		vector<pair<int,int> > v;
+		
+		int i = 0;
+		len = strlen(e);
+		while(i < len && (e[i] == '[' || e[i] == ']')) i++;
+		while(i < len)
+		{
+			int j;
+			if ('[' == e[i])
+			{
+				e[i] = 0;
+				for(j = i+1; j < len && e[j] == '['; j++);
+				q.push(make_pair(-1, 0));
+			}
+			else if (']' == e[i])
+			{
+				e[i] = 0;
+				for(j = i+1; j < len && e[j] == ']'; j++);
+				q.push(make_pair(-2, 0));
+			}
+			else
+			{
+				for(j = i+1; j < len && e[j] != '[' && e[j] != ']'; j++);
+				q.push(make_pair(i, j));
+			}
+			i = j;
+		}
+		auto it = v.end();
+		while(!q.empty())
+		{
+			pair<int, int> p = q.front();
+			q.pop();
+			if (p.first == -1)
+				it = v.begin();
+			else if(p.first == -2)
+				it = v.end();
+			else
+			{
+				it = v.insert(it, p);
+				it--;
+			}
+		}
+		for(int i = 0; i < v.size(); i++)
+			cout<<e+v[i].first;
+		cout<<endl;
+	}
+}
