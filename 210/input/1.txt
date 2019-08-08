@@ -1,6 +1,6 @@
 2
 
-3 1 1 1 1 1 1
+3 1 1 1 1 1 2
 a = 4
 print a
 lock
@@ -28,7 +28,7 @@ unlock
 print b
 end
 
-3 1 1 1 1 1 2
+3 1 1 1 1 1 1
 a = 4
 print a
 lock
