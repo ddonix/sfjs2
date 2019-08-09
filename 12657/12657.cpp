@@ -2,8 +2,10 @@
 
 using namespace std;
 
+int v1[100002], v2[100002];
 int *Left;
 int *Right;
+int n,m;
 
 void link(int l, int r)
 {
@@ -11,25 +13,78 @@ void link(int l, int r)
 	Left[r] = l;
 }
 
+void link(int l, int m, int r)
+{
+	Left[m] = l;
+	Right[m] = r;
+
+	Right[l] = m;
+	Left[r] = m;
+}
+
+unsigned long count()
+{
+	unsigned long res = 0;
+	int t;
+	if (Right == v2)
+        	t = v2[0];
+	else
+        	t = v1[n+1];
+	while(t <= n && t > 0)
+        {
+        	res += t;
+            	t = Right[t];
+		if (t <= n && t > 0)
+			t = Right[t];
+		else
+			break;
+	}
+	return res;
+}
+
+void print()
+{
+	if (Right[0] > 0)
+	{
+        	int t = Right[0];
+		while(t <= n)
+        	{
+            		cout<<t<<" ";
+            		t = Right[t];
+        	}
+	}
+	else 
+	{
+        	int t = Right[n+1];
+		while(t > 0)
+        	{
+            		cout<<t<<" ";
+            		t = Right[t];
+        	}
+	}
+	cout<<endl;
+}
+
 int main()
 {
-    int v1[100002], v2[100002];
-    int n,m;
     int ka = 1;
     
-    Left = v1; 
-    Right = v2;
     while(cin>>n)
     {
         cin>>m;
         
+
+    	Left = v1; 
+    	Right = v2;
         for(int i = 1; i <= n+1; i++)
-            Left[i] = i-1;
+            v1[i] = i-1;
+	v1[0] = -1;
         
         for(int i = 0; i <= n; i++)
-            Right[i] = i+1;
+            v2[i] = i+1;
+	v2[n+1] = -1;
         
-        int c, x, y;
+	int c, x, y;
         for(int i = 0; i < m; i++)
         {
             cin>>c;
@@ -37,7 +92,8 @@ int main()
                 cin>>x>>y;
             if(1 == c)
             {
-                if(x == Left[y])
+                //cout<<"1: "<<x<<" "<<y<<endl;
+		if(x == Left[y])
                     continue;
 
 		link(Left[x], Right[x]);
@@ -46,6 +102,7 @@ int main()
             }
             else if (2 == c)
             {
+                //cout<<"2: "<<x<<" "<<y<<endl;
                 if (x == Right[y])
                     continue;
 
@@ -55,63 +112,37 @@ int main()
             }
             else if (3 == c)
             {
+                //cout<<"3: "<<x<<" "<<y<<endl;
                 if(x == Left[y])
                 {
             	    link(Left[x], y);
-		    link(  
-            
-                    Right[x] = Right[y];
-                    Left[y] = Left[x];
-            
-                    Left[x] = y;
-                    Right[y] = x;
-
+		    link(x, Right[y]);
+		    link(y,x);
                 }
-                else if(Left[x] == y)
+                else if(x == Right[y])
                 {
-                    Right[Left[y]] = x;
-                    Left[Right[x]] = y;
-
-                    Right[y] = Right[x];
-                    Left[x] = Left[y];
-
-                    Right[x] = y;
-                    Left[y] = x;
-                }
+                	link(Left[y], x);
+			link(y, Right[x]);
+			link(x, y);
+		}
                 else
                 {
-                    Right[Left[x]] = y;
-                    Left[Right[x]] = y;
-
-                    Right[Left[y]] = x;
-                    Left[Right[y]] = x;
-
-                    int t1,t2;
-                    t1 = Left[x];
-                    t2 = Right[x];
-
-                    Left[x] = Left[y];
-                    Right[x] = Right[y];
-
-                    Left[y] = t1;
-                    Right[y] = t2;
-                }
+                	int yl = Left[y];
+			int yr = Right[y];
+			link(Left[x], y, Right[x]);
+			link(yl, x, yr);
+		}
             }
             else
             {
+                //cout<<"h_t"<<endl;
                 int * t = Right;
                 Right = Left;
                 Left = t;
             }
+	    //print();
         }
-        
-        int t = Right[0];
-	while(t <= n && t > 0)
-        {
-            cout<<t<<endl;
-            t= Right[t];
-        }
-        cout<<"Case "<<ka++<<": "<<0<<endl;
+        cout<<"Case "<<ka++<<": "<<count()<<endl;
     }
 }
 
