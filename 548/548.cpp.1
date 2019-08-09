@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+const int maxn = 10000+2;
+
+int in_order[maxn];
+int post_order[maxn];
+
+int Left[maxn];
+int Right[maxn];
+
+int nn;
+int root;
+
+int getroot(pair<int, int> ind, pair<int, int> posto)
+{
+	int rt = post_order[posto.second];
+	int l, r, i;
+	for(i = ind.first; in_order[i] != rt; i++);
+	if (i > ind.first)
+		l = getroot(make_pair(ind.first,i-1), make_pair(posto.first, posto.first+(i-1-ind.first)));
+	else
+		l = 0;
+	
+	if (i < ind.second)
+		r = getroot(make_pair(i+1, ind.second), make_pair( posto.second+i-ind.second , posto.second-1));
+	else
+		r = 0;
+	Left[rt] = l;
+	Right[rt] = r;
+	cout<<rt<<endl;
+	return rt;
+}
+
+void maketree()
+{
+	root = getroot(make_pair(1,nn), make_pair(1, nn));
+}
+
+int main()
+{
+	string s;
+	while(getline(cin, s))
+	{
+		stringstream ss1(s);
+		int t;
+		int i = 0;
+		nn = 0;
+		while(ss1>>t)  in_order[++nn] = t;
+		
+		getline(cin, s);
+		stringstream ss2(s);
+		for(int i = 1; i <= nn; i++)
+		{
+			ss2>>t;
+			post_order[i]= t;
+		}
+
+		maketree();
+	}
+}
