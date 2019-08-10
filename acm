@@ -1,0 +1,9 @@
+#include <algorithm>
+
+
+string strB;
+strB.resize(strA.size());
+transform(strA.begin(), strA.end(), strB.begin(), ::toupper);
+
+strA.find('A');
+strA.find('A', 3);

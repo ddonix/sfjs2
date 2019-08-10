@@ -13,38 +13,15 @@ int n, m;
 
 void dfs(int i, int j, int id)
 {
-	if('*' == pic[i][j])
-	{
-		idd[i][j] = -1;
+	if(i < 0 || i >= m || j < 0 || j >= n || (idd[i][j] != 0) || (pic[i][j] != '@')) 
 		return;
-	}
-	if(idd[i][j] != 0)
-		return;
-	id = (id == 0) ? ++cid : id;
 	idd[i][j] = id;
-	for(int jj = -1; jj <= 1; jj++)
-	{
-		if ((i > 0) && ('@' == pic[i-1][j+jj]))
-		{ 
-			idd[i][j] = id;
-			dfs(i-1, j+jj, id);
-		}
-		if ((i < n-1) && ('@' == pic[i+1][j+jj]))
+	for(int ii = -1; ii <= 1; ii++)
+		for(int jj = -1; jj <= 1; jj++)
 		{
-			idd[i][j] = id;
-			dfs(i+1, j+jj, id);
+			if (ii || jj)
+				dfs(i+ii, j+jj, id);
 		}
-	}
-	if ((j > 0) && ('@' == pic[i][j-1]))
-	{
-		idd[i][j] = id;
-		dfs(i, j-1, id);
-	}
-	if ((j < n-1) && ('@' == pic[i][j+1]))
-	{
-		idd[i][j] = id;
-		dfs(i, j+1, id);
-	}
 }
 
 int main()
@@ -62,9 +39,9 @@ int main()
 		for(int i = 0; i < m; i++)
 			for (int j = 0; j < n; j++)
 			{
-				if ('@' == pic[i][j] && 0 == idd[maxn][maxn])
+				if ('@' == pic[i][j] && (0 == idd[i][j]))
 				{
-					dfs(i, j, 0);
+					dfs(i, j, ++cid);
 				}
 			}
 		cout<<cid<<endl;
