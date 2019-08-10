@@ -70,15 +70,7 @@ int main()
 		vector<int> v;
 		v.resize(cid+1);
 		
-		for(int i = 0; i < m; i++)
-			dfs2(i, 0);
-		for(int i = 0; i < m; i++)
-			dfs2(i, n-1);
-		for(int j = 0; j < n; j++)
-			dfs2(0, j);
-		for(int j = 0; j < n; j++)
-			dfs2(m-1, j);
-		
+		dfs2(0, 0);
 		for(int i = 0; i < m; i++)
 			for(int j = 0; j < n; j++)
 			{
@@ -107,5 +99,4 @@ int main()
 		}
 		cout<<endl;
 	}
-	cout<<endl;
 }
