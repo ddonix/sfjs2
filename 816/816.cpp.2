@@ -1,0 +1,104 @@
+#include <iostream> 
+#include <vector>
+#include <cstring>
+
+using namespace std;
+
+
+int maze[10][10][4][4];
+int idx[10][10][4];
+
+pair<int, int> spos;
+pair<int, int> epos;
+char sdirect;
+
+void bfs(int r, int c, int direct, int depth)
+{
+
+}
+
+void dfs(int r, int c, int direct, int depth)
+{
+	if (idx[r][c][direct])
+		return;
+	idx[r][c][direct] = 1;
+	if (r == epos.first && c == epos.second)
+	{
+		cout<<"("<<r<<","<<c<<")"<<"depth:"<<depth<<endl;
+		return;
+	}
+	if(maze[r][c][direct][0]) dfs(r-1, c, 0, depth+1);
+	if(maze[r][c][direct][1]) dfs(r+1, c, 1, depth+1);
+	if(maze[r][c][direct][2]) dfs(r, c-1, 2, depth+1);
+	if(maze[r][c][direct][3]) dfs(r, c+1, 3, depth+1);
+}
+
+int main()
+{
+	string name;
+	while(cin>>name && name != "END")
+	{
+		cin>>spos.first>>spos.second>>sdirect>>epos.first>>epos.second;
+		//clear maze and idx
+		memset(maze, 0, sizeof(maze));
+		memset(idx, 0, sizeof(idx));
+		
+		int r, c;
+		//read maze
+		while(cin>>r && r != 0)
+		{
+			cin>>c;
+			string s;
+			while(cin>>s && s!="*")
+			{
+				if('N' == s[0])
+				{
+					maze[r][c][0][1] = false;
+					for(int i = 1; i < s.length(); i++)
+					{
+						if ('F' == s[i]) maze[r][c][0][0] = true;
+						if ('L' == s[i]) maze[r][c][0][2] = true;
+						if ('R' == s[i]) maze[r][c][0][3] = true;
+					}
+				}
+				if('S' == s[0])
+				{
+					maze[r][c][1][0] = false;
+					for(int i = 1; i < s.length(); i++)
+					{
+						if ('F' == s[i]) maze[r][c][1][1] = true;
+						if ('L' == s[i]) maze[r][c][1][3] = true;
+						if ('R' == s[i]) maze[r][c][1][2] = true;
+					}
+				}
+				else if('W' == s[0])
+				{
+					maze[r][c][2][3] = false;
+					for(int i = 1; i < s.length(); i++)
+					{
+						if ('F' == s[i]) maze[r][c][2][2] = true;
+						if ('L' == s[i]) maze[r][c][2][1] = true;
+						if ('R' == s[i]) maze[r][c][2][0] = true;
+					}
+				}
+				else
+				{
+					maze[r][c][3][2] = false;
+					for(int i = 1; i < s.length(); i++)
+					{
+						if ('F' == s[i]) maze[r][c][3][3] = true;
+						if ('L' == s[i]) maze[r][c][3][0] = true;
+						if ('R' == s[i]) maze[r][c][3][1] = true;
+					}
+				}
+			}
+		}
+		
+		cout<<name<<endl;
+		if('N' == sdirect) dfs(spos.first-1, spos.second, 0, 1);
+		if('S' == sdirect) dfs(spos.first+1, spos.second, 1, 1);
+		if('W' == sdirect) dfs(spos.first, spos.second-1, 2, 1);
+		if('E' == sdirect) dfs(spos.first, spos.second+1, 3, 1);
+		cout<<"No Solution Possibl"<<endl;
+	}
+}

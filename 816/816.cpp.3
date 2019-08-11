@@ -1,6 +1,5 @@
 #include <iostream> 
 #include <vector>
-#include <stack>
 #include <queue>
 #include <cstring>
 
@@ -10,21 +9,9 @@ using namespace std;
 int maze[10][10][4][4];
 int idx[10][10][4];
 
-struct Node
-{
-	int r;
-	int c;
-	int direct;
-	Node(){}
-	Node(int rr, int cc, int d) : r(rr), c(cc), direct(d) {}
-};
-
-Node father[10][10][4];
-
 pair<int, int> spos;
 pair<int, int> epos;
 char sdirect;
-int edirect;
 
 bool bfs()
 {
@@ -41,58 +28,36 @@ bool bfs()
 		r = w.first.first;
 		c = w.first.second;
 		direct = w.second;
-		
-		
 		if (idx[r][c][direct])
 			continue;
 		
 		idx[r][c][direct] = 1;
 		if (w.first == epos)
 		{
-			edirect = direct;
 			return true;
 		}
 		
-		if(maze[r][c][direct][0]) 
-		{
-			q.push(make_pair(make_pair(r-1, c), 0));
-			father[r-1][c][0] = Node(r,c,direct);
-		}
-		if(maze[r][c][direct][1]) 
-		{
-			q.push(make_pair(make_pair(r+1, c), 1));
-			father[r+1][c][1] = Node(r,c,direct);
-		}
-		if(maze[r][c][direct][2])
-		{
-			q.push(make_pair(make_pair(r, c-1), 2));
-			father[r][c-1][2] = Node(r,c,direct);
-		}
-		if(maze[r][c][direct][3]) 
-		{
-			q.push(make_pair(make_pair(r, c+1), 3));
-			father[r][c+1][3] = Node(r,c,direct);
-		}
+		if(maze[r][c][direct][0]) q.push(make_pair(make_pair(r-1, c), 0));
+		if(maze[r][c][direct][1]) q.push(make_pair(make_pair(r+1, c), 1));
+		if(maze[r][c][direct][2]) q.push(make_pair(make_pair(r, c-1), 2));
+		if(maze[r][c][direct][3]) q.push(make_pair(make_pair(r, c+1), 3));
 	}
 	return false;
 }
 
-void print_trace()
+void dfs(int r, int c, int direct, int depth)
 {
-	stack<Node> trace;
-	pair<int, int> p,p1;
-	int direct, t;
-
-	p = epos;
-	direct = edirect;
-	while(p != spos)
+	if (idx[r][c][direct])
+		return;
+	idx[r][c][direct] = 1;
+	if (r == epos.first && c == epos.second)
 	{
-		trace.push(p);
-		p.first = father[p1.first][p1.second][direct].r;
-		p.second = father[p1.first][p1.second][direct].c;
-		direct = father[p1.first][p1.second][direct].direct;
+		return;
 	}
-	cout<<"()()"<<endl;
+	if(maze[r][c][direct][0]) dfs(r-1, c, 0, depth+1);
+	if(maze[r][c][direct][1]) dfs(r+1, c, 1, depth+1);
+	if(maze[r][c][direct][2]) dfs(r, c-1, 2, depth+1);
+	if(maze[r][c][direct][3]) dfs(r, c+1, 3, depth+1);
 }
 
 int main()
@@ -157,11 +122,16 @@ int main()
 		}
 		
 		cout<<name<<endl;
+		if('N' == sdirect) dfs(spos.first-1, spos.second, 0, 1);
+		if('S' == sdirect) dfs(spos.first+1, spos.second, 1, 1);
+		if('W' == sdirect) dfs(spos.first, spos.second-1, 2, 1);
+		if('E' == sdirect) dfs(spos.first, spos.second+1, 3, 1);
+		
 		memset(idx, 0, sizeof(idx));
-		memset(father, 0, sizeof(father));
 		if (bfs())
-			print_trace();
+			cout<<"()()"<<endl;
 		else
 			cout<<"No Solution Possibl"<<endl;
+			
 	}
 }
