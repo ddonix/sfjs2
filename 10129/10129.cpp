@@ -23,27 +23,14 @@ int main()
 		for(int i = 0; i < n; i++)
 		{
 			cin>>buff;
-			table[buff[0]-'a'][buff[strlen(buff)-1]-'a']++;
+			int a = buff[0]-'a';
+			int b = buff[strlen(buff)-1]-'a';
+			table[a][b]++;
+			out[a]++;
+			in[b]++;
 		}
-		for(int i = 0; i < 26; i++)
-		{
-			for(int j = 0; j < 26; j++)
-			{
-				out[i] += table[i][j];
-				in[j] += table[i][j];
-			}
-		}
-		
 		int diff = 0;
 		int n[3];
-//		for(int i = 0; i < 26; i++)
-//			if (out[i] > 0)
-//				cout<<(char)('a'+i)<<" "<<out[i]<<endl;
-//		cout<<endl;
-//		for(int i = 0; i < 26; i++)
-//			if (in[i] > 0)
-//				cout<<(char)('a'+i)<<" "<<in[i]<<endl;
-		
 		for(int i = 0; i < 26 && diff <= 2; i++)
 		{
 			if (out[i] != in[i])
@@ -55,7 +42,9 @@ int main()
 		if (diff > 2)
 			cout<<"The door cannot be opened."<<endl;
 		else if (0 == diff)
+		{
 			cout<<"Ordering is possible."<<endl;
+		}
 		else
 		{
 			int a, b;
@@ -66,7 +55,6 @@ int main()
 				b = n[(i+1)%2];
 				if ((out[a]-in[a] == 1) && (in[b]-out[b] == 1))
 				{
-//					cout<<"&&&&&&&&&"<<table[a][b];
 					if (!(table[a][b]%2))
 						ok = true;
 				}
@@ -76,6 +64,5 @@ int main()
 			else
 				cout<<"The door cannot be opened."<<endl;
 		}
-//		cout<<"******************"<<endl;
 	}
 }
