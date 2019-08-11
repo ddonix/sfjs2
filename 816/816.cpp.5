@@ -20,22 +20,22 @@ struct Node
 
 	bool operator !=(const Node & right)
 	{
-		return (r != right.r) || (c != right.c) || (d != right.d); 
+		return !((r == right.r) && (c == right.c) && (d == right.d));
 	}
 };
 
 Node father[10][10][4];
+
 Node snode;
 Node enode;
-char sdirect;
 
 bool bfs()
 {
 	queue<pair<Node, Node> > q;
-	if('N' == sdirect) q.push(make_pair(Node(snode.r-1, snode.c, 0), snode));
-	if('S' == sdirect) q.push(make_pair(Node(snode.r+1, snode.c, 1), snode));
-	if('W' == sdirect) q.push(make_pair(Node(snode.r, snode.c-1, 2), snode));
-	if('E' == sdirect) q.push(make_pair(Node(snode.r, snode.c+1, 3), snode));
+	if(0 == snode.d) q.push(make_pair(Node(snode.r-1, snode.c, 0), snode));
+	if(1 == snode.d) q.push(make_pair(Node(snode.r+1, snode.c, 1), snode));
+	if(2 == snode.d) q.push(make_pair(Node(snode.r, snode.c-1, 2), snode));
+	if(3 == snode.d) q.push(make_pair(Node(snode.r, snode.c+1, 3), snode));
 	
 	while(!q.empty())
 	{
@@ -46,6 +46,7 @@ bool bfs()
 		r = w.first.r;
 		c = w.first.c;
 		direct = w.first.d;
+		
 		if (idx[r][c][direct])
 			continue;
 		
@@ -78,44 +79,30 @@ bool bfs()
 	return false;
 }
 
-string name;
-bool first = true;
-void print_trace(bool ok)
+void print_trace()
 {
-	if (first)
-		first = false;
-	else
-		cout<<endl;
-
-	cout<<name;
-	if (!ok)
-	{
-		cout<<endl<<"  No Solution Possible";
-		return;
-	}
-	
 	stack<Node> trace;
 	
 	int r, c, direct;
 	Node n = enode;
-	do
+	while(n != snode)
 	{
 		trace.push(n);
 		Node t = n;
 		n = father[t.r][t.c][t.d];
-	}while(n != snode);
+	}
 	trace.push(snode);
-	
 	int i = 1;
 	while(!trace.empty())
 	{
 		n = trace.top();
 		trace.pop();
-		
 		if (i%10 == 1)
+			cout<<"  ";
+		cout<<"("<<n.r<<","<<n.c<<")";
+		if (i%10)
 			cout<<" ";
-		cout<<" ("<<n.r<<","<<n.c<<")";
-		if (!(i%10))
+		else
 			cout<<endl;
 		i++;
 	}
@@ -125,15 +112,18 @@ void print_trace(bool ok)
 
 int main()
 {
+	string name;
+	char d;
 	while(cin>>name && name != "END")
 	{
-		cin>>snode.r>>snode.c>>sdirect>>enode.r>>enode.c;
-		snode.d = -1;
-		
+		cin>>snode.r>>snode.c>>d>>enode.r>>enode.c;
 		//clear maze and idx
 		memset(maze, 0, sizeof(maze));
 		memset(idx, 0, sizeof(idx));
-		memset(father, 0, sizeof(father));
+		if ('N' == d) snode.d = 0;
+		if ('S' == d) snode.d = 1;
+		if ('W' == d) snode.d = 2;
+		if ('E' == d) snode.d = 3;
 		
 		int r, c;
 		//read maze
@@ -153,7 +143,7 @@ int main()
 						if ('R' == s[i]) maze[r][c][0][3] = true;
 					}
 				}
-				else if('S' == s[0])
+				if('S' == s[0])
 				{
 					maze[r][c][1][0] = false;
 					for(int i = 1; i < s.length(); i++)
@@ -187,9 +177,11 @@ int main()
 		}
 		
 		cout<<name<<endl;
+		memset(idx, 0, sizeof(idx));
+		memset(father, 0, sizeof(father));
 		if (bfs())
-			print_trace(1);
+			print_trace();
 		else
-			print_trace(0);
+			cout<<"No Solution Possibl"<<endl;
 	}
 }
