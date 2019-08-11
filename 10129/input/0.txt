@@ -1,0 +1,11 @@
+3
+2
+a
+ibm
+3
+acm
+malform
+mouse
+2
+ok
+ok
