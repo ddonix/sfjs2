@@ -6,6 +6,36 @@
 
 using namespace std;
 
+struct Adis
+{
+	int x;
+	int y;
+	int z;
+	Adis & operator=(const Adis & b)
+	{
+		x = b.x;
+		y = b.y;
+		z = b.z;
+		return *this;
+	}
+	
+	bool operator==(const Adis & b) const
+	{
+		return (x == b.x && y == b.y && z == b.z);
+	}
+	
+	bool operator<(const Adis & b) const
+	{
+		if (x != b.x) return x < b.x;
+		if (y != b.y) return y < b.y;
+		if (z != b.z) return z < b.z;
+		return false;
+	}
+	
+	Adis() : x(-1), y(-1), z(-1) {}
+	Adis(int xx, int yy, int zz) : x(xx), y(yy), z(zz) {}
+};
+
 struct Box
 {
 	int al[3];
@@ -30,7 +60,7 @@ struct Box
 		return true;
 	}
 
-	bool include(int x, int y, int z)
+	int relation(int x, int y, int z)
 	{
 		if (!(x >= al[0] && x <= ag[0])) return false;
 		if (!(y >= al[1] && y <= ag[1])) return false;
@@ -50,14 +80,20 @@ vector<int> adis[3];
 vector<int> adis_c[3];
 set<int> aset[3];
 
+set<Adis> cu;
 void bfs()
 {
-	queue<int *> q;
-	int a[3] = {1, 1, 1};
+	queue<Adis> q;
+	Adis a(1,1,1), b;
 	q.push(a);
+	area = volume = 0;
 	while(!q.empty())
 	{
-	
+		a = q.front();
+		q.pop();
+		if (cu.count(a))
+			continue;
+		cu.insert(a);
 	}
 }
 
