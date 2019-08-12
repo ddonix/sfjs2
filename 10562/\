@@ -12,28 +12,30 @@ int len[maxn];
 
 int line;
 
-string dfs(char root, int l, string::size_type rp)
+string dfs(char root, string::size_type rp, int l)
 {
-	if (l == (line-1))
-		return root+string("()");
-	if (map[l+1][rp] != '|')
-		return root+string("()");
-
 	string t, res;
 	string s, s1, s2;
-	int left, right;
-	for(left = rp-1; map[l+2][left] == '-'; left--);
-	for(right = rp+1; map[l+2][right] == '-'; right++);
-	left++;
+	if (l == (line-1))
+		return root+string("()");
 	
-	res = root+string("(");
-	for(int p = left; p < right && p < map[l+3].length(); p++)
+	string::size_type p = map[l+1].find('|');
+	if (p == string::npos)
+		return root+string("()");
+	
+	int left, right;
+	for(left = p-1; map[l+2][left] == '-'; left--);
+	for(right = p+1; map[l+2][right] == '-'; right++);
+	left++;
+
+	
+	for(int p = left; p < right; p++)
 	{
 		char c = map[l+3][p];
 		string rr;
 		if (c != '-' && c != '|' && c != ' ' && c != '#')
 		{
-			rr = dfs(c, l+3, p);
+			rr = dfs(c, l+3);
 			res += rr;
 		}
 	}
@@ -70,11 +72,11 @@ int main()
 				r = map[0][p];
 				if (r != '-' && r != '|' && r != ' ' && r != '#')
 				{
-					s = dfs(r, 0, p);
-					cout<<"("<<s<<")"<<endl;
-					break;
+				
 				}
 			}
+			s = dfs(r, p, 0);
+			cout<<"("<<s<<")"<<endl;
 		}
 	}
 }
