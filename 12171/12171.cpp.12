@@ -8,10 +8,8 @@
 using namespace std;
 
 const int maxn = 50;
-const int EDGE = 102;
+const int EDGE = 1024;
 const int maxd = 102;
-
-int 
 vector<int> adis[3];
 int adisn[3];
 
@@ -125,7 +123,7 @@ bool isAir(Box & b)
 	return true;
 }
 
-int vis[maxd][maxd][maxd];
+int cu[maxd][maxd][maxd];
 int area;
 int volume;
 void bfs()
@@ -134,15 +132,15 @@ void bfs()
 	q.push(Index(0,0,0));
 	
 	area = volume = 0;
-	memset(vis, 0, sizeof(vis));
+	memset(cu, 0, sizeof(cu));
 	while(!q.empty())
 	{
 		Index ind = q.front();
 		q.pop();
 
-		if (vis[ind.id[0]][ind.id[1]][ind.id[2]])
+		if (cu[ind.id[0]][ind.id[1]][ind.id[2]])
 			continue;
-		vis[ind.id[0]][ind.id[1]][ind.id[2]] = 1;
+		cu[ind.id[0]][ind.id[1]][ind.id[2]] = 1;
 
 		bool mb = true;
 		for(int i = 0; i < 3; i++)
@@ -170,7 +168,7 @@ void bfs()
 			volume += b.volume;
 			area += b.touch;
 		}
-		//cout<<b.t<<" "<<b.touch<<" "<<"("<<a0[0]<<" "<<a0[1]<<" "<<a0[2]<<") ("<<a1[0]<<" "<<a1[1]<<" "<<a1[2]<<")"<<endl; 
+		cout<<b.t<<" "<<b.touch<<" "<<"("<<a0[0]<<" "<<a0[1]<<" "<<a0[2]<<") ("<<a1[0]<<" "<<a1[1]<<" "<<a1[2]<<")"<<endl; 
 	}
 	volume = EDGE*EDGE*EDGE - volume;
 }

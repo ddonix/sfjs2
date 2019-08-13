@@ -2,18 +2,11 @@
 #include <vector>
 #include <set>
 #include <queue>
-#include <cstring>
 #include <algorithm>
 
 using namespace std;
 
-const int maxn = 50;
-const int EDGE = 102;
-const int maxd = 102;
-
-int 
 vector<int> adis[3];
-int adisn[3];
 
 struct Index
 {
@@ -36,25 +29,36 @@ struct Index
 		if (fx == 5) temp.id[2]--;
 		return temp;
 	}
+	
+	bool operator< (const Index & right) const 
+	{ 
+		for(int i = 0; i < 3; i++)
+			if (id[i] != right.id[i])
+				return id[i] < right.id[i];
+		return false;
+	}
 };
 
+//Box box[maxn];		//0 --- n-1铜盒子
 struct Box
 {
 	int a0[3];
 	int a1[3];
 	int t;		//0:铜 1:空气
-	int touch;	//接触面积
-	int volume;	//体积
+	int touch;	//面积
+	int volume;
 	int edge[6];
 
 	Box(){}
-	Box(const int a0_[3], const int a1_[3]) : t(0)	//铜
+	Box(int a0_[3], int a1_[3])	//铜
 	{
 		for(int i = 0; i < 3; i++)
 		{
 			a0[i] = a0_[i];
 			a1[i] = a1_[i];
 		}
+		t = 0;
+		volume =  (a1[0]-a0[0])*(a1[1]-a0[1])*(a1[2]-a0[2]);
 	}
 
 	int relation(const Box & b) const
@@ -91,23 +95,31 @@ struct Box
 	}
 };
 
+const int maxn = 51;
+const int EDGE = 510;
 Box box[maxn];		//0 --- n-1铜盒子
+
 int n;
 
-bool isAir(Box & b)
+int area;
+int volume;
+
+Box makeBox(int a0[3], int a1[3])
 {
+	bool af[6];
+	Box b = Box(a0, a1);
 	for(int i = 0; i < 6; i++)
 		b.edge[i] = 1;
+	b.t = 0;
 	for(int i = 0; i < n; i++)
 	{
 		int r = box[i].relation(b);
 		if (r == -2)
-			return false;
+			return b;
 		if(r >= 0)
 			b.edge[r] = 0;
 	}
 	b.t = 1;			//空气
-	b.volume =  (b.a1[0]-b.a0[0])*(b.a1[1]-b.a0[1])*(b.a1[2]-b.a0[2]);
 	b.touch = 0;
 	for(int i = 0; i < 6; i++)
 	{
@@ -122,37 +134,37 @@ bool isAir(Box & b)
 		if (b.edge[i] == 0)
 			b.touch += ar;
 	}
-	return true;
+	return b;
 }
 
-int vis[maxd][maxd][maxd];
-int area;
-int volume;
+set<Index> cu;
 void bfs()
 {
-	queue<Index> q;
-	q.push(Index(0,0,0));
+	queue<pair<Index, int> > q;
+	q.push(make_pair(Index(0,0,0), 0));		//小点
 	
+	cu.clear();
 	area = volume = 0;
-	memset(vis, 0, sizeof(vis));
 	while(!q.empty())
 	{
-		Index ind = q.front();
+		int edge[6];				//0:铜 1:空气
+		Index ind = (q.front()).first;
+		edge[(q.front()).second] = 1;
+		
 		q.pop();
-
-		if (vis[ind.id[0]][ind.id[1]][ind.id[2]])
+		if (cu.count(ind))
 			continue;
-		vis[ind.id[0]][ind.id[1]][ind.id[2]] = 1;
+		cu.insert(ind);
 
 		bool mb = true;
 		for(int i = 0; i < 3; i++)
 		{
 			if(ind.id[i] > 0)
-				q.push(ind.next(i*2+1));
+				q.push(make_pair(ind.next(i*2+1),i*2+1));
 			
-			if(ind.id[i] < adisn[i]-2)
-				q.push(ind.next(i*2));
-			else if(ind.id[i] > adisn[i]-2)
+			if(ind.id[i] < adis[i].size()-2)
+				q.push(make_pair(ind.next(i*2), i*2));
+			else if(ind.id[i] > adis[i].size()-2)
 				mb = false;
 		}
 		if (!mb)
@@ -164,13 +176,13 @@ void bfs()
 			a0[i] = adis[i][ind.id[i]];
 			a1[i] = adis[i][ind.id[i]+1];
 		}
-		Box b(a0, a1);
-		if (isAir(b))
+		Box b = makeBox(a0, a1);
+		cout<<b.t<<" "<<b.touch<<" "<<"("<<a0[0]<<" "<<a0[1]<<" "<<a0[2]<<") ("<<a1[0]<<" "<<a1[1]<<" "<<a1[2]<<")"<<endl; 
+		if (b.t == 1)
 		{
 			volume += b.volume;
 			area += b.touch;
 		}
-		//cout<<b.t<<" "<<b.touch<<" "<<"("<<a0[0]<<" "<<a0[1]<<" "<<a0[2]<<") ("<<a1[0]<<" "<<a1[1]<<" "<<a1[2]<<")"<<endl; 
 	}
 	volume = EDGE*EDGE*EDGE - volume;
 }
@@ -201,9 +213,7 @@ int main()
 		for(int i = 0; i < 3; i++)
 		{
 			int j = 1;
-			adisn[i] = aset[i].size()+2;
-			adis[i].resize(adisn[i]);
-			
+			adis[i].resize(aset[i].size()+2);
 			adis[i][0] = 0;
 			for(auto it = aset[i].begin(); it != aset[i].end(); it++)
 				adis[i][j++] = *it;
