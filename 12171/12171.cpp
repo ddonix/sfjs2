@@ -41,6 +41,34 @@ struct Adis
 	}
 };
 
+vector<int> adis[3];
+set<int> aset[3];
+
+struct Index
+{
+	int id[3];
+	Index(int i0, int i1, int i2)
+	{
+		id[0] = i0;
+		id[1] = i1;
+		id[2] = i2;
+	}
+
+	Index next(int fx)
+	{
+		Index temp = Index(id[0], id[1], id[2]);
+		if (fx == 0) temp.id[0]++;
+		if (fx == 1) temp.id[1]++;
+		if (fx == 2) temp.id[2]++;
+		if (fx == 10) temp.id[0]--;
+		if (fx == 11) temp.id[1]--;
+		if (fx == 12) temp.id[2]--;
+		return temp;
+	}
+	
+	bool operator< (const Index & right) const { return true; }
+};
+
 //Box box[maxn];		//0 --- n-1铜盒子, n -- n+nc-1 空气盒子
 struct Box
 {
@@ -77,10 +105,6 @@ int nc;
 int area;
 int volume;
 
-vector<int> adis[3];
-set<int> aset[3];
-set<Adis> cu;
-
 void makeBox(int i)
 {
 	bool af[6];
@@ -109,72 +133,42 @@ void makeBox(int i)
 	box[i] = b;
 }
 
-bool Findcube(Adis a, int edge[6])
-{
-	int t[6];
-	for(int i = 0; i < 6; i++) 
-		edge[i] = -1;
-	for(int i = 0; i < 3; i++) 
-	{
-		t[i*2] = 0;
-		t[i*2+1] = EDGE;
-	}
-	for(int i = 0; i < 6; i++)
-		if (edge[i] != -1)
-			return true;
-	return false;
-}
-
+set<Index> cu;
 void bfs()
 {
-	queue<Adis> q;
-	Adis a(0,0,0);
-	q.push(a);		//小点
+	queue<Index> q;
+	q.push(Index(0,0,0));		//小点
 	
 	nk = 0;
 	area = volume = 0;
 	while(!q.empty())
 	{
-		a = q.front();
+		Index ind = q.front();
 		q.pop();
-		if (cu.count(a))
+		if (cu.count(ind))
 			continue;
-		cu.insert(a);
+		cu.insert(ind);
 
-		int e[6];
-		Box b;		//新空气盒子
-		Adis next;	//下一个结点
-		Adis t;
-		
-		if (Findcube(a, e))
-		{
-			box[nc+nk] = Box(e);
-			makeBox(nc+nk);
-			
-			volume += box[nc+nk].v;
-			area += box[nc+nk].touch;
-			t = box[nc+nk].a1;
-
-			nk++;
-		}
-		else
-			t = a;
-			
+		bool mb = true;
 		for(int i = 0; i < 3; i++)
 		{
-			if(t.a[i] < EDGE)
-			{
-				next = a;
-				next.a[i] = *(++find(adis[i].begin(), adis[i].end(), t.a[i]));
-				q.push(next);
-			}
-			if(a.a[i] > 0)
-			{
-				next = a;
-				next.a[i] = *(--find(adis[i].begin(), adis[i].end(), a.a[i]));
-				q.push(next);
-			}
+			if(ind.id[i] > 0)
+				q.push(ind.next(10+i));
+			if(ind.id[i] < adis[i].size()-1)
+				q.push(ind.next(i));
+			else
+				mb = false;
 		}
+		if (!mb)
+			continue;
+		
+		Adis a0, a1;
+		for(int i = 0; i < 3; i++)
+		{
+			a0.a[i] = ind.id[i];
+			a1.a[i] = ind.id[i]+1;
+		}
+		Box b;		//新空气盒子
 	}
 	volume = EDGE*EDGE*EDGE - volume;
 }
