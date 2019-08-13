@@ -69,7 +69,7 @@ struct Plane
 	
 	bool istouch(int u0, int v0, int u1, int v1)
 	{
-		if ((u0 == u1) || (v0 == v1))
+		if ((u0 == v0) || (v0 == v1))
 			return !(u0 < a0[0] || u1 > a1[0] || v0 < a0[1] || v1 > a1[1]);
 		else
 			return !(u1 < a0[0] || u0 > a1[0] || v1 < a0[1] || v0 > a1[1]);
@@ -77,7 +77,6 @@ struct Plane
 	}
 };
 
-//Box box[maxn];		//0 --- n-1铜盒子, n -- n+nc-1 空气盒子
 struct Box
 {
 	Adis a0;
@@ -85,7 +84,6 @@ struct Box
 	int t;		//0:铜 1:空气
 	int touch;	//面积
 	int v;
-	int edge[6];
 
 	Box(){}
 	Box(Adis l, Adis r)	//铜
@@ -96,10 +94,10 @@ struct Box
 		v =  (a1.a[0]-a0.a[0])*(a1.a[1]-a0.a[1])*(a1.a[2]-a0.a[2]);
 	}
 
-	Box(int e[6])	//空气
+	Box(int edge[6])	//空气
 	{
-		for(int i = 0; i < 6; i++) edge[i] = e[i];
 		t = 1;
+		v = 0;
 		touch = 0;
 	}
 
@@ -140,100 +138,14 @@ vector<int> adis[3];
 set<int> aset[3];
 set<Adis> cu;
 
-void makeBox(int i)
-{
-	bool af[6];
-	Box b = box[i];
-	for(int i = 0; i < 3; i++)
-	{
-		b.a0.a[i] = (b.edge[i*2] < 0) ? 0 : (box[b.edge[i*2]].a1.a[i]);
-		b.a1.a[i] = (b.edge[i*2+1] < EDGE) ? 0 : (box[b.edge[i*2+1]].a0.a[i]);
-	}
-	
-	b.v = (b.a1.a[0] - b.a0.a[0])*(b.a1.a[1] - b.a0.a[1])*(b.a1.a[2] - b.a0.a[2]);
-	b.t = 0;
-	for(int i = 0; i < 6; i++)
-	{
-		int area;
-		if ((0 == i) || (1 == i))
-			area = (b.a1.a[1] - b.a0.a[1])*(b.a1.a[2] - b.a0.a[2]);
-		else if ((2 == i) || (3 == i))
-			area = (b.a1.a[0] - b.a0.a[0])*(b.a1.a[2] - b.a0.a[2]);
-		else
-			area = (b.a1.a[0] - b.a0.a[0])*(b.a1.a[1] - b.a0.a[1]);
-		
-		if (b.edge[i] >= 0 && b.edge[i] < nc) 
-			b.t += area;
-	}
-	box[i] = b;
-}
-
 bool Findcube(Adis a, int edge[6])
 {
-	int t[6];
-	for(int i = 0; i < 6; i++) 
-		edge[i] = -1;
-	for(int i = 0; i < 3; i++) 
-	{
-		t[i*2] = 0;
-		t[i*2+1] = EDGE;
-	}
-	for(int i = 0; i < nk+nc; i++)
-	{
-		if (box[i].istouch("YZ", a.a[1], a.a[2]))
-		{
-			if (box[i].a1.a[0] > t[0])
-			{
-				t[0] = box[i].a1.a[0];
-				edge[0] = i;
-			}
-			if (box[i].a0.a[0] < t[1])
-			{
-				t[1] = box[i].a0.a[0];
-				edge[1] = i;
-			}
-		}
-	}
-	for(int i = 0; i < nk+nc; i++)
-	{
-		if (box[i].istouch("XZ", t[0], a.a[2], t[1], a.a[2]))
-		{
-			if (box[i].a1.a[1] > t[2])
-			{
-				t[2] = box[i].a1.a[1];
-				edge[2] = i;
-			}
-			if (box[i].a0.a[1] < t[3])
-			{
-				t[3] = box[i].a0.a[1];
-				edge[3] = i;
-			}
-		}
-	}
-	for(int i = 0; i < nk+nc; i++)
-	{
-		if (box[i].istouch("XY", t[0], t[2], t[1], t[3]))
-		{
-			if (box[i].a1.a[2] > t[4])
-			{
-				t[4] = box[i].a1.a[2];
-				edge[4] = i;
-			}
-			if (box[i].a0.a[2] < t[5])
-			{
-				t[5] = box[i].a0.a[2];
-				edge[5] = i;
-			}
-		}
-	}
-	for(int i = 0; i < 6; i++)
-		if (edge[i] != -1)
-			return true;
-	return false;
+	return true;
 }
 
 void bfs()
 {
+	/*
 	queue<Adis> q;
 	Adis a(0,0,0);
 	q.push(a);		//小点
@@ -254,35 +166,52 @@ void bfs()
 		Adis t;
 		if (Findcube(a, e))
 		{
-			box[nc+nk] = Box(e);
-			makeBox(nc+nk);
-			
+			b = Box(e);
+			box[nc+nk++] = b;
 			volume += box[nc+nk].v;
 			area += box[nc+nk].touch;
-			t = box[nc+nk].a1;
-
-			nk++;
+			t = b.a1;
 		}
 		else
 			t = a;
 			
-		for(int i = 0; i < 3; i++)
+		if(t.x < EDGE)
 		{
-			if(t.a[i] < EDGE)
-			{
-				next = a;
-				next.a[i] = *(++find(adis[i].begin(), adis[i].end(), t.a[i]));
-				q.push(next);
-			}
-			if(a.a[i] > 0)
-			{
-				next = a;
-				next.a[i] = *(--find(adis[i].begin(), adis[i].end(), a.a[i]));
-				q.push(next);
-			}
+			next = a;
+			next.x = *(++find(adis[0].begin(), adis[0].end(), t.x));
+			q.push(next);
 		}
-	}
-	volume = EDGE*EDGE*EDGE - volume;
+		if(t.y < EDGE)
+		{
+			next = a;
+			next.y = *(++find(adis[1].begin(), adis[1].end(), t.y));
+			q.push(next);
+		}
+		if(t.z < EDGE)
+		{
+			next = a;
+			next.z = *(++find(adis[2].begin(), adis[2].end(), t.z));
+			q.push(next);
+		}
+		if(a.x > 0)
+		{
+			next = a;
+			next.x = *(--find(adis[0].begin(), adis[0].end(), a.x));
+			q.push(next);
+		}
+		if(a.y > 0)
+		{
+			next = a;
+			next.y = *(--find(adis[1].begin(), adis[1].end(), a.y));
+			q.push(next);
+		}
+		if(a.z > 0)
+		{
+			next = a;
+			next.z = *(--find(adis[2].begin(), adis[2].end(), a.z));
+			q.push(next);
+		}
+	}*/
 }
 
 int main()
