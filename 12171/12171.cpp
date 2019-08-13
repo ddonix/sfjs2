@@ -1,6 +1,10 @@
+/*
+* 审题：要考虑完全被包裹起来的情况，所以体积的计算也要bfs。
+* 此题要floodfill
+*/
+
 #include <iostream> 
 #include <vector>
-#include <set>
 #include <queue>
 #include <cstring>
 #include <algorithm>
@@ -8,208 +12,119 @@
 using namespace std;
 
 const int maxn = 50;
-const int EDGE = 102;
-const int maxd = 102;
+const int EDGE = 1024;
+const int maxd = 102; 
+int ad[3][maxd];			//离散化坐标
+int adn[3];					//离散化坐标个数
 
-int 
-vector<int> adis[3];
-int adisn[3];
+int vis[maxd][maxd][maxd];
+int grid[maxd][maxd][maxd];	//0:空气	//1：铜
+
+int cube[maxn][6];
 
 struct Index
 {
-	int id[3];
-	Index(int i0, int i1, int i2)
-	{
-		id[0] = i0;
-		id[1] = i1;
-		id[2] = i2;
-	}
-
-	Index next(int fx)
-	{
-		Index temp = Index(id[0], id[1], id[2]);
-		if (fx == 0) temp.id[0]++;
-		if (fx == 1) temp.id[0]--;
-		if (fx == 2) temp.id[1]++;
-		if (fx == 3) temp.id[1]--;
-		if (fx == 4) temp.id[2]++;
-		if (fx == 5) temp.id[2]--;
-		return temp;
-	}
+	int x,y,z;
+	Index(int xx, int yy, int zz) : x(xx), y(yy), z(zz){}
 };
 
-struct Box
-{
-	int a0[3];
-	int a1[3];
-	int t;		//0:铜 1:空气
-	int touch;	//接触面积
-	int volume;	//体积
-	int edge[6];
-
-	Box(){}
-	Box(const int a0_[3], const int a1_[3]) : t(0)	//铜
-	{
-		for(int i = 0; i < 3; i++)
-		{
-			a0[i] = a0_[i];
-			a1[i] = a1_[i];
-		}
-	}
-
-	int relation(const Box & b) const
-	{
-		int u0, v0, u1, v1;
-		int o0, p0, o1, p1;
-		for(int i = 0; i < 3;i++)
-		{
-			u0 = ((i==0) ? a0[1] : a0[0]);
-			u1 = ((i==0) ? a1[1] : a1[0]);
-			v0 = ((i==2) ? a0[1] : a0[2]);
-			v1 = ((i==2) ? a1[1] : a1[2]);
-			
-			o0 = ((i==0) ? b.a0[1] : b.a0[0]);
-			o1 = ((i==0) ? b.a1[1] : b.a1[0]);
-			p0 = ((i==2) ? b.a0[1] : b.a0[2]);
-			p1 = ((i==2) ? b.a1[1] : b.a1[2]);
-			if((u0 <= o0) && (u1 >= o1) && (v0 <= p0) &&(v1 >= p1))
-			{
-				if (a0[i] > b.a1[i] || a1[i] < b.a0[i])
-					return -1;		//分离
-				if (a0[i] <= b.a0[i] && a1[i] > b.a0[i])
-					return -2;		//重合
-				if (a1[i] >= b.a1[i] && a0[i] < b.a1[i])
-					return -2;		//重合
-				if (a0[i] == b.a1[i])
-					return 2*i;
-			 	if (a1[i] == b.a0[i])
-					return 2*i+1;
-				cout<<"*******************************"<<endl;
-			}
-		}
-		return -1;
-	}
-};
-
-Box box[maxn];		//0 --- n-1铜盒子
-int n;
-
-bool isAir(Box & b)
-{
-	for(int i = 0; i < 6; i++)
-		b.edge[i] = 1;
-	for(int i = 0; i < n; i++)
-	{
-		int r = box[i].relation(b);
-		if (r == -2)
-			return false;
-		if(r >= 0)
-			b.edge[r] = 0;
-	}
-	b.t = 1;			//空气
-	b.volume =  (b.a1[0]-b.a0[0])*(b.a1[1]-b.a0[1])*(b.a1[2]-b.a0[2]);
-	b.touch = 0;
-	for(int i = 0; i < 6; i++)
-	{
-		int ar;
-		if ((0 == i) || (1 == i))
-			ar = (b.a1[1] - b.a0[1])*(b.a1[2] - b.a0[2]);
-		else if ((2 == i) || (3 == i))
-			ar = (b.a1[0] - b.a0[0])*(b.a1[2] - b.a0[2]);
-		else
-			ar = (b.a1[0] - b.a0[0])*(b.a1[1] - b.a0[1]);
-		
-		if (b.edge[i] == 0)
-			b.touch += ar;
-	}
-	return true;
-}
-
-int vis[maxd][maxd][maxd];
 int area;
 int volume;
+int dx[] = {1,-1, 0, 0, 0, 0};
+int dy[] = {0, 0, 1,-1, 0, 0};
+int dz[] = {0, 0, 0, 0, 1,-1};
 void bfs()
 {
-	queue<Index> q;
-	q.push(Index(0,0,0));
-	
-	area = volume = 0;
+	area = 0;
+	volume = 0;
 	memset(vis, 0, sizeof(vis));
+	queue<Index> q;
+	
+	q.push(Index(0,0,0));
+	vis[0][0][0] = 1;
+
 	while(!q.empty())
 	{
 		Index ind = q.front();
 		q.pop();
-
-		if (vis[ind.id[0]][ind.id[1]][ind.id[2]])
-			continue;
-		vis[ind.id[0]][ind.id[1]][ind.id[2]] = 1;
-
-		bool mb = true;
-		for(int i = 0; i < 3; i++)
+		int x, y, z;
+		x = ind.x;
+		y = ind.y;
+		z = ind.z;
+	
+		if (0 == grid[x][y][z])
+			volume += (ad[0][x+1]-ad[0][x])*(ad[1][y+1]-ad[1][y])*(ad[2][z+1]-ad[2][z]);
+        for(int i=0; i<6; i++)
 		{
-			if(ind.id[i] > 0)
-				q.push(ind.next(i*2+1));
-			
-			if(ind.id[i] < adisn[i]-2)
-				q.push(ind.next(i*2));
-			else if(ind.id[i] > adisn[i]-2)
-				mb = false;
-		}
-		if (!mb)
-			continue;
-		
-		int a0[3], a1[3];
-		for(int i = 0; i < 3; i++)
-		{
-			a0[i] = adis[i][ind.id[i]];
-			a1[i] = adis[i][ind.id[i]+1];
-		}
-		Box b(a0, a1);
-		if (isAir(b))
-		{
-			volume += b.volume;
-			area += b.touch;
-		}
-		//cout<<b.t<<" "<<b.touch<<" "<<"("<<a0[0]<<" "<<a0[1]<<" "<<a0[2]<<") ("<<a1[0]<<" "<<a1[1]<<" "<<a1[2]<<")"<<endl; 
-	}
+            int tx, ty, tz;
+            tx = x + dx[i];
+            ty = y + dy[i];
+            tz = z + dz[i];
+            if(tx<0 || tx>=adn[0]-1 || ty<0 || ty>=adn[1]-1 || tz<0 || tz>=adn[2]-1)
+                continue;
+            if(grid[tx][ty][tz] == 1)
+			{
+            	if (i < 2)
+					area += (ad[1][y+1]-ad[1][y])*(ad[2][z+1]-ad[2][z]);
+            	else if (i < 4)
+					area += (ad[0][x+1]-ad[0][x])*(ad[2][z+1]-ad[2][z]);
+            	else
+					area += (ad[0][x+1]-ad[0][x])*(ad[1][y+1]-ad[1][y]);
+			}
+			else if(grid[tx][ty][tz] == 0 && vis[tx][ty][tz] == 0)
+			{
+                q.push(Index(tx, ty, tz));
+                vis[tx][ty][tz] = 1;
+            }
+        }
+    }
 	volume = EDGE*EDGE*EDGE - volume;
 }
 
+int n;
 int main()
 {
 	int T;
 	cin>>T;
 	while(T--)
 	{
-		set<int> aset[3];
 		cin>>n;
-		for(int i = 0; i < 3; i++)
-			adis[i].clear();
-		
+		volume = 0;
 		for(int i = 0; i < n; i++)
 		{
-			int a0[3], a1[3];
-			cin>>a0[0]>>a0[1]>>a0[2]>>a1[0]>>a1[1]>>a1[2];
+			int a[6];
+			cin>>a[0]>>a[1]>>a[2]>>a[3]>>a[4]>>a[5];
+			volume += a[3]*a[4]*a[5];
 			for(int j = 0; j < 3; j++)
 			{
-				a1[j] += a0[j];
-				aset[j].insert(a0[j]);
-				aset[j].insert(a1[j]);
+				ad[j][2*i+1] = cube[i][j] = a[j];
+				ad[j][2*i+2] = cube[i][3+j] = a[3+j]+a[j];
 			}
-			box[i] = Box(a0, a1);
 		}
 		for(int i = 0; i < 3; i++)
 		{
-			int j = 1;
-			adisn[i] = aset[i].size()+2;
-			adis[i].resize(adisn[i]);
-			
-			adis[i][0] = 0;
-			for(auto it = aset[i].begin(); it != aset[i].end(); it++)
-				adis[i][j++] = *it;
-			adis[i][j] = EDGE;
-			for(auto it = aset[i].begin(); it != aset[i].end(); it++)
-			sort(adis[i].begin(), adis[i].end());
+			ad[i][0] = 0;
+			sort(ad[i], ad[i]+2*n+1);
+			adn[i] = unique(ad[i], ad[i]+2*n+1)-ad[i];
+			ad[i][adn[i]++] = EDGE;
+		}
+
+		//关键步骤：根据n个铜cube填充grid
+		//这个步骤如果不做，下步判断接触面积将极其麻烦
+		memset(grid, 0, sizeof(grid));
+		for(int c = 0; c < n; c++)
+		{
+			int x0, x1, y0, y1, z0, z1;
+			x0 = lower_bound(ad[0], ad[0]+adn[0], cube[c][0])-ad[0];
+			x1 = lower_bound(ad[0], ad[0]+adn[0], cube[c][3])-ad[0];
+			y0 = lower_bound(ad[1], ad[1]+adn[0], cube[c][1])-ad[1];
+			y1 = lower_bound(ad[1], ad[1]+adn[0], cube[c][4])-ad[1];
+			z0 = lower_bound(ad[2], ad[2]+adn[0], cube[c][2])-ad[2];
+			z1 = lower_bound(ad[2], ad[2]+adn[0], cube[c][5])-ad[2];
+			for(int i = x0; i < x1; i++)
+				for(int j = y0; j < y1; j++)
+					for(int k = z0; k < z1; k++)
+						grid[i][j][k] = 1;
 		}
 		bfs();
 		cout<<area<<" "<<volume<<endl;
