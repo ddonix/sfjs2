@@ -41,6 +41,43 @@ struct Adis
 	}
 };
 
+struct Plane
+{
+	int a0[2];
+	int a1[2];
+	Plane(){};
+	Plane & operator=(const Plane & p)
+	{
+		for(int i = 0; i < 2; i++) 
+		{
+			a0[i] = p.a0[i];
+			a1[i] = p.a1[i];
+		}
+		return *this;
+	}
+	Plane(int u0, int v0, int u1, int v1)
+	{
+		a0[0] = u0;
+		a0[1] = v0;
+		a1[0] = u1;
+		a1[1] = v1;
+	}
+	
+	bool istouch(int u, int v)
+	{
+		return !(u < a0[0] || u > a1[0] || v < a0[1] || v > a1[1]);
+	}
+	
+	bool istouch(int u0, int v0, int u1, int v1)
+	{
+		if ((u0 == u1) || (v0 == v1))
+			return !(u0 < a0[0] || u1 > a1[0] || v0 < a0[1] || v1 > a1[1]);
+		else
+			return !(u1 < a0[0] || u0 > a1[0] || v1 < a0[1] || v0 > a1[1]);
+
+	}
+};
+
 //Box box[maxn];		//0 --- n-1铜盒子, n -- n+nc-1 空气盒子
 struct Box
 {
@@ -60,10 +97,33 @@ struct Box
 		v =  (a1.a[0]-a0.a[0])*(a1.a[1]-a0.a[1])*(a1.a[2]-a0.a[2]);
 	}
 
-	bool isin(string type, int u0, int v0, int u1, int v1)
+	Box(int e[6])	//空气
 	{
-		pair<int, int> p0, p1;
-		return 0;
+		for(int i = 0; i < 6; i++) edge[i] = e[i];
+		t = 1;
+		touch = 0;
+	}
+
+	Plane getplane(string type)
+	{
+		Plane plane;
+		if ("YZ" == type)
+			plane = Plane(a0.a[1], a0.a[2], a1.a[1], a1.a[2]);
+		else if ("XZ" == type)
+			plane = Plane(a0.a[0], a0.a[2], a1.a[0], a1.a[2]);
+		else //	"XY" == type
+			plane = Plane(a0.a[0], a0.a[1], a1.a[0], a1.a[1]);
+		return plane;
+	}
+	bool istouch(string type, int u, int v)
+	{
+		Plane plane = getplane(type);
+		return plane.istouch(u, v);
+	}
+	bool istouch(string type, int u0, int v0, int u1, int v1)
+	{
+		Plane plane = getplane(type);
+		return plane.istouch(u0, v0, u1, v1);
 	}
 };
 
@@ -119,6 +179,54 @@ bool Findcube(Adis a, int edge[6])
 		t[i*2] = 0;
 		t[i*2+1] = EDGE;
 	}
+	for(int i = 0; i < nk+nc; i++)
+	{
+		if (box[i].istouch("YZ", a.a[1], a.a[2]))
+		{
+			if ((box[i].a1.a[0] <= a.a[0]) && (box[i].a1.a[0] > t[0]))
+			{
+				t[0] = box[i].a1.a[0];
+				edge[0] = i;
+			}
+			if ((box[i].a0.a[0] >= a.a[0]) && (box[i].a0.a[0] < t[1]))
+			{
+				t[1] = box[i].a0.a[0];
+				edge[1] = i;
+			}
+		}
+	}
+	for(int i = 0; i < nk+nc; i++)
+	{
+		if (box[i].istouch("XZ", t[0], a.a[2], t[1], a.a[2]))
+		{
+			if ((box[i].a1.a[1] <= a.a[1]) && (box[i].a1.a[1] > t[2]))
+			{
+				t[2] = box[i].a1.a[1];
+				edge[2] = i;
+			}
+			if ((box[i].a0.a[1] >= a.a[1]) && (box[i].a0.a[1] < t[3]))
+			{
+				t[3] = box[i].a0.a[1];
+				edge[3] = i;
+			}
+		}
+	}
+	for(int i = 0; i < nk+nc; i++)
+	{
+		if (box[i].istouch("XY", t[0], t[2], t[1], t[3]))
+		{
+			if ((box[i].a1.a[2] <= a.a[2]) && (box[i].a1.a[2] > t[4]))
+			{
+				t[4] = box[i].a1.a[2];
+				edge[4] = i;
+			}
+			if ((box[i].a0.a[2] >= a.a[2]) && (box[i].a0.a[2] < t[5]))
+			{
+				t[5] = box[i].a0.a[2];
+				edge[5] = i;
+			}
+		}
+	}
 	for(int i = 0; i < 6; i++)
 		if (edge[i] != -1)
 			return true;
@@ -145,7 +253,6 @@ void bfs()
 		Box b;		//新空气盒子
 		Adis next;	//下一个结点
 		Adis t;
-		
 		if (Findcube(a, e))
 		{
 			box[nc+nk] = Box(e);
