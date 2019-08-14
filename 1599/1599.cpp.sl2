@@ -1,0 +1,125 @@
+/*uva 1599
+ *思路：1.最简单的想法： 算出最短路径长度（bfs), dfs得到字典序列最小的路径
+ *      优化：  
+ *	暴力解法的重复计算量太大，时间超时，所以要进行优化。
+ *	第一遍bfs的时候就记录所有路径，然后进行选择。
+ *得到每个点到终点的最短路径（反向bfs）
+ *
+ */
+#include <iostream>
+#include <cstring>
+#include <map>
+#include <set>
+#include <stack>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+const int maxv = 100001;
+const int maxe = 200000;
+
+struct Node
+{
+	int v;
+	int c;
+	Node(){};
+	Node(int v1, int c1) : v(v1) , c(c1){}
+};
+
+bool cmp(const Node & a, const Node & b)
+{
+	return a.c < b.c;
+}
+vector<Node> G[maxv];
+int vis[maxv];
+
+int n;		//number of the V
+void bfs()
+{
+	queue<int> > q;
+	q.push(1);
+	vis[1] = -1;
+	bool running = true;
+	while(!q.empty() && running)
+	{
+		int u = q.front().first;
+		q.pop();
+		sort(G[u].begin(), G[u].end(), cmp);
+		for(int i = 0; i < G[u].size(); i++)
+		{
+			int v = G[u][i].v;
+			if (!vis[v])
+			{
+				if (v == n)
+				{
+					running = false;
+					stack<int> s;
+					int p = u;
+					do
+					{
+						s.push(p);
+						p = vis[p];
+					}while(p != -1);
+					if (u != 1)
+						s.push(1);
+					int d = s.size();
+					cout<<d<<endl;
+					for(int i = 0; i < d-1; i++)
+					{
+						cout<<s.top()<<" ";
+						s.pop();
+					}
+					cout<<s.top()<<endl;
+					break;
+				}
+				else
+				{
+					q.push(v);
+					vis[v] = G[u][i].c;
+				}
+			}
+		}
+	}
+}
+
+int main()
+{
+	while(cin>>n)
+	{
+		int m;
+		cin>>m;
+		while(m--)
+		{
+			int u, v, c, i;
+			cin>>u>>v>>c;
+			if (u == v)
+				continue;
+			for(i = 0; i < G[u].size(); i++)
+				if (G[u][i].v == v)
+				{
+					if (G[u][i].c > c)
+						G[u][i].c = c;
+					break;
+				}
+			if (i == G[u].size())
+				G[u].push_back(Node(v,c));
+			i = u;
+			u = v;
+			v = i;
+			for(i = 0; i < G[u].size(); i++)
+				if (G[u][i].v == v)
+				{
+					if (G[u][i].c > c)
+						G[u][i].c = c;
+					break;
+				}
+			if (i == G[u].size())
+				G[u].push_back(Node(v,c));
+		}
+		memset(vis, 0, sizeof(vis));
+		bfs();
+		for(int i = 0; i < n; i++)
+			G[i].clear();
+	}
+}

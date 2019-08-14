@@ -19,67 +19,53 @@ using namespace std;
 const int maxv = 100001;
 const int maxe = 200000;
 
-struct Node
+struct E
 {
+	int u;
 	int v;
 	int c;
-	Node(){};
-	Node(int v1, int c1) : v(v1) , c(c1){}
 };
 
-bool cmp(const Node & a, const Node & b)
-{
-	return a.c < b.c;
-}
-vector<Node> G[maxv];
-int vis[maxv];
+map<int, set<int> > e[maxv];
+map<int, set<int> > root[maxv];
+vector<int> seq[maxv];
 
-int n;		//number of the V
+int vis[maxv];
+int n;
 void bfs()
 {
-	queue<int> > q;
-	q.push(1);
-	vis[1] = -1;
+	memset(vis, 0, sizeof(vis));
 	bool running = true;
-	while(!q.empty() && running)
+	
+	root[0][0] = set<int>();
+	root[0][0].insert(1);
+	seq[0].push_back(0);
+	for(int i = 0; running; i++)
 	{
-		int u = q.front().first;
-		q.pop();
-		sort(G[u].begin(), G[u].end(), cmp);
-		for(int i = 0; i < G[u].size(); i++)
+		for(int j = 0; j < seq[i].size(); j++)
 		{
-			int v = G[u][i].v;
-			if (!vis[v])
+			for(auto it = root[i][seq[i][j]].begin();it!=root[i][seq[i][j]].end();it++)
 			{
-				if (v == n)
+				for(auto it2 = e[*it].begin(); it2 != e[*it].end(); it2++)
 				{
-					running = false;
-					stack<int> s;
-					int p = u;
-					do
+					for(auto it3 = (*it2).second.begin(); it3 !=  (*it2).second.end(); it3++)
 					{
-						s.push(p);
-						p = vis[p];
-					}while(p != -1);
-					if (u != 1)
-						s.push(1);
-					int d = s.size();
-					cout<<d<<endl;
-					for(int i = 0; i < d-1; i++)
-					{
-						cout<<s.top()<<" ";
-						s.pop();
+						if (!vis[*it3])
+						{
+							if (root[i+1].count((*it2).first) < 1)
+								root[i+1][(*it2).first] = set<int>();
+							root[i+1][(*it2).first].insert(*it3);
+							vis[*it3]=i+1;
+							if(*it3 == n)
+								running = false;
+						}
 					}
-					cout<<s.top()<<endl;
-					break;
-				}
-				else
-				{
-					q.push(v);
-					vis[v] = G[u][i].c;
 				}
 			}
 		}
+		for(auto it = root[i+1].begin(); it != root[i+1].end(); it++)
+			seq[i+1].push_back((*it).first);
+		sort(seq[i+1].begin(), seq[i+1].end());
 	}
 }
 
@@ -87,39 +73,39 @@ int main()
 {
 	while(cin>>n)
 	{
-		int m;
+		int m, t;
 		cin>>m;
+		map<long long, int> mp;
 		while(m--)
 		{
-			int u, v, c, i;
+			int u, v, c, i, t;
 			cin>>u>>v>>c;
 			if (u == v)
 				continue;
-			for(i = 0; i < G[u].size(); i++)
-				if (G[u][i].v == v)
-				{
-					if (G[u][i].c > c)
-						G[u][i].c = c;
-					break;
-				}
-			if (i == G[u].size())
-				G[u].push_back(Node(v,c));
-			i = u;
-			u = v;
-			v = i;
-			for(i = 0; i < G[u].size(); i++)
-				if (G[u][i].v == v)
-				{
-					if (G[u][i].c > c)
-						G[u][i].c = c;
-					break;
-				}
-			if (i == G[u].size())
-				G[u].push_back(Node(v,c));
+			if (u > v)
+			{
+				t = u;
+				u = v;
+				v = t;
+			}
+			if (mp.count((long long)u << 32|(long long)v) <1)
+				mp[(long long)u << 32|(long long)v] = c;
+			else if(mp[(long long)u << 32|(long long)v] > c)
+				mp[(long long)u << 32|(long long)v] = c;
 		}
-		memset(vis, 0, sizeof(vis));
+		for(auto it = mp.begin(); it != mp.end(); it++)
+		{
+			int u, v, c;
+			u = (*it).first>>32;
+			v = (*it).first & 0xffffffff;
+			c = (*it).second;
+			if(e[u].count(c) < 1)
+				e[u][c] = set<int>();
+			e[u][c].insert(v);
+			if(e[v].count(c) < 1)
+				e[v][c] = set<int>();
+			e[v][c].insert(u);
+		}
 		bfs();
-		for(int i = 0; i < n; i++)
-			G[i].clear();
 	}
 }
