@@ -27,25 +27,20 @@ struct Node
 	Node(int v1, int c1) : v(v1) , c(c1){}
 };
 
-bool cmp(const Node & a, const Node & b)
-{
-	return a.c < b.c;
-}
 vector<Node> G[maxv];
 int vis[maxv];
 
 int n;		//number of the V
 void bfs()
 {
-	queue<int> > q;
+	queue<int> q;
 	q.push(1);
 	vis[1] = -1;
 	bool running = true;
 	while(!q.empty() && running)
 	{
-		int u = q.front().first;
+		int u = q.front();
 		q.pop();
-		sort(G[u].begin(), G[u].end(), cmp);
 		for(int i = 0; i < G[u].size(); i++)
 		{
 			int v = G[u][i].v;
@@ -60,7 +55,7 @@ void bfs()
 					{
 						s.push(p);
 						p = vis[p];
-					}while(p != -1);
+					}while(p != 1);
 					if (u != 1)
 						s.push(1);
 					int d = s.size();
@@ -76,7 +71,7 @@ void bfs()
 				else
 				{
 					q.push(v);
-					vis[v] = G[u][i].c;
+					vis[v] = u;
 				}
 			}
 		}
@@ -95,18 +90,6 @@ int main()
 			cin>>u>>v>>c;
 			if (u == v)
 				continue;
-			for(i = 0; i < G[u].size(); i++)
-				if (G[u][i].v == v)
-				{
-					if (G[u][i].c > c)
-						G[u][i].c = c;
-					break;
-				}
-			if (i == G[u].size())
-				G[u].push_back(Node(v,c));
-			i = u;
-			u = v;
-			v = i;
 			for(i = 0; i < G[u].size(); i++)
 				if (G[u][i].v == v)
 				{

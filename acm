@@ -7,3 +7,6 @@ transform(strA.begin(), strA.end(), strB.begin(), ::toupper);
 
 strA.find('A');
 strA.find('A', 3);
+
+long long int
+unsing long long 都不能用于vector结构的push_back

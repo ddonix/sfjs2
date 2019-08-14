@@ -10,7 +10,6 @@
 #include <cstring>
 #include <map>
 #include <set>
-#include <stack>
 #include <queue>
 #include <algorithm>
 
@@ -27,25 +26,22 @@ struct Node
 	Node(int v1, int c1) : v(v1) , c(c1){}
 };
 
-bool cmp(const Node & a, const Node & b)
-{
-	return a.c < b.c;
-}
 vector<Node> G[maxv];
 int vis[maxv];
 
 int n;		//number of the V
+int depth;
 void bfs()
 {
-	queue<int> > q;
+	queue<int> q;
 	q.push(1);
 	vis[1] = -1;
 	bool running = true;
+	depth = 1;
 	while(!q.empty() && running)
 	{
-		int u = q.front().first;
+		int u = q.front();
 		q.pop();
-		sort(G[u].begin(), G[u].end(), cmp);
 		for(int i = 0; i < G[u].size(); i++)
 		{
 			int v = G[u][i].v;
@@ -54,29 +50,22 @@ void bfs()
 				if (v == n)
 				{
 					running = false;
-					stack<int> s;
 					int p = u;
 					do
 					{
-						s.push(p);
+						cout<<p<<" ";
 						p = vis[p];
-					}while(p != -1);
+						depth++;
+					}while(p != 1);
 					if (u != 1)
-						s.push(1);
-					int d = s.size();
-					cout<<d<<endl;
-					for(int i = 0; i < d-1; i++)
-					{
-						cout<<s.top()<<" ";
-						s.pop();
-					}
-					cout<<s.top()<<endl;
+						cout<<1;
+					cout<<endl;
 					break;
 				}
 				else
 				{
 					q.push(v);
-					vis[v] = G[u][i].c;
+					vis[v] = u;
 				}
 			}
 		}
@@ -104,21 +93,10 @@ int main()
 				}
 			if (i == G[u].size())
 				G[u].push_back(Node(v,c));
-			i = u;
-			u = v;
-			v = i;
-			for(i = 0; i < G[u].size(); i++)
-				if (G[u][i].v == v)
-				{
-					if (G[u][i].c > c)
-						G[u][i].c = c;
-					break;
-				}
-			if (i == G[u].size())
-				G[u].push_back(Node(v,c));
 		}
 		memset(vis, 0, sizeof(vis));
 		bfs();
+		cout<<depth<<endl;
 		for(int i = 0; i < n; i++)
 			G[i].clear();
 	}
