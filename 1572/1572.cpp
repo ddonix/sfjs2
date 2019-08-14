@@ -2,6 +2,7 @@
  * 关键：
  */
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 const int N = 52;
@@ -41,20 +42,19 @@ int main()
 	bool bound;
 	while(cin>>n)
 	{
-		sizeof(G, 0, sizeof(G));
+		memset(G, 0, sizeof(G));
+		memset(vis, 0, sizeof(vis));
 		
 		while(n--)
 		{
-			char s[9];
+			char s[10];
 			cin>>s;
-			cout<<s<<endl;
 			for(int i = 0; i < 4; i++)
 				for(int j = 0; j < 4; j++)
 					if (i != j)
 						connect(s[i*2], s[i*2+1], s[j*2], s[j*2+1]);
 		}
 		bound = true;
-		sizeof(vis, 0, sizeof(vis));
 		for(int i = 0; i < 52 && bound; i++)
 		{
 			if (!vis[i] && dfs(i))

@@ -1,6 +1,6 @@
 /*
-* 神仙题？bfs入门题？:)
-* 离散化+floodfill
+* 审题：要考虑完全被包裹起来的情况，所以体积的计算也要bfs。
+* 此题要floodfill
 */
 
 #include <iostream> 
@@ -11,16 +11,16 @@
 
 using namespace std;
 
-const int maxn = 50;			//cube
-const int EDGE = 1024;			//
-const int maxd = 102; 			//
+const int maxn = 50;
+const int EDGE = 1024;
+const int maxd = 102; 
 int ad[3][maxd];			//离散化坐标
-int an[3];				//离散化坐标个数
+int adn[3];					//离散化坐标个数
 
 int vis[maxd][maxd][maxd];
-int grid[maxd][maxd][maxd];		//0:空	//1：铜
+int grid[maxd][maxd][maxd];	//0:空气	//1：铜
 
-int cube[maxn][6];			//
+int cube[maxn][6];
 
 struct Index
 {
@@ -33,7 +33,6 @@ int volume;
 int dx[] = {1,-1, 0, 0, 0, 0};
 int dy[] = {0, 0, 1,-1, 0, 0};
 int dz[] = {0, 0, 0, 0, 1,-1};
-
 void bfs()
 {
 	area = 0;
@@ -53,31 +52,32 @@ void bfs()
 		y = ind.y;
 		z = ind.z;
 	
-		volume += (ad[0][x+1]-ad[0][x])*(ad[1][y+1]-ad[1][y])*(ad[2][z+1]-ad[2][z]);
-        	for(int i=0; i<6; i++)
+		if (0 == grid[x][y][z])
+			volume += (ad[0][x+1]-ad[0][x])*(ad[1][y+1]-ad[1][y])*(ad[2][z+1]-ad[2][z]);
+        for(int i=0; i<6; i++)
 		{
-			int tx, ty, tz;
-            		tx = x + dx[i];
-            		ty = y + dy[i];
-            		tz = z + dz[i];
-            		if(tx<0 || tx>=an[0]-1 || ty<0 || ty>=an[1]-1 || tz<0 || tz>=an[2]-1)
-                		continue;
-            		if(grid[tx][ty][tz] == 1)
+            int tx, ty, tz;
+            tx = x + dx[i];
+            ty = y + dy[i];
+            tz = z + dz[i];
+            if(tx<0 || tx>=adn[0]-1 || ty<0 || ty>=adn[1]-1 || tz<0 || tz>=adn[2]-1)
+                continue;
+            if(grid[tx][ty][tz] == 1)
 			{
-            			if (i < 2)
+            	if (i < 2)
 					area += (ad[1][y+1]-ad[1][y])*(ad[2][z+1]-ad[2][z]);
-            			else if (i < 4)
+            	else if (i < 4)
 					area += (ad[0][x+1]-ad[0][x])*(ad[2][z+1]-ad[2][z]);
-            			else
+            	else
 					area += (ad[0][x+1]-ad[0][x])*(ad[1][y+1]-ad[1][y]);
 			}
 			else if(grid[tx][ty][tz] == 0 && vis[tx][ty][tz] == 0)
 			{
-                		q.push(Index(tx, ty, tz));
-                		vis[tx][ty][tz] = 1;
-            		}
-        	}
-    	}
+                q.push(Index(tx, ty, tz));
+                vis[tx][ty][tz] = 1;
+            }
+        }
+    }
 	volume = EDGE*EDGE*EDGE - volume;
 }
 
@@ -105,8 +105,8 @@ int main()
 		{
 			ad[i][0] = 0;
 			sort(ad[i], ad[i]+2*n+1);
-			an[i] = unique(ad[i], ad[i]+2*n+1)-ad[i];
-			ad[i][an[i]++] = EDGE;
+			adn[i] = unique(ad[i], ad[i]+2*n+1)-ad[i];
+			ad[i][adn[i]++] = EDGE;
 		}
 
 		//关键步骤：根据n个铜cube填充grid
@@ -115,12 +115,12 @@ int main()
 		for(int c = 0; c < n; c++)
 		{
 			int x0, x1, y0, y1, z0, z1;
-			x0 = lower_bound(ad[0], ad[0]+an[0], cube[c][0])-ad[0];
-			x1 = lower_bound(ad[0], ad[0]+an[0], cube[c][3])-ad[0];
-			y0 = lower_bound(ad[1], ad[1]+an[1], cube[c][1])-ad[1];
-			y1 = lower_bound(ad[1], ad[1]+an[1], cube[c][4])-ad[1];
-			z0 = lower_bound(ad[2], ad[2]+an[2], cube[c][2])-ad[2];
-			z1 = lower_bound(ad[2], ad[2]+an[2], cube[c][5])-ad[2];
+			x0 = lower_bound(ad[0], ad[0]+adn[0], cube[c][0])-ad[0];
+			x1 = lower_bound(ad[0], ad[0]+adn[0], cube[c][3])-ad[0];
+			y0 = lower_bound(ad[1], ad[1]+adn[0], cube[c][1])-ad[1];
+			y1 = lower_bound(ad[1], ad[1]+adn[0], cube[c][4])-ad[1];
+			z0 = lower_bound(ad[2], ad[2]+adn[0], cube[c][2])-ad[2];
+			z1 = lower_bound(ad[2], ad[2]+adn[0], cube[c][5])-ad[2];
 			for(int i = x0; i < x1; i++)
 				for(int j = y0; j < y1; j++)
 					for(int k = z0; k < z1; k++)
