@@ -23,9 +23,32 @@ struct Oppo
 	}
 };
 
+int n;
 Oppo oppo[maxn];
-bool vis[maxn];
+int G[maxn][maxn];
 
+void build()
+{
+	for(int i = 0; i < n; i++)
+		memset(G[i], 0, n*sizeof(int));
+	for(int i = 0; i < (n-1); i++)
+	{
+		Oppo & a = oppo[i];
+		for(int j = i; j < n; j++)
+		{
+			//
+			//oppo[i].t+oppo[j].t-2*(oppo[i].x*oppo[j].x+oppo[i].y*oppo[j].y) >=
+			//(oppo[i].rr+oppo[j].rr+2*oppo[i].r*oppo[j].r)
+			Oppo & b = oppo[j];
+			if(a.t+b.t >= 0)
+//				(oppo[i].rr+oppo[j].rr+2*(oppo[i].r*oppo[j].r+(oppo[i].x*oppo[j].x+oppo[i].y*oppo[j].y)
+//					)
+			{}
+		}
+	}
+}
+
+bool vis[maxn];
 bool dfs(int u)
 {
 	return true;
@@ -33,7 +56,6 @@ bool dfs(int u)
 
 int main()
 {
-	int n;
 	while(scanf("%d", &n)==1)
 	{
 		double x,y,r;
