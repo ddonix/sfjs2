@@ -53,8 +53,13 @@ void bfs1()
 void bfs2()
 {
 	memset(inq, 0, sizeof(inq));
-	int d = 0;
 	queue<int>q;
+	if (n == 1)
+	{
+		printf("0\n");
+		return;
+	}
+	
 	q.push(1);
 	inq[1] = 1;
 	vector<int> res;
@@ -88,16 +93,9 @@ void bfs2()
 		else if(res[r] > cmin)
 			res[r] = cmin;
 	}
-	if (vis[1] > 1)
-	{
-		for(int i = 0; i < vis[1]-2; i++)
-			printf("%d ", res[i]);
-		printf("%d\n", res[vis[1]-2]);
-	}
-	else
-	{
-		printf("0\n");
-	}
+	for(int i = 0; i < vis[1]-2; i++)
+		printf("%d ", res[i]);
+	printf("%d\n", res[vis[1]-2]);
 }
 
 int main()

@@ -19,41 +19,41 @@ void bfs(int start,int end){
     int u,v,c;
     queue<int> q;
     q.push(start);
-    if(start==0){//用于正向bfs 
+    if(start==0)
+    {//用于正向bfs 
         memset(res,0,sizeof(int)*n);
         while(!q.empty())
-		{
-            u=q.front();
-			q.pop();
-			vis[u]=1;
-            if(u==n-1)
-				return;
-            int minc=inf,len=edge[u].size();
-            for(int i=0;i<len;i++)
-				if(!vis[v=edge[u][i].num] && d[u]-1==d[v])
-					minc=min(edge[u][i].color,minc);//获取所有路径中最小的颜色
-            for(int i=0;i<len;i++)
-				if(!vis[v=edge[u][i].num] && d[u]-1==d[v] && edge[u][i].color==minc 
-																				&& !inqueue[v])
-					q.push(v),inqueue[v]=1; //若有多组颜色相同,且未入队，则将其入队 
-            int index=d[0]-d[u];//获得当前步数对应的下标
-            if(res[index]==0)
-				res[index]=minc;
-            else 
-				res[index]=min(res[index],minc);//获取最小颜色 
-        }
+	{
+            	u=q.front();
+		q.pop();
+		vis[u]=1;
+            	if(u==n-1)
+			return;
+            	int minc=inf,len=edge[u].size();
+            	for(int i=0;i<len;i++)
+			if(!vis[v=edge[u][i].num] && d[u]-1==d[v])
+				minc=min(edge[u][i].color,minc);//获取所有路径中最小的颜色
+            	for(int i=0;i<len;i++)
+			if(!vis[v=edge[u][i].num] && d[u]-1==d[v] && edge[u][i].color==minc && !inqueue[v])
+				q.push(v),inqueue[v]=1; 	//若有多组颜色相同,且未入队，则将其入队 
+            	int index=d[0]-d[u];//获得当前步数对应的下标
+            	if(res[index]==0)
+			res[index]=minc;
+            	else 
+			res[index]=min(res[index],minc);//获取最小颜色 
+       	}
     }//用于反向bfs 构建层次图，找最短路 
     else while(!q.empty()){
         u=q.front();
-		q.pop();
-		vis[u]=1;
+	q.pop();
+	vis[u]=1;
         for(int i=0,len=edge[u].size();i<len;i++)
-			if(!vis[v=edge[u][i].num] && !inqueue[v])
-			{ 
-            	d[v]=d[u]+1; //一定是头一次入队，这通过inqueue保证 
-            	if(v==0)return; //找到起点，退出 
-            	q.push(v);//如果不是起点，就把这个点入队 
-            	inqueue[v]=1;//入队标记
+		if(!vis[v=edge[u][i].num] && !inqueue[v])
+		{ 
+            		d[v]=d[u]+1; //一定是头一次入队，这通过inqueue保证 
+            		if(v==0)return; //找到起点，退出 
+            		q.push(v);//如果不是起点，就把这个点入队 
+            		inqueue[v]=1;//入队标记
         	}
     }
 }
@@ -61,9 +61,12 @@ int main(){
     while(scanf("%d%d",&n,&m)==2){
         for(int i=0;i<n;i++)edge[i].clear();
         memset(d,-1,sizeof(int)*n);d[n-1]=0;//注意初始化的细节
-        while(m--){
+        while(m--)
+	{
             scanf("%d%d%d",&a,&b,&c);
-            if(a!=b){ //排除自环
+            if(a!=b)
+	    { 
+		//排除自环
                 edge[a-1].push_back(ver(b-1,c));
                 edge[b-1].push_back(ver(a-1,c));
             }
