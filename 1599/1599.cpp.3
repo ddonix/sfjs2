@@ -1,12 +1,6 @@
 /*uva 1599
- *思路：1.最简单的想法： 算出最短路径长度（bfs), dfs得到字典序列最小的路径
- *      优化：  
- *	暴力解法的重复计算量太大，时间超时，所以要进行优化。
- *	第一遍bfs的时候就记录所有路径，然后进行选择。
- *得到每个点到终点的最短路径（反向bfs）
  *
  */
-#include <iostream>
 #include <cstring>
 #include <map>
 #include <set>
@@ -18,91 +12,107 @@ using namespace std;
 
 const int maxv = 100001;
 const int maxe = 200000;
+const int maxc = 0x7fffffff;
 
-struct Node
+int n,m;
+struct E
 {
 	int v;
 	int c;
-	Node(){};
-	Node(int v1, int c1) : v(v1) , c(c1){}
+	E(int v_, int c_):v(v_), c(c_){}
 };
 
-vector<Node> G[maxv];
+vector<E> G[maxv];
 int vis[maxv];
+int vis2[maxv];
 
-int n;		//number of the V
-void bfs()
+void bfs1()
 {
+	memset(vis, 0, (n+1)*sizeof(int));
 	queue<int> q;
-	q.push(1);
-	vis[1] = -1;
-	bool running = true;
-	while(!q.empty() && running)
+	q.push(n);
+	vis[n] = 1;
+	while(1)
 	{
 		int u = q.front();
+		int l = G[u].size();
 		q.pop();
-		for(int i = 0; i < G[u].size(); i++)
+		for(int i = 0; i < l; i++)
 		{
-			int v = G[u][i].v;
-			if (!vis[v])
+			int v =  G[u][i].v;
+			if(!vis[v])
 			{
-				if (v == n)
-				{
-					running = false;
-					stack<int> s;
-					int p = u;
-					do
-					{
-						s.push(p);
-						p = vis[p];
-					}while(p != 1);
-					if (u != 1)
-						s.push(1);
-					int d = s.size();
-					cout<<d<<endl;
-					for(int i = 0; i < d-1; i++)
-					{
-						cout<<s.top()<<" ";
-						s.pop();
-					}
-					cout<<s.top()<<endl;
-					break;
-				}
-				else
-				{
-					q.push(v);
-					vis[v] = u;
-				}
+				vis[v] = vis[u]+1;
+				if (v == 1)
+					return;
+				q.push(v);
 			}
 		}
 	}
 }
 
+void bfs2()
+{
+	memset(vis2, 0, sizeof(int)*(n+1));
+	queue<int>q;
+	
+	q.push(1);
+	vector<int> res;
+	res.resize(vis[1]-1);
+	while(!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		vis2[u] = 1;
+		int cmin = maxc;
+		for(int i = 0; i < G[u].size(); i++)
+		{
+			int v = G[u][i].v;
+			if((vis[G[u][i].v] == vis[u]-1) && !vis2[G[u][i].v])
+				if (cmin > G[u][i].c)
+					cmin = G[u][i].c;
+		}
+		for(int i = 0; i < G[u].size(); i++)
+		{
+			int v = G[u][i].v;
+			if((vis[v] == vis[u]-1) &&  !vis2[v] && v != n && (G[u][i].c == cmin))
+			{
+				q.push(G[u][i].v);
+			}
+		}
+		
+		int r = vis[1]-vis[u];
+		if(res[r] == 0)
+			res[r] = cmin;
+		else if(res[r] > cmin)
+			res[r] = cmin;
+	}
+	for(int i = 0; i < vis[1]-2; i++)
+		printf("%d ", res[i]);
+	printf("%d\n", res[vis[1]-2]);
+}
+
 int main()
 {
-	while(cin>>n)
+	while(scanf("%d%d", &n, &m) == 2)
 	{
-		int m;
-		cin>>m;
 		while(m--)
 		{
-			int u, v, c, i;
-			cin>>u>>v>>c;
+			int u, v, c, i, t;
+			scanf("%d%d%d", &u, &v, &c);
 			if (u == v)
 				continue;
-			for(i = 0; i < G[u].size(); i++)
-				if (G[u][i].v == v)
-				{
-					if (G[u][i].c > c)
-						G[u][i].c = c;
-					break;
-				}
-			if (i == G[u].size())
-				G[u].push_back(Node(v,c));
+			G[u].push_back(E(v, c));
+			G[v].push_back(E(u, c));
 		}
-		memset(vis, 0, sizeof(vis));
-		bfs();
-		for(int i = 0; i < n; i++)
-			G[i].clear();
+		if (1 == n)
+			printf("0\n0\n");
+		else
+		{
+			bfs1();
+			printf("%d\n", vis[1]-1);
+			bfs2();
+		}
+		for(int i = 1; i <= n; i++) G[i].clear();
 	}
 }

@@ -24,11 +24,11 @@ struct E
 
 vector<E> G[maxv];
 int vis[maxv];
-int vis2[maxv];
+int res[maxv];
 
 void bfs1()
 {
-	memset(vis, 0, sizeof(vis));
+	memset(vis, 0, (n+1)*sizeof(int));
 	queue<int> q;
 	q.push(n);
 	vis[n] = 1;
@@ -53,33 +53,24 @@ void bfs1()
 
 void bfs2()
 {
-	memset(vis2, 0, sizeof(vis2));
 	queue<int>q;
-	
 	q.push(1);
-	vis2[1] = 1;
-	vector<int> res;
-	res.resize(vis[1]-1);
+	
+	memset(res, 0, sizeof(int)*(vis[1]-1));
 	while(!q.empty())
 	{
 		int u = q.front();
+		int l = G[u].size();
 		q.pop();
 		int cmin = maxc;
-		for(int i = 0; i < G[u].size(); i++)
+		for(int i = 0; i < l; i++)
+			if((vis[G[u][i].v] == vis[u]-1) && (cmin > G[u][i].c))
+				cmin = G[u][i].c;
+		for(int i = 0; i < l; i++)
 		{
 			int v = G[u][i].v;
-			if((vis[G[u][i].v] == vis[u]-1) && !vis2[G[u][i].v])
-				if (cmin > G[u][i].c)
-					cmin = G[u][i].c;
-		}
-		for(int i = 0; i < G[u].size(); i++)
-		{
-			int v = G[u][i].v;
-			if((vis[v] == vis[u]-1) &&  !vis2[v] && v != n && (G[u][i].c == cmin))
-			{
-				q.push(G[u][i].v);
-				vis2[v] = 1;
-			}
+			if((vis[v] == vis[u]-1) && v != n && (G[u][i].c == cmin))
+				q.push(v);
 		}
 		
 		int r = vis[1]-vis[u];
@@ -114,6 +105,7 @@ int main()
 			printf("%d\n", vis[1]-1);
 			bfs2();
 		}
-		for(int i = 0; i < n; i++) G[i].clear();
+		for(int i = 1; i <= n; i++) 
+			G[i].clear();
 	}
 }
