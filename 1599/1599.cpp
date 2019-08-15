@@ -70,12 +70,12 @@ void bfs2()
 		vis2[u] = true;
 		int cmin = maxc;
 		for(int i = 0; i < l; i++)
-			if(vis1[G[u][i].v] && !vis2[G[u][i].v] && (vis1[G[u][i].v] == vis1[u]-1) && (cmin > G[u][i].c))
+			if((vis1[G[u][i].v] == vis1[u]-1) && !vis2[G[u][i].v] && (cmin > G[u][i].c))
 				cmin = G[u][i].c;
 		for(int i = 0; i < l; i++)
 		{
 			int v = G[u][i].v;
-			if(vis1[v] && !vis2[v] && (vis1[v] == vis1[u]-1) && (G[u][i].c == cmin))
+			if((vis1[v] == vis1[u]-1) && !vis2[v] && (G[u][i].c == cmin))
 				q.push(v);
 		}
 		int r = vis1[1]-vis1[u];
