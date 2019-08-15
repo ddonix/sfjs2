@@ -28,7 +28,9 @@ void bfs(int start,int end){
 		q.pop();
 		vis[u]=1;
             	if(u==n-1)
+		{
 			return;
+		}
             	int minc=inf,len=edge[u].size();
             	for(int i=0;i<len;i++)
 			if(!vis[v=edge[u][i].num] && d[u]-1==d[v])
