@@ -12,7 +12,7 @@ using namespace std;
 
 const int maxv = 100001;
 const int maxe = 200000;
-const int maxc = 100000000;
+const int maxc = 0x7fffffff;
 
 int n,m;
 struct E
@@ -25,13 +25,10 @@ struct E
 vector<E> G[maxv];
 int vis[maxv];
 int res[maxv];
-int resm[maxv];
 
 void bfs1()
 {
 	memset(vis, 0, (n+1)*sizeof(int));
-	for(int i = 1; i <= n; i++)
-		resm[i] = maxc;
 	queue<int> q;
 	q.push(n);
 	vis[n] = 1;
@@ -45,9 +42,6 @@ void bfs1()
 			int v =  G[u][i].v;
 			if(!vis[v])
 			{
-				if (G[u][i].c < resm[vis[u]])
-					resm[vis[u]] = G[u][i].c;
-
 				vis[v] = vis[u]+1;
 				if (v == 1)
 					return;
@@ -94,10 +88,6 @@ void bfs2()
 	for(int i = 0; i < vis[1]-2; i++)
 		printf("%d ", res[i]);
 	printf("%d\n", res[vis[1]-2]);
-	
-	for(int i = 1; i < vis[1]-1; i++)
-		printf("%d ", resm[i]);
-	printf("%d\n", resm[vis[1]-1]);
 }
 
 int main()
