@@ -1,0 +1,96 @@
+DEPEND A B C 
+DEPEND B D E G 
+DEPEND C G E K 
+DEPEND K Z 
+DEPEND E S 
+INSTALL A 
+   Installing D
+   Installing S
+   Installing E
+   Installing G
+   Installing B
+   Installing Z
+   Installing K
+   Installing C
+   Installing A
+LIST 
+   D
+   S
+   E
+   G
+   B
+   Z
+   K
+   C
+   A
+REMOVE A 
+   Removing A
+   Removing B
+   Removing D
+   Removing C
+   Removing G
+   Removing E
+   Removing S
+   Removing K
+   Removing Z
+LIST 
+INSTALL B 
+   Installing D
+   Installing S
+   Installing E
+   Installing G
+   Installing B
+INSTALL C 
+   Installing Z
+   Installing K
+   Installing C
+INSTALL A 
+   Installing A
+REMOVE A 
+   Removing A
+INSTALL K 
+   K is already installed.
+LIST 
+   D
+   S
+   E
+   G
+   B
+   Z
+   K
+   C
+REMOVE C 
+   Removing C
+   Removing K
+   Removing Z
+REMOVE A 
+   A is not installed.
+INSTALL A 
+   Installing Z
+   Installing K
+   Installing C
+   Installing A
+LIST 
+   D
+   S
+   E
+   G
+   B
+   Z
+   K
+   C
+   A
+INSTALL C 
+   C is already installed.
+REMOVE A 
+   Removing A
+   Removing C
+   Removing K
+   Removing Z
+LIST 
+   D
+   S
+   E
+   G
+   B
+END
