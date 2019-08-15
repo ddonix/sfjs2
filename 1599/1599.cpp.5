@@ -1,0 +1,79 @@
+/*uva 1599
+ *思路：1.最简单的想法： 算出最短路径长度（bfs), dfs得到字典序列最小的路径
+ *      优化：  
+ *	暴力解法的重复计算量太大，时间超时，所以要进行优化。
+ *	第一遍bfs的时候就记录所有路径，然后进行选择。
+ *得到每个点到终点的最短路径（反向bfs）
+ *
+ */
+#include <cstring>
+#include <map>
+#include <set>
+#include <stack>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+const int maxv = 100001;
+const int maxe = 200000;
+int n,m;
+struct E
+{
+	int v;
+	int c;
+	E(int v_, int c_):v(v_), c(c_){}
+};
+
+vector<E> G[maxv];
+
+int vis[maxv];
+int inq[maxv];
+
+int depth;
+
+void bfs1()
+{
+	memset(vis, 0, sizeof(vis));
+	memset(inq, 0, sizeof(inq));
+	queue<int> q;
+	q.push(n);
+	vis[n] = 1;
+	while(!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		for(int i = 0; i < G[u].size(); i++)
+		{
+			int v =  G[u][i].v;
+			if(!vis[v])
+			{
+				if (v == 1)
+				{
+					depth = vis[u];
+					return;
+				}
+				q.push(v);
+				vis[v] = vis[u]+1;
+			}
+		}
+	}
+}
+
+int main()
+{
+	while(scanf("%d%d", &n, &m) == 2)
+	{
+		while(m--)
+		{
+			int u, v, c, i, t;
+			scanf("%d%d%d", &u, &v, &c);
+			if (u == v)
+				continue;
+			G[u].push_back(E(v, c));
+			G[v].push_back(E(u, c));
+		}
+		bfs1();
+		printf("%d\n", depth);
+	}
+}
