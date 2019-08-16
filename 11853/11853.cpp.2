@@ -6,8 +6,6 @@
 #include <cstdio>
 #include <cstring>
 #include <cmath>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
 const int maxn = 1000;
@@ -26,19 +24,8 @@ struct Oppo
 		rr = r*r;
 		ne = (y+r) >= 1000 ? true : false;
 		se = r >= y? true : false;
-		ws = es = -1;	//如果接触东西界，南边的接触点y轴值
 	}
 	
-	double ws;
-	double es;
-	void cws()
-	{
-		ws = y - pow((rr-x*x), 0.5);
-	}
-	void ces()
-	{
-		es = y - pow((rr-(1000-x)*(1000-x)), 0.5);
-	}
 	bool isCon(const Oppo & b) const
 	{
 		return (t+b.t) <= (rr+b.rr+2*(r*b.r+x*b.x+y*b.y)) ? true : false;
@@ -50,20 +37,9 @@ Oppo oppo[maxn];
 int G[maxn][maxn];
 bool vis[maxn];
 
-bool cmp_w(int u, int v)
+bool dfs(int u)
 {
-	return  oppo[u].ws <= oppo[v].ws; 
-}
-
-bool cmp_e(int u, int v)
-{
-	return  oppo[u].es <= oppo[v].es;
-}
-
-//能否到南界
-bool dfs(int u, bool s)
-{
-	if((s && oppo[u].se) || (!s && oppo[u].ne))
+	if(oppo[u].se)
 		return true;
 	for(int i = 0; i < n; i++)
 	{
@@ -74,13 +50,13 @@ bool dfs(int u, bool s)
 			if (1 == G[u][i])
 			{
 				vis[i] = 1;
-				if(dfs(i, s))
+				if(dfs(i))
 					return true;
 			}
 		}
 	}
 	return false;
-}
+};
 
 int main()
 {
@@ -104,7 +80,7 @@ int main()
 			if (!vis[i] && oppo[i].ne)
 			{
 				vis[i] = 1;
-				if (nsc = dfs(i, true))
+				if (nsc = dfs(i))
 					break;
 			}
 		}
@@ -112,39 +88,25 @@ int main()
 			printf("IMPOSSBILE\n");
 		else
 		{
-			vector<int> w, e;
 			double wn=1000, en=1000;
+			double t;
 			for(int i = 0; i < n; i++)
 			{
-				if(oppo[i].r >= oppo[i].x)
+				Oppo & a = oppo[i];
+				if (a.ne)
 				{
-					oppo[i].cws();
-					w.push_back(i);
-				}
-				else if(oppo[i].r >= (1000-oppo[i].x))
-				{
-					oppo[i].ces();
-					e.push_back(i);
-				}
-			}
-			sort(w.begin(), w.end(), cmp_w);
-			sort(e.begin(), e.end(), cmp_e);
-			memset(vis, 0, sizeof(n)*n);
-			for(auto it = w.begin(); it != w.end(); it++)
-			{
-				if (dfs(*it, false))
-				{
-					wn = oppo[*it].ws;
-					break;
-				}
-			}
-			memset(vis, 0, sizeof(n)*n);
-			for(auto it = e.begin(); it != e.end(); it++)
-			{
-				if (dfs(*it, false))
-				{
-					en = oppo[*it].es;
-					break;
+					if (a.r >= a.x)
+					{
+						t = a.y - pow((a.rr-a.x*a.x), 0.5);
+						if(wn > t) 
+							wn = t;
+					}
+					else if (oppo[i].r >= (1000-oppo[i].x))
+					{
+						t = a.y - pow((a.rr-(1000-a.x)*(1000-a.x)), 0.5);
+						if(en > t)
+							en = t;
+					}
 				}
 			}
 			printf("%.2lf %.2lf %.2lf %.2lf\n", 0.0, wn, 1000.0, en);
