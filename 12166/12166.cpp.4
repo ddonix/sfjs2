@@ -4,15 +4,13 @@
 *
 */
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+#include <iostream>
+#include <string>
 #include <sstream>
 #include <stack>
-#include <queue>
+#include <vector>
 #include <algorithm>
 #include <cmath>
-#include <map>
 
 using namespace std;
 const int maxn = 65538;
@@ -29,56 +27,37 @@ struct Node
 
 Node node[maxn];
 
-int nt = 0;
-int nn = maxn;
-
+int n = 0;
 int newNode(int w)
 {
-	node[++nt].w = w;
-	return nt;
+	node[++n].w = w;
+	return n;
 }
 
 int newNode(int l, int r)
 {
-	node[--nn].l = l;
-	node[nn].r = r;
-	return nn;
+	node[++n].l = l;
+	node[n].r = r;
+	return n;
 }
 
-int mind, maxd;
-void makedepth(int r)
+void makedepth(int r, int d)
 {
-	mind=16, maxd = 0;
-	queue<int> q;
-	q.push(r);
-	node[r].d = 0;
-	while(!q.empty())
-	{
-		int p = q.front();
-		q.pop();
-		if(node[p].l)
-		{
-			node[node[p].l].d = node[node[p].r].d = node[p].d+1;
-			q.push(node[p].l);
-			q.push(node[p].r);
-		}
-		else
-		{
-			if(node[p].d > maxd)
-				maxd = node[p].d;
-			if(node[p].d < mind)
-				mind = node[p].d;
-		}
-	}
+	node[r].d = d;
+	if (node[r].l)
+		makedepth(node[r].l, d+1);
+	if (node[r].r)
+		makedepth(node[r].r, d+1);
 }
+
+vector<int> terminal;
 
 //单个结点的情况进入之前排除
-int buildtree(char s[])
+int buildtree(string s)
 {
 	stack<int> st;
 	int r;
-	int len = strlen(s);
-	for(int i = 0; i < len; i++)
+	for(int i = 0; i < s.size(); i++)
 	{
 		if(']' == s[i])
 		{
@@ -92,13 +71,14 @@ int buildtree(char s[])
 				else
 				{
 					ch[j] = newNode(ch[j]);
+					terminal.push_back(ch[j]);
 				}
 			}
 			st.push(-newNode(ch[1], ch[0]));
 		}
 		else if(s[i] >= '1' && s[i] <= '9')
 		{
-			stringstream ss(s+i);
+			stringstream ss(s.substr(i));
 			int w;
 			ss>>w;
 			st.push(w);
@@ -109,67 +89,59 @@ int buildtree(char s[])
 	return -st.top();
 }
 
-int mp2[16] = { 0, 1, 3, 7, 
-				15, 31, 63,127, 
-				255, 511, 1023, 2047, 
-				4095, 8191, 16383, 32767};
-
-map<int, int> mp3[16];
+int mp[16] = { 	1, 2, 4, 8, 
+				16, 32, 64,128, 
+				256, 512, 1024, 2048, 
+				4096, 8192, 16384, 32768};
 
 void printtree(int r)
 {
-	int res;
-	res = nt;
-	for(int i = 1; i <= nt; i++)
+	int res, len;
+	res = len = terminal.size();
+	for(int i = 0; i < len; i++)
 	{
-		int d = node[i].d;
-		int w = node[i].w;
+		int d = node[terminal[i]].d;
+		int w = node[terminal[i]].w;
 		int c = 0;
-		
-		if ((mp2[maxd-d] & w) != 0)
-			continue;
-		if((long long)(w << (d-mind)) >= 1000000000)
-			continue;
-		
-		for(int j = 1; j <= nt && c < res; j++)
+		for(int j = 0; j < len; j++)
 		{
 			if (j == i)
 				continue;
-			if (node[j].d <= d)
-				c += (node[j].w == (w << (d-node[j].d))) ? 0 : 1;
+			if (node[terminal[j]].d <= d)
+				c += (node[terminal[j]].w == w*mp[d-node[terminal[j]].d]) ? 0 : 1;
 			else 
-				c += ((node[j].w << (node[j].d-d)) == w) ? 0 : 1;
+				c += (node[terminal[j]].w*mp[node[terminal[j]].d-d] == w) ? 0 : 1;
 		}
 		if (c < res)
 			res = c;
 	}
-	printf("%d\n", res);
+	cout<<res<<endl;
 }
 
 int main()
 {
 	int T;
-	char s[1000000];
-	scanf("%d", &T);
+	cin>>T;
 	while(T--)
 	{
+		string s;
 		int r, res;
-		scanf("%s", s);
+		cin>>s;
 		if (s[0] >= '1' && s[0] <= '9')
 		{
-			printf("0\n");
+			cout<<0<<endl;
 			continue;
 		}
 		r = buildtree(s);
-		makedepth(r);
+		makedepth(r, 0);
 		printtree(r);
 		
-		for(int i = nn; i < maxn; i++)
+		for(int i = 1; i <= n; i++)
 		{
 			node[i].d = -1;
 			node[i].l = node[i].r = 0;
 		}
-		nn = maxn;
-		nt = 0;
+		n = 0;
+		terminal.clear();
 	}
 }

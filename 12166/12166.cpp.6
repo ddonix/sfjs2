@@ -10,6 +10,7 @@
 #include <sstream>
 #include <stack>
 #include <queue>
+#include <vector>
 #include <algorithm>
 #include <cmath>
 #include <map>
@@ -29,20 +30,18 @@ struct Node
 
 Node node[maxn];
 
-int nt = 0;
-int nn = maxn;
-
+int n = 0;
 int newNode(int w)
 {
-	node[++nt].w = w;
-	return nt;
+	node[++n].w = w;
+	return n;
 }
 
 int newNode(int l, int r)
 {
-	node[--nn].l = l;
-	node[nn].r = r;
-	return nn;
+	node[++n].l = l;
+	node[n].r = r;
+	return n;
 }
 
 int mind, maxd;
@@ -72,6 +71,8 @@ void makedepth(int r)
 	}
 }
 
+vector<int> terminal;
+
 //单个结点的情况进入之前排除
 int buildtree(char s[])
 {
@@ -92,6 +93,7 @@ int buildtree(char s[])
 				else
 				{
 					ch[j] = newNode(ch[j]);
+					terminal.push_back(ch[j]);
 				}
 			}
 			st.push(-newNode(ch[1], ch[0]));
@@ -118,12 +120,12 @@ map<int, int> mp3[16];
 
 void printtree(int r)
 {
-	int res;
-	res = nt;
-	for(int i = 1; i <= nt; i++)
+	int res, len;
+	res = len = terminal.size();
+	for(int i = 0; i < len; i++)
 	{
-		int d = node[i].d;
-		int w = node[i].w;
+		int d = node[terminal[i]].d;
+		int w = node[terminal[i]].w;
 		int c = 0;
 		
 		if ((mp2[maxd-d] & w) != 0)
@@ -131,14 +133,14 @@ void printtree(int r)
 		if((long long)(w << (d-mind)) >= 1000000000)
 			continue;
 		
-		for(int j = 1; j <= nt && c < res; j++)
+		for(int j = 0; j < len && c < res; j++)
 		{
 			if (j == i)
 				continue;
-			if (node[j].d <= d)
-				c += (node[j].w == (w << (d-node[j].d))) ? 0 : 1;
+			if (node[terminal[j]].d <= d)
+				c += (node[terminal[j]].w == (w << (d-node[terminal[j]].d))) ? 0 : 1;
 			else 
-				c += ((node[j].w << (node[j].d-d)) == w) ? 0 : 1;
+				c += ((node[terminal[j]].w << (node[terminal[j]].d-d)) == w) ? 0 : 1;
 		}
 		if (c < res)
 			res = c;
@@ -164,12 +166,12 @@ int main()
 		makedepth(r);
 		printtree(r);
 		
-		for(int i = nn; i < maxn; i++)
+		for(int i = 1; i <= n; i++)
 		{
 			node[i].d = -1;
 			node[i].l = node[i].r = 0;
 		}
-		nn = maxn;
-		nt = 0;
+		n = 0;
+		terminal.clear();
 	}
 }
