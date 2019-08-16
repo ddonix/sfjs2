@@ -92,28 +92,26 @@ int main()
 	while(scanf("%d", &n)==1)
 	{
 		double x,y,r;
-		bool nsc;	//north south connect
 		for(int i = 0; i < n; i++)
 		{
 			scanf("%lf%lf%lf", &x, &y, &r);
 			oppo[i] = Oppo(x, y, r);
 		}
-		nsc = false;
-		
 		memset(vis, 0, n*sizeof(int));
 		for(int i = 0; i < n; i++)
 			memset(G[i], 0, sizeof(int)*n);
 		
-		for(int i = 0; i < n; i++)
+		int j;
+		for(j = 0; j < n; j++)
 		{
-			if (!vis[i] && oppo[i].ne)
+			if (!vis[j] && oppo[j].ne)
 			{
-				vis[i] = 1;
-				if (nsc = dfs(i, true))
+				vis[j] = 1;
+				if (dfs(j, true))
 					break;
 			}
 		}
-		if(nsc)
+		if(j < n)
 			printf("IMPOSSIBLE\n");
 		else
 		{
