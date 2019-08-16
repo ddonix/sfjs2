@@ -1,51 +1,46 @@
 #include <iostream>
 #include <cstring>
+#include <stack>
 
 using namespace std;
 
-char b[129];
+string b;
 
-bool isValid(int s, int e)
+bool isValid()
 {
-	if(e<=s)
-		return false;
-	if(e-s == 1)
+	int l = b.size();
+	stack<char> s;
+	for(int i = 0; i < l; i++)
 	{
-		return ('('==b[s] && ')'==b[e])||('['==b[s] && ']'==b[e]);
-	}
-	else if (('('==b[s] && ')'==b[e])||('['==b[s] && ']'==b[e]))
-	{
-		return isValid(s+1, e-1);
-	}
-	else 
-	{
-		return false;
-	}
-
-}
-
-int main()
-{
-	int n;
-	cin>>n;
-	while(n--)
-	{
-		scanf("%s", b);
-		if(isValid(0, strlen(b)-1))
-			cout<<"Yes"<<endl;
+		if('(' == b[i] || '[' == b[i])
+			s.push(b[i]);
+		else if(')' == b[i])
+		{
+			if (s.empty() || s.top() != '(')
+				return false;
+			s.pop();
+		}
+		else if(']' == b[i])
+		{
+			if (s.empty() || s.top() != '[')
+				return false;
+			s.pop();
+		}
 		else
-			cout<<"No"<<endl;
+			return false;
 	}
+	return s.empty();
 }
 
 int main()
 {
 	int n;
 	cin>>n;
+	cin.ignore(1024, '\n');
 	while(n--)
 	{
-		scanf("%s", b);
-		if(isValid(0, strlen(b)-1))
+		getline(cin, b);
+		if(isValid())
 			cout<<"Yes"<<endl;
 		else
 			cout<<"No"<<endl;
