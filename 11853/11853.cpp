@@ -2,6 +2,8 @@
 * 思路：如果障碍物隔绝了南北，那么不能从东到西。
 * 反之如果不能从东到西，则隔绝了南北。
 * 对攻击范围达到北边界的所有敌人，分别作dfs或者bfs，看看能否到达南边界。
+* 求最北的出发和到达范围，可以反向计算。先按从南到北的顺序，把和东西界接触的排序
+* 然后看能否联通到北界。如果能，就是就是下界。
 */
 #include <cstdio>
 #include <cstring>
@@ -15,22 +17,24 @@ struct Oppo
 {
 	double x,y;
 	double r;
-	double t;
-	double rr;
+	
+	double t;	//t = x*x+y*y
+	double rr;	//rr = r*r
 	bool ne;	//含北界
 	bool se;	//含南界
+	
+	double ws;
+	double es;
+	
 	Oppo(){};
 	Oppo(double x1, double y1, double r1):x(x1), y(y1), r(r1)
 	{
 		t = x*x+y*y;
 		rr = r*r;
 		ne = (y+r) >= 1000 ? true : false;
-		se = r >= y? true : false;
-		ws = es = -1;	//如果接触东西界，南边的接触点y轴值
+		se = (r >= y) ? true : false;
 	}
 	
-	double ws;
-	double es;
 	void cws()
 	{
 		ws = y - pow((rr-x*x), 0.5);
@@ -60,7 +64,8 @@ bool cmp_e(int u, int v)
 	return  oppo[u].es <= oppo[v].es;
 }
 
-//能否到南界
+//s == true	能否到南界
+//s == false	能否到北界
 bool dfs(int u, bool s)
 {
 	if((s && oppo[u].se) || (!s && oppo[u].ne))
@@ -109,7 +114,7 @@ int main()
 			}
 		}
 		if(nsc)
-			printf("IMPOSSBILE\n");
+			printf("IMPOSSIBLE\n");
 		else
 		{
 			vector<int> w, e;
