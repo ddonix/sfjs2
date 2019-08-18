@@ -5,10 +5,6 @@ using namespace std;
 
 int main()
 {
-	char ch;
-	while(1)
-	{
-		ch = getchar();
-		cout<<ch<<(int)ch<<endl;
-	}
+	int i = 64;
+	cout<< (i << 1) << (i << -1)<<endl;
 }

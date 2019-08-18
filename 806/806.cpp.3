@@ -1,11 +1,6 @@
-/* uva 806:图像的点阵和四分树表示法之间的转换
-*  思路：不要构造四分树，直接在点阵和树叶表示法中进行转换。
-*
-*/
 #include <iostream>
 #include <vector>
 #include <string>
-#include <cstring>
 #include <algorithm>
 
 using namespace std;
@@ -31,7 +26,6 @@ void setb(int rtl)
 	}
 	s += '0'+t;
 	
-	//cout<<s<<endl;
 	for(int i = 0; i < s.size(); i++)
 	{
 		if (s[i] != '0')
@@ -51,7 +45,6 @@ void setb(int rtl)
 
 void seqtoimage(vector<int> seq)
 {
-	memset(image, 0, sizeof(image));
 	for(int i = 0; i < seq.size(); i++)
 		setb(seq[i]);
 }
@@ -107,13 +100,8 @@ void imagetoseq()
 int main()
 {
 	int ka = 0;
-	bool first = true;
 	while(cin>>n && n)
 	{
-		if (first)
-			first = false;
-		else
-			cout<<endl;
 		if (n < 0)
 		{
 			int rtl;
@@ -131,6 +119,7 @@ int main()
 					cout<<(image[i][j] ? '*' : '.');
 				cout<<endl;
 			}
+			cout<<endl;
 		}
 		else
 		{
@@ -159,7 +148,7 @@ int main()
 				}
 			}
 			cout<<endl;
-			cout<<"Total number of black nodes = "<<seqr.size()<<endl;
+			cout<<"Total number of black nodes = "<<seqr.size()<<endl<<endl;
 		}
 	}
 }
