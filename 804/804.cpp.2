@@ -6,7 +6,6 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
-#include <set>
 
 using namespace std;
 
@@ -14,8 +13,6 @@ const int maxn = 100;
 int np, nt, nf;
 
 int place[maxn];	//place包含的token数量
-int G[maxn][maxn];
-
 struct E
 {
 	int p;		//place id
@@ -60,24 +57,6 @@ int getET()
 	return -1;
 }
 
-void update(int t)
-{
-	bool vis[maxn];
-	for(int i = 0;i < nt; i++)
-		vis[i] = false;
-	for(int d = 0; d < 2; d++)
-		for(int i = 0; i < trans[t].ioe[d].size(); i++)
-		{
-			int p = trans[t].ioe[d][i].p;
-			for(int j = 0; j < nt; j++)
-				if (G[j][p] && !vis[j])
-				{
-					trans[j].update();
-					vis[j] = true;
-				}
-		}
-}
-
 int main()
 {
 	int ka = 0, p, i;
@@ -93,7 +72,6 @@ int main()
 				int d,j;
 				d = (p < 0) ? 0 : 1;
 				p = (p < 0) ? (-p-1) : (p-1);
-				G[i][p] = 1;
 				for(j = 0; j < trans[i].ioe[d].size(); j++)
 				{
 					if(trans[i].ioe[d][j].p == p)
@@ -120,7 +98,8 @@ int main()
 			else
 			{
 				trans[et].ope();
-				update(et);
+				for(int j = 0; j < nf; j++)
+					trans[j].update();
 			}
 		}
 		if (i == nf)
