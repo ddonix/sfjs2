@@ -1,53 +1,45 @@
 #include <iostream>
 #include <vector>
+#include <stack>
 
 using namespace std;
 const int maxn = 1001;
-
-int root;
 int n;
 
-int bfs[maxn];
-int dfs[maxn];
+int pos[maxn];
 
 vector<int> ch[maxn];
 
-int buildtree(int b0)
-{
-	int i, c0, c1, r = bfs[b0];
-	if (b0 >= n)
-		return 0;
-	if (b0 >= n-1)
-		return bfs[b0];
-	c0 = bfs[b0+1];
-	for(int i = 0; i < n; i++)
-	{
-		if (dfs[i] == c0)
-		{
-			if (i < n-1)
-				c1 = dfs[i+1];
-			else
-				c1 = c0;
-			break;
-		}
-	}
-	for(i = b0+1; i < n && bfs[i] != c1; i++)
-		ch[r].push_back(bfs[i]);
-	buildtree(i);
-}
-
 int main()
 {
-	int root;
+	int root, u, x;
 	for(int i = 1; i < maxn; i++)
 		ch[i].clear();
 	while(cin>>n && n)
 	{
-		for(int i = 0; i < n; i++)
-			cin>>bfs[i];
-		for(int i = 0; i < n; i++)
-			cin>>dfs[i];
-		buildtree(0);
+		stack<int> sta;
+		for(int i = 1; i <= n; i++)
+		{
+			cin>>u;
+			pos[u] = i;
+		}
+		cin>>root;
+		sta.push(root);
+		for(int i = 1; i< n; i++)
+		{
+			cin>>x;
+			while(true)
+			{
+				u = sta.top();
+				if (u == root || pos[u]+1 < pos[x])
+				{
+					ch[u].push_back(x);
+					sta.push(x);
+					break;
+				}
+				sta.pop();
+			}
+		}
 		for(int i = 1; i <= n; i++)
 		{
 			cout<<i<<":";
