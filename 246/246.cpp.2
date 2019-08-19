@@ -10,9 +10,8 @@
 
 using namespace std;
 
-vector<deque<int> > pile;	//所有牌堆，最多7个
-deque<int> deck;		//手里的牌堆
-int cp;				//当前要发牌的堆
+vector<deque<int> > pile;
+deque<int> deck;
 
 bool isten(int x)
 {
@@ -54,19 +53,23 @@ bool deal(int p)
 struct Status
 {
 	int card[62];
-	Status(){}
+	Status()
+	{}
 	
 	Status(bool snap)
 	{
 		int i = 0;
+		if(!snap)
+			return;
 		card[i++] = deck.size();
 		card[i++] = pile.size();
 		for(int j = 0; j < pile.size(); j++)
 			card[i++] = pile[j].size();
-		card[i++] = cp;
-		while(i < 10) card[i++] = 0;
-		for(int j = 0; j < card[0]; j++)
-			card[i++] = deck[j];
+		while(i < 10)
+		{
+			card[i++] = 0;
+		}
+		
 		for(int j = 0; j < card[1]; j++)
 			for(int k = 0; k < pile[j].size(); k++)
 				card[i++] = pile[j][k];
@@ -83,7 +86,7 @@ struct Status
 
 int main()
 {
-	int c,i,t;
+	int c,p,i,t;
 	bool loop;
 	cin>>c;
 	while(c != 0)
@@ -102,29 +105,28 @@ int main()
 			deck.push_back(c);
 			cin>>c;
 		}
+		p = 0;
 		t = 7;
-		cp = 0;
-		loop = false;
 		status.push_back(Status(true));
 		while(!deck.empty() && !loop)
 		{
 			t++;
-			pile[cp].push_back(deck.front());
+			pile[p].push_back(deck.front());
 			deck.pop_front();
-			if (deal(cp))
+			if (deal(p))
 			{
-				pile.erase(pile.begin()+cp);
-				if (cp == pile.size()) //原先是最后一个
+				pile.erase(pile.begin()+p);
+				if (p == pile.size()) 
 				{
-					if (pile.size() > 0)	//原先不只有一个
-						cp = 0;
+					if (pile.size() > 0)
+						p = 0;
 					else
 						break;
 				}
 			}
 			else
 			{
-				cp = (cp+1)%pile.size();
+				p = (p+1)%pile.size();
 			}
 			Status s(true);
 			if (find(status.begin(), status.end(), s) != status.end())
@@ -137,7 +139,7 @@ int main()
 		if (loop)
 			cout<<"Draw: "<<t<<endl;
 		else if (pile.empty())
-			cout<<"Win : "<<t<<endl;
+			cout<<"Win: "<<t<<endl;
 		else
 			cout<<"Loss: "<<t<<endl;
 	}
