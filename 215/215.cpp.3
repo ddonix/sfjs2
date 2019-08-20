@@ -1,0 +1,116 @@
+#include <iostream>
+#include <vector>
+#include <cstring>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+const int maxr = 20;
+const int maxc = 10;
+
+int R, C;
+
+struct Cell
+{
+	int v;			//value
+	string s;		//express string
+	vector<int> exp;	//r*C+c; 10000: + , 10001:-, < 0: 无符号数
+	Cell() : v(10001), s(""){}
+	Cell(string s_) : v(10001), s(s_) {}
+	Cell(int v_) : v(v_) , s("") {}
+};
+
+Cell sheet[maxr][maxc];
+bool e[maxr*maxc][maxr*maxc];
+
+
+void tp()
+{
+	int i, j;
+	vector<int> topu;
+	bool flag[R*C], running = true;
+	memset(flag, 0, sizeof(flag));
+	while(running)
+	{
+		if (topu.size() == R*C)
+			break;
+		running = false;
+		for(i = 0; i < R*C; i++)
+		{
+			if (flag[i])
+				continue;
+			for(j = 0; j < R*C && !e[i][j]; j++);
+			if(j < R*C)
+				continue;
+			running = true;
+			topu.push_back(i);
+			flag[i] = true;
+			for(j = 0; j < R*C; j++)
+				e[j][i] = 0;
+		}
+	}
+	cout<<topu.size()<<endl;
+	for(int i = 0; i < topu.size(); i++)
+		cout<<topu[i]/C<<" "<<topu[i]%C<<endl;
+}
+
+int main()
+{
+	while(cin>>R>>C && R != 0)
+	{
+		string s;
+		int v;
+		memset(e, 0, sizeof(e));
+		for(int i = 0; i < R; i++)
+			for(int j = 0; j < C; j++)
+			{
+				cin>>s;
+				if (!(s[0] >= 'A' && s[0] <= 'T'))
+				{
+					stringstream ss(s);
+					ss>>v;
+					sheet[i][j] = Cell(v);
+				}
+				else
+				{
+					int a = i*C+j, b;
+					sheet[i][j] = Cell(s);
+					for(int k = 0; k < s.size(); )
+					{
+						if (s[k] >= 'A' && s[k] <= 'T')
+						{
+							b = (s[k]-'A')*C+(s[k+1]-'0');
+							sheet[i][j].exp.push_back(b);
+							e[a][b] = true;
+							k += 2;
+						}
+						else if('+' == s[k])
+						{
+							sheet[i][j].exp.push_back(10000);
+							k++;
+						}
+						else if('-' == s[k])
+						{
+							sheet[i][j].exp.push_back(10001);
+							k++;
+						}
+						else
+						{
+							int v, p;
+							for(p = k+1; s[p] >= '0' && s[p] <= '9'; p++);
+							stringstream ss(s.substr(k, p-k));
+							ss>>v;
+							sheet[i][j].exp.push_back(-v);
+							k = p;
+						}
+					}
+				}
+			}
+		cout<<R<<" "<<C<<endl;
+		tp();
+		for(int i = 0; i < R; i++)
+			for(int j = 0; j < C; j++)
+				sheet[i][j].v = 10001;
+	}
+}
