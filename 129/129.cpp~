@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+const int maxl = 26;
+const int maxseq = 81;
+
+int n;
+char l;
+int tot;
+
+char seq[maxseq];
+void hardseq(int cur)
+{
+	tot++;
+	if (tot == n) {
+		cur = strlen(seq);
+		for(int j = 0; j < 4 && j < cur; j++) cout<<seq[j];
+		for(i = 1; i < (cur-1)/4; i++) {
+			cout<<" ";
+			for(int j = 0; j < 4; j++) cout<<seq[i*4+j];
+		}
+		if (i*4 < cur) {
+			cout<<" ";
+				for(int j = 0; i*4+j < cur; j++)
+				cout<<seq[i*4+j];
+		}
+		cout<<endl;
+		return;
+	}
+	if (tot >= n)
+		return;
+	for(char c = 'A'; c <= l; c++)
+	{
+		bool hard = true;
+		seq[cur] = c;
+
+		for(int i = 1; i <= (cur+1)/2; i++)
+		{
+			char *s1 = &seq[cur+1-i];
+			char *s2 = &seq[cur+1-2*i];
+			if (!strncmp(s1, s2, i)) {
+				hard = false;
+				break;
+			}
+		}
+		if (hard)
+			hardseq(cur+1);
+	}
+}
+
+int main()
+{
+	int t;
+	while(cin>>n>>t && n)
+	{
+		tot = -1;
+		l = 'A'+t;
+		hardseq(0);
+	}
+}
+
