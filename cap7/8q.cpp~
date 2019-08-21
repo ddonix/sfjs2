@@ -1,0 +1,72 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+const int maxn = 10;
+int n;
+
+bool vis[3][maxn*2];
+
+int C[maxn];
+int tot = 0;
+void search(int cur)
+{
+	if (cur == n) 
+	{
+		/*
+		for(int i = 0; i < n; i++)
+		{
+			for(int j = 0; j < C[i]; j++)
+				cout<<'.';
+			cout<<'*';
+			for(int j = C[i]+1; j < n; j++)
+				cout<<'.';
+			cout<<endl;
+		}
+		cout<<endl<<endl;*/
+		tot++;
+	}
+	else
+	{
+		for(int i = 0; i < n; i++)
+		{
+			if (!vis[0][i] && !vis[1][cur+i] && !vis[1][cur-i+n])
+			{
+				C[cur] = i;
+				vis[0][i] = vis[0][i] = vis[1][cur-i+n] = true;
+				search(cur+1);
+				vis[0][i] = vis[0][i] = vis[1][cur-i+n] = false;
+			}
+			
+		}
+	}
+}
+
+void search2(int cur) {
+	if(cur == n) tot++;
+	else for(int i = 0; i < n; i++) {
+if(!vis[0][i] && !vis[1][cur+i] && !vis[2][cur-i+n]) {
+//利用二维数组直接判断
+C[cur] = i;
+ //如果不用打印解,整个C数组都可以省略
+vis[0][i] = vis[1][cur+i] = vis[2][cur-i+n] = 1;
+ //修改全局变量
+search(cur+1);
+vis[0][i] = vis[1][cur+i] = vis[2][cur-i+n] = 0;
+ //切记!一定要改回来
+}
+}
+}
+
+int main()
+{
+	while(cin>>n && n)
+	{
+		memset(vis, 0, sizeof(vis));
+		tot = 0;
+		search2(0);
+		cout<<n<<"queun question: "<<tot<<" answer"<<endl;
+	}
+
+}
