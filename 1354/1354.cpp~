@@ -1,0 +1,32 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+const int maxn = 6;
+double r;
+int n;
+int s[maxn];
+
+void maketree(int i)
+{
+}
+
+
+double scale()
+{
+	for (int i = 0; i < (1 << (n - 1)); i++) {
+		maketree(i);
+		maketree(((1 << n) - 1) ^ i);
+	}
+}
+
+int main()
+{
+	int T;
+	cin >> T;
+	while (T--) {
+		cin >> n;
+		for (int i = 0; i < n; i++)
+			cin >> s[i];
+	}
+}
