@@ -1,0 +1,95 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+const int maxn = 26;
+bool G[maxn][maxn];
+bool o[maxn];
+
+vector < int >g[maxn];
+int n;
+int mp[maxn];
+
+int od[maxn];
+int odok[maxn];
+
+int getband()
+{
+	int r = 0, t;
+	int od2[maxn];
+	for (int i = 0; i < n; i++)
+		od2[od[i]] = i;
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < g[i].size(); j++) {
+			t = (od2[i] > od2[g[i][j]]) ? (od2[i] - od2[g[i][j]]) : (od2[g[i][j]] - od2[i]);
+			r = (t > r) ? t : r;
+		}
+	return r;
+}
+
+int band;
+bool vis[maxn];
+void georder(int cur)
+{
+	int t;
+	if (cur == n) {
+		t = getband();
+		if (t < band) {
+			band = t;
+			for (int i = 0; i < n; i++)
+				odok[i] = od[i];
+		}
+	} else {
+		for (int i = 0; i < n; i++) {
+			if (!vis[i]) {
+				od[cur] = i;
+				vis[i] = true;
+				georder(cur + 1);
+				vis[i] = false;
+			}
+		}
+	}
+}
+
+int main()
+{
+	string s;
+	while (getline(cin, s) && s[0] != '#') {
+		memset(G, 0, sizeof(G));
+		memset(o, 0, sizeof(o));
+		for (int i = 0; i < s.size();) {
+			int x, j;
+			x = s[i] - 'A';
+			o[x] = true;
+			for (j = i + 2; j < s.size() && s[j] != ';'; j++) {
+				G[x][s[j] - 'A'] = true;
+				G[s[j] - 'A'][x] = true;
+
+				o[s[j] - 'A'] = true;
+			}
+			i = j + 1;
+		}
+
+		n = 0;
+		for (int i = 0; i < 26; i++)
+			if (o[i])
+				mp[n++] = i;
+
+		for (int i = 0; i < n; i++) {
+			g[i].clear();
+			for (int j = 0; j < n; j++)
+				if (j != i && G[mp[i]][mp[j]])
+					g[i].push_back(j);
+		}
+		band = maxn;
+		memset(vis, 0, sizeof(vis));
+		georder(0);
+		for (int i = 0; i < n; i++)
+			cout << (char)('A' + mp[odok[i]]) << " ";
+		cout << "-> " << band << endl;
+	}
+}

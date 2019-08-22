@@ -1,0 +1,7000 @@
+C Z -> 1
+J C X V -> 1
+T C L V X Z -> 2
+J L Q X C T V Z -> 3
+J X C Z Q V L T -> 3
+L C J Q V X T Z -> 5
+C J L Q T V X Z -> 7
+B X -> 1
+O B N X -> 1
+E B N O J Y X -> 2
+E B O Y Z X N -> 3
+E J B O X Y N -> 4
+E J B O X Z Y N -> 5
+B E J N O X Y Z -> 7
+G K -> 1
+L Z G S -> 1
+I G K R O S -> 2
+I R Z O G K S -> 3
+L S R O K G I Z -> 3
+K I L O R Z G S -> 5
+G I K L O R S Z -> 7
+A U -> 1
+H F A X -> 1
+F X W A Z H -> 2
+H A K U F W X Z -> 3
+F K U A Z W H X -> 4
+F K H W X Z A U -> 5
+A F H K U W X Z -> 7
+A U -> 1
+G L A U -> 1
+C G K A L P U -> 2
+G A P W C K U -> 3
+G C A K U W L -> 4
+C A G K P U W L -> 5
+A C G K L P U W -> 7
+A G -> 1
+F A S R -> 1
+G R F A Q S -> 2
+F G L A R J S Q -> 3
+F G A L Q R S J -> 4
+L F A G J R S Q -> 5
+A F G J L Q R S -> 7
+A S -> 1
+K O A S -> 1
+K A J Q O L -> 2
+J K L O A M S -> 3
+J A K L M S O -> 4
+J L A K M S Q O -> 5
+A J K L M O Q S -> 7
+A N -> 1
+P A K S -> 1
+B P N S A K T -> 2
+B K A U P N T -> 3
+K N P S T A U -> 4
+B A K P S T U N -> 5
+A B K N P S T U -> 7
+B Z -> 1
+B S W -> 2
+B S T Z -> 3
+I B L W Z J T -> 3
+I Z T W J B S L -> 3
+I L B S T Z W J -> 5
+B I J L S T W Z -> 7
+D F -> 1
+Q D F V -> 1
+F K D L T Q -> 2
+T K L F Q D V Y -> 2
+F K L Q Y D V T -> 4
+F T D K Q V Y L -> 5
+D F K L Q T V Y -> 7
+C I -> 1
+C G Z -> 2
+G I L C Z R -> 2
+G I C Z R W -> 3
+L Z G I W C R -> 4
+L I C K R Z G W -> 5
+C G I K L R W Z -> 7
+A Q -> 1
+B N A Q -> 1
+E N Q A U H -> 2
+B K Q A U E N H -> 3
+E U H B N A K Q -> 3
+N B A H K Q E U -> 5
+A B E H K N Q U -> 7
+E J -> 1
+F E U T -> 1
+F E T Z R J -> 2
+F T E J Q U R -> 3
+F Q E Z J R T U -> 3
+Q E F J T U Z R -> 5
+E F J Q R T U Z -> 7
+G X -> 1
+L G H W -> 1
+H G K W Y -> 2
+K G H Y X W L -> 3
+H K G O X L W Y -> 4
+K G H O W Y L X -> 5
+G H K L O W X Y -> 7
+A P -> 1
+A W X -> 2
+P B A M W V -> 2
+P V A M B X Q -> 3
+B Q W M X P A V -> 4
+B A M P V W X Q -> 5
+A B M P Q V W X -> 7
+E G -> 1
+E I L -> 2
+I J E L Y -> 2
+G E J K Y I L -> 3
+I Y G J E K L N -> 3
+G I E J L N K Y -> 5
+E G I J K L N Y -> 7
+C D -> 1
+E C T W -> 1
+D C G W K P T -> 2
+K E C D G P T W -> 2
+D W G C E T P K -> 3
+D C E G K P W T -> 5
+C D E G K P T W -> 7
+A X -> 1
+B X A F -> 1
+E O B X A K Z -> 2
+F Z A B O E K X -> 2
+K B E F Z A O X -> 3
+O F A E K Z B X -> 5
+A B E F K O X Z -> 7
+A O -> 1
+G S A L -> 1
+G E L A O X -> 2
+E L O X S A P -> 3
+G O E A X L S P -> 4
+E L A P S X G O -> 5
+A E G L O P S X -> 7
+F W -> 1
+H F I W -> 1
+H X L P F I W -> 2
+H I W X F K L P -> 3
+W I H F P K L X -> 3
+I H F L W X P K -> 5
+F H I K L P W X -> 7
+A Q -> 1
+R A L T -> 1
+D N Q A L T R -> 2
+D F A N R Q L -> 3
+D A F R T N L Q -> 4
+D F A L R T Q N -> 5
+A D F L N Q R T -> 7
+B X -> 1
+B U X -> 2
+E V B Z U -> 2
+E G Z B H X U V -> 3
+G E B H V X Z U -> 4
+V B E G H U X Z -> 5
+B E G H U V X Z -> 7
+D H -> 1
+H U D Z -> 1
+E H D Z U N -> 2
+H D Z E Y M N -> 3
+E H M U Z D Y -> 4
+M D E N U Z H Y -> 5
+D E H M N U Y Z -> 7
+B Q -> 1
+J N B X -> 1
+G O X Q B P -> 2
+J O Q G P B N X -> 2
+G B O J P Q N X -> 4
+G N B J P X O Q -> 5
+B G J N O P Q X -> 7
+A V -> 1
+O P A T -> 1
+P D A E T V -> 2
+O A M D T V P -> 3
+E M A T V D O P -> 4
+D A E M P T V O -> 5
+A D E M O P T V -> 7
+D J -> 1
+J D R X -> 1
+J D X O W Y R -> 2
+U R O J D W X -> 2
+J R D U X Y O W -> 4
+O W D J R Y X U -> 5
+D J O R U W X Y -> 7
+A Q -> 1
+E P A L -> 1
+J A P E Q Z -> 2
+B A P L Z E Q -> 3
+Q J A B E L P Z -> 3
+B A E L P Q Z J -> 5
+A B E J L P Q Z -> 7
+G X -> 1
+I X G Q -> 1
+H I V G Q N -> 2
+N Q H V G X -> 3
+H I G N S Q X V -> 4
+H G N Q S V X I -> 5
+G H I N Q S V X -> 7
+C W -> 1
+L C X S -> 1
+G L P C S W -> 2
+G L S X C H P W -> 3
+L G C H X P W S -> 4
+H P C S W X G L -> 5
+C G H L P S W X -> 7
+E Y -> 1
+L X E O -> 1
+I E H O Y L -> 2
+M L I H Y E X O -> 2
+H M O I E X L Y -> 3
+H E L M O X I Y -> 5
+E H I L M O X Y -> 7
+A N -> 1
+F A K N -> 1
+F K U A O -> 2
+F A O G Y U K -> 3
+N F G A Y U K O -> 3
+F K G N U Y A O -> 5
+A F G K N O U Y -> 7
+C J -> 1
+J C K L -> 1
+L J C K O U -> 2
+D C K L F U J O -> 3
+F O D C K L U J -> 3
+J L D F K U C O -> 5
+C D F J K L O U -> 7
+B I -> 1
+B J W -> 2
+I H Z B W J -> 2
+C H J Z B I Y W -> 3
+C B H Y Z I J W -> 4
+C I H J W Y B Z -> 5
+B C H I J W Y Z -> 7
+B X -> 1
+H J B M -> 1
+M B R K X -> 2
+H J B L R M K X -> 3
+H J K B R X L M -> 3
+H J K M R X B L -> 5
+B H J K L M R X -> 7
+B Z -> 1
+T B Q Z -> 1
+D G Q U B T -> 2
+D G B P U Z Q T -> 3
+D G P Q T B Z U -> 4
+D B G P Q U T Z -> 5
+B D G P Q T U Z -> 7
+H Z -> 1
+J H I R -> 1
+J K M Z H R -> 2
+I J K Q H M -> 3
+I Q R H K M J Z -> 4
+J R I K M Q H Z -> 5
+H I J K M Q R Z -> 7
+B M -> 1
+B I T -> 2
+D B C M H T -> 2
+C T I Y B D M -> 3
+D C I B H Y T M -> 4
+D C H I M T B Y -> 5
+B C D H I M T Y -> 7
+A B -> 1
+O A Q X -> 1
+B A S X O Q -> 2
+B X D Z A O Q -> 3
+D A B Q X S O Z -> 4
+B D A O S X Q Z -> 5
+A B D O Q S X Z -> 7
+B U -> 1
+S B D U -> 1
+S R B Q U -> 2
+D G Q U R B T S -> 3
+G Q D T U B S R -> 4
+Q B D G T U S R -> 5
+B D G Q R S T U -> 7
+C Z -> 1
+G C S H -> 1
+H C U G Y V -> 2
+H U Z G V C S Y -> 3
+H G Z C V Y U S -> 3
+G H S U V Y C Z -> 5
+C G H S U V Y Z -> 7
+D Y -> 1
+D F R -> 2
+R T P U D V Y -> 2
+F P D Y U V R -> 3
+F Y T V P D R U -> 3
+T V F P R Y D U -> 5
+D F P R T U V Y -> 7
+G H -> 1
+G H M -> 2
+K G L H M -> 2
+R J L K G M X -> 2
+H L G R K X M J -> 3
+J G H L M X K R -> 5
+G H J K L M R X -> 7
+F N -> 1
+F H U -> 2
+N H F S Q W -> 2
+H F M N U W S -> 3
+H W M N Q F U S -> 4
+H Q F M S W N U -> 5
+F H M N Q S U W -> 7
+B U -> 1
+D B U N -> 1
+D B V I N -> 2
+K U B D W N I V -> 2
+I B D K V N W -> 4
+I B D K U V N W -> 5
+B D I K N U V W -> 7
+D M -> 1
+J D R M -> 1
+G L M D J N -> 2
+G K D M J R L N -> 3
+J K L D N G M R -> 4
+J L D G K N R M -> 5
+D G J K L M N R -> 7
+D Y -> 1
+H D S M -> 1
+L R H D M S -> 2
+K H M L R D S Y -> 3
+K D H R Y L S -> 4
+H R D L S Y M K -> 5
+D H K L M R S Y -> 7
+F I -> 1
+I Q F T -> 1
+I F S U O Q -> 2
+N O F I S Q U -> 3
+I O F Q T S N U -> 4
+I N F O T U Q S -> 5
+F I N O Q S T U -> 7
+I R -> 1
+L I V X -> 1
+Q J S I V -> 2
+J L X S I V Q R -> 3
+Q L I J R X V S -> 4
+R S I J L Q X V -> 5
+I J L Q R S V X -> 7
+A Z -> 1
+A C R -> 2
+C A R D G Z S -> 2
+C A R S L Z D -> 3
+G L R A S C D Z -> 4
+C A D G L S Z R -> 5
+A C D G L R S Z -> 7
+A U -> 1
+B A S T -> 1
+B A T X N V U -> 2
+B V N X A T U -> 3
+B N S T U X A V -> 4
+B N A S V X T U -> 5
+A B N S T U V X -> 7
+B H -> 1
+K J B Y -> 1
+K N Z B L -> 2
+H K J L B Z N Y -> 3
+L N B H J Z K Y -> 3
+K J H L Y Z B N -> 5
+B H J K L N Y Z -> 7
+B M -> 1
+M K B X -> 1
+J B K M S O -> 2
+E J K S O B M X -> 3
+K E J M X B S O -> 4
+E B J O S X M K -> 5
+B E J K M O S X -> 7
+A B -> 1
+F A G H -> 1
+B A N F D G H -> 2
+D H A F G X N -> 3
+B D H X N A F G -> 3
+B H A D N X F G -> 5
+A B D F G H N X -> 7
+D Y -> 1
+M D E S -> 1
+F Y D E I -> 2
+E F S I L D M Y -> 2
+E M F I Y D S L -> 4
+L D E F S Y I M -> 5
+D E F I L M S Y -> 7
+B D -> 1
+B D O -> 2
+D H K B T O -> 2
+I N B T O D H K -> 2
+I H B K T D N O -> 3
+H B D I O T K N -> 5
+B D H I K N O T -> 7
+J R -> 1
+N J V Q -> 1
+Q X J U W R -> 2
+N U J V W Q R X -> 2
+N R Q V W U J X -> 4
+R W N Q U X J V -> 5
+J N Q R U V W X -> 7
+B T -> 1
+Q D B Z -> 1
+D B T Z O G -> 2
+D Z Q S B O T -> 3
+D Q O Z G B S T -> 3
+G D B Q S T Z O -> 5
+B D G O Q S T Z -> 7
+B T -> 1
+L B R Z -> 1
+N L V B R Z -> 2
+M N L Z B V T R -> 3
+L T B Z R V N M -> 3
+L B N R T V Z M -> 5
+B L M N R T V Z -> 7
+B P -> 1
+N B Z P -> 1
+N Z E B P -> 2
+M N B P F Z -> 3
+P V M B F N E Z -> 3
+E M B F N Z V P -> 5
+B E F M N P V Z -> 7
+F M -> 1
+G F Y O -> 1
+G O F M R Y -> 2
+I R G O F M W -> 2
+G M O I Y F W R -> 4
+O F G I R W M Y -> 5
+F G I M O R W Y -> 7
+C L -> 1
+C N Q -> 2
+F C H L N K -> 2
+H K C Q I N L -> 3
+H I F L Q C K N -> 4
+F I C H N Q K L -> 5
+C F H I K L N Q -> 7
+E M -> 1
+F L E M -> 1
+F V H E L M -> 2
+F H L M W E G V -> 3
+G F E H L V M W -> 3
+G F E L M V W H -> 5
+E F G H L M V W -> 7
+E X -> 1
+E R U -> 2
+H E Y S R U -> 2
+H K S E Y R X U -> 3
+H U E K R Y X -> 4
+H K R S U X E Y -> 5
+E H K R S U X Y -> 7
+F K -> 1
+L K F R -> 1
+G F I K L -> 2
+G I K R M F L -> 3
+G K I L R F X M -> 4
+G M F K L R X I -> 5
+F G I K L M R X -> 7
+D L -> 1
+L U D R -> 1
+L D O V R N -> 2
+L D U R Z V N -> 3
+U O Z D R N L V -> 3
+N V D L O R U Z -> 5
+D L N O R U V Z -> 7
+A G -> 1
+S E A Z -> 1
+S E A P Z -> 2
+E A G P X W Z -> 3
+E G S Z A X P W -> 3
+G A E P W X S Z -> 5
+A E G P S W X Z -> 7
+F L -> 1
+T F Q X -> 1
+L J R F Q -> 2
+K X J F L Q T R -> 3
+K J Q R L F X T -> 3
+K F J L Q T R X -> 5
+F J K L Q R T X -> 7
+A S -> 1
+A S V -> 2
+K A V Y S X -> 2
+C S A B X Y V -> 3
+B A C X Y S V K -> 4
+K B A C V X S Y -> 5
+A B C K S V X Y -> 7
+D S -> 1
+Q W D R -> 1
+G D S W Z -> 2
+G D Q S Z R -> 3
+G S Q R W Z D V -> 4
+G D R S V W Z Q -> 5
+D G Q R S V W Z -> 7
+E K -> 1
+H E V L -> 1
+F H O E J -> 2
+F J E V O H -> 3
+F K E J L O V H -> 4
+F L E H J V O K -> 5
+E F H J K L O V -> 7
+D Q -> 1
+D V W -> 2
+G E D J Q R -> 2
+E G D W J V R -> 3
+E R D J V G Q W -> 4
+Q E D G J V W R -> 5
+D E G J Q R V W -> 7
+E S -> 1
+S W E V -> 1
+G E Q W U X -> 2
+G U W Q X E S -> 3
+Q W U E S G V X -> 3
+G W E Q V X U S -> 5
+E G Q S U V W X -> 7
+A N -> 1
+E A U N -> 1
+E A V L N T M -> 2
+N T V A L E U -> 3
+E L M A N U V T -> 4
+E L A N U V T M -> 5
+A E L M N T U V -> 7
+A C -> 1
+G A C Y -> 1
+C G J U A K S -> 2
+J G A U C Y S -> 2
+C G A J S U K Y -> 4
+C A G J S Y K U -> 5
+A C G J K S U Y -> 7
+A W -> 1
+O C A W -> 1
+T A C D W -> 2
+C A O P W D T -> 3
+C T P A W D O H -> 4
+H O C D P W A T -> 5
+A C D H O P T W -> 7
+C K -> 1
+K C N T -> 1
+K T U N C W Y -> 2
+K T C W N Y U Z -> 3
+K N T U Z C W Y -> 4
+N C K U Y Z T W -> 5
+C K N T U W Y Z -> 7
+A T -> 1
+G T A U -> 1
+G M A L T U -> 2
+M A G Q L T N U -> 3
+G L M N U Q A T -> 4
+M A G L Q U N T -> 5
+A G L M N Q T U -> 7
+A T -> 1
+N T A Z -> 1
+H A C Z Y T -> 2
+C H G T A Z -> 3
+G C A T Z N H Y -> 3
+C H A G N T Y Z -> 5
+A C G H N T Y Z -> 7
+D Z -> 1
+K Z D W -> 1
+S P D M V -> 2
+K M P D S Z V -> 3
+K D M V Z P S W -> 4
+M D K P S V W Z -> 5
+D K M P S V W Z -> 7
+E Z -> 1
+I S E L -> 1
+L E V Z U -> 2
+I R S E V Z U -> 3
+I V L Z E R S U -> 3
+L E I R U Z V S -> 5
+E I L R S U V Z -> 7
+A X -> 1
+I J A T -> 1
+B J O A Q X -> 2
+I B J O A T Q -> 3
+B O A T X Q I J -> 3
+J A B I O Q X T -> 5
+A B I J O Q T X -> 7
+F M -> 1
+M T F X -> 1
+L F W X O V -> 2
+O F V L M T X -> 3
+L M F O W T X V -> 4
+L M O T V W F X -> 5
+F L M O T V W X -> 7
+C N -> 1
+K D C N -> 1
+D C K N H T -> 2
+D T C H I K Z -> 3
+D K I C H Z N T -> 4
+H K C D I N T Z -> 5
+C D H I K N T Z -> 7
+C Z -> 1
+P T C Q -> 1
+P C G Z T -> 2
+G C P H Q T W -> 3
+P T C G W H Z Q -> 4
+G C H Q T W Z P -> 5
+C G H P Q T W Z -> 7
+A I -> 1
+A L U -> 2
+D I J A L R -> 2
+I J L D A M U R -> 3
+D A M J L U R I -> 4
+D A L M R U I J -> 5
+A D I J L M R U -> 7
+A P -> 1
+P O A Z -> 1
+O E W A T Z -> 2
+O A W E Z P T Q -> 3
+E O A P Q T W Z -> 4
+E A O P T Z W Q -> 5
+A E O P Q T W Z -> 7
+G J -> 1
+J R G W -> 1
+J Y W G K S -> 2
+J R Y G K N S -> 3
+J K N G Y S R W -> 4
+J K G N R W Y S -> 5
+G J K N R S W Y -> 7
+C F -> 1
+F C U T -> 1
+F C T W N U -> 2
+F C U T X L N W -> 3
+F L C T X N W U -> 4
+F L C U W X T N -> 5
+C F L N T U W X -> 7
+A C -> 1
+F A C J -> 1
+E F H A J X Z -> 2
+F A E J X Z -> 3
+H C J X E A F Z -> 3
+E H C J X Z A F -> 5
+A C E F H J X Z -> 7
+C G -> 1
+G C O V -> 1
+E O S C G J -> 2
+E V O S C J G -> 3
+G S C V W E J O -> 4
+E C G J S V W O -> 5
+C E G J O S V W -> 7
+B S -> 1
+I B Z S -> 1
+I B M Q Z -> 2
+C B M S Q I Z R -> 3
+I M R C B S Q Z -> 3
+I C B M R S Z Q -> 5
+B C I M Q R S Z -> 7
+C L -> 1
+E C D S -> 1
+L C E Z Q -> 2
+D L Z C E R S -> 3
+E Q C R S Z L -> 4
+D Q E L R Z C S -> 5
+C D E L Q R S Z -> 7
+C Y -> 1
+R L C V -> 1
+E W V Y C L N -> 2
+E L C V N Y R W -> 3
+E L Y N R C V W -> 4
+L N E R V Y C W -> 5
+C E L N R V W Y -> 7
+D X -> 1
+D H X -> 2
+H L D X Y J -> 2
+H L P Y D O -> 3
+H J X O Y D P L -> 4
+H L D J X Y P O -> 5
+D H J L O P X Y -> 7
+C H -> 1
+Q C H U -> 1
+F C H S N Q U -> 2
+S N C H Q U -> 3
+F N H O U C Q S -> 4
+F H C N S U O Q -> 5
+C F H N O Q S U -> 7
+L M -> 1
+M P L U -> 1
+N L M O P X -> 2
+O P M U N L T X -> 2
+M N L P X U T -> 4
+M L N O T X U P -> 5
+L M N O P T U X -> 7
+B J -> 1
+V B U W -> 1
+U W X B V -> 2
+D U G W B V J X -> 3
+D J B V X G W U -> 4
+U G B D J W X V -> 5
+B D G J U V W X -> 7
+A O -> 1
+B A H O -> 1
+O A B E Z X -> 2
+O H A E Z U -> 3
+B E A X Z H U O -> 4
+O U A B H Z E X -> 5
+A B E H O U X Z -> 7
+A Z -> 1
+J A Q R -> 1
+J R A O V U -> 2
+J R A Z Q O U V -> 3
+O Q J R V Z A U -> 4
+U O A J Q R Z V -> 5
+A J O Q R U V Z -> 7
+B O -> 1
+O B I U -> 1
+I B O W U T -> 2
+I U O V B M T -> 3
+I O T B V U W M -> 4
+I M B T U V O W -> 5
+B I M O T U V W -> 7
+B S -> 1
+D B U L -> 1
+F B S D L O U -> 2
+F L S U B T -> 3
+S F D L B T O U -> 3
+D O F S T U B L -> 5
+B D F L O S T U -> 7
+A N -> 1
+N U A S -> 1
+F A N U S Y R -> 2
+F J N A S U Y R -> 3
+F U S A Y N J R -> 4
+R F A J S U N Y -> 5
+A F J N R S U Y -> 7
+A D -> 1
+L A X U -> 1
+D A Q X L J -> 2
+D J L X A U P -> 3
+Q D A L U J P X -> 3
+J L A D P Q X U -> 5
+A D J L P Q U X -> 7
+A B -> 1
+A J U -> 2
+B T X A Z U -> 2
+B A C X Z U J T -> 3
+B C A J X T Z U -> 4
+J T A B X Z C U -> 5
+A B C J T U X Z -> 7
+D Y -> 1
+E K D I -> 1
+I T D E Y K -> 2
+E D V K Y G T -> 3
+E I G V D K T Y -> 3
+G E I T V Y D K -> 5
+D E G I K T V Y -> 7
+D O -> 1
+O K D W -> 1
+H D O W I L -> 2
+K L Y D O H W -> 2
+H D I O W Y L K -> 4
+H D I K L O Y W -> 5
+D H I K L O W Y -> 7
+A L -> 1
+K A X Q -> 1
+Q A K L X -> 2
+L X A H Z K U Q -> 2
+H K L U X A Z Q -> 4
+Q H A K L U X Z -> 5
+A H K L Q U X Z -> 7
+A K -> 1
+B Y A Q -> 1
+B Q A K C E -> 2
+E I A B K C Y -> 2
+B A C E K Y Q I -> 4
+B E A C K Q Y I -> 5
+A B C E I K Q Y -> 7
+E V -> 1
+H E F V -> 1
+F E S V M U H -> 2
+F M U P E S H V -> 3
+F H P E S V U M -> 4
+F M E S U V P H -> 5
+E F H M P S U V -> 7
+A G -> 1
+G W A K -> 1
+G W K A S X -> 2
+F G J A W K X -> 3
+K W A F G J X S -> 3
+F K A J S W G X -> 5
+A F G J K S W X -> 7
+D L -> 1
+G D U X -> 1
+G L U D Y R -> 2
+S L U D R Y G X -> 2
+R D G L U Y S X -> 4
+G R D L S U X Y -> 5
+D G L R S U X Y -> 7
+A R -> 1
+E H A I -> 1
+F I R A P W -> 2
+F A I R P H W -> 3
+E I A R H F P W -> 3
+F H A I R W E P -> 5
+A E F H I P R W -> 7
+C Y -> 1
+I C U X -> 1
+I C X U N Z -> 2
+M I N X C Y Z U -> 3
+I N C X Y Z M U -> 4
+M I C U X Y Z N -> 5
+C I M N U X Y Z -> 7
+B I -> 1
+K B I S -> 1
+I K S P B W -> 2
+I W B M S P K L -> 2
+I K B L P M S W -> 4
+I K B M S W L P -> 5
+B I K L M P S W -> 7
+B U -> 1
+S T B U -> 1
+L B Q S U T -> 2
+L B S Q U T V X -> 3
+L B U S T V Q X -> 4
+S B L Q U V T X -> 5
+B L Q S T U V X -> 7
+B Y -> 1
+R N B T -> 1
+M N P T B Y -> 2
+K P M T B R N Y -> 3
+K P B N R M T Y -> 4
+P K B N T Y M R -> 5
+B K M N P R T Y -> 7
+A Q -> 1
+B A Y U -> 1
+B K T Y A Q W -> 2
+B T A W K U Y -> 3
+K U W A Y B T Q -> 4
+B U A Q T W K Y -> 5
+A B K Q T U W Y -> 7
+B X -> 1
+I B L Z -> 1
+I Y Z B T L -> 2
+D B I X Y L Z T -> 3
+D I B T Y X Z L -> 4
+I L B D Y Z X T -> 5
+B D I L T X Y Z -> 7
+A E -> 1
+R Y A Z -> 1
+R A G U Z -> 2
+E G Y A Q Z R -> 3
+G Y E Q A U R Z -> 3
+E R A G U Y Z Q -> 5
+A E G Q R U Y Z -> 7
+H V -> 1
+L H W M -> 1
+L M T H P V Y -> 2
+M V H L P W Y -> 2
+L H M T Y V P W -> 4
+L M H T V Y W P -> 5
+H L M P T V W Y -> 7
+H Q -> 1
+P Q H X -> 1
+I H Q X P S -> 2
+Q S P X H N Y -> 3
+I P Q H S X N Y -> 4
+N S H I Q X P Y -> 5
+H I N P Q S X Y -> 7
+D F -> 1
+K P D T -> 1
+F K P R D U Z -> 2
+F K U D T R P Z -> 3
+F T D P U R K Z -> 4
+F P D K R T U Z -> 5
+D F K P R T U Z -> 7
+A T -> 1
+T A H Y -> 1
+C H P A T X K -> 2
+C H T A P K Y X -> 3
+H T A P C Y X K -> 3
+C A H K P T Y X -> 5
+A C H K P T X Y -> 7
+E Z -> 1
+E G O -> 2
+I X E Z K -> 2
+G E X Z K O R -> 3
+G E K O R X Z I -> 4
+K X G I O Z E R -> 5
+E G I K O R X Z -> 7
+C U -> 1
+K C T U -> 1
+J T C N K -> 2
+E O K T C J U -> 3
+J E K C T U N O -> 4
+E C K N O T U J -> 5
+C E J K N O T U -> 7
+A Q -> 1
+F A R Q -> 1
+C F Q A X R -> 2
+C F J X R A Q Z -> 3
+C A J R X Z Q F -> 4
+C A F J Q Z R X -> 5
+A C F J Q R X Z -> 7
+B F -> 1
+F L B H -> 1
+F B G Q H R -> 2
+H Y F B L G Q -> 2
+G B F H L Q Y R -> 4
+F R B G H Q L Y -> 5
+B F G H L Q R Y -> 7
+B W -> 1
+D B G T -> 1
+G R S B L W -> 2
+D G S W B L T -> 3
+D L B S W G T R -> 4
+L D B G R S T W -> 5
+B D G L R S T W -> 7
+A Z -> 1
+N A V R -> 1
+B A M Z R F -> 2
+F B M R V A N Z -> 2
+B N A R Z F M V -> 4
+F M A N R Z B V -> 5
+A B F M N R V Z -> 7
+A T -> 1
+P A R T -> 1
+O A P J S T V -> 2
+J P A V S O -> 3
+R A J O P V S T -> 4
+J A O P R V S T -> 5
+A J O P R S T V -> 7
+A P -> 1
+N F A O -> 1
+F A N P L W -> 2
+F N O S A P W -> 3
+O F A L N S P W -> 3
+N F A L O W P S -> 5
+A F L N O P S W -> 7
+B T -> 1
+N E B O -> 1
+E B H K Z -> 2
+E B O K T H N -> 3
+E B K T Z H N O -> 4
+K B E N O T H Z -> 5
+B E H K N O T Z -> 7
+B S -> 1
+D U B Q -> 1
+K B O D S -> 2
+D O U K B Q E -> 2
+D U Q B E O S K -> 3
+O B D E K Q U S -> 5
+B D E K O Q S U -> 7
+I L -> 1
+L I T Y -> 1
+L O X I R S -> 2
+L T O Y I R X -> 3
+L O X I R Y T S -> 4
+L I O R S X Y T -> 5
+I L O R S T X Y -> 7
+C T -> 1
+P H C T -> 1
+M H C W U P -> 2
+H O T W C P M -> 3
+H M C O P T W U -> 4
+P H C O U W M T -> 5
+C H M O P T U W -> 7
+B D -> 1
+I P B U -> 1
+I B P U W Y -> 2
+E U B D I W Y -> 3
+D B P U W Y E I -> 4
+D B E I P Y U W -> 5
+B D E I P U W Y -> 7
+B L -> 1
+C R B K -> 1
+C B L R P -> 2
+C B D P S R K L -> 3
+P D K S C B L R -> 3
+P B C D K L S R -> 5
+B C D K L P R S -> 7
+B X -> 1
+V W B X -> 1
+J H X B S -> 2
+C H B S J W X -> 3
+J B C S X W V -> 4
+H B C J S W V X -> 5
+B C H J S V W X -> 7
+B I -> 1
+C J B Z -> 1
+C J W B I Z -> 2
+C U B M Z I W -> 3
+J C I B U W Z M -> 3
+I M B C U Z W J -> 5
+B C I J M U W Z -> 7
+B Z -> 1
+D B Z H -> 1
+C D B H Z N -> 2
+D E H Z C B N U -> 3
+C B E H N Z D -> 4
+C B D H N Z U E -> 5
+B C D E H N U Z -> 7
+G R -> 1
+M G S T -> 1
+I J G R M T -> 2
+H I G T J R S -> 3
+I H M G S R J T -> 3
+J G H I M R S T -> 5
+G H I J M R S T -> 7
+C G -> 1
+J C L O -> 1
+G C O V U L -> 2
+G J V O C U H -> 3
+G O U C L H J V -> 3
+G C H J L U V O -> 5
+C G H J L O U V -> 7
+A O -> 1
+G A J V -> 1
+G A X J V -> 2
+G N W A X V O -> 3
+G J A N X O W V -> 4
+J V A G W X N O -> 5
+A G J N O V W X -> 7
+A D -> 1
+R D A Z -> 1
+D A L W Y Z -> 2
+R L M D Z A W Y -> 2
+D R L A W M Y Z -> 4
+D A L M R W Z Y -> 5
+A D L M R W Y Z -> 7
+D Q -> 1
+Q D M X -> 1
+J M D O X Q -> 2
+F J O D X Q M -> 3
+J K F M O D X Q -> 4
+K J D F O X Q M -> 5
+D F J K M O Q X -> 7
+E I -> 1
+E N P -> 2
+K N V E R -> 2
+I K P V E U N R -> 3
+K N E I P V U -> 4
+N E I K P V R U -> 5
+E I K N P R U V -> 7
+C T -> 1
+T C Q X -> 1
+F Q X C Z V T -> 2
+T V F S C X Z -> 3
+F Q X C Z S T V -> 4
+T C F Q S V Z X -> 5
+C F Q S T V X Z -> 7
+J M -> 1
+L M J U -> 1
+L J U Z Q X -> 2
+M K X J Z U Q -> 2
+J K L Q X Z -> 5
+L Q J K U X Z M -> 5
+J K L M Q U X Z -> 7
+G S -> 1
+O G W S -> 1
+P J O G W -> 2
+J W O P G K S -> 3
+J O G P S K W U -> 4
+S W J K O P G U -> 5
+G J K O P S U W -> 7
+D N -> 1
+D R U -> 2
+O S Z D R V -> 2
+N D R V O U S -> 3
+N V O D S Z U R -> 3
+N D O S V Z R U -> 5
+D N O R S U V Z -> 7
+B N -> 1
+O B T Q -> 1
+N B T C O Q -> 2
+C O Q G S B N T -> 2
+C G T B Q N S O -> 4
+N B C G S T O Q -> 5
+B C G N O Q S T -> 7
+F H -> 1
+R N F X -> 1
+J F N X R M -> 2
+H J M R X F U -> 3
+H N M R U F X J -> 3
+R M F H J X N U -> 5
+F H J M N R U X -> 7
+A T -> 1
+K A P T -> 1
+F P W A T I -> 2
+I A F P W K T -> 3
+I L W A K F T P -> 3
+F A K P T W I L -> 5
+A F I K L P T W -> 7
+C O -> 1
+O C E U -> 1
+G C U L N Y O -> 2
+O N C Y E U -> 3
+L E C Y G N O U -> 3
+E L N O U Y C G -> 5
+C E G L N O U Y -> 7
+B W -> 1
+H X B J -> 1
+N H X B R W -> 2
+N B W X R S -> 3
+H W N R B J X S -> 3
+J B H N R S X W -> 5
+B H J N R S W X -> 7
+A V -> 1
+D H A V -> 1
+Q N A S V -> 2
+S D A Q H V -> 3
+B D Q S V A H N -> 4
+B D A N Q S V H -> 5
+A B D H N Q S V -> 7
+E M -> 1
+M E V N -> 1
+M P N E V -> 2
+K L P N E J V M -> 3
+J E K M P L V -> 4
+M E J K L V N P -> 5
+E J K L M N P V -> 7
+A O -> 1
+L Y A O -> 1
+G L A N Y O -> 2
+G F A L N O Y -> 3
+F L O A Y G N S -> 4
+F A G N O Y S L -> 5
+A F G L N O S Y -> 7
+H S -> 1
+J N H P -> 1
+N S H X R -> 2
+J S V R P H X N -> 2
+R N P S X H V -> 4
+J N H P V X S R -> 5
+H J N P R S V X -> 7
+E O -> 1
+R E O Z -> 1
+P O E T Z R -> 2
+M O T E P Z R V -> 3
+M R O T Z E P V -> 4
+P E M O T Z V R -> 5
+E M O P R T V Z -> 7
+D Z -> 1
+J H D N -> 1
+N U Z D O -> 2
+J H D N O P Z -> 3
+J D P H O U Z N -> 4
+H D J N P Z O U -> 5
+D H J N O P U Z -> 7
+C T -> 1
+U C P W -> 1
+P C Q W T U -> 2
+K P D U W C T -> 3
+P K C T U W Q -> 4
+P D C K Q T U W -> 5
+C D K P Q T U W -> 7
+I W -> 1
+O L I W -> 1
+N I W X U -> 2
+L O U W I X N -> 2
+L X N I V O U W -> 4
+N I L O V W U X -> 5
+I L N O U V W X -> 7
+B O -> 1
+D Z B U -> 1
+D O B Z X I -> 2
+D K I Z U B X O -> 3
+I X B O Z K D U -> 3
+I O D K U X B Z -> 5
+B D I K O U X Z -> 7
+C S -> 1
+I C T R -> 1
+I R C L U -> 2
+T N S C R I U -> 2
+N I C R U L S T -> 4
+L N C I T U R S -> 5
+C I L N R S T U -> 7
+B P -> 1
+U B I Z -> 1
+D P B Z R I -> 2
+O B Z I D P R U -> 3
+I O B D R U Z P -> 3
+D O I P U Z B R -> 5
+B D I O P R U Z -> 7
+A F -> 1
+F G A L -> 1
+F G A V U X -> 2
+E F A X G U L V -> 3
+E V F L U A X G -> 4
+E A F G L V U X -> 5
+A E F G L U V X -> 7
+H R -> 1
+R H I V -> 1
+S H I T X V -> 2
+N T H I V X S -> 3
+N S I T V H X R -> 4
+N T I R V X H S -> 5
+H I N R S T V X -> 7
+A J -> 1
+F B A J -> 1
+I A F W J -> 2
+F A D W J L -> 3
+B A I D F W J L -> 4
+B F A D L W J I -> 5
+A B D F I J L W -> 7
+D K -> 1
+U D H Z -> 1
+F D N Z K H -> 2
+H F D N Q Z U -> 3
+K D F H U Z N Q -> 4
+F D H K Q Z U N -> 5
+D F H K N Q U Z -> 7
+B K -> 1
+J B M X -> 1
+P S K B X -> 2
+J P B X K S -> 3
+J K B M S U X P -> 4
+K B J P S X U M -> 5
+B J K M P S U X -> 7
+A N -> 1
+A E Y -> 2
+D E K A Y N -> 2
+D N Q K A E Y -> 3
+D K N W Y A E Q -> 4
+D A E N Q W Y K -> 5
+A D E K N Q W Y -> 7
+C M -> 1
+L J C V -> 1
+J L M C T X -> 2
+J L N C V M X T -> 3
+L M N C V T J X -> 4
+L V C J M N X T -> 5
+C J L M N T V X -> 7
+B W -> 1
+H W B L -> 1
+O H W B S -> 2
+H B O I W L S X -> 3
+H W O S X B I L -> 4
+L B H I O W X S -> 5
+B H I L O S W X -> 7
+C G -> 1
+G Z C S -> 1
+G C Z N I -> 2
+G S C I Z N M -> 3
+G N I S Z M C T -> 4
+M C G I S T Z N -> 5
+C G I M N S T Z -> 7
+F I -> 1
+W F U X -> 1
+I X Q F W U -> 2
+Q W F I X T G U -> 2
+I G F Q T X W U -> 4
+G F Q T U X I W -> 5
+F G I Q T U W X -> 7
+D O -> 1
+T D I V -> 1
+L I V D T -> 2
+F L T D V S O -> 3
+L V I T D F S O -> 3
+F I D O S V T L -> 5
+D F I L O S T V -> 7
+A C -> 1
+C U A S -> 1
+E W S J A P U -> 2
+C P U S E A W -> 3
+C P A S W E J -> 4
+C A E J U W S P -> 5
+A C E J P S U W -> 7
+G K -> 1
+G H J -> 2
+H G T W J L Y -> 2
+K G W H J T Y L -> 3
+H G J K Y W T -> 4
+K G H J T Y L W -> 5
+G H J K L T W Y -> 7
+B L -> 1
+E V B Q -> 1
+F B V L Q R -> 2
+E F J L B Q V -> 3
+E V J B F Q R L -> 3
+F Q B E L V J R -> 5
+B E F J L Q R V -> 7
+D T -> 1
+N D T X -> 1
+J T L D N -> 2
+J L D W N P T -> 2
+J L N P T D X -> 4
+J D L P T W X N -> 5
+D J L N P T W X -> 7
+F L -> 1
+O F M W -> 1
+G M W F H U -> 2
+H M F U G L W -> 3
+H L F M W O U -> 4
+O F G H L W M U -> 5
+F G H L M O U W -> 7
+F X -> 1
+F M V -> 2
+S T H V F U X -> 2
+M F T S U X V -> 3
+H U F T M X V S -> 3
+M U F H T V X S -> 5
+F H M S T U V X -> 7
+D F -> 1
+K F D T -> 1
+F K T D Y S -> 2
+F K D V U T Y -> 3
+K S U D V F T Y -> 4
+U D F K S T V Y -> 5
+D F K S T U V Y -> 7
+A W -> 1
+A C P -> 2
+F S C A P W -> 2
+E A F C M P S W -> 3
+E F C M S A W P -> 4
+E C A F M P W S -> 5
+A C E F M P S W -> 7
+A T -> 1
+F T A O -> 1
+G O F A V X -> 2
+F G N A O V X T -> 3
+F G O A V T X N -> 4
+N G F O T X A V -> 5
+A F G N O T V X -> 7
+A T -> 1
+N X A T -> 1
+N A T X Z -> 2
+C N V A Z O X T -> 3
+C N A O V X Z T -> 4
+C T O V X Z A N -> 5
+A C N O T V X Z -> 7
+I Z -> 1
+W I L Z -> 1
+K V I U Z -> 2
+K Q U Z I V L W -> 3
+K V I Q U Z W L -> 4
+K I L U W Z V Q -> 5
+I K L Q U V W Z -> 7
+B S -> 1
+M B Z S -> 1
+K B M O S Z -> 2
+F M N B Z O S K -> 3
+F K B N Z M S O -> 4
+O B F K M Z N S -> 5
+B F K M N O S Z -> 7
+C F -> 1
+C F O -> 2
+O W F C X -> 2
+O F C H X W T -> 3
+F O C T X H W -> 4
+F N C O T W X H -> 5
+C F H N O T W X -> 7
+A J -> 1
+A K T -> 2
+M A T K Z -> 2
+F M T K A J W Z -> 3
+F Z A J M T K W -> 4
+F J K M T Z A W -> 5
+A F J K M T W Z -> 7
+C J -> 1
+J F C P -> 1
+H C J S I Z -> 2
+F H S Z C P I J -> 3
+J H I P C S F Z -> 3
+H S F I J Z C P -> 5
+C F H I J P S Z -> 7
+A D -> 1
+C Q A L -> 1
+C R K A D L -> 2
+C A L Q D R -> 3
+K C D Q R A L N -> 4
+N D A C L R K Q -> 5
+A C D K L N Q R -> 7
+B R -> 1
+K B O V -> 1
+C B V H Q K -> 2
+C H B V O R K -> 3
+C K H O Q V B R -> 4
+C B H K O R V Q -> 5
+B C H K O Q R V -> 7
+E V -> 1
+E F Z -> 2
+F E J S Z I -> 2
+I Z E J F S R V -> 3
+I J E F R Z V S -> 4
+F E I J V Z S R -> 5
+E F I J R S V Z -> 7
+C O -> 1
+E C Q S -> 1
+O V E C Z Q -> 2
+Q C O S Z V -> 3
+J E Q C Z S O V -> 4
+E J C O Q V S Z -> 5
+C E J O Q S V Z -> 7
+A M -> 1
+E F A U -> 1
+X M W A Z -> 2
+F M W Z A E U X -> 3
+E F W A X M U Z -> 4
+U E A F M Z X W -> 5
+A E F M U W X Z -> 7
+A U -> 1
+U A Q Z -> 1
+U A G C Z -> 2
+U A C G Q Z -> 3
+C G Z A H U Q S -> 4
+G A C Q S U Z H -> 5
+A C G H Q S U Z -> 7
+F Z -> 1
+L F I V -> 1
+U O F I V Y -> 2
+I F O V Y U Z -> 3
+I U F L O Y Z V -> 4
+L F I O V Z U Y -> 5
+F I L O U V Y Z -> 7
+B E -> 1
+B J O -> 2
+E B M L X -> 2
+J B M N O L X -> 3
+M L N J O B E X -> 3
+J L B E M X N O -> 5
+B E J L M N O X -> 7
+A C -> 1
+F A C U -> 1
+E C X A W -> 2
+C E O U A F X W -> 3
+C F O U X A E W -> 4
+C A E F O U W X -> 5
+A C E F O U W X -> 7
+E T -> 1
+E F U -> 2
+J F T E L U -> 2
+F E I Y U J T -> 3
+I U F L E T J Y -> 3
+F I E L T U Y J -> 5
+E F I J L T U Y -> 7
+H T -> 1
+H N Z -> 2
+L P U H N M -> 2
+T U H L P M N Z -> 2
+L H P N U T M Z -> 4
+M P H L T Z N U -> 5
+H L M N P T U Z -> 7
+B C -> 1
+G B N U -> 1
+C U B Z N O -> 2
+C B U Z G O P -> 3
+C N U P Z B G O -> 4
+G O B C U Z P N -> 5
+B C G N O P U Z -> 7
+A C -> 1
+B K A O -> 1
+B E A K P -> 2
+B A C O V K E -> 3
+B A C K P V O -> 4
+B O A E K P V C -> 5
+A B C E K O P V -> 7
+D K -> 1
+V T D Z -> 1
+E S T D M V -> 2
+E K S V D M T Z -> 3
+E D K V Z S M T -> 4
+E D K M T V Z S -> 5
+D E K M S T V Z -> 7
+A D -> 1
+M D A T -> 1
+B T D U A N X -> 2
+B A T D X U N -> 3
+B D A N X U T -> 4
+B D A M N U X T -> 5
+A B D M N T U X -> 7
+B I -> 1
+H Y B X -> 1
+H I U B X -> 2
+H U X V B I O -> 3
+H U I X Y B O V -> 4
+I O B H U Y V X -> 5
+B H I O U V X Y -> 7
+B D -> 1
+F B H O -> 1
+D E R B O -> 2
+D H B R F O T -> 3
+D E H R T B F O -> 4
+F O B E H R D T -> 5
+B D E F H O R T -> 7
+C E -> 1
+D C I E -> 1
+D E U T C I L -> 2
+D L C U R E I -> 3
+L E D I U C R T -> 3
+D E C I R U T L -> 5
+C D E I L R T U -> 7
+H X -> 1
+T O H W -> 1
+K T O H Z X W -> 2
+K O T H W V X Z -> 3
+K V H X O T Z W -> 3
+K O H V W Z X T -> 5
+H K O T V W X Z -> 7
+A P -> 1
+P L A W -> 1
+L F A U Z M -> 2
+M P A U W F L Z -> 2
+M U A L P F W -> 4
+L A F M P Z W U -> 5
+A F L M P U W Z -> 7
+A X -> 1
+D X A E -> 1
+E D A X H -> 2
+D C E W X A H Z -> 3
+E A C D X W Z H -> 4
+C A D E H X Z W -> 5
+A C D E H W X Z -> 7
+A T -> 1
+B A T W -> 1
+B A T V W -> 2
+B L K T A R V W -> 3
+B L K R T A V W -> 4
+K R B L T W A V -> 5
+A B K L R T V W -> 7
+B Q -> 1
+O Q B U -> 1
+M B I Y Q R -> 2
+O M B U I R -> 3
+M O I R U B Q Y -> 4
+M Q B I R U O Y -> 5
+B I M O Q R U Y -> 7
+A X -> 1
+P O A Q -> 1
+P K A Q X T -> 2
+D K T A Q P O -> 2
+D K O A Q T P X -> 4
+D A O P Q T X K -> 5
+A D K O P Q T X -> 7
+A Y -> 1
+C A O P -> 1
+C A P O F Y -> 2
+F A C Y M O Z -> 3
+C M O P Z A Y F -> 4
+M F A C O Y P Z -> 5
+A C F M O P Y Z -> 7
+B H -> 1
+B H V -> 2
+H J V B G Y -> 2
+H B G M K V -> 3
+G H Y B K J M V -> 4
+G M B H J V Y K -> 5
+B G H J K M V Y -> 7
+B C -> 1
+K B C X -> 1
+K B L O S N -> 2
+K L X B C O S -> 3
+C L K B N X O S -> 4
+L N B K S X C O -> 5
+B C K L N O S X -> 7
+C M -> 1
+U C K Z -> 1
+K M T Z C U -> 2
+D M C Y T K Z -> 3
+D T Y C Z M K U -> 4
+D C K U Y Z M T -> 5
+C D K M T U Y Z -> 7
+B U -> 1
+L N B S -> 1
+O S X B U -> 2
+L N D S B X O -> 3
+D O L U X B S N -> 4
+D B O S U X N L -> 5
+B D L N O S U X -> 7
+B D -> 1
+C E B D -> 1
+E D B Y M -> 2
+G D B U Y M -> 3
+D G C B M E U Y -> 4
+E C B D G M U Y -> 5
+B C D E G M U Y -> 7
+D H -> 1
+D E P -> 2
+E D Q P H -> 2
+H D E Q S P K -> 3
+K V S H E D Q P -> 3
+K E D H P Q V S -> 5
+D E H K P Q S V -> 7
+A H -> 1
+H U A Z -> 1
+E U A H G Y -> 2
+D A G Z U H -> 3
+U E Y A H G D Z -> 3
+E G A U Y Z D H -> 5
+A D E G H U Y Z -> 7
+D X -> 1
+H U D P -> 1
+H D U P Y -> 2
+H V X Q U D P Y -> 2
+H P Q U X Y D V -> 4
+H V D P X Y Q U -> 5
+D H P Q U V X Y -> 7
+G P -> 1
+J Y G X -> 1
+N G P Z X Y -> 2
+J P G X Z V Y -> 3
+N G Y J P X Z V -> 4
+P G J N V Y Z X -> 5
+G J N P V X Y Z -> 7
+A V -> 1
+W N A Y -> 1
+F W Y A L X -> 2
+F L A V X N Y W -> 3
+F W A L X V Y N -> 4
+N X A F L Y V W -> 5
+A F L N V W X Y -> 7
+B W -> 1
+M B X N -> 1
+N B W X Q -> 2
+M B N Y X W -> 3
+M X B W Y L Q N -> 4
+L M Q W X Y B N -> 5
+B L M N Q W X Y -> 7
+C L -> 1
+F C I Q -> 1
+F D C L Q I -> 2
+D F L Q G C S I -> 3
+D F L C G S I Q -> 4
+D S C G L Q I F -> 5
+C D F G I L Q S -> 7
+F T -> 1
+T N F V -> 1
+T F Q N Z -> 2
+I V F Z N T Q -> 3
+L T Q F V Z I N -> 3
+I F L N T Z Q V -> 5
+F I L N Q T V Z -> 7
+D E -> 1
+D J U -> 2
+E J D N P Q -> 2
+J D M P Q U E N -> 3
+E J D Q U N P M -> 4
+J D E P Q U N M -> 5
+D E J M N P Q U -> 7
+A I -> 1
+L Y A R -> 1
+I A F L V -> 2
+I X A Y L R -> 3
+F Y A R V L X I -> 3
+L R A F I V Y X -> 5
+A F I L R V X Y -> 7
+C M -> 1
+I W C Y -> 1
+I C M T Y Z W -> 2
+M K T W C Y Z -> 3
+K W C I Y T Z -> 4
+I C K M T Y Z W -> 5
+C I K M T W Y Z -> 7
+B W -> 1
+H T B I -> 1
+H M B I W -> 2
+C B I U W M H -> 3
+H U B C W T I -> 4
+C W B H I M T U -> 5
+B C H I M T U W -> 7
+B X -> 1
+B R Z -> 2
+M Z C B X O -> 2
+F O Z M R B X -> 3
+C F O X Z B M R -> 4
+C F B M X Z O R -> 5
+B C F M O R X Z -> 7
+E W -> 1
+H M E Q -> 1
+M S Q E W Z -> 2
+H L M E W Q S -> 3
+M E L Q S Z W -> 4
+H L E M S W Z Q -> 5
+E H L M Q S W Z -> 7
+B E -> 1
+I B E V -> 1
+I V B E X P -> 2
+E B I V X R P L -> 3
+E X I L V B R P -> 4
+I B E L P V R X -> 5
+B E I L P R V X -> 7
+A J -> 1
+J A L S -> 1
+B S V G A E J -> 2
+G A B L S V -> 3
+E S B V G A L J -> 3
+B A E G L V S J -> 5
+A B E G J L S V -> 7
+J R -> 1
+J P R -> 2
+M R J W P U -> 2
+L P R J U X W -> 3
+M J P R U X W -> 4
+M W J R U X L P -> 5
+J L M P R U W X -> 7
+A T -> 1
+S H A X -> 1
+G A E H T X -> 2
+E X W A G T H S -> 2
+E A G S W X T -> 4
+E G A H S T W X -> 5
+A E G H S T W X -> 7
+F S -> 1
+H F Y M -> 1
+G M Z F S J -> 2
+G F H Z Y J M S -> 3
+H G Y F Z M J S -> 4
+G S F H Y Z J M -> 5
+F G H J M S Y Z -> 7
+C K -> 1
+D X C G -> 1
+D G Z X C H Q -> 2
+G H C Q D X K Z -> 3
+G Q C X K D Z H -> 3
+Q D C G H X K Z -> 5
+C D G H K Q X Z -> 7
+G R -> 1
+Q R G S -> 1
+P G R N Q Y S -> 2
+P R G Y T Q S -> 3
+N P Q R G T S Y -> 3
+P S G N Q Y T R -> 5
+G N P Q R S T Y -> 7
+I O -> 1
+Q X I W -> 1
+R Z O I X T -> 2
+O Q I R Z W T X -> 3
+O I Q T W X R Z -> 4
+O Q I R W X T Z -> 5
+I O Q R T W X Z -> 7
+D P -> 1
+D P V -> 2
+H O X D V T -> 2
+G H O X D T V -> 3
+G D P T X V H O -> 4
+G D O P T X V H -> 5
+D G H O P T V X -> 7
+C H -> 1
+J C M O -> 1
+J M Y C K T -> 2
+H J K C Y M T O -> 3
+H C O J K Y T M -> 4
+M J C K T Y H O -> 5
+C H J K M O T Y -> 7
+G O -> 1
+P G Q W -> 1
+P Q Y W G T -> 2
+Q T O J P G W Y -> 2
+J G Q W Y T O -> 4
+P G J O T Y Q W -> 5
+G J O P Q T W Y -> 7
+A X -> 1
+S M A V -> 1
+M E A S N X -> 2
+M S A E U V N -> 3
+S N M A E X U V -> 3
+M A E N S U V X -> 5
+A E M N S U V X -> 7
+C I -> 1
+F I C N -> 1
+F I C T U -> 2
+F M N T C I U O -> 3
+I F C M U O T N -> 4
+I N C F M T U O -> 5
+C F I M N O T U -> 7
+C Y -> 1
+M V C Y -> 1
+H C Y T K V -> 2
+K C H O V Y M T -> 3
+H K O V Y C T M -> 4
+H M C K O T Y V -> 5
+C H K M O T V Y -> 7
+E J -> 1
+E F X -> 2
+J Q F E L O -> 2
+F J O Q E L P X -> 3
+F J L E X P O Q -> 4
+F J E L O P Q X -> 5
+E F J L O P Q X -> 7
+A Y -> 1
+B A Q X -> 1
+B J Q A C X -> 2
+B C A Y J X R -> 3
+C J A Q Y B X R -> 4
+B X A C J Y Q R -> 5
+A B C J Q R X Y -> 7
+A E -> 1
+A E Y -> 2
+B Z R J A U Y -> 2
+B E A Y Z J R -> 3
+B E A J R Z Y U -> 4
+B A E J U Z R Y -> 5
+A B E J R U Y Z -> 7
+C H -> 1
+H C E Q -> 1
+H I O C E N -> 2
+I E C Z Q O -> 3
+E C N O Q Z I H -> 4
+H O C E I Q Z N -> 5
+C E H I N O Q Z -> 7
+C W -> 1
+T O C V -> 1
+G V W Y C O T -> 2
+H C G O V Y W -> 3
+O H C G V Y W T -> 4
+G H C O T Y W V -> 5
+C G H O T V W Y -> 7
+E U -> 1
+G U E J -> 1
+G E W J P -> 2
+G E Z J N P W U -> 3
+G N E P Z J W U -> 4
+J G N P U Z E W -> 5
+E G J N P U W Z -> 7
+G O -> 1
+M J G P -> 1
+O P G T Q X -> 2
+O J G X M T Q -> 2
+J P T O X G M Q -> 4
+M O G J P T Q X -> 5
+G J M O P Q T X -> 7
+A C -> 1
+R A G X -> 1
+G H A L X O -> 2
+C G R L A O H X -> 3
+C A G L O X H R -> 4
+C L A G O X H R -> 5
+A C G H L O R X -> 7
+E T -> 1
+E S Y -> 2
+M S E Y U -> 2
+L M S Z E T U Y -> 3
+L S E T U Z M Y -> 4
+S L M T U Z E Y -> 5
+E L M S T U Y Z -> 7
+A Q -> 1
+Q R A W -> 1
+E J K A O R W -> 2
+E A Q O R W J -> 3
+E K R A W O Q J -> 4
+K A E J Q R W O -> 5
+A E J K O Q R W -> 7
+E F -> 1
+Q F E Y -> 1
+W F E Q Y -> 2
+F E I K Y W -> 3
+Q X E I Y K W -> 4
+I F K Q W Y E X -> 5
+E F I K Q W X Y -> 7
+G H -> 1
+G J L -> 2
+H J O G U L Q -> 2
+J L Q U G O M -> 3
+H G L M Q U J O -> 4
+J H L M O Q G U -> 5
+G H J L M O Q U -> 7
+D R -> 1
+E W D X -> 1
+E F X D R I -> 2
+E R D W F I X -> 3
+E F D I X R W K -> 4
+E I D F R W K X -> 5
+D E F I K R W X -> 7
+F T -> 1
+S G F Z -> 1
+H Z Y F U S -> 2
+G F T U Z H S Y -> 3
+G S H U Z Y F T -> 4
+G H S U Y Z F T -> 5
+F G H S T U Y Z -> 7
+D Q -> 1
+N D M T -> 1
+L M D N W -> 2
+J Q W D M L N T -> 3
+J N D L T Q W M -> 4
+J L N Q T W D M -> 5
+D J L M N Q T W -> 7
+A N -> 1
+T B A Z -> 1
+E M T A Z N -> 2
+B M A C Z E T N -> 2
+C E Z M A B N T -> 3
+B E A M T Z C N -> 5
+A B C E M N T Z -> 7
+D G -> 1
+F D Y J -> 1
+H D T F J Y -> 2
+F D G T O H Y J -> 3
+F J O T Y G D H -> 4
+F D G J O Y T H -> 5
+D F G H J O T Y -> 7
+G P -> 1
+X I G Z -> 1
+I G P Z M X -> 2
+I X G P Z M K U -> 2
+I X G M U P Z K -> 4
+I K P U X Z G M -> 5
+G I K M P U X Z -> 7
+B U -> 1
+M N B T -> 1
+M B P Y N U -> 2
+M B U D P N Y T -> 3
+D B P M U Y N T -> 4
+N T B D U Y M P -> 5
+B D M N P T U Y -> 7
+E G -> 1
+F E U H -> 1
+H E F Z J U -> 2
+F E G H Z J U R -> 3
+G E F H J U Z R -> 4
+F G E J U Z H R -> 5
+E F G H J R U Z -> 7
+B Z -> 1
+B D M -> 2
+C L Y B M -> 2
+D B C M Y Z -> 3
+D B L M Q Z Y -> 4
+D B C L M Q Y Z -> 5
+B C D L M Q Y Z -> 7
+C S -> 1
+N S C V -> 1
+M N S C Q V -> 2
+G M S Q C T V N -> 3
+M G T C N S Q V -> 4
+G M C N S V Q T -> 5
+C G M N Q S T V -> 7
+H Z -> 1
+J Z H Y -> 1
+U H Y K Z -> 2
+K W S Z H U -> 3
+K Z J W H U S Y -> 3
+J S H K W Z Y U -> 5
+H J K S U W Y Z -> 7
+A D -> 1
+A E T -> 2
+L A D E T O -> 2
+D A L O Q K T -> 3
+D L O A E K T Q -> 3
+D E K L O T A Q -> 5
+A D E K L O Q T -> 7
+E M -> 1
+E S X -> 2
+E Q S U -> 3
+Q R X V M E S U -> 3
+R U M Q S E V X -> 4
+M S E U V X R Q -> 5
+E M Q R S U V X -> 7
+E X -> 1
+E F O -> 2
+F G E N O -> 2
+F M E N X H O -> 3
+F G E H M N X O -> 4
+F H E M N O X G -> 5
+E F G H M N O X -> 7
+B G -> 1
+R F B T -> 1
+F B I R G O -> 2
+M T B G F O R -> 2
+G I F B O M T R -> 4
+M G B F I R T O -> 5
+B F G I M O R T -> 7
+A O -> 1
+B W A X -> 1
+G A X N O K -> 2
+B A K O X N W G -> 3
+B A O W X K N G -> 4
+B G A K O W N X -> 5
+A B G K N O W X -> 7
+B H -> 1
+V Q B Z -> 1
+H B W Q V Z X -> 2
+H B T Q Z V X W -> 3
+H X B Q Z W V T -> 4
+T B H Q W Z X V -> 5
+B H Q T V W X Z -> 7
+A E -> 1
+D A B I -> 1
+B A I F C E D -> 2
+B A E F D C S -> 3
+B A C D I S F E -> 4
+B C A D F S E I -> 5
+A B C D E F I S -> 7
+C L -> 1
+D E C S -> 1
+J L N Z C S -> 2
+N E L Z C J S -> 2
+D S L J Z E C N -> 4
+E D C J L N Z S -> 5
+C D E J L N S Z -> 7
+C M -> 1
+M U C O -> 1
+M R U C O Y -> 2
+K U C J M O Y R -> 3
+K M C O Y J U R -> 4
+J M C K O R U Y -> 5
+C J K M O R U Y -> 7
+B E -> 1
+E B I H -> 1
+F B M Z Q I -> 2
+E I F Z Q B M H -> 2
+F I Q M H B E Z -> 3
+E H B F I M Z Q -> 5
+B E F H I M Q Z -> 7
+B Y -> 1
+F Y B I -> 1
+E Y B F Z -> 2
+F B E H Z Y -> 3
+H B E I Z F Y -> 4
+E F B H I Y Z Q -> 5
+B E F H I Q Y Z -> 7
+C F -> 1
+M C F W -> 1
+M C W G T V -> 2
+F G T V W C M Y -> 3
+G M T V W C F Y -> 4
+T C G M V W F Y -> 5
+C F G M T V W Y -> 7
+E F -> 1
+J V E T -> 1
+J O V L E T -> 2
+J M F L E O T V -> 3
+J E F L O T V M -> 4
+F E J L T V M O -> 5
+E F J L M O T V -> 7
+B Q -> 1
+F Q B W -> 1
+R B F V Y -> 2
+Q V B F R Y W -> 3
+P Q F B R W Y V -> 4
+F R Q V W Y B P -> 5
+B F P Q R V W Y -> 7
+E F -> 1
+G Q E I -> 1
+G I V E N P -> 2
+G F V P E Q N I -> 3
+F I E G Q V P N -> 4
+F G E N Q V P I -> 5
+E F G I N P Q V -> 7
+E S -> 1
+E H I -> 2
+F E H S P I -> 2
+F H I P E V J S -> 3
+F J E H V I P S -> 4
+F H J P S V E I -> 5
+E F H I J P S V -> 7
+D L -> 1
+R D F Y -> 1
+L V X D Y R -> 2
+F D M Y V L X -> 3
+M L X D V F R Y -> 3
+L D F M R Y X V -> 5
+D F L M R V X Y -> 7
+C M -> 1
+C G M -> 2
+I C Q R M X -> 2
+M Q G X C R N -> 3
+I R G N X C Q M -> 4
+G C I M N R Q X -> 5
+C G I M N Q R X -> 7
+D E -> 1
+D E H -> 2
+L N X D E W O -> 2
+H D L O W X N -> 3
+E L D H O X N W -> 4
+E H D O W X L N -> 5
+D E H L N O W X -> 7
+C K -> 1
+M D C U -> 1
+D J M Q C U -> 2
+K C I M Q U -> 3
+D I C J U K M Q -> 4
+D C I K M U Q J -> 5
+C D I J K M Q U -> 7
+A V -> 1
+D A B J -> 1
+B H J A D K -> 2
+B A K M D H J V -> 3
+B D H K M A J V -> 4
+B A H J M V K D -> 5
+A B D H J K M V -> 7
+B K -> 1
+B K U -> 2
+K S B R U -> 2
+E B U K V N R -> 3
+E N B S V K R U -> 4
+K B E N U V S R -> 5
+B E K N R S U V -> 7
+A R -> 1
+M W A T -> 1
+C A T V M -> 2
+R M W A C V E T -> 2
+C A E M R T W -> 4
+E A C M R W T V -> 5
+A C E M R T V W -> 7
+C Z -> 1
+V C Z Y -> 1
+L C P V Y Z -> 2
+K L C P V Z U Y -> 3
+L V K C Z P Y U -> 4
+K Z C L P U Y V -> 5
+C K L P U V Y Z -> 7
+A I -> 1
+I A D T -> 1
+B T A S D -> 2
+B A D L T C I -> 3
+C A S B D T I L -> 4
+B D A L S T I C -> 5
+A B C D I L S T -> 7
+B Q -> 1
+Y B Q Z -> 1
+F I Z Y B X -> 2
+F I B Z L Y X -> 3
+X Y F Q B I L Z -> 3
+I Q F L X Z B Y -> 5
+B F I L Q X Y Z -> 7
+B O -> 1
+I B H J -> 1
+O C W B U -> 2
+I B C H J W O -> 3
+I C H O U B W J -> 3
+I H C O U W B J -> 5
+B C H I J O U W -> 7
+E O -> 1
+H E I N -> 1
+Q G I E R -> 2
+G H N E O R Q -> 3
+G N E H O R I Q -> 4
+H I G N O R E Q -> 5
+E G H I N O Q R -> 7
+A N -> 1
+A J L -> 2
+F A L N W S -> 2
+J A L F N W S -> 3
+F J H A N S L W -> 4
+J A F H L N S W -> 5
+A F H J L N S W -> 7
+B N -> 1
+B G V -> 2
+G B V N R S -> 2
+G H P R B S V -> 3
+H G V S B N P R -> 3
+G H B N R S P V -> 5
+B G H N P R S V -> 7
+G I -> 1
+G H U -> 2
+I G W J O U Q -> 2
+H G O I W U J -> 3
+H G I U W Q O J -> 4
+I O G H J W Q U -> 5
+G H I J O Q U W -> 7
+D I -> 1
+D M R -> 2
+L D M R Q X -> 2
+H I D M L X Q -> 3
+H I L Q X D M R -> 4
+M I H L R X D Q -> 5
+D H I L M Q R X -> 7
+D P -> 1
+L W D X -> 1
+L D W M Q X Z -> 2
+L P W X D Q Z -> 3
+P Q L M Z W D X -> 4
+M D L P W Z Q X -> 5
+D L M P Q W X Z -> 7
+F R -> 1
+I F H K -> 1
+I K F W R V -> 2
+H J F V K R W -> 3
+H V F K R I J W -> 4
+H R F J K W V I -> 5
+F H I J K R V W -> 7
+B J -> 1
+C B V R -> 1
+C H R B X U -> 2
+H R B J V C U X -> 2
+C U J B V H X R -> 4
+H B C U V X R J -> 5
+B C H J R U V X -> 7
+A V -> 1
+A D K -> 2
+T D A G Y -> 2
+D A T V Y Z K -> 3
+G D T Y Z A K V -> 4
+G A D K T V Y Z -> 5
+A D G K T V Y Z -> 7
+A K -> 1
+A H O -> 2
+C A W H J O -> 2
+C J A K H W -> 3
+H J A C O W K N -> 4
+C A H J K W N O -> 5
+A C H J K N O W -> 7
+A T -> 1
+G A S Y -> 1
+G H N A T Y -> 2
+E G A T N S H Y -> 3
+E G Y A T S H N -> 3
+G N A E S Y T H -> 5
+A E G H N S T Y -> 7
+A D -> 1
+C B A M -> 1
+B A D L W -> 2
+B D A V C W L M -> 3
+B C D A M L W V -> 4
+B D A L M W V C -> 5
+A B C D L M V W -> 7
+E X -> 1
+Q E G V -> 1
+G E Q R L X V -> 2
+G E R T V L X -> 3
+G E T V X Q R L -> 4
+L G E Q R V X T -> 5
+E G L Q R T V X -> 7
+H O -> 1
+U H K W -> 1
+O Q U H S W -> 2
+L K Q S W H O U -> 3
+K O W S H Q L U -> 3
+O H K L S U W Q -> 5
+H K L O Q S U W -> 7
+A Y -> 1
+U P A V -> 1
+P Y A L V W -> 2
+J L P A Y U W V -> 3
+L J V A Y W U P -> 4
+P A J L V Y W U -> 5
+A J L P U V W Y -> 7
+A D -> 1
+D A T I -> 1
+G A P E I T -> 2
+D A E T P H I G -> 3
+D T G P I A E H -> 3
+D E A H I T G P -> 5
+A D E G H I P T -> 7
+B S -> 1
+S B H T -> 1
+G T B R U S -> 2
+G B H S R U L T -> 3
+R S B U G H L T -> 3
+G B H S T U L R -> 5
+B G H L R S T U -> 7
+B F -> 1
+E F B X -> 1
+E F Z B X N -> 2
+F B E Z X S M N -> 3
+E F M S Z B N X -> 4
+X B E F M N S Z -> 5
+B E F M N S X Z -> 7
+A Z -> 1
+M A Z P -> 1
+E A C Z M -> 2
+C E A G F P M Z -> 3
+E G A M C P F Z -> 3
+E A C F G Z P M -> 5
+A C E F G M P Z -> 7
+B Z -> 1
+C Y B M -> 1
+D N Y C B V -> 2
+C D B M Z N V Y -> 3
+C N D B Y Z M V -> 4
+D V C M Y Z B N -> 5
+B C D M N V Y Z -> 7
+C E -> 1
+F E C W -> 1
+G L E C W U -> 2
+E L O C G W U -> 3
+E L C F O G U W -> 4
+F G C E L U W O -> 5
+C E F G L O U W -> 7
+A O -> 1
+C A Y D -> 1
+F L S A O -> 2
+C D O A L F S Y -> 3
+F A C D Y O L -> 4
+C D A O S Y L F -> 5
+A C D F L O S Y -> 7
+C V -> 1
+H W C P -> 1
+F C S V H Z P -> 2
+F H S C Z V P -> 3
+H S C V Z F W P -> 4
+F H C P S V W Z -> 5
+C F H P S V W Z -> 7
+B M -> 1
+C B K M -> 1
+C B W X R K -> 2
+C R B K O X W M -> 2
+K C B M O R W -> 4
+C B K O R X W M -> 5
+B C K M O R W X -> 7
+A B -> 1
+L A R N -> 1
+J B A T R -> 2
+B N A T J R S -> 3
+B A L N S T J R -> 4
+B N A J S T R L -> 5
+A B J L N R S T -> 7
+D P -> 1
+J P D Y -> 1
+F D L W Y H -> 2
+F D P W Y H J L -> 3
+H F J D Y P L W -> 4
+F J D P W Y H L -> 5
+D F H J L P W Y -> 7
+B U -> 1
+R B O X -> 1
+D N U B I O -> 2
+D I N U X B O R -> 3
+D B R U X O I N -> 4
+D I N O R X B U -> 5
+B D I N O R U X -> 7
+D Z -> 1
+D U Z -> 2
+I Q R D U M -> 2
+I M Q R X D U Z -> 3
+I M D Q X R U Z -> 4
+M X D I Q R U Z -> 5
+D I M Q R U X Z -> 7
+A Z -> 1
+C G A P -> 1
+O C A G P -> 2
+P A G X O Z V -> 3
+C A G O V Z P X -> 4
+C A O P V X Z G -> 5
+A C G O P V X Z -> 7
+C P -> 1
+F C I P -> 1
+J C P W U -> 2
+I W C J P U -> 3
+C F J O U W -> 5
+I C F O P U W J -> 5
+C F I J O P U W -> 7
+A G -> 1
+N G A W -> 1
+G J N A W M -> 2
+G J A W T N M -> 2
+B G A N T J W M -> 4
+B W G M N T A J -> 5
+A B G J M N T W -> 7
+A L -> 1
+E K A Q -> 1
+D E K A H Q -> 2
+B A L H Q D E K -> 3
+K Q H E D A B L -> 3
+B E A D H K Q L -> 5
+A B D E H K L Q -> 7
+B Q -> 1
+C B Q P -> 1
+C B G Q P -> 2
+C N T G Q B P O -> 2
+C G N B P Q T O -> 4
+C G B N P T O Q -> 5
+B C G N O P Q T -> 7
+B F -> 1
+K O B S -> 1
+E I B K M O -> 2
+E B M S O F K -> 3
+E I K S B M O F -> 3
+E B I K M O S F -> 5
+B E F I K M O S -> 7
+A M -> 1
+Q X A W -> 1
+L A I X M -> 2
+I L M O A Q W -> 3
+M L Q I X A W O -> 3
+L O A I W X Q M -> 5
+A I L M O Q W X -> 7
+B M -> 1
+D B C P -> 1
+J N D B M V -> 2
+D P C M V B N J -> 2
+M B C D J V P N -> 4
+J B D M N P C V -> 5
+B C D J M N P V -> 7
+E Y -> 1
+S U E X -> 1
+R E V Y U X -> 2
+S U R Y E X V -> 3
+S E R Q U V Y X -> 4
+Q E S U V Y R X -> 5
+E Q R S U V X Y -> 7
+E T -> 1
+E H N -> 2
+H E Q T Y V -> 2
+H E K Q Y V -> 3
+K N Q E Y H V T -> 4
+K Y E H N Q T V -> 5
+E H K N Q T V Y -> 7
+D K -> 1
+K D Q T -> 1
+P K T D Q -> 2
+M D Q T W P -> 3
+K M E Q W T D P -> 4
+M D E K P Q W T -> 5
+D E K M P Q T W -> 7
+D Z -> 1
+N D L V -> 1
+E L U D Z V -> 2
+E S Z D L U V -> 3
+E D L S U V N Z -> 4
+E S D U V Z N L -> 5
+D E L N S U V Z -> 7
+A P -> 1
+A E G -> 2
+E U G A Y V -> 2
+D A G V U Y E -> 3
+G A U V Y E P -> 4
+E D A P U V Y G -> 5
+A D E G P U V Y -> 7
+D M -> 1
+M D K R -> 1
+I K M R D T -> 2
+I D S K T R U M -> 3
+I M K S T U D R -> 4
+I K M R S T D U -> 5
+D I K M R S T U -> 7
+D P -> 1
+E N D K -> 1
+I D E P K Q -> 2
+F E P K D N I -> 2
+K P N E I D F Q -> 3
+E F I N P Q D K -> 5
+D E F I K N P Q -> 7
+A D -> 1
+M A P W -> 1
+C G W D A K P -> 2
+C D G M P A K W -> 3
+C A G P W K M D -> 4
+C D A G K M P W -> 5
+A C D G K M P W -> 7
+F T -> 1
+S F O T -> 1
+L O F S Q T -> 2
+K F S T O N L Q -> 3
+L S K F O T Q N -> 4
+K L F O Q T S N -> 5
+F K L N O Q S T -> 7
+K X -> 1
+X M K Y -> 1
+M N Y K P O -> 2
+M O Y X K N P -> 3
+M K N Y Z P O X -> 4
+M N K O P X Y Z -> 5
+K M N O P X Y Z -> 7
+B R -> 1
+C B L N -> 1
+C U L B R E -> 2
+C L R E B N U S -> 3
+C E R S U L B N -> 4
+C U B L R S E N -> 5
+B C E L N R S U -> 7
+E N -> 1
+E N Q -> 2
+F Q E N M R -> 2
+F R E N S M Q I -> 3
+F E N M Q R I S -> 4
+F N E I R S Q M -> 5
+E F I M N Q R S -> 7
+A U -> 1
+D K A S -> 1
+D I S A U N -> 2
+D I A N L S U K -> 3
+D K A I U S L N -> 4
+D L A I N U S K -> 5
+A D I K L N S U -> 7
+A O -> 1
+O E A W -> 1
+E G J W A S -> 2
+E A G W J O S -> 3
+W E A J S O X -> 4
+E A G J O W X S -> 5
+A E G J O S W X -> 7
+K L -> 1
+L V K M -> 1
+R V K L Y -> 2
+L Z S M K Y V R -> 3
+L M R K S Z V Y -> 4
+M L K R S Y Z V -> 5
+K L M R S V Y Z -> 7
+B G -> 1
+B E U -> 2
+G B V E U W -> 2
+C B E G P V U W -> 3
+C E B G W V P U -> 4
+P B E G U V C W -> 5
+B C E G P U V W -> 7
+E I -> 1
+I X E U -> 1
+K X E O T U -> 2
+I L E U K X T O -> 2
+K E I T X L O U -> 4
+I L O T U X E K -> 5
+E I K L O T U X -> 7
+B U -> 1
+S V B U -> 1
+I U V B N P -> 2
+G U N S I B V P -> 2
+G B I N V P U S -> 4
+G B N P S V I U -> 5
+B G I N P S U V -> 7
+A R -> 1
+A F J -> 2
+E F N A R J -> 2
+F E J Y A S -> 3
+E A F N Y R S J -> 4
+E F A N S Y R J -> 5
+A E F J N R S Y -> 7
+D E -> 1
+D N Y -> 2
+E D O N G K H -> 2
+E G K Y O D H -> 3
+E D H G N Y O K -> 4
+E G K N O Y D H -> 5
+D E G H K N O Y -> 7
+F R -> 1
+P W F U -> 1
+H U I F R W -> 2
+H W I U F R Y P -> 3
+I F H P R Y U W -> 4
+I R H U W Y F P -> 5
+F H I P R U W Y -> 7
+A W -> 1
+B I A X -> 1
+B W D A T I -> 2
+B D I X A T W -> 3
+B G D A I W X T -> 4
+B X D I T W A G -> 5
+A B D G I T W X -> 7
+A N -> 1
+G M A S -> 1
+G A S T I M -> 2
+G I T M A S U N -> 3
+G I A N S T U M -> 4
+M G A I S U T N -> 5
+A G I M N S T U -> 7
+A I -> 1
+A O Z -> 2
+B H Z A U I -> 2
+I U A H O Z M -> 3
+B I A Z U O H M -> 3
+H A B I M Z O U -> 5
+A B H I M O U Z -> 7
+A D -> 1
+G F A L -> 1
+D A I U K L G -> 2
+D G F L A U I K -> 3
+D A I G L U K F -> 4
+F D I K L U A G -> 5
+A D F G I K L U -> 7
+A F -> 1
+A B M -> 2
+D A N B G M -> 2
+D A G Z B F M N -> 3
+G B D M A Z F N -> 3
+B A D F M N Z G -> 5
+A B D F G M N Z -> 7
+D R -> 1
+K D E S -> 1
+K D G S R U -> 2
+F G D E R S K U -> 3
+E S D U F R K G -> 3
+F G E K S U D R -> 5
+D E F G K R S U -> 7
+B P -> 1
+C F B P -> 1
+F C Z B S M -> 2
+C S F Z B H M -> 3
+H B C F S P M Z -> 4
+F B C H M P S Z -> 5
+B C F H M P S Z -> 7
+A L -> 1
+L D A R -> 1
+L M A R Z P -> 2
+L E D A Z R M -> 3
+D L M A Z R E P -> 4
+L A D E R Z M P -> 5
+A D E L M P R Z -> 7
+E W -> 1
+I E Y M -> 1
+O E V W Y -> 2
+I E M O Y W V -> 3
+M O E W I L V Y -> 3
+M I L O V W E Y -> 5
+E I L M O V W Y -> 7
+B P -> 1
+N C B Y -> 1
+P U B L R -> 2
+C P N U B L R Y -> 3
+N B C L P R Y U -> 4
+C P B L R U Y N -> 5
+B C L N P R U Y -> 7
+C G -> 1
+R M C Y -> 1
+G C M Y V -> 2
+G N P C R Y V -> 3
+N M C G P Y V R -> 4
+P C G M N V Y R -> 5
+C G M N P R V Y -> 7
+A Y -> 1
+L A Y X -> 1
+C L W Y A V Z -> 2
+V A C Y Z W -> 3
+W L A V Y Z X -> 4
+L W A C X Z Y V -> 5
+A C L V W X Y Z -> 7
+F P -> 1
+I U F O -> 1
+J F P U K -> 2
+O F J L K P -> 3
+I L F J P O U K -> 4
+J I F K O P U L -> 5
+F I J K L O P U -> 7
+G U -> 1
+L Q G Y -> 1
+L G Q T P Y -> 2
+P L G X Y U T -> 3
+P Q T L U Y G X -> 4
+P G L Q T U X Y -> 5
+G L P Q T U X Y -> 7
+D G -> 1
+G F D V -> 1
+F G V D K H -> 2
+F J H D Y V K -> 3
+G J F D V Y H K -> 4
+G F D K V Y J H -> 5
+D F G H J K V Y -> 7
+B N -> 1
+J B Q U -> 1
+N I J B Q -> 2
+E B J N V Q I -> 3
+N Q J B I V E U -> 3
+E I B J U V Q N -> 5
+B E I J N Q U V -> 7
+B Z -> 1
+Q D B W -> 1
+Q Y X B Z -> 2
+D Q B Z N X -> 3
+D N X B Y Q W Z -> 4
+D W B Q Y Z X N -> 5
+B D N Q W X Y Z -> 7
+D H -> 1
+H Y D V -> 1
+H Q D F V R -> 2
+H R D E Y F Q -> 2
+F Q D E V Y H R -> 3
+Q E F H V Y D R -> 5
+D E F H Q R V Y -> 7
+B L -> 1
+M B L R -> 1
+C X Y B L W -> 2
+C M R X B Y W -> 3
+C L M W Y X B R -> 4
+M B C L R W Y X -> 5
+B C L M R W X Y -> 7
+A M -> 1
+M A D W -> 1
+B N M A D W -> 2
+D K N A S B W -> 3
+M B D K W A N S -> 4
+B A D K N S M W -> 5
+A B D K M N S W -> 7
+C P -> 1
+C M Y -> 2
+J C D V P Y -> 2
+E C J V Y P M -> 3
+D C E J M P V Y -> 4
+D C J M P V Y E -> 5
+C D E J M P V Y -> 7
+C H -> 1
+E C G K -> 1
+D C H P F -> 2
+E F C G D K -> 3
+D E C F P G K H -> 4
+D E C G H K P F -> 5
+C D E F G H K P -> 7
+D U -> 1
+M R D O -> 1
+M U V D O X -> 2
+J U O V D X M -> 3
+J D M O U R V X -> 4
+J D M O R V X U -> 5
+D J M O R U V X -> 7
+C G -> 1
+G C L H -> 1
+G W T C L H -> 2
+G L T V C W F H -> 2
+F C G H W T V L -> 4
+G C H L T V F W -> 5
+C F G H L T V W -> 7
+B Z -> 1
+L B I Y -> 1
+L Y B I M -> 2
+G B M F I L Y Z -> 3
+G L Y F B M I Z -> 3
+M I B F G Z L Y -> 5
+B F G I L M Y Z -> 7
+G O -> 1
+J N G Z -> 1
+R G O V X -> 2
+J N R G O X Z V -> 3
+J N G O Z V R X -> 4
+J N G O R V Z X -> 5
+G J N O R V X Z -> 7
+A I -> 1
+I B A T -> 1
+B I A G U T -> 2
+B G A U I T J H -> 3
+G B A I J U H -> 4
+J H A B G T I U -> 5
+A B G H I J T U -> 7
+I W -> 1
+K I X Y -> 1
+J Q I X W Y -> 2
+J K Q W Y I X Z -> 3
+J W K X Y I Z Q -> 4
+J Y I Q X Z W K -> 5
+I J K Q W X Y Z -> 7
+B Z -> 1
+B R U -> 2
+F Z K B R Y -> 2
+F B K Y Z P U -> 3
+K U R Y Z B F P -> 4
+K B F R U Y Z P -> 5
+B F K P R U Y Z -> 7
+C Q -> 1
+I O C K -> 1
+I K Q X C O P -> 2
+C I K W X -> 4
+I C O P Q K W X -> 4
+K I C P Q W O X -> 5
+C I K O P Q W X -> 7
+A Z -> 1
+D J A X -> 1
+C A Z X I -> 2
+B A C I J X -> 3
+B C D I J X A Z -> 4
+C Z A D I X B J -> 5
+A B C D I J X Z -> 7
+D E -> 1
+F D X V -> 1
+K D X E V -> 2
+E F K N D X V -> 3
+F K D N X R E V -> 4
+E R D F K N X V -> 5
+D E F K N R V X -> 7
+B I -> 1
+D L B O -> 1
+D P L O B E G -> 2
+I D P G O B E L -> 2
+D B E I L O G P -> 4
+D E G I O P B L -> 5
+B D E G I L O P -> 7
+E K -> 1
+E K R -> 2
+O K E W S R -> 2
+K O E Q G W R S -> 3
+G K E Q R S O W -> 4
+G E O Q R S W K -> 5
+E G K O Q R S W -> 7
+D V -> 1
+L J D P -> 1
+G D L Q V N -> 2
+G J V Q D P L N -> 3
+G D P J L V N Q -> 4
+L G D J N P V Q -> 5
+D G J L N P Q V -> 7
+A Q -> 1
+E A F H -> 1
+B A F U Q -> 2
+E H A F T U Q -> 2
+B E Q A U F H T -> 4
+F A B E T U Q H -> 5
+A B E F H Q T U -> 7
+B U -> 1
+Q B E S -> 1
+E B T U Q -> 2
+P E T S Q B M U -> 2
+E U M Q S B P T -> 4
+Q U B E P S M T -> 5
+B E M P Q S T U -> 7
+B L -> 1
+E N B K -> 1
+E B N U J M -> 2
+J E L U B M K -> 3
+E K M N U B J L -> 4
+J M B E K N L U -> 5
+B E J K L M N U -> 7
+A V -> 1
+S A V X -> 1
+D V A S W X -> 2
+O A S X V W U -> 3
+D O S U V A X W -> 4
+D U A O V X S W -> 5
+A D O S U V W X -> 7
+B Z -> 1
+D B Z K -> 1
+I B W Z J K -> 2
+D B I W S Z -> 3
+D I K S W B Z J -> 4
+D B I J K Z W S -> 5
+B D I J K S W Z -> 7
+D G -> 1
+M D X Q -> 1
+G W D S T -> 2
+G W D M X Q T -> 2
+G M Q T X D S -> 4
+G D Q S W X M T -> 5
+D G M Q S T W X -> 7
+A O -> 1
+A W Y -> 2
+H A X Y L O -> 2
+O W H Y A X -> 3
+B O W A X Y H L -> 4
+L H B W X Y A O -> 5
+A B H L O W X Y -> 7
+F Q -> 1
+F Q V -> 2
+I F V Q K J -> 2
+K R J F Z V Q -> 3
+J F I K Q V R Z -> 4
+Q J F K V Z I R -> 5
+F I J K Q R V Z -> 7
+A V -> 1
+C A X U -> 1
+E O U X A Z -> 2
+C X A Z U E V -> 3
+C V Z X A E U O -> 3
+E C O U V X A Z -> 5
+A C E O U V X Z -> 7
+E V -> 1
+S W E V -> 1
+L E G V W T -> 2
+G L S E W T V -> 3
+L E S V W G Z -> 4
+G V E L T Z W S -> 5
+E G L S T V W Z -> 7
+A L -> 1
+A E N -> 2
+G A I N W L -> 2
+E G L A I N P W -> 3
+G E I A L P W N -> 4
+E A G I N P W L -> 5
+A E G I L N P W -> 7
+B D -> 1
+B J V -> 2
+H D B I V -> 2
+D I B V E H J -> 3
+D J B H V I E -> 4
+E B D H I R V J -> 5
+B D E H I J R V -> 7
+B U -> 1
+Q B N U -> 1
+I S B U X -> 2
+I B L U N X S Q -> 3
+L I Q B X N U S -> 4
+I Q B L N X U S -> 5
+B I L N Q S U X -> 7
+C N -> 1
+I P C N -> 1
+N C H U Y -> 2
+G Y C H N I P U -> 3
+I N C G U P H Y -> 3
+I C G H U Y P N -> 5
+C G H I N P U Y -> 7
+A K -> 1
+K A D W -> 1
+B Y D A W J -> 2
+D A B K Y S W -> 3
+B S A D W K J Y -> 3
+B A D J K W S Y -> 5
+A B D J K S W Y -> 7
+C Z -> 1
+J C H Z -> 1
+J Z H C V W -> 2
+H J R W C Y -> 3
+J C H R V Y Z -> 4
+J C H R Y Z W V -> 5
+C H J R V W Y Z -> 7
+C P -> 1
+P C O U -> 1
+E C O R U -> 2
+E O P S C V R U -> 3
+E O P R U V C S -> 4
+O P C E U V R S -> 5
+C E O P R S U V -> 7
+E S -> 1
+F E Y Z -> 1
+F S U E Q Z -> 2
+S U J Z E Q Y -> 2
+J Q E F Y S Z U -> 4
+S E F J Q U Y Z -> 5
+E F J Q S U Y Z -> 7
+A N -> 1
+A C N -> 2
+C H N A G V -> 2
+C G S A N H V -> 3
+C H A N V G J S -> 4
+C G A H J S V N -> 5
+A C G H J N S V -> 7
+B N -> 1
+H C B Z -> 1
+G H J N B K Z -> 2
+C J Z B H N G -> 3
+K C G B H N J Z -> 3
+G C B H K N J Z -> 5
+B C G H J K N Z -> 7
+B T -> 1
+N F B O -> 1
+F B V T K N G -> 2
+F K O V B N T -> 3
+F G N K O B V T -> 4
+G B F K O V T N -> 5
+B F G K N O T V -> 7
+B W -> 1
+H L B S -> 1
+H L O B S W -> 2
+G H B W L O S -> 3
+G B H S W L O -> 4
+G B H I O S W L -> 5
+B G H I L O S W -> 7
+F V -> 1
+F G R -> 2
+I X F G V -> 2
+G F I V X P R U -> 3
+R V U P F I G X -> 3
+I F G P R V X U -> 5
+F G I P R U V X -> 7
+B F -> 1
+I F B W -> 1
+C F B H I O -> 2
+C H W B J F O I -> 3
+C F I J O B W H -> 4
+H C B F J W O I -> 5
+B C F H I J O W -> 7
+A X -> 1
+R A K X -> 1
+E R A X G V -> 2
+E B R A G K X V -> 3
+E R B A X V G K -> 4
+B A E G K R V X -> 5
+A B E G K R V X -> 7
+B F -> 1
+S B C W -> 1
+C Q G S B F U -> 2
+C G Q W B F U S -> 3
+C G F Q U W B S -> 4
+C B F Q S U W G -> 5
+B C F G Q S U W -> 7
+E H -> 1
+S H E Z -> 1
+F E Q T H Z -> 2
+F H S W E Z Q T -> 3
+Q F E H W Z S -> 4
+F S E H Q W T Z -> 5
+E F H Q S T W Z -> 7
+E F -> 1
+U R E V -> 1
+U G W E V -> 2
+F E Y W G R U V -> 3
+F R E W U G V Y -> 3
+G E F R U Y V W -> 5
+E F G R U V W Y -> 7
+C F -> 1
+L C E V -> 1
+D E C W V F -> 2
+W V C E F X -> 3
+E D C F X L V -> 4
+E D C F L X V W -> 5
+C D E F L V W X -> 7
+D G -> 1
+H D O N -> 1
+U G H D Y -> 2
+G U F H D Y N O -> 2
+G D F H U Y N -> 4
+N F D G O Y H U -> 5
+D F G H N O U Y -> 7
+A J -> 1
+E A U O -> 1
+E A O J U N -> 2
+E A U N O J K P -> 3
+E A J N O P K U -> 4
+J O A E P U N K -> 5
+A E J K N O P U -> 7
+C N -> 1
+H U C N -> 1
+F H C Q N I -> 2
+F C L I N Q H -> 3
+F H C L I N U Q -> 3
+F C I L N U H Q -> 5
+C F H I L N Q U -> 7
+B N -> 1
+F B M K -> 1
+K Y B Q N -> 2
+F K U B Q N M -> 3
+F K Q B N Y M U -> 3
+K B F N Q U Y M -> 5
+B F K M N Q U Y -> 7
+C V -> 1
+K I C X -> 1
+I C L S X K -> 2
+I J V L C K X S -> 3
+I C J L S V X K -> 4
+I J C K L S V X -> 5
+C I J K L S V X -> 7
+A V -> 1
+N E A V -> 1
+C E V A N R S -> 2
+C R V E N A S -> 3
+C A N R V S G -> 4
+E A C G N R V S -> 5
+A C E G N R S V -> 7
+D S -> 1
+I N D W -> 1
+H D S W I K U -> 2
+I K N S D U -> 3
+H I K N W D U S -> 4
+K D H I S W U N -> 5
+D H I K N S U W -> 7
+F P -> 1
+P F O T -> 1
+H Q F T S -> 2
+M F Q H S P T O -> 3
+H O P Q T F M -> 4
+H S F M Q T O P -> 5
+F H M O P Q S T -> 7
+C M -> 1
+O C X U -> 1
+J W C Z U -> 2
+J C X O W M Z U -> 3
+O J M U X C Z W -> 3
+O J C M X Z W U -> 5
+C J M O U W X Z -> 7
+B I -> 1
+B C I -> 2
+C B N R J P -> 2
+D B I J N R P -> 3
+C D B N R J P I -> 4
+D N B C J R P I -> 5
+B C D I J N P R -> 7
+K N -> 1
+O K N T -> 1
+N K O U X Y -> 2
+O N K Y T U X -> 2
+N O T K U X S Y -> 4
+N T O S X Y K U -> 5
+K N O S T U X Y -> 7
+B U -> 1
+H B U T -> 1
+H B X U T -> 2
+P M T B X H U -> 2
+Q M X P T B H U -> 3
+H Q B M U X P T -> 5
+B H M P Q T U X -> 7
+C K -> 1
+E K C T -> 1
+E C T K L -> 2
+E G C R L T H K -> 3
+G H C E R K L T -> 4
+E K G H L T C R -> 5
+C E G H K L R T -> 7
+E V -> 1
+I E V T -> 1
+I T L E M V -> 2
+F E L M V I T -> 3
+F E I L T K V M -> 4
+I F E L M V T K -> 5
+E F I K L M T V -> 7
+A Q -> 1
+A G Z -> 2
+E G A C I M -> 2
+E I M Z A Q -> 3
+Q G A C M E I Z -> 3
+C A E G I Z Q M -> 5
+A C E G I M Q Z -> 7
+A E -> 1
+C A K E -> 1
+C Q A Z F U -> 2
+F A C Q U K Z -> 3
+C A E F U K Z Q -> 4
+C Q A E U Z F K -> 5
+A C E F K Q U Z -> 7
+A T -> 1
+W A T Z -> 1
+H X T L A W Z -> 2
+T A H Z L W X -> 3
+L X A P W H Z T -> 3
+H L T W X Z A P -> 5
+A H L P T W X Z -> 7
+C F -> 1
+E C Q F -> 1
+F Y E C Q G -> 2
+D E C Y F V G Q -> 3
+E G Q C D Y F V -> 4
+D E C F V Y G Q -> 5
+C D E F G Q V Y -> 7
+E Q -> 1
+Q O E U -> 1
+F E O Z P U -> 2
+F P Q O E Z S U -> 3
+P E F O S U Z -> 4
+P O F Q U Z E S -> 5
+E F O P Q S U Z -> 7
+A F -> 1
+M R A S -> 1
+D A M V S Z R -> 2
+M A F S R V -> 3
+D A M S Z R V F -> 4
+D A F M S Z R V -> 5
+A D F M R S V Z -> 7
+B G -> 1
+H Z B Y -> 1
+F G H P B V Y -> 2
+F H B Z Y P V -> 3
+G P Y F B H V Z -> 3
+F B H P V Z Y G -> 5
+B F G H P V Y Z -> 7
+A K -> 1
+J A Y X -> 1
+B A Y X E J -> 2
+J E A B D X K -> 2
+D A B E K Y X -> 4
+J A B D E K X Y -> 5
+A B D E J K X Y -> 7
+E U -> 1
+G E X P -> 1
+F G K P E U -> 2
+G E F U X T -> 3
+F E G P U K T X -> 4
+F E G P U X K T -> 5
+E F G K P T U X -> 7
+B F -> 1
+D B X L -> 1
+D X B U L -> 2
+F W B R D U -> 3
+D R B U W F X L -> 3
+L B D F U W X R -> 5
+B D F L R U W X -> 7
+G Q -> 1
+I R G V -> 1
+Q G Z X V R -> 2
+I Q G U R Z X -> 3
+Q U V I R Z G X -> 4
+I G R V X Z U Q -> 5
+G I Q R U V X Z -> 7
+B Z -> 1
+U B Z V -> 1
+O R V B U Z -> 2
+O B V Z X R Y -> 3
+O U B R Y Z V X -> 4
+R U O X Y Z B V -> 5
+B O R U V X Y Z -> 7
+C U -> 1
+L I C W -> 1
+F C L U X Z W -> 2
+L U F I C W X -> 3
+L I W F U C X Z -> 3
+L I C F U Z W X -> 5
+C F I L U W X Z -> 7
+B W -> 1
+P O B X -> 1
+P T O B W -> 2
+G B L O W T X -> 3
+G L O B T W P X -> 4
+O L B G W X T P -> 5
+B G L O P T W X -> 7
+B O -> 1
+F H B L -> 1
+F H E B X O -> 2
+E B F I O X H -> 3
+O I H L B E F X -> 3
+H B E F O X I L -> 5
+B E F H I L O X -> 7
+B I -> 1
+I B S T -> 1
+O B W I S T Z -> 2
+O S T W B X -> 3
+W I S T Z B O X -> 3
+O Z B I S T W X -> 5
+B I O S T W X Z -> 7
+J M -> 1
+N J Y O -> 1
+M J Y Q N O -> 2
+M N Y T Q J O -> 3
+M O J Q Z N Y T -> 4
+M N J O Q Z Y T -> 5
+J M N O Q T Y Z -> 7
+A I -> 1
+H O A S -> 1
+H L U A I O -> 2
+E A L O S U H -> 3
+E H I L O U A S -> 4
+H A E I O U S L -> 5
+A E H I L O S U -> 7
+A M -> 1
+A G M -> 2
+D A G B U -> 2
+B M A L P D U -> 3
+B G P A M U D L -> 4
+L B D G P U A M -> 5
+A B D G L M P U -> 7
+B R -> 1
+Q D B V -> 1
+D Q B V S -> 2
+I B D R Q S M -> 3
+D R S B V Q M I -> 4
+D B I M R V S Q -> 5
+B D I M Q R S V -> 7
+E N -> 1
+N S E X -> 1
+F N S X E V W -> 2
+S E F V X Y -> 3
+N E F S V Y X W -> 4
+F N E S W X Y V -> 5
+E F N S V W X Y -> 7
+A F -> 1
+J K A T -> 1
+J K T A Y -> 2
+H A F V Y K J -> 3
+F A H J Y V K T -> 4
+F H A T V Y J K -> 5
+A F H J K T V Y -> 7
+D J -> 1
+E D J W -> 1
+E F D L I R -> 2
+E F D L R W I -> 3
+E F J D R W I L -> 4
+I E D F J R L W -> 5
+D E F I J L R W -> 7
+C H -> 1
+I P C V -> 1
+D C T V H P -> 2
+Q C D P T V -> 3
+P D Q V H C I T -> 3
+P C D H I T V Q -> 5
+C D H I P Q T V -> 7
+A H -> 1
+C W A N -> 1
+D F W M A N -> 2
+F H A C N W M -> 3
+C D M N W A H F -> 4
+F C A M N W D H -> 5
+A C D F H M N W -> 7
+A K -> 1
+A K T -> 2
+C A J H K -> 2
+F C A N T K J -> 3
+C K H A T N J F -> 3
+C A F H J K T N -> 5
+A C F H J K N T -> 7
+E M -> 1
+E I W -> 2
+M I W E S V -> 2
+I K V W E G M S -> 3
+G M W S V E I K -> 4
+G E I K M W V S -> 5
+E G I K M S V W -> 7
+E Z -> 1
+F O E R -> 1
+F E L S O Y -> 2
+F E R Z Y L S O -> 3
+R L O E Z F Y S -> 3
+F L E O S Z Y R -> 5
+E F L O R S Y Z -> 7
+E R -> 1
+E V X -> 2
+M X E T V -> 2
+T L E M V U -> 3
+L U X T E M V R -> 3
+T M E R V X L U -> 5
+E L M R T U V X -> 7
+C N -> 1
+X C N Y -> 1
+H K C U N Y -> 2
+H N C Y K U Q X -> 3
+H C K Q X U N -> 4
+N Q C H K U Y X -> 5
+C H K N Q U X Y -> 7
+C P -> 1
+C P Q -> 2
+F M K C I L -> 2
+F C I K M L Q -> 3
+F I Q C M P L K -> 3
+I K C F M P Q L -> 5
+C F I K L M P Q -> 7
+A Q -> 1
+A L X -> 2
+L J P A Q X -> 2
+L A U J X O P Q -> 3
+J O A P U X L Q -> 4
+P O J L U X A Q -> 5
+A J L O P Q U X -> 7
+D E -> 1
+I X D Z -> 1
+I L Z D O X -> 2
+I D X Z W L -> 3
+E L O D W X I Z -> 4
+E D I L O X Z W -> 5
+D E I L O W X Z -> 7
+F K -> 1
+Q H F X -> 1
+U F H Q Z X -> 2
+H X F Q Z K -> 3
+H K F M X Z U Q -> 4
+H F K M Q Z X U -> 5
+F H K M Q U X Z -> 7
+A R -> 1
+L G A R -> 1
+G A V I R L -> 2
+R I K L A V -> 3
+G I A R V J L K -> 4
+G V I J K R A L -> 5
+A G I J K L R V -> 7
+C G -> 1
+L G C N -> 1
+G I O C N L -> 2
+G J O W C L N -> 3
+N G I J C W L O -> 3
+J L G I O W C N -> 5
+C G I J L N O W -> 7
+C P -> 1
+P C M R -> 1
+P M C O T R -> 2
+L C O P R M X T -> 3
+L R T X C O M P -> 3
+L C M O R X P T -> 5
+C L M O P R T X -> 7
+G Y -> 1
+H G Z R -> 1
+I Y G H T -> 2
+H G I R Z T W -> 3
+I G H T W Y Z R -> 4
+H G I R T Y W Z -> 5
+G H I R T W Y Z -> 7
+A N -> 1
+M E A N -> 1
+E I Z M A T -> 2
+M A I N Z T -> 3
+E I M Y Z A T N -> 4
+I E M N Y Z A T -> 5
+A E I M N T Y Z -> 7
+D J -> 1
+N D W O -> 1
+J W L D V O -> 2
+G N L D O W J -> 3
+J L N O W G D V -> 4
+L D G J N W O V -> 5
+D G J L N O V W -> 7
+E K -> 1
+H E K M -> 1
+H J U E K T N -> 2
+J E N T U M -> 3
+J K E H U T M N -> 4
+H E J N T U M K -> 5
+E H J K M N T U -> 7
+E G -> 1
+G N E L -> 1
+G L N E K M -> 2
+L E G J W N M -> 3
+J E M G N W K L -> 4
+K E G J L M N W -> 5
+E G J K L M N W -> 7
+B G -> 1
+J B U X -> 1
+D B U J R X G -> 2
+D R J B G X U -> 2
+D J B M X R G U -> 4
+G B D J M R U X -> 5
+B D G J M R U X -> 7
+B V -> 1
+S Y B X -> 1
+O V P B S X -> 2
+O P S X B Y V -> 3
+O B I P S X V -> 4
+S I B O P Y V X -> 5
+B I O P S V X Y -> 7
+E W -> 1
+E G J -> 2
+U M Z E W -> 2
+G U E W Z M R J -> 3
+G Z R U E W J M -> 3
+G J E M U Z W R -> 5
+E G J M R U W Z -> 7
+F L -> 1
+H X F U -> 1
+G H X L F U -> 2
+G H L X F S U Z -> 3
+G L F H S X Z U -> 4
+H U F G L X Z S -> 5
+F G H L S U X Z -> 7
+A B -> 1
+A P Q -> 2
+F A P Q H I -> 2
+F I H J B A P Q -> 3
+B A H J P Q I F -> 4
+F B A H I Q P J -> 5
+A B F H I J P Q -> 7
+C T -> 1
+E T C Z -> 1
+E F O T C I P -> 2
+F I C O P T Z -> 3
+F C O T Z E I P -> 4
+F C E O T Z I P -> 5
+C E F I O P T Z -> 7
+A K -> 1
+K Q A L -> 1
+K L Q Y A Z -> 2
+G L A K Z I Y Q -> 2
+G K A Y L Q Z I -> 3
+I A G K L Y Z Q -> 5
+A G I K L Q Y Z -> 7
+A N -> 1
+D F A G -> 1
+F G S A J O -> 2
+F D N O A J -> 3
+D A F J N S G O -> 4
+F G D J O S A N -> 5
+A D F G J N O S -> 7
+A T -> 1
+H A Q T -> 1
+H F T A W O -> 2
+C H F Q W A T O -> 2
+C Q A O T F H W -> 4
+C F A H Q T W O -> 5
+A C F H O Q T W -> 7
+K Q -> 1
+K M W -> 2
+N K W M P Q -> 2
+N P R W Q K Z -> 3
+M N P K Z R Q W -> 4
+P N K Q R Z M W -> 5
+K M N P Q R W Z -> 7
+A I -> 1
+G N A I -> 1
+B P A K Y N -> 2
+G A I B Y N P -> 3
+B A K G Y N P I -> 4
+B G I K N Y A P -> 5
+A B G I K N P Y -> 7
+A S -> 1
+A Q U -> 2
+J F A S Q U -> 2
+F A S Z X J Q U -> 3
+F A Q S U Z J X -> 4
+F U A Q X Z S J -> 5
+A F J Q S U X Z -> 7
+H J -> 1
+O S H Z -> 1
+R S H X T Z -> 2
+O S T Z H X J R -> 2
+J T X H Z O S R -> 4
+O S H J R Z X T -> 5
+H J O R S T X Z -> 7
+A I -> 1
+I Y A J -> 1
+J R U Y A X -> 2
+R I A J S U -> 3
+I J S A Y X R U -> 4
+I A J S U Y X R -> 5
+A I J R S U X Y -> 7
+A W -> 1
+P A E T -> 1
+E W A P K -> 2
+E G K P T A H W -> 3
+G A K E T W P H -> 4
+H G A K P W E T -> 5
+A E G H K P T W -> 7
+A I -> 1
+G Y A I -> 1
+G B R A I W -> 2
+G B I A R M W -> 3
+B A R I M Y W G -> 4
+B G I M R W A Y -> 5
+A B G I M R W Y -> 7
+A J -> 1
+F A J U -> 1
+I A P D U -> 2
+D F A W I J P U -> 3
+F A D J U W P I -> 4
+D A F I J P W U -> 5
+A D F I J P U W -> 7
+E O -> 1
+O E L S -> 1
+G J L S E O -> 2
+G L J E O P S -> 3
+G L Q E S J P O -> 4
+G O E J P S L Q -> 5
+E G J L O P Q S -> 7
+E X -> 1
+U O E W -> 1
+O U M W E X Z -> 2
+M O W Z X E P U -> 3
+M U E W Z P O X -> 4
+M O E P W Z X U -> 5
+E M O P U W X Z -> 7
+E F -> 1
+S E N W -> 1
+E S T Y -> 3
+T N S E W F V -> 2
+F V T W Y E N S -> 4
+N S F V W Y E T -> 5
+E F N S T V W Y -> 7
+G S -> 1
+N G T V -> 1
+K G Y N S U V -> 2
+K S T Y G N U -> 3
+K U S G Y N T V -> 4
+K N G S T Y V U -> 5
+G K N S T U V Y -> 7
+H U -> 1
+O J H U -> 1
+J U R H O L -> 2
+R N L O H J P U -> 2
+J U P N H O R L -> 3
+J O H P R U L N -> 5
+H J L N O P R U -> 7
+E O -> 1
+Q Y E V -> 1
+Q E S O V Y Z -> 2
+N O E Y V S Z -> 3
+N E Q S V Z O Y -> 4
+O E N Q S Y V Z -> 5
+E N O Q S V Y Z -> 7
+D K -> 1
+O W D Y -> 1
+K O Y D G S -> 2
+G D M O S Y K -> 3
+G W S K Y D O M -> 4
+K G D M O Y S W -> 5
+D G K M O S W Y -> 7
+A H -> 1
+K A U S -> 1
+H S V X A U -> 2
+K A V H U S X -> 3
+C H S V X A K U -> 4
+H S A C U V K X -> 5
+A C H K S U V X -> 7
+A U -> 1
+G U A M -> 1
+G A F Q M W -> 2
+F G A Q M W U X -> 3
+G F Q A U W M X -> 4
+F A G Q W X M U -> 5
+A F G M Q U W X -> 7
+H U -> 1
+H L U -> 2
+J L I H W U O -> 2
+I J L U H K O W -> 3
+J I L H K U O W -> 3
+J H I K L W U O -> 5
+H I J K L O U W -> 7
+H P -> 1
+J O H W -> 1
+I J N W H O P -> 2
+I J H N O Q W -> 3
+I O H N W J Q P -> 4
+J H I N O W Q P -> 5
+H I J N O P Q W -> 7
+A C -> 1
+C A T M -> 1
+Q C M A U -> 2
+C L T H U A M Q -> 3
+H A L C Q U M T -> 4
+C M A H T U L Q -> 5
+A C H L M Q T U -> 7
+C Q -> 1
+P C T U -> 1
+H C P G U -> 2
+G C H P Q T U -> 3
+G H Q C U P M T -> 4
+G C H M Q U T P -> 5
+C G H M P Q T U -> 7
+C K -> 1
+L C N T -> 1
+C K Q T -> 3
+L K C N Q W O -> 3
+K C L O W T N Q -> 4
+N W C K Q T L O -> 5
+C K L N O Q T W -> 7
+A X -> 1
+R I A W -> 1
+I C T A P W -> 2
+C A R X W I P -> 3
+I A T C P W R X -> 4
+C A I P R W T X -> 5
+A C I P R T W X -> 7
+C U -> 1
+C L P -> 2
+L C S U Y X -> 2
+D P C L X Y U -> 3
+P D U X Y C S -> 4
+D L C P S U Y X -> 5
+C D L P S U X Y -> 7
+D Q -> 1
+D M T -> 2
+M D U Q P T -> 2
+M D Q F T U W -> 3
+F P M T W D Q -> 4
+M F D P Q U W T -> 5
+D F M P Q T U W -> 7
+B X -> 1
+F B P L -> 1
+E X D F B L P -> 2
+E X P D B O F -> 3
+D E F B L X P O -> 4
+D E B F L X P O -> 5
+B D E F L O P X -> 7
+A S -> 1
+H A P I -> 1
+H A V M N I -> 2
+H A N V S M I P -> 3
+H M A I V N P S -> 4
+I N A H P S M V -> 5
+A H I M N P S V -> 7
+F I -> 1
+I F Q K -> 1
+J F O K N Q S -> 2
+I F N Q S J O K -> 3
+I Q K N S F J O -> 4
+I F K N O Q S J -> 5
+F I J K N O Q S -> 7
+C F -> 1
+T P C V -> 1
+J P N V C T W -> 2
+F V J W T C P N -> 2
+J T C F W N P V -> 4
+F C J P T V W N -> 5
+C F J N P T V W -> 7
+D V -> 1
+D V W -> 2
+W Z D V Y -> 2
+P D T W X Z Y -> 3
+P D T V Z Y W X -> 4
+P Y T V W X D Z -> 5
+D P T V W X Y Z -> 7
+F Y -> 1
+F I X -> 2
+L F I R V -> 2
+L Y R F I V O X -> 3
+L I F O X R Y V -> 4
+I F L R V X Y O -> 5
+F I L O R V X Y -> 7
+B O -> 1
+B O P -> 2
+E B S H P T J -> 2
+H J P B S O T -> 3
+E H B O P S T -> 4
+E O B H P T J S -> 5
+B E H J O P S T -> 7
+A G -> 1
+I G A U -> 1
+D G A J I U -> 2
+D G A I R V J U -> 3
+I D A G V R J U -> 3
+D A G I J R V U -> 5
+A D G I J R U V -> 7
+E H -> 1
+E N Q -> 2
+N E Q X Z -> 2
+W G Z E N H X -> 2
+H W X E N G Q Z -> 3
+G N E H Q Z W X -> 5
+E G H N Q W X Z -> 7
+A V -> 1
+A D S -> 2
+I A D S Y -> 2
+D X H A S V I Y -> 2
+S Y A H D I X V -> 3
+I A D H V Y S X -> 5
+A D H I S V X Y -> 7
+I S -> 1
+L W I N -> 1
+L N K I M P -> 2
+K L P I W M S -> 3
+L N K I P W M S -> 4
+K L I N S W P M -> 5
+I K L M N P S W -> 7
+B L -> 1
+I D B L -> 1
+I B W V S -> 2
+I L B S D V W -> 3
+D V B I W L S X -> 4
+I B D S V X W L -> 5
+B D I L S V W X -> 7
+A J -> 1
+O A R Y -> 1
+R O A V Y -> 2
+J R Y A V N O -> 3
+J A O Q V Y N R -> 4
+R A J N O Q V Y -> 5
+A J N O Q R V Y -> 7
+E M -> 1
+H E G L -> 1
+L M R E X -> 2
+F E G L X H -> 3
+F E H L M X G R -> 4
+G E F L M X R H -> 5
+E F G H L M R X -> 7
+D X -> 1
+K D E X -> 1
+I D K E S -> 2
+E F D S X P I K -> 3
+E F D K P I X S -> 4
+I S E F K P D X -> 5
+D E F I K P S X -> 7
+A Z -> 1
+F A W H -> 1
+G A H F Q W -> 2
+F G Q Z P A H W -> 3
+F H A G P Q Z W -> 4
+G H A F P Z Q W -> 5
+A F G H P Q W Z -> 7
+A F -> 1
+O F A R -> 1
+F A L U Z M -> 2
+L R A O U M -> 3
+F O L A R Z U M -> 3
+F L A M O Z U R -> 5
+A F L M O R U Z -> 7
+A D -> 1
+F A B W -> 1
+D A P W H F -> 2
+B D P A F G H -> 2
+B D F H P A W G -> 4
+B A D F G W H P -> 5
+A B D F G H P W -> 7
+A M -> 1
+O M A Y -> 1
+M A X P O Y -> 2
+L P A Q M X O Y -> 3
+M Q Y O L A P X -> 3
+M Q A L P X Y O -> 5
+A L M O P Q X Y -> 7
+C W -> 1
+P C N Q -> 1
+I N C Q W P -> 2
+N G I Q C W Z P -> 3
+G N I C P W Z Q -> 4
+G I N Q W Z C P -> 5
+C G I N P Q W Z -> 7
+A F -> 1
+C A J L -> 1
+F O J A T L -> 2
+F A L C T J O -> 3
+F O A J L C T P -> 4
+L F A C J P O T -> 5
+A C F J L O P T -> 7
+C F -> 1
+K W C T -> 1
+F C V M K T Y -> 2
+F C T V Y K W M -> 3
+F M T C Y K V W -> 4
+F C K T V W Y M -> 5
+C F K M T V W Y -> 7
+C T -> 1
+J Y C L -> 1
+G C I Y L T H -> 2
+G C L Y T I J -> 3
+G I C J Y T H L -> 3
+G H I J L Y C T -> 5
+C G H I J L T Y -> 7
+F S -> 1
+T F S Y -> 1
+Q Y M F S -> 2
+M F S N Y Q V -> 3
+M F N Q T V S Y -> 4
+S V F M Q Y N T -> 5
+F M N Q S T V Y -> 7
+B Z -> 1
+N Y B R -> 1
+E B R U Z N -> 2
+D N Y Z B E U -> 3
+E R D U Y B N -> 4
+N B D E R U Z Y -> 5
+B D E N R U Y Z -> 7
+A F -> 1
+B G A Z -> 1
+F A N Z G R -> 2
+F G A Z B N R M -> 3
+B G N F Z A M R -> 4
+G B A F M N R Z -> 5
+A B F G M N R Z -> 7
+C R -> 1
+C R T -> 2
+D K C W R T -> 2
+F D W C X K R -> 3
+D R W F T C X K -> 3
+R K C D F T W X -> 5
+C D F K R T W X -> 7
+A G -> 1
+D M A G -> 1
+G A L M J N -> 2
+D A M N K G L J -> 3
+G A D J K M N -> 4
+D K A J L N G M -> 5
+A D G J K L M N -> 7
+B J -> 1
+O B W Y -> 1
+C B D W J O -> 2
+C J W B Z D O -> 3
+D O C B Y W J Z -> 4
+O D B C J Y W Z -> 5
+B C D J O W Y Z -> 7
+A E -> 1
+E A R V -> 1
+C A L H R V E -> 2
+C A L H J E R V -> 3
+E A C H R V J L -> 4
+E C H L R V A J -> 5
+A C E H J L R V -> 7
+A O -> 1
+F O A Y -> 1
+C A F V I Y -> 2
+B A I Y V F C -> 3
+B F C I O A Y -> 4
+B C F I V Y A O -> 5
+A B C F I O V Y -> 7
+H O -> 1
+K H I T -> 1
+I K O T H L P -> 2
+I H O K T L Z P -> 3
+I K O Z H L P T -> 3
+I H K L P Z O T -> 5
+H I K L O P T Z -> 7
+B M -> 1
+M B O W -> 1
+S B K O W -> 2
+I L W O B K M -> 2
+I M B K W O S -> 4
+I B L M O S K W -> 5
+B I K L M O S W -> 7
+F U -> 1
+I Y F J -> 1
+F I R U -> 3
+I J F Y R P Z -> 3
+R F I J P Z U Y -> 4
+I J F R Y Z P U -> 5
+F I J P R U Y Z -> 7
+A M -> 1
+O M A V -> 1
+M O K A W V -> 2
+N A K W L O -> 3
+M V K N W A O -> 4
+L A K N O V W M -> 5
+A K L M N O V W -> 7
+B W -> 1
+S T B Z -> 1
+G B W Z P T -> 2
+G T P S B W Q Z -> 3
+G B P Q Z W S -> 4
+T Q B G P S Z W -> 5
+B G P Q S T W Z -> 7
+A F -> 1
+K A F N -> 1
+C F L A U N -> 2
+H A F L N K U -> 3
+F H A L U C K N -> 4
+C A F L N U K H -> 5
+A C F H K L N U -> 7
+C V -> 1
+F C U I -> 1
+I C N O U V -> 2
+F I T U C O V N -> 3
+F C N I O V U T -> 4
+F V I O T U C N -> 5
+C F I N O T U V -> 7
+G P -> 1
+G N Y -> 2
+N G I Y P -> 2
+K I P N Y G V S -> 3
+I N P G S K V Y -> 4
+V G I K N P S Y -> 5
+G I K N P S V Y -> 7
+A L -> 1
+L A R O -> 1
+N X O A P -> 2
+I N A R L X P -> 3
+I P A O L X R N -> 3
+L N A I R X P O -> 5
+A I L N O P R X -> 7
+A Q -> 1
+S A F Y -> 1
+G F A D U Y -> 2
+D F G U Q A S Y -> 3
+D A F G Q U S Y -> 4
+Q F A D G U Y S -> 5
+A D F G Q S U Y -> 7
+A B -> 1
+B A Q Z -> 1
+I A B L T N -> 2
+I B Z Q L A N T -> 3
+I L A Q Z B T N -> 4
+L I A B N Z T Q -> 5
+A B I L N Q T Z -> 7
+B T -> 1
+T B V Y -> 1
+L B V I Y Z -> 2
+L B P I T Z V -> 3
+L P B I V Y Z T -> 4
+P B I L V Z Y T -> 5
+B I L P T V Y Z -> 7
+B W -> 1
+B J O -> 2
+J B F I X -> 2
+F X W I B J O -> 2
+K X O F B J I W -> 3
+F I J K W X B O -> 5
+B F I J K O W X -> 7
+A M -> 1
+J O A L -> 1
+D J U A H M -> 2
+H D J A M L O U -> 3
+L J A O D U H M -> 3
+L M A D H J O U -> 5
+A D H J L M O U -> 7
+B T -> 1
+S Q B Y -> 1
+S Q B X Y T -> 2
+S B H Q T X Y -> 3
+H X B Q T U S Y -> 4
+Q S B T X Y H U -> 5
+B H Q S T U X Y -> 7
+D U -> 1
+D K O -> 2
+K D O L U -> 2
+F D K L U G Q -> 3
+F O G L U D Q K -> 4
+F G D L O Q U K -> 5
+D F G K L O Q U -> 7
+A S -> 1
+G T A V -> 1
+B G T W A S -> 2
+B G P W S A T -> 3
+G B S T W A P -> 4
+B G A P T V W S -> 5
+A B G P S T V W -> 7
+B P -> 1
+B P U -> 2
+I B U Q J N X -> 2
+I P B U Q J X -> 3
+J N B U Q I X P -> 3
+I Q B J P U N X -> 5
+B I J N P Q U X -> 7
+A F -> 1
+B A J F -> 1
+B F Q A J -> 2
+F B A U J Z Q -> 3
+B Q F A U J M Z -> 4
+F B A M Q U Z J -> 5
+A B F J M Q U Z -> 7
+A E -> 1
+D Q A K -> 1
+D A P Y K Q -> 2
+E W D K Y A P Q -> 2
+D A E K W Q P Y -> 4
+K Q D E W Y A P -> 5
+A D E K P Q W Y -> 7
+A V -> 1
+A E I -> 2
+D A Y E V M -> 2
+E M A P D I Y V -> 2
+D I M A Y V E P -> 4
+D A E I P V M Y -> 5
+A D E I M P V Y -> 7
+B V -> 1
+S B V U -> 1
+U V W B Y -> 2
+R C B S W V Y -> 2
+C U B W Y S R V -> 4
+C B R S U W Y V -> 5
+B C R S U V W Y -> 7
+B F -> 1
+P B F V -> 1
+R B P Z V -> 2
+F J R B X P V -> 3
+J Z F X R B V P -> 3
+F P R V X Z B J -> 5
+B F J P R V X Z -> 7
+A N -> 1
+A G N -> 2
+H N S A G X -> 2
+G E S X A H N R -> 3
+G H A N S E X R -> 4
+E G A N S X R H -> 5
+A E G H N R S X -> 7
+D Z -> 1
+L D Z X -> 1
+T L D X V -> 2
+L D Y Z U T X V -> 3
+L T V Z U D X Y -> 3
+T D L X Y Z V U -> 5
+D L T U V X Y Z -> 7
+E Z -> 1
+Q U E X -> 1
+O M U E X -> 2
+O Q T M X E U Z -> 3
+M O X U Z E Q T -> 4
+M X O Q T Z E U -> 5
+E M O Q T U X Z -> 7
+K S -> 1
+P T K S -> 1
+R S X K P T U -> 2
+L R K U P T S X -> 3
+P T K S U L R X -> 4
+S P K L R U T X -> 5
+K L P R S T U X -> 7
+B X -> 1
+B N W -> 2
+R B E W V -> 2
+V N B E R W Y -> 2
+N E B X Y W V R -> 4
+E B N R X Y V W -> 5
+B E N R V W X Y -> 7
+C U -> 1
+R I C S -> 1
+F R U C M -> 2
+I M C S P R U -> 3
+F C U M P S I R -> 4
+M R F I P U C S -> 5
+C F I M P R S U -> 7
+H S -> 1
+I H Z U -> 1
+R U W H S -> 2
+I R H J S W Z -> 3
+I R S J W U H Z -> 4
+I S R U W Z H J -> 5
+H I J R S U W Z -> 7
+C J -> 1
+F S C X -> 1
+F C J X Q S -> 2
+I J C X F V Q S -> 3
+F I C J Q X S V -> 4
+F I C J S V Q X -> 5
+C F I J Q S V X -> 7
+A E -> 1
+J A C N -> 1
+A C E Z -> 3
+E A C T U Z J N -> 3
+J E A C T N U Z -> 4
+C E N T U Z A J -> 5
+A C E J N T U Z -> 7
+A T -> 1
+C T A D -> 1
+C A T U Z S -> 2
+C A D S U T Z -> 3
+D Z C U A T S J -> 3
+C J A T U Z S D -> 5
+A C D J S T U Z -> 7
+B E -> 1
+E U B P -> 1
+H P B U X T -> 2
+E P T U B X Y H -> 3
+E X B H T U Y -> 4
+H B E P T X U Y -> 5
+B E H P T U X Y -> 7
+F V -> 1
+K T F U -> 1
+K F J T S U -> 2
+J S F V P T U -> 3
+J P S U V F K T -> 4
+J K F S U V P T -> 5
+F J K P S T U V -> 7
+B L -> 1
+U B I Z -> 1
+F B L V U I -> 2
+F I B Z L U K -> 3
+K I U F B L V Z -> 3
+F K B I U Z V L -> 5
+B F I K L U V Z -> 7
+C Y -> 1
+L Y C X -> 1
+J C L U O Y X -> 2
+L J W X C Y U -> 2
+L Y X W C J U O -> 3
+L C J O U X W Y -> 5
+C J L O U W X Y -> 7
+A Q -> 1
+K Z A W -> 1
+Q A Z K U X Y -> 2
+K A Y Z U W X -> 3
+Q A U K W Y X Z -> 4
+Q A K W X Z Y U -> 5
+A K Q U W X Y Z -> 7
+B M -> 1
+G B R J -> 1
+N J R B W -> 2
+G W I J M B R N -> 2
+G I M N R J B W -> 4
+I M B N R W G J -> 5
+B G I J M N R W -> 7
+E G -> 1
+J T E X -> 1
+L G E W X T -> 2
+I E L X W J T -> 3
+L G E I J T X W -> 4
+G I E L W X T J -> 5
+E G I J L T W X -> 7
+A V -> 1
+F A P I -> 1
+B F I A U -> 2
+F U A W P I B V -> 2
+F I A B W P V U -> 4
+F I A B U W V P -> 5
+A B F I P U V W -> 7
+B R -> 1
+G J B X -> 1
+G J X B O R -> 2
+C M J X B O G R -> 3
+G B O J X C M R -> 4
+C G B J M O R X -> 5
+B C G J M O R X -> 7
+D P -> 1
+H I D S -> 1
+P R I D W S -> 2
+S D H I R W -> 3
+H D N I R P S W -> 4
+I H D N P S W R -> 5
+D H I N P R S W -> 7
+D X -> 1
+U D N X -> 1
+J D R T K -> 2
+K J D N U R T -> 3
+J K D T X N U R -> 4
+J N D K T X U R -> 5
+D J K N R T U X -> 7
+B Q -> 1
+H B T L -> 1
+E H B T P L -> 2
+P H J T B Q -> 3
+E B H J P Q T L -> 4
+E P B H Q T L J -> 5
+B E H J L P Q T -> 7
+A W -> 1
+R A L W -> 1
+I L Z A P W -> 2
+I A G Z R W -> 3
+G L A P R Z W I -> 4
+L I A P R Z G W -> 5
+A G I L P R W Z -> 7
+I S -> 1
+K I X N -> 1
+M N R X I S T -> 2
+K S R T I N M -> 3
+K I M N R X T S -> 4
+K I M N R T S X -> 5
+I K M N R S T X -> 7
+A B -> 1
+A B T -> 2
+N D Q A T Y -> 2
+D T N Y I A B Q -> 2
+I B T A D N Y Q -> 3
+B D A I N Y Q T -> 5
+A B D I N Q T Y -> 7
+E M -> 1
+G E M S -> 1
+G H U E S M -> 2
+H E G M N U T S -> 3
+G N M E U S H T -> 4
+G U H N S T E M -> 5
+E G H M N S T U -> 7
+H M -> 1
+M Y H U -> 1
+T U Y H Z X -> 2
+T M I Y H Z -> 3
+M X I U Z H T Y -> 4
+M H I T U Y X Z -> 5
+H I M T U X Y Z -> 7
+C Z -> 1
+I C W N -> 1
+F N W C Z P -> 2
+F I C Z D P W N -> 3
+D P Z W F C N I -> 3
+D F C N P Z W I -> 5
+C D F I N P W Z -> 7
+B M -> 1
+H B R N -> 1
+H B M Z P R -> 2
+H N R B P L M Z -> 3
+L H N P Z B R M -> 4
+H L B M P R Z N -> 5
+B H L M N P R Z -> 7
+A U -> 1
+U A K Y -> 1
+D Y U K A J L -> 2
+K L O U A D J Y -> 2
+D U J A K L O Y -> 3
+D L A J O Y K U -> 5
+A D J K L O U Y -> 7
+A W -> 1
+A I L -> 2
+I L P J A W -> 2
+N I J A P X W -> 3
+I W A J X P L -> 4
+I P A J L N W X -> 5
+A I J L N P W X -> 7
+E F -> 1
+E I T -> 2
+I E N R J W -> 2
+F R E J N W T -> 3
+I E F J T N R W -> 4
+J N E F I R W T -> 5
+E F I J N R T W -> 7
+A K -> 1
+K S A T -> 1
+C T A S R G -> 2
+C G A R T K S W -> 3
+K A C G R S T W -> 4
+C T G K S W A R -> 5
+A C G K R S T W -> 7
+G M -> 1
+I V G R -> 1
+H O U G M I -> 2
+H G M U V R I -> 3
+H U M R V G I O -> 4
+M I H R U V G O -> 5
+G H I M O R U V -> 7
+A J -> 1
+F A J T -> 1
+F H A V T J -> 2
+F A O V Y H J -> 3
+F T O V Y A J H -> 4
+J F A H O V Y T -> 5
+A F H J O T V Y -> 7
+A E -> 1
+E R A K -> 1
+I U E K A R Z -> 2
+E A I C U Z K -> 3
+C I A K Z U E -> 4
+I K A C E U Z R -> 5
+A C E I K R U Z -> 7
+A K -> 1
+E K A Q -> 1
+C N A K Q J -> 2
+J A P E Q N K -> 3
+C E A K P J N Q -> 4
+E J A C K N P Q -> 5
+A C E J K N P Q -> 7
+A T -> 1
+C Q A N -> 1
+H A N P Q T -> 2
+C P Q R A H N -> 3
+N C A Q R T P -> 4
+C H A P R T Q N -> 5
+A C H N P Q R T -> 7
+L Y -> 1
+O L S V -> 1
+P L V M S -> 2
+M O R L S P V Y -> 3
+M R S V Y L O P -> 4
+O L M R V Y P S -> 5
+L M O P R S V Y -> 7
+H M -> 1
+M H P X -> 1
+M K X H P U -> 2
+K P H U M S X Y -> 3
+K M H P S X Y U -> 4
+M P H K U X Y S -> 5
+H K M P S U X Y -> 7
+B W -> 1
+D V B X -> 1
+D W Z B E T -> 2
+V E B D X T W Z -> 2
+T E B D V W X Z -> 4
+D E B T V X W Z -> 5
+B D E T V W X Z -> 7
+F H -> 1
+G J F V -> 1
+H F S V M J -> 2
+H S G M F J V O -> 3
+J O V H F G S M -> 3
+G F J M S V O H -> 5
+F G H J M O S V -> 7
+B H -> 1
+H C B T -> 1
+Q B H S T -> 2
+H Q B W I T -> 3
+H I Q B C S T W -> 4
+C I H Q T W B S -> 5
+B C H I Q S T W -> 7
+B I -> 1
+E Q B I -> 1
+P L B K V -> 2
+E I B K L Q V -> 3
+E B I P V K Q L -> 4
+E I B L P Q V K -> 5
+B E I K L P Q V -> 7
+E X -> 1
+H E Y V -> 1
+X E H T Y -> 2
+T H F X E Y U -> 2
+T X U F E H Y V -> 3
+H T E F V X U Y -> 5
+E F H T U V X Y -> 7
+A O -> 1
+O T A V -> 1
+V O A X Z -> 2
+N A T X Z O V -> 3
+B A V N Z X O T -> 4
+O A B N V X Z T -> 5
+A B N O T V X Z -> 7
+D P -> 1
+G E D W -> 1
+P D E U V S -> 2
+G D P S E U V W -> 3
+E W D S G U V P -> 3
+G D E S U V W P -> 5
+D E G P S U V W -> 7
+A H -> 1
+H I A S -> 1
+D H A S I -> 2
+D H I O A R L S -> 3
+D O S L R A H I -> 3
+H A D L O R I S -> 5
+A D H I L O R S -> 7
+C U -> 1
+C L R -> 2
+D V C X L R -> 2
+F C R L X V U -> 3
+D F R U V X C L -> 4
+F R D L U V C X -> 5
+C D F L R U V X -> 7
+D G -> 1
+G P D I -> 1
+I W D G T P -> 2
+G V D W T P N I -> 2
+G D I N P V T W -> 4
+N I D G P V W T -> 5
+D G I N P T V W -> 7
+F I -> 1
+F M N -> 2
+K N T M F P -> 2
+I T Q M F N P -> 3
+I K M N T F Q P -> 4
+I F K P Q T N M -> 5
+F I K M N P Q T -> 7
+F Y -> 1
+M T F R -> 1
+M J T F N R -> 2
+M J T Y F N R W -> 3
+J N F M T R Y W -> 4
+M F J N W Y T R -> 5
+F J M N R T W Y -> 7
+E T -> 1
+I E S P -> 1
+I E O T Z -> 2
+P E G O S T Z -> 3
+G O E P Z T I S -> 4
+P O G I T Z E S -> 5
+E G I O P S T Z -> 7
+C W -> 1
+L C U M -> 1
+W L M C X -> 2
+K M O W C L X -> 3
+K L C M U W X -> 4
+M W C L U X K O -> 5
+C K L M O U W X -> 7
+A L -> 1
+Q A K S -> 1
+G K Q N A L S -> 2
+G A K L N Q S -> 3
+K B A G L S Q N -> 3
+B K A G Q S L N -> 5
+A B G K L N Q S -> 7
+A J -> 1
+B A G H -> 1
+B A M F H X J -> 2
+F A G X J M H -> 3
+B A G M X H J F -> 4
+J F A B H X G M -> 5
+A B F G H J M X -> 7
+C F -> 1
+D R C W -> 1
+F C I N O -> 2
+D I F W R C N -> 3
+D C O I R W F N -> 4
+D F C I R W O N -> 5
+C D F I N O R W -> 7
+A I -> 1
+I A C J -> 1
+C G A I X V -> 2
+C V A X J G -> 3
+G X J A S C V I -> 4
+C A G J S V X I -> 5
+A C G I J S V X -> 7
+A S -> 1
+Y A X Z -> 1
+S X A O Z Y -> 2
+R P Y A O S Z -> 2
+O Y P A R X S Z -> 4
+R O A P S Y X Z -> 5
+A O P R S X Y Z -> 7
+C V -> 1
+P C K V -> 1
+F H Z C V -> 2
+H K C P V N Z -> 3
+F C H K Z N V P -> 4
+F H C K N Z P V -> 5
+C F H K N P V Z -> 7
+B F -> 1
+R B G W -> 1
+G R W B L U X -> 2
+F W L X B G R -> 3
+L R F U B W G X -> 3
+F G B L U X W R -> 5
+B F G L R U W X -> 7
+B I -> 1
+B L Y -> 2
+F B I U L Y -> 2
+F I B U E W Y -> 3
+I L B U E F W Y -> 3
+E I B F U W Y L -> 5
+B E F I L U W Y -> 7
+C J -> 1
+C J S -> 2
+I C N S Y J -> 2
+I J C Q S Y N Z -> 3
+J N Q C Y I S Z -> 4
+I N C J Q Z Y S -> 5
+C I J N Q S Y Z -> 7
+B O -> 1
+B G J -> 2
+G O V B J N -> 2
+J G B P V N O -> 3
+J P G O W B V N -> 4
+G J B O P V N W -> 5
+B G J N O P V W -> 7
+G P -> 1
+Q O G W -> 1
+K G Q T O P -> 2
+K W G Q T O Y -> 3
+P Q K G Y O T W -> 4
+K Y G O P T W Q -> 5
+G K O P Q T W Y -> 7
+C M -> 1
+L K C T -> 1
+K L M C O T -> 2
+H R C M L K O T -> 2
+H K O C R L T M -> 4
+H C K L O R T M -> 5
+C H K L M O R T -> 7
+A X -> 1
+N P A Y -> 1
+J F X A N Z -> 2
+F J A P X Y N -> 3
+F X A P Z Y N J -> 4
+N A F J Y Z P X -> 5
+A F J N P X Y Z -> 7
+D F -> 1
+H F D V -> 1
+S D F L U -> 2
+H D F L S U -> 3
+F H D L V N S U -> 4
+L D F H N S U V -> 5
+D F H L N S U V -> 7
+B K -> 1
+X B Q Z -> 1
+X E K B Z -> 2
+D B E X Z K U -> 3
+Q X K B U D E Z -> 3
+D U B K X Z E Q -> 5
+B D E K Q U X Z -> 7
+F Q -> 1
+F L Q -> 2
+L Q M X F Y Z -> 2
+M F L X Z R Q -> 3
+M L F Q Z R Y X -> 4
+M L F R Y Z X Q -> 5
+F L M Q R X Y Z -> 7
+A C -> 1
+U Q A X -> 1
+M A P U Q -> 2
+D X Q C P A M U -> 2
+P D Q X C A M U -> 3
+C A D M Q U X P -> 5
+A C D M P Q U X -> 7
+B V -> 1
+J H B L -> 1
+J H V B L -> 2
+H L B E Y J V -> 3
+E N H J V B Y L -> 4
+J E B H L V Y N -> 5
+B E H J L N V Y -> 7
+D T -> 1
+J T D Y -> 1
+G J D N Y M -> 2
+M R G T D Y N -> 3
+G N J R Y T D M -> 4
+G D J N R Y T M -> 5
+D G J M N R T Y -> 7
+D W -> 1
+K S D N -> 1
+K N W D Z V O -> 2
+N D V K W S Z -> 3
+N Z D K S V W O -> 3
+K D N O S Z V W -> 5
+D K N O S V W Z -> 7
+A B -> 1
+K B A L -> 1
+B C P A J K -> 2
+B L J C A V P -> 3
+B J A L P C V K -> 4
+B A C J K P L V -> 5
+A B C J K L P V -> 7
+C Q -> 1
+F V C H -> 1
+I U V C P -> 2
+F Q C P V U H -> 3
+H C F I Q V P U -> 4
+I C F H P U V Q -> 5
+C F H I P Q U V -> 7
+A N -> 1
+G Q A N -> 1
+G A B N Q W -> 2
+B D A W G Q -> 3
+D A B G L N Q -> 4
+B A D G L N Q W -> 5
+A B D G L N Q W -> 7
+A M -> 1
+P G A S -> 1
+G M T A J K -> 2
+G A K S M T J -> 3
+G A K J M P S T -> 4
+G A J M P S T K -> 5
+A G J K M P S T -> 7
+B N -> 1
+B P V -> 2
+F M P V B O Z -> 2
+F B O M V P Z N -> 3
+M N F B Z P V O -> 4
+N F B O V Z M P -> 5
+B F M N O P V Z -> 7
+A I -> 1
+N A H Q -> 1
+J A Q D K -> 2
+D N A H Q I J K -> 2
+I A J K Q H N -> 4
+D K H I J Q A N -> 5
+A D H I J K N Q -> 7
+C F -> 1
+D M C O -> 1
+F C M D T X S -> 2
+D C M S O F T X -> 3
+D F C M T S X O -> 4
+O D C F M S X T -> 5
+C D F M O S T X -> 7
+D N -> 1
+N D R T -> 1
+K D N V Q -> 2
+K N Q T D R S V -> 3
+K N R Q D S V T -> 3
+K D Q R S T N V -> 5
+D K N Q R S T V -> 7
+A F -> 1
+H F A U -> 1
+D A L C H U -> 2
+H C A L F U -> 3
+D C A H L P F U -> 3
+C F A D H U P L -> 5
+A C D F H L P U -> 7
+A Y -> 1
+G B A U -> 1
+B Y A D H U -> 2
+B D A G H M U Y -> 3
+B D A G H Y U M -> 4
+M B A D G U H Y -> 5
+A B D G H M U Y -> 7
+L X -> 1
+Q L Z S -> 1
+M Q Z L X R -> 2
+N S L Q Z M R X -> 2
+M R S L Z X Q N -> 4
+N Q L M S X Z R -> 5
+L M N Q R S X Z -> 7
+A I -> 1
+B A S Q -> 1
+B A C W G I -> 2
+C Q A I G S B W -> 2
+G B I A C W Q S -> 3
+C B A I Q W S G -> 5
+A B C G I Q S W -> 7
+A M -> 1
+D A F W -> 1
+M A F W Q -> 2
+F Z A D M Y Q -> 2
+D F Q M Z A W Y -> 4
+F Q A D W Z M Y -> 5
+A D F M Q W Y Z -> 7
+C O -> 1
+O C J Z -> 1
+D J E C X -> 2
+D Z E C M X J O -> 3
+E M D C X J Z O -> 4
+D C E J M Z O X -> 5
+C D E J M O X Z -> 7
+B D -> 1
+N L B Y -> 1
+D F N K B L Y -> 2
+K L B F D Y N T -> 2
+D F B L N Y K T -> 4
+D F B K L T N Y -> 5
+B D F K L N T Y -> 7
+C U -> 1
+F Y C S -> 1
+L C V Y U S -> 2
+F S L V U C Y -> 3
+F I L C Y U V S -> 4
+F C I L S U Y V -> 5
+C F I L S U V Y -> 7
+A K -> 1
+K A O R -> 1
+I A N T R -> 2
+K I N A T O S R -> 3
+I N A K S O T R -> 4
+K I A O S T R N -> 5
+A I K N O R S T -> 7
+A F -> 1
+E A R P -> 1
+E A P H Y J -> 2
+E A H R Y F P -> 3
+H E A F R Y J P -> 4
+J E A F H Y P R -> 5
+A E F H J P R Y -> 7
+O R -> 1
+S V O Z -> 1
+R O Z S V U -> 2
+P Q O S V U Z -> 3
+Q R U P Z S O V -> 4
+P Q R U V Z O S -> 5
+O P Q R S U V Z -> 7
+A G -> 1
+U Y A Z -> 1
+B Y K A Z F -> 2
+B G U Z A F K -> 3
+G A B F Y K Z U -> 4
+F Y B K U Z A G -> 5
+A B F G K U Y Z -> 7
+B C -> 1
+M B H X -> 1
+C B M H I X -> 2
+D B X V C I H M -> 3
+D C H I V B M X -> 4
+D H B C M V X I -> 5
+B C D H I M V X -> 7
+B F -> 1
+G B Q W -> 1
+F B C M Q W -> 2
+C G B Y M Q W -> 3
+M B C F G Y Q W -> 4
+C B F G M Q W Y -> 5
+B C F G M Q W Y -> 7
+A B -> 1
+F A K X -> 1
+B A D K F X Z -> 2
+B A D Z F J K X -> 3
+B D J A X K Z F -> 4
+J A B D F X K Z -> 5
+A B D F J K X Z -> 7
+C G -> 1
+F C U L -> 1
+D F E C L H -> 2
+G U D C E H L -> 2
+D C G L U E H F -> 4
+D C E F H L G U -> 5
+C D E F G H L U -> 7
+D H -> 1
+I G D K -> 1
+G D H X T I -> 2
+I T G D K H X -> 2
+H T D K W G I X -> 4
+H G I T W X D K -> 5
+D G H I K T W X -> 7
+F G -> 1
+L J F M -> 1
+I V F M L J -> 2
+G I F U M V L J -> 3
+J I F G L M V U -> 3
+J F G I L M V U -> 5
+F G I J L M U V -> 7
+E S -> 1
+T E S Y -> 1
+F E V N L Y -> 2
+L E N S F V T Y -> 3
+V N S T E L F Y -> 3
+F N E S T V Y L -> 5
+E F L N S T V Y -> 7
+B E -> 1
+D B C Z -> 1
+D B K Y E N -> 2
+C Y Z N K B D -> 3
+D Y C E K B N Z -> 4
+D K C N Y Z B E -> 5
+B C D E K N Y Z -> 7
+B R -> 1
+G U B K -> 1
+C B R Y K U G -> 2
+G R U B C K Y V -> 3
+G K V B C U R Y -> 3
+G Y C R U V B K -> 5
+B C G K R U V Y -> 7
+B M -> 1
+C Q B O -> 1
+D C O B P -> 2
+C P B L D Q O -> 2
+D L O C P B M Q -> 4
+L B C D M O Q P -> 5
+B C D L M O P Q -> 7
+G P -> 1
+P L G Z -> 1
+L W G K X Z -> 2
+K P G X L R Z W -> 3
+R Z W P G L K X -> 3
+L K G P X Z R W -> 5
+G K L P R W X Z -> 7
+E S -> 1
+O E S Y -> 1
+M E Y O S Z -> 2
+O R S M Y E Z X -> 3
+R Z E X M O Y S -> 3
+O M S X Y Z E R -> 5
+E M O R S X Y Z -> 7
+B P -> 1
+D Z B R -> 1
+D G B U P R -> 2
+D B P Z U X G -> 3
+D P R B X Z G U -> 4
+D R B G P U Z X -> 5
+B D G P R U X Z -> 7
+A M -> 1
+I A T M -> 1
+G J O T A I L -> 2
+G A L J O M T I -> 3
+G A J L O M T -> 4
+J G A I L O T M -> 5
+A G I J L M O T -> 7
+D M -> 1
+D M Q -> 2
+K H X D M W -> 2
+H D M Q K X Y -> 3
+H K D M Q W X Y -> 4
+H M D K X Y W Q -> 5
+D H K M Q W X Y -> 7
+B V -> 1
+G J B I -> 1
+G B Z I N V -> 2
+J I G Z B U N V -> 3
+G I U J Z B V N -> 3
+J G I U V Z B N -> 5
+B G I J N U V Z -> 7
+B V -> 1
+K B Y V -> 1
+C B P V K Y -> 2
+E P C B Y V W -> 3
+E Y P C B V W K -> 3
+C P E K V W B Y -> 5
+B C E K P V W Y -> 7
+A H -> 1
+R A H X -> 1
+K A J O X R -> 2
+J H O R A K U X -> 3
+H K A O R J X U -> 4
+J A H K R X U O -> 5
+A H J K O R U X -> 7
+D P -> 1
+J D H M -> 1
+J M N D P S -> 2
+J S D H P V M N -> 2
+J D M P V S N -> 4
+H J D P S V M N -> 5
+D H J M N P S V -> 7
+G Z -> 1
+L X G Z -> 1
+H G K Z J Y -> 2
+H J X K Y G Z L -> 3
+K L H G J X Y Z -> 3
+L J G K X Z H Y -> 5
+G H J K L X Y Z -> 7
+F H -> 1
+J F N O -> 1
+G F L I H -> 2
+I H F N J G L O -> 2
+G H J I L F O N -> 4
+J F G I N O H L -> 5
+F G H I J L N O -> 7
+A L -> 1
+D A K X -> 1
+L A E Z P -> 2
+D L Z P E A K X -> 3
+D L P E X A K Z -> 4
+K A D E P X Z L -> 5
+A D E K L P X Z -> 7
+D Z -> 1
+T D J W -> 1
+J L U D W T P -> 2
+J L P D Z T U W -> 3
+J Z P D T U L W -> 4
+T J D L W Z P U -> 5
+D J L P T U W Z -> 7
+B O -> 1
+J O B S -> 1
+K Q S B O U -> 2
+J Q B S M U O K -> 3
+J K U B M O Q S -> 4
+J O B K Q U M S -> 5
+B J K M O Q S U -> 7
+A V -> 1
+T M A V -> 1
+L O T A M -> 2
+O V L F T A M P -> 2
+F L P A T M V O -> 4
+L P A F T V M O -> 5
+A F L M O P T V -> 7
+C S -> 1
+S Z C T -> 1
+N G C F V S -> 2
+F G C V N Z S T -> 3
+G C F S Z T V N -> 4
+F S C N T Z G V -> 5
+C F G N S T V Z -> 7
+E N -> 1
+F N E T -> 1
+I E N U T K -> 2
+F K I V E N T U -> 3
+F U E T V K N I -> 4
+F K E N U V T I -> 5
+E F I K N T U V -> 7
+D E -> 1
+E D R Q -> 1
+M J L D Q -> 2
+L J M R D Q P -> 3
+J P Q E L D R M -> 3
+E J D L M P R Q -> 5
+D E J L M P Q R -> 7
+H P -> 1
+H K Z -> 2
+Q U Z H K W -> 2
+J P K H Z Q W -> 3
+K H W J Q Z P U -> 4
+K J H P Q U Z W -> 5
+H J K P Q U W Z -> 7
+B D -> 1
+B D S -> 2
+I L Q T B Z -> 2
+I B L D Z Q S T -> 3
+D I L B Q T S Z -> 4
+D L B Q T Z S I -> 5
+B D I L Q S T Z -> 7
+B W -> 1
+B H Q -> 2
+F B Q W J L -> 2
+F J L B H Q W -> 3
+E H J Q W F B L -> 4
+H E B F L W Q J -> 5
+B E F H J L Q W -> 7
+B V -> 1
+K S B N -> 1
+G B J Q S N -> 2
+G J S V B Q N K -> 3
+G J K Q S B V N -> 4
+G B J K Q V S N -> 5
+B G J K N Q S V -> 7
+A B -> 1
+A D Z -> 2
+D A Q Z H I -> 2
+B H A T Z Q I D -> 3
+D I T H Z A B Q -> 4
+H D A B I T Z Q -> 5
+A B D H I Q T Z -> 7
+A Z -> 1
+T I A X -> 1
+L Z I W A Q T -> 2
+L A Q T Z X -> 3
+I A Q T Z W X -> 4
+I L A W X Z Q T -> 5
+A I L Q T W X Z -> 7
+C Z -> 1
+C O R -> 2
+K C L O Z -> 2
+L K R Z C O P -> 3
+G L P C R K O Z -> 4
+G R C K L Z P O -> 5
+C G K L O P R Z -> 7
+D P -> 1
+H D S P -> 1
+H D O P I W -> 2
+L W D P O I H S -> 2
+H O I S W D L P -> 4
+O H D I L P W S -> 5
+D H I L O P S W -> 7
+A S -> 1
+I A L T -> 1
+D I A M U -> 2
+I M L S D A U T -> 2
+I A L T U D M S -> 4
+I A D L M S T U -> 5
+A D I L M S T U -> 7
+A C -> 1
+X Y A Z -> 1
+I A T B Y Z -> 2
+I C A B Y Z T -> 3
+B X C I Z Y A T -> 4
+B X A I T Y Z C -> 5
+A B C I T X Y Z -> 7
+A C -> 1
+L C A Q -> 1
+C K M L A Q -> 2
+C G A M X Q K -> 3
+K C G X A Q M L -> 3
+C G A L M Q K X -> 5
+A C G K L M Q X -> 7
+A Z -> 1
+D A O W -> 1
+N O J A Z W -> 2
+D Z I J A O -> 3
+D Z J A O I N W -> 4
+D J A I N W Z O -> 5
+A D I J N O W Z -> 7
+B X -> 1
+N X B R -> 1
+I J N C B X -> 2
+C I J N B R K X -> 3
+C K B I J N R X -> 3
+J I B C K N X R -> 5
+B C I J K N R X -> 7
+A W -> 1
+E A V Z -> 1
+P A M E W -> 2
+E W P Q A M Z -> 3
+E P A M Z Q V W -> 4
+E P A M Q Z V W -> 5
+A E M P Q V W Z -> 7
+A K -> 1
+L N A R -> 1
+N K A L R -> 2
+C A N L T R D K -> 3
+N K A C D L T R -> 3
+C A D L N R T K -> 5
+A C D K L N R T -> 7
+B S -> 1
+B S X -> 2
+C X T B O S -> 2
+C B T V X O -> 3
+S Q B O C V X T -> 3
+O B C S T V X Q -> 5
+B C O Q S T V X -> 7
+K M -> 1
+M L K V -> 1
+M P W K V R -> 2
+L K S W R V M -> 3
+P S K L W V M R -> 3
+P K L M R W V S -> 5
+K L M P R S V W -> 7
+A V -> 1
+F A V Q -> 1
+C A F Q D E -> 2
+C A U V E Q F -> 3
+C D E Q U F A V -> 4
+C A E F Q V D U -> 5
+A C D E F Q U V -> 7
+E J -> 1
+F E V K -> 1
+K F V E O Z -> 2
+F J E S Z K O -> 2
+J V E K S F Z O -> 4
+J O E F S Z K V -> 5
+E F J K O S V Z -> 7
+B R -> 1
+W K B Z -> 1
+E B K R Z -> 2
+E B F W K R Z -> 3
+E H F Z B K R W -> 3
+E B F H R Z W K -> 5
+B E F H K R W Z -> 7
+D Z -> 1
+G D W U -> 1
+G V D W U I -> 2
+G U Z D P W V -> 3
+G I U V W D Z P -> 4
+G D I P U V W Z -> 5
+D G I P U V W Z -> 7
+A R -> 1
+R J A Y -> 1
+A R S Y -> 3
+J A B V X Y R -> 3
+R S X B J A Y V -> 3
+J B A V X Y S R -> 5
+A B J R S V X Y -> 7
+A E -> 1
+Q A R U -> 1
+Q A E K R U -> 2
+K A E P R Q -> 3
+K E O A P Q R U -> 3
+E P A O Q U R K -> 5
+A E K O P Q R U -> 7
+A P -> 1
+C A J P -> 1
+M H A P N -> 2
+C A H J P M N -> 3
+H C A J V M N P -> 4
+J M A C H V P N -> 5
+A C H J M N P V -> 7
+B P -> 1
+C B E U -> 1
+J B E U T P -> 2
+C B E P U T N J -> 3
+E C P N U B J T -> 3
+C B E J P T U N -> 5
+B C E J N P T U -> 7
+B L -> 1
+P B N R -> 1
+L F B N Z -> 2
+F I P Z L B N R -> 3
+N P B I Z L F R -> 3
+F B I N R Z P L -> 5
+B F I L N P R Z -> 7
+D X -> 1
+L T D Z -> 1
+L W D P Z Y -> 2
+L D W Y Z P X T -> 3
+L D T W Y Z P X -> 4
+W P D T Y Z L X -> 5
+D L P T W X Y Z -> 7
+B N -> 1
+I N B M -> 1
+K D G B V -> 2
+D G M I V B N K -> 3
+I G K M N B V -> 4
+D G B I K M V N -> 5
+B D G I K M N V -> 7
+E K -> 1
+M W E P -> 1
+I E Z W L P -> 2
+L I E M Z W K P -> 2
+K E I M W Z L P -> 4
+I E L M P Z K W -> 5
+E I K L M P W Z -> 7
+F X -> 1
+F G Y -> 2
+Q H F G X S -> 2
+G H F Y R X S -> 3
+H G Q F R S X Y -> 4
+G H Q R X Y F S -> 5
+F G H Q R S X Y -> 7
+C T -> 1
+U C R Z -> 1
+O P K T C R U -> 2
+K C P R U O Z -> 3
+P R T K U C O Z -> 3
+K C O R T Z U P -> 5
+C K O P R T U Z -> 7
+B K -> 1
+K B O Y -> 1
+P K B U Y R -> 2
+O P B R U W Y -> 3
+K B R P U Y W O -> 4
+O B K P R U Y W -> 5
+B K O P R U W Y -> 7
+A W -> 1
+A B W -> 2
+B J A R X -> 2
+B I R A W G J -> 3
+B J A R G I W X -> 3
+B A G J W X R I -> 5
+A B G I J R W X -> 7
+H X -> 1
+Y L H Z -> 1
+P K Y H X Z -> 2
+L O X H P Z Y -> 3
+K O H X Y Z P L -> 4
+K X H L P Z Y O -> 5
+H K L O P X Y Z -> 7
+D N -> 1
+M D J N -> 1
+J L T D Z M -> 2
+J M N T Z D W -> 3
+J L M D Z N T W -> 4
+J N D M T Z L W -> 5
+D J L M N T W Z -> 7
+D J -> 1
+N X D S -> 1
+I Q D N L X -> 2
+J D I N X Q S -> 3
+I L D J S Q N X -> 4
+N D I J L Q X S -> 5
+D I J L N Q S X -> 7
+I P -> 1
+K V I Y -> 1
+R P Y I V -> 2
+K S I J R Y V -> 3
+J V I S Y K P R -> 4
+J R I K S V Y P -> 5
+I J K P R S V Y -> 7
+C E -> 1
+E F C N -> 1
+E S F N C I X -> 2
+I C S E F N Y X -> 3
+I S C X E F Y N -> 3
+F E C I S X Y N -> 5
+C E F I N S X Y -> 7
+H J -> 1
+I H U M -> 1
+M V J H R U -> 2
+M I H U J R N -> 2
+I N U M R H J V -> 3
+J H I N R U M V -> 5
+H I J M N R U V -> 7
+A V -> 1
+E A K P -> 1
+B E H A F K -> 2
+E K B V A P -> 3
+E F K P B A H V -> 3
+F E B K P V A H -> 5
+A B E F H K P V -> 7
+C Z -> 1
+M C H P -> 1
+M C H X P V -> 2
+H P V X C T Z -> 3
+H T C P Z M V X -> 3
+P H C M V X Z T -> 5
+C H M P T V X Z -> 7
+C M -> 1
+H M C N -> 1
+H K F C M Y -> 2
+H C F M N K Q -> 3
+F H K C M N Q Y -> 4
+F H C K M Y N Q -> 5
+C F H K M N Q Y -> 7
+D Q -> 1
+D Q V -> 2
+G D E I V Q -> 2
+R G D Q W V -> 3
+E Q W I G D R V -> 3
+R E D G I Q V W -> 5
+D E G I Q R V W -> 7
+D F -> 1
+P X D U -> 1
+H D P F T U -> 2
+P F D V H X T U -> 3
+F P D X T U H V -> 3
+F U D T V X P H -> 5
+D F H P T U V X -> 7
+D N -> 1
+N D T X -> 1
+K N X U D R -> 2
+N O K T D R U -> 3
+N K T D U O R X -> 4
+N K D O T U X R -> 5
+D K N O R T U X -> 7
+B P -> 1
+J G B P -> 1
+G B L P J Y T -> 2
+G J P Y B T L -> 3
+C T L G B P Y J -> 3
+G C B J T Y P L -> 5
+B C G J L P T Y -> 7
+A C -> 1
+A C K -> 2
+C A V O K W H -> 2
+V K H O A C W -> 2
+C H I K O A V W -> 4
+H C A I V W O K -> 5
+A C H I K O V W -> 7
+G R -> 1
+I G V K -> 1
+I K G Z V O -> 2
+V J G R O Z -> 3
+K Z G J O I V R -> 3
+I K G J V Z R O -> 5
+G I J K O R V Z -> 7
+A K -> 1
+A R Y -> 2
+J H K A Q Y -> 2
+H J A R D Y -> 3
+H D A K Q Y R J -> 3
+H Q D J K R A Y -> 5
+A D H J K Q R Y -> 7
+A D -> 1
+A D X -> 2
+D A T G L -> 2
+V G T F A D L X -> 2
+D F A G V X T L -> 4
+D A F G L X V T -> 5
+A D F G L T V X -> 7
+C G -> 1
+K X C N -> 1
+K U Z C X N -> 2
+K C U Z O X N -> 3
+K Z U N C G O X -> 3
+N C G K O U X Z -> 5
+C G K N O U X Z -> 7
+B X -> 1
+K O B R -> 1
+K O R B W L -> 2
+K B E O W L X -> 3
+E R L O W B X K -> 4
+E K B O R W X L -> 5
+B E K L O R W X -> 7
+F N -> 1
+K F H V -> 1
+H V N F Y Q -> 2
+J N Q V H F K Y -> 3
+J K F N V H Q Y -> 4
+H F J K N Q V Y -> 5
+F H J K N Q V Y -> 7
+D T -> 1
+L D T Y -> 1
+I L Y T D O -> 2
+I U L T D R O Y -> 3
+I T L U Y D O R -> 4
+O I L R T Y D U -> 5
+D I L O R T U Y -> 7
+A P -> 1
+C A H I -> 1
+H J S I A M -> 2
+C I J P A M H S -> 3
+H A C J M S I P -> 4
+J C H I M P A S -> 5
+A C H I J M P S -> 7
+D P -> 1
+K V D M -> 1
+H D V P Y -> 2
+K M D R P Y V -> 3
+K H M D V R P Y -> 4
+K Y H M P V D R -> 5
+D H K M P R V Y -> 7
+C V -> 1
+C L W -> 2
+H W T C L N -> 2
+H L C N M W V -> 3
+M T H C W L N V -> 4
+N C H L M T W V -> 5
+C H L M N T V W -> 7
+B J -> 1
+U B V Z -> 1
+V Y M B Z -> 2
+V Y B M U L Z -> 2
+J Y M L Z B U V -> 4
+L Z B J U Y V M -> 5
+B J L M U V Y Z -> 7
+D S -> 1
+J D P T -> 1
+J R S D K T -> 2
+J D P R Y K T S -> 3
+K Y J P T D S R -> 3
+J R D P T Y K S -> 5
+D J K P R S T Y -> 7
+B Y -> 1
+Q O B T -> 1
+L B Q T Y Z -> 2
+L B Q U Y Z O -> 3
+U Q L T Y B O Z -> 3
+L O B Q T Y Z U -> 5
+B L O Q T U Y Z -> 7
+C T -> 1
+X N C Z -> 1
+L V X Z C N T -> 2
+Y X T N L C V Z -> 2
+N C V Y Z L T X -> 4
+N T L X Y Z C V -> 5
+C L N T V X Y Z -> 7
+A C -> 1
+C L A Q -> 1
+C A U Y L R -> 2
+L C A Q Y R U O -> 2
+L Q C R Y A O U -> 4
+C O L Q R Y A U -> 5
+A C L O Q R U Y -> 7
+E L -> 1
+E F L -> 2
+F P L T E O R -> 2
+F L P R E Q O T -> 3
+F E L O R Q P T -> 4
+F L E O P Q R T -> 5
+E F L O P Q R T -> 7
+A Z -> 1
+V A G Z -> 1
+M Z A G Y -> 2
+C V G J A Y Z -> 3
+C J A Z V Y G M -> 3
+C V J M Y Z A G -> 5
+A C G J M V Y Z -> 7
+A S -> 1
+I A F O -> 1
+I L A F S O -> 2
+I A D F S J L -> 3
+D S I J L A O F -> 4
+F A D L O S I J -> 5
+A D F I J L O S -> 7
+B Y -> 1
+H Q B Y -> 1
+H Y B I M S -> 2
+D I M Y B H Q -> 3
+D H B I M Y Q S -> 4
+D B H I M Q S Y -> 5
+B D H I M Q S Y -> 7
+C M -> 1
+K S C V -> 1
+J C S U K V -> 2
+H C K S M U V -> 3
+H C M K V U S J -> 4
+H C J K M V U S -> 5
+C H J K M S U V -> 7
+A B -> 1
+G T A Q -> 1
+C A N R T G -> 2
+B A G T N Q C -> 3
+B C G A R N Q T -> 4
+G B A C Q T N R -> 5
+A B C G N Q R T -> 7
+D V -> 1
+V M D Y -> 1
+K D V E M S -> 2
+E W D S V K M Y -> 2
+E M W Y K D S V -> 3
+E K D S W Y V M -> 5
+D E K M S V W Y -> 7
+F T -> 1
+S P F U -> 1
+I P N S F U X -> 2
+N S P F I U X T -> 2
+I P S F N X T U -> 4
+I F N S T U X P -> 5
+F I N P S T U X -> 7
+G O -> 1
+N G O R -> 1
+H N G O K V -> 2
+H K G U R N O V -> 3
+K G H O U V N R -> 4
+H K G N R U V O -> 5
+G H K N O R U V -> 7
+A V -> 1
+I M A Q -> 1
+M Q A Y V T -> 2
+M I R A Y T Q -> 3
+I A R T Y V Q M -> 4
+I Q M T V Y A R -> 5
+A I M Q R T V Y -> 7
+A T -> 1
+A N X -> 2
+I A O T Q R -> 2
+N Q A X I T R -> 3
+Q O A I N X T R -> 4
+I Q O R T X A N -> 5
+A I N O Q R T X -> 7
+F S -> 1
+Q U F Z -> 1
+H T Z F S -> 2
+H F T Z U Q X -> 3
+H U F S X T Z Q -> 4
+H F T U X Z S Q -> 5
+F H Q S T U X Z -> 7
+A S -> 1
+O A S U -> 1
+O A K U S -> 2
+K U Z A S O R -> 2
+G K S R U Z A O -> 4
+R G A K O S Z U -> 5
+A G K O R S U Z -> 7
+D N -> 1
+K Y D N -> 1
+G D Y K X S -> 2
+G K N V X D Y -> 3
+N G V S D K Y X -> 3
+K D G S X Y N V -> 5
+D G K N S V X Y -> 7
+C S -> 1
+G Z C S -> 1
+G C Q D S Z U -> 2
+G D M Z C Q U S -> 3
+M C D G Q Z U S -> 4
+G C D Q S U Z M -> 5
+C D G M Q S U Z -> 7
+A G -> 1
+B A S T -> 1
+F A B G T S -> 2
+F G T A O S V -> 3
+G S A F V B O T -> 4
+B G A O S T F V -> 5
+A B F G O S T V -> 7
+A J -> 1
+D M A Y -> 1
+D A J R Y M -> 2
+B R A D Y J -> 3
+D Y R A B I J M -> 3
+I D A B J M Y R -> 5
+A B D I J M R Y -> 7
+B S -> 1
+M B W T -> 1
+M S B D T W -> 2
+M S P K B W T -> 2
+D M K T W B S P -> 4
+K M B D P S T W -> 5
+B D K M P S T W -> 7
+D L -> 1
+L D I P -> 1
+I K U P D L T -> 2
+K I Y D L P U -> 3
+I P U K T D L Y -> 3
+P D I K L T U Y -> 5
+D I K L P T U Y -> 7
+F W -> 1
+G W F P -> 1
+G I O F W P L -> 2
+G P O W F Y L -> 3
+G W P I F Y O L -> 3
+O F G I L P W Y -> 5
+F G I L O P W Y -> 7
+A Y -> 1
+P C A T -> 1
+D A S P O Y -> 2
+C D A S O P Y T -> 3
+O T Y A D S C P -> 3
+C P D S T Y A O -> 5
+A C D O P S T Y -> 7
+B E -> 1
+E B Z Q -> 1
+E K Z Q B S Y -> 2
+K E B Y Q Z S -> 2
+K S B E Z Q V Y -> 4
+E Z K Q V Y B S -> 5
+B E K Q S V Y Z -> 7
+A S -> 1
+A M Q -> 2
+B F A L S Z -> 2
+F A B L Z S Q -> 3
+L B S A Q M F Z -> 3
+M A B F L Q S Z -> 5
+A B F L M Q S Z -> 7
+A P -> 1
+A C D -> 2
+C I L A O P -> 2
+C D A L P I E -> 3
+D I C A E P L O -> 3
+C I D E O P A L -> 5
+A C D E I L O P -> 7
+B R -> 1
+T B I U -> 1
+F B I R G U -> 2
+F B G Z T I -> 3
+F I B R Z G U -> 4
+F G I T U Z B R -> 5
+B F G I R T U Z -> 7
+D Q -> 1
+E Z D R -> 1
+D Q R X -> 3
+O T Q R Z D X -> 3
+E D O Q T Z X R -> 4
+E D O Q R T Z X -> 5
+D E O Q R T X Z -> 7
+A I -> 1
+A U Y -> 2
+J I Y A U -> 2
+E A I K J U O Y -> 3
+E I J A K U Y O -> 4
+E I A J U Y O K -> 5
+A E I J K O U Y -> 7
+B X -> 1
+F B J I -> 1
+H I X B L R -> 2
+F B H J X I R -> 3
+L H J B R F I X -> 3
+F I B H J X R L -> 5
+B F H I J L R X -> 7
+D N -> 1
+H U D T -> 1
+G H T D N U -> 2
+N H O U D G J T -> 2
+H J T O U D G N -> 4
+G O D H J T U N -> 5
+D G H J N O T U -> 7
+A V -> 1
+J V A S -> 1
+H Z A V S J -> 2
+G L A S H V J -> 3
+G S V J L H A Z -> 4
+S J G H L V A Z -> 5
+A G H J L S V Z -> 7
+G R -> 1
+T W G Y -> 1
+M R Y G T W -> 2
+I H T G Y R W M -> 2
+I R H W T G M Y -> 3
+I R G H T W Y M -> 5
+G H I M R T W Y -> 7
+F X -> 1
+G F X J -> 1
+G H X F J Y -> 2
+G P F Y H U X -> 3
+G J F H P X Y U -> 4
+J F G H P X U Y -> 5
+F G H J P U X Y -> 7
+A G -> 1
+A G O -> 2
+L E A S O Y -> 2
+K L S Y A G O -> 3
+E Y G L O A S K -> 4
+G E A L S Y K O -> 5
+A E G K L O S Y -> 7
+E P -> 1
+V E P W -> 1
+I P W E J V -> 2
+I E M P V G W J -> 3
+J G I V W E M -> 4
+G E I J V W M P -> 5
+E G I J M P V W -> 7
+C Z -> 1
+W C E Z -> 1
+F C T Y H Z -> 2
+E H C T F Z W -> 3
+E Z F C T Y H W -> 4
+E T C F Y Z H W -> 5
+C E F H T W Y Z -> 7
+A X -> 1
+A O X -> 2
+A B G T -> 3
+G O A Z T B V X -> 2
+B V O Z T A G X -> 3
+O A B G T X V Z -> 5
+A B G O T V X Z -> 7
+F X -> 1
+K X F M -> 1
+H X O F U Z -> 2
+H M X K F U O Z -> 3
+H F U O X Z K M -> 4
+M H K O X Z F U -> 5
+F H K M O U X Z -> 7
+C L -> 1
+I Z C Y -> 1
+L C U S Y Z V -> 2
+I L Y S V C U Z -> 2
+I C S L V Y Z U -> 4
+I U C L Y Z V S -> 5
+C I L S U V Y Z -> 7
+A J -> 1
+A I V -> 2
+H I T A V K N -> 2
+H I J N A K T V -> 3
+J A H I N T K -> 4
+H I A K T V N J -> 5
+A H I J K N T V -> 7
+A L -> 1
+E A K H -> 1
+E A J K H W T -> 2
+J L H T A W K -> 3
+H A E L T W K J -> 4
+E A H J K L W T -> 5
+A E H J K L T W -> 7
+F N -> 1
+G P F N -> 1
+H N S F U P -> 2
+F G H N S -> 4
+N V F G S H P U -> 4
+N F G H P S U V -> 5
+F G H N P S U V -> 7
+I M -> 1
+J I M S -> 1
+M P I S W -> 2
+M N J U W I P S -> 3
+J I S P W M N U -> 4
+J I M N P S W U -> 5
+I J M N P S U W -> 7
+A W -> 1
+J C A V -> 1
+C S W A D -> 2
+M C D S A V -> 3
+C D A J V S M W -> 4
+C J A M S W V D -> 5
+A C D J M S V W -> 7
+A L -> 1
+G Y A V -> 1
+L S H A U V Y -> 2
+G H V U Y A S L -> 3
+S H A G V L U -> 4
+S G A H L U Y V -> 5
+A G H L S U V Y -> 7
+D N -> 1
+G N D Y -> 1
+L D G N Z -> 2
+E D L N G H Z Y -> 3
+G L D E N H Z Y -> 4
+L G D H N Y E Z -> 5
+D E G H L N Y Z -> 7
+B M -> 1
+E P B M -> 1
+D B X H K P -> 2
+E H B M K P X -> 3
+D H B E P K M X -> 4
+E M D K P X B H -> 5
+B D E H K M P X -> 7
+D I -> 1
+D U Y -> 2
+R U D I W -> 2
+I R W D Y Q U -> 3
+I U Q W Y D P R -> 4
+I D P R U W Y Q -> 5
+D I P Q R U W Y -> 7
+F M -> 1
+M U F V -> 1
+R U F H Y V -> 2
+G F H M R V U -> 3
+H Y G M F V R U -> 3
+G M F R U Y H V -> 5
+F G H M R U V Y -> 7
+D W -> 1
+F D R Z -> 1
+U D Z L W -> 2
+F D R L W U Z K -> 3
+K D F L W R Z U -> 4
+F K D R U W L Z -> 5
+D F K L R U W Z -> 7
+D L -> 1
+E D R L -> 1
+E T N D R J -> 2
+E D J T N L R -> 3
+E J K D R T L N -> 4
+E D J K N T L R -> 5
+D E J K L N R T -> 7
+B L -> 1
+T W B Z -> 1
+L P T Y B W -> 2
+L P Z B W S T Y -> 3
+S W P Z Y B L T -> 3
+P B L S W Y Z T -> 5
+B L P S T W Y Z -> 7
+B U -> 1
+E T B K -> 1
+E K L B U I -> 2
+I B P E T U K -> 3
+E I K B P L T U -> 4
+E B K L P U T I -> 5
+B E I K L P T U -> 7
+D F -> 1
+D P Q -> 2
+F D O H Q V W -> 2
+F H D W P V Q O -> 3
+F H D O V Q P W -> 4
+O D F H P Q V W -> 5
+D F H O P Q V W -> 7
+A G -> 1
+O U A V -> 1
+B U G X A I V -> 2
+I U X G A O V -> 3
+B G A I U X V -> 4
+G B A I U X V O -> 5
+A B G I O U V X -> 7
+C J -> 1
+M C I Y -> 1
+I J P Y C M Q -> 2
+J C M P Q W Y -> 3
+I M C P Q W Y -> 4
+J P C I Q W Y M -> 5
+C I J M P Q W Y -> 7
+A Y -> 1
+Q A E Y -> 1
+C E F A I Q -> 2
+E A C I Q W Y -> 3
+C F E I Q A Y W -> 4
+C A E I Q W Y F -> 5
+A C E F I Q W Y -> 7
+B P -> 1
+E P B Z -> 1
+L B R E P Z N -> 2
+H P B R E N -> 3
+H P Z R B E N L -> 3
+E H B N P R Z L -> 5
+B E H L N P R Z -> 7
+E P -> 1
+J O E Y -> 1
+M E P T X Y -> 2
+J O E T M Y X P -> 3
+J T E X Y P O -> 4
+J O E M P Y X T -> 5
+E J M O P T X Y -> 7
+B E -> 1
+E B U O -> 1
+O B F T P Y -> 2
+E B P T O U F Y -> 3
+O U F T B E P Y -> 3
+F P B T U Y E O -> 5
+B E F O P T U Y -> 7
+A F -> 1
+F A T P -> 1
+F T A P I -> 2
+D A F T N P X I -> 3
+F A D I P N X T -> 4
+F D I N P T A X -> 5
+A D F I N P T X -> 7
+E P -> 1
+N Z E W -> 1
+N V Z E W P -> 2
+I P N U E V W Z -> 3
+I E N U V Z P W -> 4
+V E I N U Z P W -> 5
+E I N P U V W Z -> 7
+B U -> 1
+H B J P -> 1
+H B E N J P -> 2
+E B F H U N -> 3
+F H B E U N J P -> 4
+E F B H P U J N -> 5
+B E F H J N P U -> 7
+A R -> 1
+G A Z V -> 1
+B E A W Z G -> 2
+R A E B Z G W V -> 3
+B E R A W Z G V -> 4
+G V A B E W R Z -> 5
+A B E G R V W Z -> 7
+A N -> 1
+D A Q N -> 1
+D H A N T -> 2
+D Q H N G A T I -> 2
+D A I G Q T H N -> 4
+D G A N Q T I H -> 5
+A D G H I N Q T -> 7
+C M -> 1
+O C K T -> 1
+K O U C M W -> 2
+M O W C Y T U -> 3
+M K O C Y U T W -> 4
+O C K M T U W Y -> 5
+C K M O T U W Y -> 7
+A D -> 1
+A B E -> 2
+B F P V A D E -> 2
+B P R E D A F -> 3
+B D A F V E R P -> 4
+D F B P R V A E -> 5
+A B D E F P R V -> 7
+D Z -> 1
+S O D Z -> 1
+G L W D V O -> 2
+G Z D V L W S -> 2
+G L D O S W Z V -> 4
+O S D L V Z G W -> 5
+D G L O S V W Z -> 7
+B Z -> 1
+B R V -> 2
+U Z B R V -> 2
+E D B Z L V U -> 2
+D Z U R B E V L -> 3
+E B D R V Z U L -> 5
+B D E L R U V Z -> 7
+C Y -> 1
+E C I G -> 1
+E G I Y C P T -> 2
+E I C Y G X -> 3
+E I C X Y P G T -> 4
+I C E G P T X Y -> 5
+C E G I P T X Y -> 7
+C Y -> 1
+K Y C T -> 1
+K P Y N C T -> 2
+K N C Y P T Z -> 3
+I N T Y Z C K P -> 4
+I T C K Y Z P N -> 5
+C I K N P T Y Z -> 7
+A O -> 1
+O Q A S -> 1
+N O A Y S -> 2
+N A S Q Y U O -> 3
+H N S U A Y O Q -> 3
+H O A Q S Y U N -> 5
+A H N O Q S U Y -> 7
+H U -> 1
+R T H V -> 1
+R T X H U S -> 2
+J R H T S V U X -> 3
+R J T H V S U X -> 4
+J H R T U X V S -> 5
+H J R S T U V X -> 7
+D M -> 1
+M D Q Z -> 1
+X D M Q Z -> 2
+F L Q D M X Z K -> 3
+M D K F L Q Z X -> 4
+F L K M Q Z D X -> 5
+D F K L M Q X Z -> 7
+B J -> 1
+G J B I -> 1
+I J G R B M T -> 2
+G J M R B T I P -> 3
+G P B R T M J I -> 4
+G B I J M R T P -> 5
+B G I J M P R T -> 7
+H W -> 1
+Q H Z R -> 1
+Q H I J U -> 2
+Q R W H I J Z -> 3
+I J U H Z W Q R -> 4
+I J H R U Z W Q -> 5
+H I J Q R U W Z -> 7
+B C -> 1
+O B N V -> 1
+N B C F V U -> 2
+C K N U B V O -> 3
+C O F U V B K N -> 4
+F O B C K N U V -> 5
+B C F K N O U V -> 7
+J T -> 1
+L X J S -> 1
+L N J K S -> 2
+K N Q J X L S -> 3
+K J L Q S T N X -> 4
+K L N Q S X J T -> 5
+J K L N Q S T X -> 7
+B F -> 1
+F O B V -> 1
+J B G Y O V -> 2
+G J B O F Y V M -> 3
+F M G J V Y B O -> 4
+F B G O V Y M J -> 5
+B F G J M O V Y -> 7
+A V -> 1
+A F K -> 2
+F K V T A P Y -> 2
+K A T E V P Y -> 3
+E A F P T Y K V -> 4
+E A K P V Y T F -> 5
+A E F K P T V Y -> 7
+A E -> 1
+H E A T -> 1
+F A X T I H -> 2
+E A H I V F T X -> 3
+E H T V X A I F -> 4
+F I A E H X V T -> 5
+A E F H I T V X -> 7
+C K -> 1
+E K C Q -> 1
+K F C X V O -> 2
+F C E O V Q K -> 3
+F O C E K X V -> 4
+F C E K O X Q V -> 5
+C E F K O Q V X -> 7
+H W -> 1
+H I W -> 2
+O I U H W -> 2
+O T H W V Q U -> 3
+Q V H I U T O W -> 3
+I H Q T U W O V -> 5
+H I O Q T U V W -> 7
+A D -> 1
+N A M R -> 1
+M A U V N -> 2
+R A D M N X U -> 3
+M N A D R U X V -> 4
+M A D R U V X N -> 5
+A D M N R U V X -> 7
+D I -> 1
+N D I S -> 1
+I K D O N S -> 2
+G I K N S D Z O -> 3
+G S D I Z O K N -> 4
+I G D N S Z O K -> 5
+D G I K N O S Z -> 7
+B V -> 1
+E B F P -> 1
+E B P F N J -> 2
+J B L P E N V -> 3
+F B E L P V J N -> 4
+J B E F L V N P -> 5
+B E F J L N P V -> 7
+B G -> 1
+B D R -> 2
+G H Y B D V -> 2
+D Y B G V H -> 3
+G H R B T D V Y -> 4
+D B G H R V Y T -> 5
+B D G H R T V Y -> 7
+D R -> 1
+E D O J -> 1
+L D J K M R -> 2
+J E K M D R O L -> 3
+K J R L E D O M -> 3
+J D E L M R O K -> 5
+D E J K L M O R -> 7
+B R -> 1
+E W B R -> 1
+N Y B E W R -> 2
+E B R U Y W N S -> 3
+E R U S W N B Y -> 4
+R S B N W Y E U -> 5
+B E N R S U W Y -> 7
+A U -> 1
+A L V -> 2
+L U J A Q N -> 2
+J Q A L I V N -> 3
+J A I L Q U N V -> 4
+I J A L Q U N V -> 5
+A I J L N Q U V -> 7
+C O -> 1
+L C O P -> 1
+M O S C P -> 2
+L M O T C X P S -> 3
+L O C M S T P X -> 4
+L M C O P X S T -> 5
+C L M O P S T X -> 7
+E V -> 1
+F V E O -> 1
+K F E V W L -> 2
+I L E V F O W K -> 2
+I F L E V W O K -> 4
+I E F L O W K V -> 5
+E F I K L O V W -> 7
+A F -> 1
+D A F E -> 1
+P T A E Y -> 2
+T D E N P A F Y -> 2
+F A E D T Y P N -> 4
+D E A F P Y N T -> 5
+A D E F N P T Y -> 7
+C T -> 1
+I C T P -> 1
+N Z C H P X -> 2
+I N P T C H X Z -> 3
+H N P C T I X Z -> 4
+H I C N T X P Z -> 5
+C H I N P T X Z -> 7
+F Y -> 1
+L Y F T -> 1
+P L F N Y Q -> 2
+N V T P L F Y Q -> 2
+L P Q F V N T Y -> 4
+N L F P T V Y Q -> 5
+F L N P Q T V Y -> 7
+C D -> 1
+C N Y -> 2
+D S J C K L -> 2
+D J C S K N Y -> 3
+J Y S C L D N K -> 4
+D J C N S Y K L -> 5
+C D J K L N S Y -> 7
+A X -> 1
+K A P R -> 1
+I A R G K X P -> 2
+R G K I X A P Z -> 2
+I A G K R P X Z -> 4
+G K A I X Z P R -> 5
+A G I K P R X Z -> 7
+C E -> 1
+C E R -> 2
+I N U C R -> 2
+E Y I W N C U R -> 2
+E I C U Y W N -> 4
+N R E I W Y C U -> 5
+C E I N R U W Y -> 7
+A Y -> 1
+O C A S -> 1
+E C A O S T -> 2
+C O X E T A S Y -> 3
+C E Y S T A O X -> 3
+C E A O T Y S X -> 5
+A C E O S T X Y -> 7
+H Y -> 1
+H Y Z -> 2
+M Q Z H P -> 2
+P M H Z Y R -> 3
+M P Y R Z W H Q -> 4
+M Q P W Y Z H R -> 5
+H M P Q R W Y Z -> 7
+A Z -> 1
+D A K L -> 1
+Q A R K U Z -> 2
+D A Q U R K Z L -> 3
+Q A D K U L Z -> 4
+D A K L U Z R Q -> 5
+A D K L Q R U Z -> 7
+C H -> 1
+C V Z -> 2
+M C Y T Z -> 2
+M C H X Y T V -> 3
+M C X H Y Z T V -> 4
+H M C T X Y V Z -> 5
+C H M T V X Y Z -> 7
+H V -> 1
+M H K Q -> 1
+L M O V H T Q -> 2
+K H V O Q L T -> 3
+L K H O T Q M V -> 4
+M Q H K O T L V -> 5
+H K L M O Q T V -> 7
+A F -> 1
+F V A I -> 1
+F H I A X J -> 2
+F H V D A X I J -> 3
+D H J A V X I F -> 4
+D H F I J X A V -> 5
+A D F H I J V X -> 7
+H V -> 1
+K S H V -> 1
+M R S H T V -> 2
+K R T Z H M S -> 3
+K V H S T Z M R -> 3
+K H M R S V Z T -> 5
+H K M R S T V Z -> 7
+E U -> 1
+F E W M -> 1
+M E W P U X -> 2
+G X E F W U -> 3
+P G U E M F X W -> 3
+M F E G U X P W -> 5
+E F G M P U W X -> 7
+D L -> 1
+G D U L -> 1
+U D E K Y -> 2
+E F K D G Y L -> 3
+E D F K L Y G U -> 4
+E K D G L Y U F -> 5
+D E F G K L U Y -> 7
+A X -> 1
+A P Y -> 2
+E P R A Y X Q -> 2
+B R A P Q X Y E -> 3
+B P A E X R Y Q -> 4
+Q A B E P X Y R -> 5
+A B E P Q R X Y -> 7
+F I -> 1
+M P F O -> 1
+M V F G X -> 2
+I V P G F X O -> 2
+G O P V X F M I -> 4
+O M F G V X I P -> 5
+F G I M O P V X -> 7
+A B -> 1
+D A J W -> 1
+B D W A K L F -> 2
+B A K F L D J W -> 3
+B D A F J L W K -> 4
+D K A F L W B J -> 5
+A B D F J K L W -> 7
+A Y -> 1
+A D P -> 2
+R A D S Y X -> 2
+D G R X A P S Y -> 3
+S P G R A X D Y -> 3
+D G A P S X Y R -> 5
+A D G P R S X Y -> 7
+D Z -> 1
+G U D Z -> 1
+G D F J U H -> 2
+F G U D Z H N J -> 2
+F D H G N Z J U -> 4
+F D H J U Z G N -> 5
+D F G H J N U Z -> 7
+B L -> 1
+B E S -> 2
+K T L B Y S -> 2
+E Y S T B L U K -> 3
+E K U Y S B L T -> 3
+L S E K T Y B U -> 5
+B E K L S T U Y -> 7
+A W -> 1
+I A M N -> 1
+N I V A O T -> 2
+M A I O W T N -> 3
+N T A M O V I W -> 3
+M T A I O V W N -> 5
+A I M N O T V W -> 7
+B V -> 1
+B E U -> 2
+K P B U S -> 2
+E N K P B S U -> 3
+N B E K S V P U -> 4
+P E B K N U V S -> 5
+B E K N P S U V -> 7
+B I -> 1
+O B U V -> 1
+D C B H O U -> 2
+D B C H U I O -> 3
+C D H B O V I U -> 4
+D B C H O U V I -> 5
+B C D H I O U V -> 7
+F T -> 1
+F L W -> 2
+O J W F Q T -> 2
+J Q O T F L M W -> 3
+J F O Q T W M L -> 4
+J O L M Q W F T -> 5
+F J L M O Q T W -> 7
+F Y -> 1
+H F S U -> 1
+I F U G S Y -> 2
+G H F S U Y N -> 3
+I G F H S Y U N -> 4
+N Y F H I S G U -> 5
+F G H I N S U Y -> 7
+B I -> 1
+O B I P -> 1
+I B N O P -> 2
+E I P Y B V N O -> 3
+E I N O P B V Y -> 4
+E I O P V Y B N -> 5
+B E I N O P V Y -> 7
+C T -> 1
+Y S C Z -> 1
+E T U Y C Z -> 2
+E Y C U S W Z -> 3
+E T U C Y S W Z -> 4
+E C S T W Y U Z -> 5
+C E S T U W Y Z -> 7
+D Z -> 1
+J D N M -> 1
+H D P Z M N -> 2
+N M D H P Z S -> 3
+M H D J N S P Z -> 4
+H D J N P Z S M -> 5
+D H J M N P S Z -> 7
+D U -> 1
+Q D X U -> 1
+N D S W Z U -> 2
+U D N W S Z -> 3
+N Q D S X Z U -> 4
+S Z D N Q X W U -> 5
+D N Q S U W X Z -> 7
+A E -> 1
+P A M Q -> 1
+J A W M Q P -> 2
+E A J P Y W Q -> 3
+E J W A Y Q M P -> 4
+E A J M P Q W Y -> 5
+A E J M P Q W Y -> 7
+A M -> 1
+C A K R -> 1
+E Z K A R M -> 2
+C E M R A H Z -> 2
+C Z A M E K R H -> 3
+E M A C H K R Z -> 5
+A C E H K M R Z -> 7
+B O -> 1
+G T B J -> 1
+G B T N M O -> 2
+I G N B T M O J -> 3
+G B I O T J M N -> 4
+G B I J N O M T -> 5
+B G I J M N O T -> 7
+B C -> 1
+C X B O -> 1
+C B W X H -> 2
+C O H P B X R W -> 3
+C H R B P X O W -> 3
+H C B O P R W X -> 5
+B C H O P R W X -> 7
+A F -> 1
+E A Q M -> 1
+E M O A H Q -> 2
+E H F O A M Q -> 3
+E F K A O H M Q -> 4
+F A E H M O Q K -> 5
+A E F H K M O Q -> 7
+B I -> 1
+L B K S -> 1
+K L B I W S -> 2
+I K L R W B S Y -> 3
+K L I B W Y S R -> 4
+L I B K S Y R W -> 5
+B I K L R S W Y -> 7
+A Q -> 1
+K A L O -> 1
+L O K A V M -> 2
+K M O A L V W -> 3
+K A M O Q W V L -> 4
+K O A L M Q V W -> 5
+A K L M O Q V W -> 7
+A H -> 1
+H A G X -> 1
+C A D X G K U -> 2
+G A D K U H X -> 3
+G H A D K C U X -> 4
+H A C D G U K X -> 5
+A C D G H K U X -> 7
+A X -> 1
+U T A X -> 1
+D A B X V S -> 2
+B S D T A X U V -> 3
+B A D T V U X -> 4
+T A B D S X U V -> 5
+A B D S T U V X -> 7
+D P -> 1
+D G M -> 2
+G M P D V S -> 2
+G K S W D P M V -> 3
+G P M D W K S V -> 4
+S K D G M P V W -> 5
+D G K M P S V W -> 7
+A W -> 1
+U E A W -> 1
+E A W J H X -> 2
+E A M U X H J W -> 3
+E A J U W M X H -> 4
+H A E M U X J W -> 5
+A E H J M U W X -> 7
+I K -> 1
+I K U -> 2
+J K U I O Y -> 2
+J I M O Y P U -> 3
+J U I P Y K O -> 4
+K I J M P U Y O -> 5
+I J K M O P U Y -> 7
+C F -> 1
+N D C O -> 1
+D L C M W N -> 2
+L M C D F O N -> 2
+D F M C N O W L -> 4
+D C L M N O W F -> 5
+C D F L M N O W -> 7
+A F -> 1
+J A Q W -> 1
+F Q S A J R -> 2
+F A Q R W J S -> 3
+B J F Q S A R W -> 4
+J B A F Q W R S -> 5
+A B F J Q R S W -> 7
+C P -> 1
+G C P H -> 1
+G C H I Y P -> 2
+E H C P I Z Y -> 3
+G H E C I Y Z P -> 4
+E I C H P Z G Y -> 5
+C E G H I P Y Z -> 7
+A P -> 1
+T E A W -> 1
+E N P A B T -> 2
+B F A E W P N -> 3
+B A E F T P W N -> 4
+B A F N T W E P -> 5
+A B E F N P T W -> 7
+G P -> 1
+P O G W -> 1
+O G J W V -> 2
+W J V G O N P Y -> 2
+J G O P V W Y -> 4
+J G N P V Y W O -> 5
+G J N O P V W Y -> 7
+E H -> 1
+I W E S -> 1
+F S Q E I H -> 2
+F E H I S K W -> 3
+F H E I W Q K S -> 4
+H Q E F I K W S -> 5
+E F H I K Q S W -> 7
+A K -> 1
+B A K C -> 1
+B C D K A I R -> 2
+B A R M I D K C -> 3
+C R D I A B K M -> 3
+C K A D M R B I -> 5
+A B C D I K M R -> 7
+B C -> 1
+H B O L -> 1
+G B L H O -> 2
+G H V C O B M L -> 3
+L C B H V G O M -> 3
+C H G L M O B V -> 5
+B C G H L M O V -> 7
+A S -> 1
+D E A N -> 1
+D A K N E -> 2
+D K A E B S N R -> 3
+B R A E K D N S -> 3
+B A E K N R D S -> 5
+A B D E K N R S -> 7
+B K -> 1
+B P R -> 2
+D P B R L W -> 2
+D G K P B W L R -> 3
+D R P B W K G L -> 4
+D B G K P R L W -> 5
+B D G K L P R W -> 7
+C Z -> 1
+O C Z W -> 1
+H Z W C O U -> 2
+H Z V C K W U -> 3
+H V O C W U K Z -> 4
+K V C H W Z O U -> 5
+C H K O U V W Z -> 7
+C X -> 1
+D C X L -> 1
+D C P L M O -> 2
+D Z M O C L P -> 3
+D O L M Z C P X -> 4
+D P C M O Z L X -> 5
+C D L M O P X Z -> 7
+A S -> 1
+G T A L -> 1
+F T A R G -> 2
+F A G L T X S -> 3
+F L X A T G R S -> 3
+F G A R S X T L -> 5
+A F G L R S T X -> 7
+A M -> 1
+B A Q L -> 1
+L Q T M A Y -> 2
+B A L J Q T M -> 3
+B L M A Q J T Y -> 4
+J L B M Q Y A T -> 5
+A B J L M Q T Y -> 7
+C D -> 1
+N S C U -> 1
+D I C S T -> 2
+D U C I T S N H -> 2
+D I C H N S T U -> 4
+D N C H T U I S -> 5
+C D H I N S T U -> 7
+B X -> 1
+Q Z B X -> 1
+N Q Z B L T -> 2
+Q N R X B Z T -> 2
+Q X T N B Z L R -> 3
+L B N Q T Z X R -> 5
+B L N Q R T X Z -> 7
+A N -> 1
+A L V -> 2
+K M V A O N -> 2
+M A K Q V O N -> 3
+K A L O Q V M N -> 4
+K A L N O Q V M -> 5
+A K L M N O Q V -> 7
+B T -> 1
+L B T X -> 1
+P L Y B S -> 2
+P R B X S T Y -> 3
+R P B Y L S X T -> 3
+L R B P X Y T S -> 5
+B L P R S T X Y -> 7
+E Y -> 1
+E H O -> 2
+H E O U N R -> 2
+I E H U Y O R -> 3
+H R U E Y O I N -> 4
+H Y I N R U E O -> 5
+E H I N O R U Y -> 7
+A R -> 1
+P U A R -> 1
+L A U R Q V -> 2
+Q A L P U R V -> 3
+L Z Q A V R P U -> 4
+L A P Q R U Z V -> 5
+A L P Q R U V Z -> 7
+B X -> 1
+K C B R -> 1
+C B M F R X K -> 2
+C I K R B F M X -> 3
+F K R B C X I M -> 4
+C F B I M R K X -> 5
+B C F I K M R X -> 7
+C D -> 1
+D C F P -> 1
+D R F C K P -> 2
+D F C R K N P Y -> 3
+F P D C K Y N R -> 3
+N F C D P Y K R -> 5
+C D F K N P R Y -> 7
+A B -> 1
+A J Z -> 2
+K O B A Z R -> 2
+R A B O Z T -> 3
+B J K A R T Z O -> 4
+B A J K O Z T R -> 5
+A B J K O R T Z -> 7
+A N -> 1
+Q A E U -> 1
+Q A O X U R -> 2
+O A U E N Q X R -> 3
+E A R U X Q N O -> 4
+Q A E N O R U X -> 5
+A E N O Q R U X -> 7
+B D -> 1
+G B L N -> 1
+L B O N Z -> 2
+D B Z T G O N -> 3
+D B G L N Z O T -> 4
+D L B O T Z G N -> 5
+B D G L N O T Z -> 7
+A C -> 1
+C A J P -> 1
+K P J R A X Z -> 2
+K R A X P C Z -> 2
+C P K X Z A R J -> 4
+J R A C K X Z P -> 5
+A C J K P R X Z -> 7
+F K -> 1
+F G Z -> 2
+G N Y F K T -> 2
+T U F Y N Z -> 3
+K T F U Z Y N -> 4
+G F N T Y Z K U -> 5
+F G K N T U Y Z -> 7
+B U -> 1
+O H B U -> 1
+E B O U N H -> 2
+D N E U B H O -> 3
+D B M E N U H O -> 4
+H E B D N O U M -> 5
+B D E H M N O U -> 7
+B O -> 1
+K B H N -> 1
+K B H N Z -> 2
+H K M B Z N O Q -> 3
+M O B H Q K N Z -> 4
+H K B M N O Z Q -> 5
+B H K M N O Q Z -> 7
+H Q -> 1
+I H M X -> 1
+Q S I H W X U -> 2
+I Q H W M X U -> 3
+I Q H U X M S -> 4
+M H I S W X U Q -> 5
+H I M Q S U W X -> 7
+C F -> 1
+K C M Q -> 1
+F M K C Q N -> 2
+F K X C R Q M N -> 3
+F M C Q X K R N -> 4
+K M C F N Q X R -> 5
+C F K M N Q R X -> 7
+A Y -> 1
+S H A U -> 1
+H A Z Q Y -> 2
+F Y A Z H U Q S -> 3
+Q Z F H U A Y S -> 4
+F A Q S U Y Z H -> 5
+A F H Q S U Y Z -> 7
+B H -> 1
+J H B T -> 1
+H I B O J -> 2
+H I B O T Y R -> 3
+I H B O J Y R T -> 3
+J B I O T Y H R -> 5
+B H I J O R T Y -> 7
+C W -> 1
+C I J -> 2
+G C I M W -> 2
+E G C T W J I -> 3
+G E T I M C J W -> 3
+I W E G M T C J -> 5
+C E G I J M T W -> 7
+C J -> 1
+V C N W -> 1
+F P W C T N -> 2
+N V T F C P W -> 2
+F C N J T V P W -> 4
+F J C N P W V T -> 5
+C F J N P T V W -> 7
+C L -> 1
+L C Q P -> 1
+G L Z P C W -> 2
+G P C W Z L Q -> 3
+G P C L W Z Q X -> 4
+G C P Q W X Z L -> 5
+C G L P Q W X Z -> 7
+B J -> 1
+E B S Q -> 1
+F B H Q S J -> 2
+H J Q P E B F S -> 2
+E J B P S Q F H -> 4
+F E B H P Q J S -> 5
+B E F H J P Q S -> 7
+A I -> 1
+A U Y -> 2
+U I A P Z Y -> 2
+I V A U N Z Y P -> 3
+N U I P Y A V Z -> 4
+P A I N U V Y Z -> 5
+A I N P U V Y Z -> 7
+B H -> 1
+F L B N -> 1
+F G N B E L -> 2
+E N B H W L -> 3
+F G E H N L B W -> 4
+E F B G H L W N -> 5
+B E F G H L N W -> 7
+A Q -> 1
+A S Y -> 2
+C N O K A S -> 2
+K O Q S Y A N -> 3
+C A O Q Y S N -> 4
+K O A C N Q S Y -> 5
+A C K N O Q S Y -> 7
+A Z -> 1
+O B A Z -> 1
+D K V A Z -> 2
+B J Z D V A O K -> 3
+D B K V Z A J O -> 4
+B A D K V Z O J -> 5
+A B D J K O V Z -> 7
+E L -> 1
+S E L X -> 1
+H X E L M -> 2
+H L I Y S E X M -> 2
+H I E M Y L S -> 4
+I X E H L S M Y -> 5
+E H I L M S X Y -> 7
+C D -> 1
+D P C W -> 1
+F C J D W P -> 2
+F U J D P C W Y -> 2
+F U P D W C J Y -> 4
+U C D F J P W Y -> 5
+C D F J P U W Y -> 7
+M Q -> 1
+X M R Z -> 1
+O Q X M R U Z -> 2
+O P Q X R M Z U -> 3
+Q O P R Z M X U -> 4
+O U M P R X Q Z -> 5
+M O P Q R U X Z -> 7
+G Y -> 1
+I G N Y -> 1
+I L N G U Y -> 2
+I U P Y G N L K -> 3
+I K G L Y U N P -> 4
+I L G K N U P Y -> 5
+G I K L N P U Y -> 7
+D Q -> 1
+I F D N -> 1
+I N D E M -> 2
+F T M Q D I N -> 3
+M F D N E T I Q -> 3
+F E D I N Q T M -> 5
+D E F I M N Q T -> 7
+D P -> 1
+I Z D O -> 1
+M D O W N -> 2
+I W P Z D O M -> 3
+M D I N O P Z -> 4
+M Z I N O P D W -> 5
+D I M N O P W Z -> 7
+B L -> 1
+B E U -> 2
+G L X E B W -> 2
+E G L U B W X -> 3
+E B G L W U M X -> 4
+M L B G W X E U -> 5
+B E G L M U W X -> 7
+A O -> 1
+A D O -> 2
+D A R G K S O -> 2
+G O A K D R S Q -> 2
+D R Q G O A S K -> 3
+G A D K O Q S R -> 5
+A D G K O Q R S -> 7
+B T -> 1
+N Y B P -> 1
+N B G M Y -> 2
+E G N P B T Y -> 3
+G B E M P N T Y -> 4
+M G B E N P Y T -> 5
+B E G M N P T Y -> 7
+K P -> 1
+P M K S -> 1
+M Q S K N -> 2
+M P K Q S Z Y -> 3
+M N Z K Q P Y S -> 3
+P K M N S Z Q Y -> 5
+K M N P Q S Y Z -> 7
+E Y -> 1
+J E V P -> 1
+G E V U X Y -> 2
+J E Y G P V X -> 3
+G E U V Y X J -> 4
+G E J P U X Y V -> 5
+E G J P U V X Y -> 7
+B N -> 1
+F W B N -> 1
+N O X B F V -> 2
+F B V W X O N -> 3
+L W F O V B N X -> 4
+F B L N V W X O -> 5
+B F L N O V W X -> 7
+D W -> 1
+D J R -> 2
+M R X D S U -> 2
+J X D R U M -> 3
+J D M R U W X S -> 4
+S D J M R U W X -> 5
+D J M R S U W X -> 7
+B M -> 1
+K W B V -> 1
+E B M J K W -> 2
+E J V B K O W M -> 3
+E J K M V W B O -> 4
+E J B M O V W K -> 5
+B E J K M O V W -> 7
+A U -> 1
+C A E S -> 1
+B V E A C -> 2
+B V A G C U E -> 2
+C E A S U G B V -> 3
+B G A E S V C U -> 5
+A B C E G S U V -> 7
+A X -> 1
+Q A V U -> 1
+K L Q F A V -> 2
+F A U V X K Q -> 3
+Q X L K V A F U -> 3
+K Q A F L X U V -> 5
+A F K L Q U V X -> 7
+A T -> 1
+P A N W -> 1
+B P T A Q W -> 2
+B A Q T W Z N -> 3
+N W A Q Z B P T -> 3
+B N A P Q Z T W -> 5
+A B N P Q T W Z -> 7
+B P -> 1
+P B S U -> 1
+O B U Y P -> 2
+G O U Y W B P S -> 3
+P G O B Y S W U -> 3
+G U B O P W Y S -> 5
+B G O P S U W Y -> 7
+A Q -> 1
+I A Q S -> 1
+E P A S V Q -> 2
+E I A Q B S V -> 3
+B E A Q S V P I -> 4
+I A B E P S Q V -> 5
+A B E I P Q S V -> 7
+G T -> 1
+T Q G X -> 1
+I G T X Q P -> 2
+I G U Q X P T W -> 3
+P G U I T X Q W -> 4
+P T G I Q W U X -> 5
+G I P Q T U W X -> 7
+D S -> 1
+O D P S -> 1
+G O P S D Q -> 2
+G S D O W I Q P -> 3
+O I G D W P Q S -> 3
+G O D P Q W S I -> 5
+D G I O P Q S W -> 7
+A R -> 1
+Q A P R -> 1
+G P R A Q -> 2
+E P G Z A R J Q -> 3
+E G J A P R Q Z -> 4
+P A E G J R Q Z -> 5
+A E G J P Q R Z -> 7
+A J -> 1
+M U A P -> 1
+J A M P K -> 2
+H M Q A J K U P -> 3
+H A J K M P Q U -> 4
+H A J K P Q U M -> 5
+A H J K M P Q U -> 7
+E O -> 1
+K O E Z -> 1
+O E K X V -> 2
+K P Z Y O E V -> 3
+K E V P X Y Z O -> 4
+K O E P V Z X Y -> 5
+E K O P V X Y Z -> 7
+I O -> 1
+I O R -> 2
+O P Q I R Y -> 2
+P K M Q I Y R -> 2
+P R I O K M Q Y -> 3
+O I K M P Q Y R -> 5
+I K M O P Q R Y -> 7
+A U -> 1
+M A F N -> 1
+F A M N U V -> 2
+F M R V A H U N -> 3
+H A M F N U R V -> 4
+M A F H R U N V -> 5
+A F H M N R U V -> 7
+B L -> 1
+B C P -> 2
+F G C B L P -> 2
+F B L C G P H -> 3
+C G F H K P B L -> 4
+C G B F H P L K -> 5
+B C F G H K L P -> 7
+A M -> 1
+C A F Q -> 1
+F C U A J -> 2
+C F Q M A V U -> 2
+C J M F U A Q V -> 4
+F C A Q U V J M -> 5
+A C F J M Q U V -> 7
+B D -> 1
+K B D Z -> 1
+D B Z J K W H -> 2
+K W B J M Z -> 3
+D W M B Z J K H -> 4
+H D B K W Z M J -> 5
+B D H J K M W Z -> 7
+A B -> 1
+E P A F -> 1
+B F W A L T -> 2
+B W E P A T L -> 3
+B T E W A L F P -> 3
+B E A F P T L W -> 5
+A B E F L P T W -> 7
+A W -> 1
+F W A R -> 1
+F X R N A J W -> 2
+J R N W A F X -> 3
+I F N A R X W J -> 4
+J A F I R W X N -> 5
+A F I J N R W X -> 7
+C J -> 1
+I V C J -> 1
+N Q C J V Z -> 2
+N X C I J V Q Z -> 3
+I V Q C J X N Z -> 3
+I C J N V Z X Q -> 5
+C I J N Q V X Z -> 7
+F T -> 1
+R S F T -> 1
+L R P Z F S T -> 2
+K L P F R S Z T -> 3
+L R F K S P Z T -> 4
+P Z K L R S F T -> 5
+F K L P R S T Z -> 7
+A R -> 1
+A Q W -> 2
+J W A B P -> 2
+P J A Q B W R Z -> 2
+B P J A Z W Q R -> 4
+B P A Q R Z W J -> 5
+A B J P Q R W Z -> 7
+E T -> 1
+H E U T -> 1
+F S W E T Q -> 2
+F Q E H W T S -> 3
+F E U T W Q H S -> 4
+H F Q S T W E U -> 5
+E F H Q S T U W -> 7
+B Y -> 1
+I O B K -> 1
+K B U Y M O -> 2
+M B K Y U O -> 3
+D B K O U M I Y -> 4
+D M I K O Y B U -> 5
+B D I K M O U Y -> 7
+C Y -> 1
+X H C Z -> 1
+K C F H M -> 2
+K C F Y X Z M -> 3
+H X F Y Z C M K -> 4
+Y C F H K M X Z -> 5
+C F H K M X Y Z -> 7
+C S -> 1
+L C S P -> 1
+L C T G N P -> 2
+F G N P C S L T -> 3
+L P G C F T N S -> 3
+F C G L P S T N -> 5
+C F G L N P S T -> 7
+A B -> 1
+B A M J -> 1
+E A J B R V -> 2
+B A J R M E O -> 3
+B E J A O R V M -> 4
+B M E O R V A J -> 5
+A B E J M O R V -> 7
+D I -> 1
+I G D W -> 1
+G P T I D Z -> 2
+G D Z W P I T Y -> 3
+G T D I P W Y Z -> 3
+G D T W Y Z P I -> 5
+D G I P T W Y Z -> 7
+A T -> 1
+C A P I -> 1
+D A I T M -> 2
+M C R A P I T -> 2
+P M I C D A R T -> 3
+M C A D I P R T -> 5
+A C D I M P R T -> 7
+A E -> 1
+F P A Z -> 1
+B E Z A U F P -> 2
+B E P A U O Z -> 3
+B A E F P U O Z -> 4
+E F A B O P U Z -> 5
+A B E F O P U Z -> 7
+F I -> 1
+Q F J X -> 1
+J Q F L R -> 2
+I J F O L R X Q -> 3
+I O J F Q R L X -> 3
+I F L Q R X J O -> 5
+F I J L O Q R X -> 7
+A Y -> 1
+D R A Z -> 1
+D I Z Y A N R -> 2
+D N I A K Z Y -> 3
+D A I N R K Z Y -> 4
+D K I R Y Z A N -> 5
+A D I K N R Y Z -> 7
+B R -> 1
+P I B S -> 1
+I K G B P S -> 2
+G K S B R P I -> 3
+I K P G U B S R -> 3
+K G I P R U B S -> 5
+B G I K P R S U -> 7
+F Y -> 1
+S F M X -> 1
+M F T N S Y X -> 2
+M Y T X N F S W -> 2
+M N W X Y F S T -> 4
+M N T W X Y F S -> 5
+F M N S T W X Y -> 7
+B V -> 1
+L H B V -> 1
+F L Y R B V -> 2
+H R F V B S L -> 3
+F R B S V Y H L -> 4
+F S B H L Y R V -> 5
+B F H L R S V Y -> 7
+E N -> 1
+E N P -> 2
+F J P E R Y -> 2
+H N E P F J R Y -> 3
+F H J N P R E Y -> 4
+F E H J N Y R P -> 5
+E F H J N P R Y -> 7
+C F -> 1
+C H Q -> 2
+D V H C P Q -> 2
+D N C V Q P H -> 3
+D C F H N P V Q -> 4
+D F C H N Q V P -> 5
+C D F H N P Q V -> 7
+A F -> 1
+I A R O -> 1
+F I R M A J -> 2
+E J M R A F I -> 3
+I A E F J R O M -> 4
+F E I M O R A J -> 5
+A E F I J M O R -> 7
+A K -> 1
+I A P Y -> 1
+B A K Y D V P -> 2
+B A I V K Y D -> 3
+B D A I P K V Y -> 4
+B I A K P Y V D -> 5
+A B D I K P V Y -> 7
+A Y -> 1
+I B A N -> 1
+H G Y A I -> 2
+H B A G Y N M -> 3
+B G H A I Y M N -> 4
+B I A G M N Y H -> 5
+A B G H I M N Y -> 7
+F V -> 1
+V Q F Y -> 1
+G F P V H Y -> 2
+G F P V Y H Q X -> 3
+G H F Q Y V X P -> 4
+H F G P Q Y X V -> 5
+F G H P Q V X Y -> 7
+C D -> 1
+L C E W -> 1
+D L E C K W -> 2
+E D K C R O W L -> 3
+D O W R C L E K -> 3
+E K C D O R L W -> 5
+C D E K L O R W -> 7
+B T -> 1
+P B R Q -> 1
+Q B J T R -> 2
+J R T F V B Q P -> 3
+J F P V Q B T R -> 3
+F J P R T V B Q -> 5
+B F J P Q R T V -> 7
+B I -> 1
+Y U B Z -> 1
+Q R B U Z Y -> 2
+I U Y B X R Z Q -> 2
+I R U B Z Y Q X -> 4
+I B Q R U Y X Z -> 5
+B I Q R U X Y Z -> 7
+C Y -> 1
+I V C Q -> 1
+L I X C Y -> 2
+I J Q V L C X Y -> 3
+I J Q V X Y C L -> 4
+L Q C I V X J Y -> 5
+C I J L Q V X Y -> 7
+A G -> 1
+G L A I -> 1
+G P V A L R -> 2
+I R Z G P A L V -> 3
+G I A P R V Z L -> 4
+V I A G L R P Z -> 5
+A G I L P R V Z -> 7
+D Q -> 1
+Q D Y R -> 1
+R S U D W Y -> 2
+Q W R S D T U -> 3
+Q W Y T D R S U -> 3
+Q T D R U W Y S -> 5
+D Q R S T U W Y -> 7
+F M -> 1
+S M F T -> 1
+I X F M L -> 2
+I M L S F T X -> 3
+I M F X S V T L -> 3
+I T F M V X S L -> 5
+F I L M S T V X -> 7
+C Z -> 1
+E M C Z -> 1
+E C Y T I M Z -> 2
+I K M Z C E T Y -> 3
+E M T C Y I Z K -> 4
+E Y K M T Z C I -> 5
+C E I K M T Y Z -> 7
+B T -> 1
+B F O -> 2
+F G V B T O -> 2
+F T O V B C K -> 2
+C F B K O V T G -> 4
+G C F K T V B O -> 5
+B C F G K O T V -> 7
+A N -> 1
+N A I Z -> 1
+N O I A X -> 2
+I W H Z A O N -> 3
+H A N O X I Z W -> 4
+H N O W X Z A I -> 5
+A H I N O W X Z -> 7
+E H -> 1
+U T E Z -> 1
+O U H E T Z -> 2
+F H E T U Z Y O -> 3
+F H O E U Y T Z -> 4
+U E F H O Y T Z -> 5
+E F H O T U Y Z -> 7
+D Q -> 1
+H O D Q -> 1
+H O X D P Q -> 2
+H O D P Q X -> 3
+H Q D P X V O -> 4
+P D H O Q V K X -> 5
+D H K O P Q V X -> 7
+A G -> 1
+E P A G -> 1
+C A N E G Y P -> 2
+C G N A E Y P -> 3
+V C N A E G P Y -> 3
+C E G N P Y A V -> 5
+A C E G N P V Y -> 7
+F R -> 1
+W Z F Y -> 1
+M F O J Z -> 2
+M O J W F Z R Y -> 3
+J M F O R Z Y W -> 4
+J M F R Y Z W O -> 5
+F J M O R W Y Z -> 7
+B O -> 1
+B K T -> 2
+J K T Q B M Y -> 2
+J M Y Q K B T O -> 3
+J K T M B Y O Q -> 3
+K O B J Q T Y M -> 5
+B J K M O Q T Y -> 7
+H P -> 1
+H L V -> 2
+K H S Y Z V -> 2
+K Y S V H L Z -> 3
+K H L V Y Z P S -> 4
+K P H V Y Z S L -> 5
+H K L P S V Y Z -> 7
+D X -> 1
+F D X I -> 1
+F M R V D X -> 2
+F I M R D V K -> 3
+F D R I K V M X -> 4
+K F I M R V D X -> 5
+D F I K M R V X -> 7
+B R -> 1
+S B U V -> 1
+E B F R P S V -> 2
+E R P B S F V -> 3
+E B F P R V S U -> 4
+E P B R S U F V -> 5
+B E F P R S U V -> 7
+C Y -> 1
+Q C N Y -> 1
+Q S Y Z C W -> 2
+J W C Y S Z N -> 3
+J C N Q S Z W Y -> 4
+Q J N S W Y C Z -> 5
+C J N Q S W Y Z -> 7
+A J -> 1
+N A U W -> 1
+G A J H W N -> 2
+H A G W N U J M -> 3
+N W G H A J M U -> 3
+G W H J N U A M -> 5
+A G H J M N U W -> 7
+B N -> 1
+R N B X -> 1
+D Y R B X N -> 2
+D N R X B Y V P -> 3
+D P V B X Y N R -> 4
+R B D N P V Y X -> 5
+B D N P R V X Y -> 7
+D I -> 1
+D N O -> 2
+E N Q O D U V -> 2
+E N D Q U V O -> 3
+N D E Q U O V -> 4
+Q I D N O U E V -> 5
+D E I N O Q U V -> 7
+A J -> 1
+B J A Q -> 1
+B R A K D J -> 2
+B A Q D T K J -> 3
+B D J R T K A Q -> 4
+B K D J Q R A T -> 5
+A B D J K Q R T -> 7
+B I -> 1
+I B Q K -> 1
+Q K L B V -> 2
+J Q L S B V K -> 3
+J K B I L Q V S -> 4
+J I B K Q V S L -> 5
+B I J K L Q S V -> 7

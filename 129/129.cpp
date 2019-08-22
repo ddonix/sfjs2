@@ -27,26 +27,27 @@ void hardseq(int cur)
 {
 	tot++;
 	if (tot == n) {
-		cur = strlen(seq);
-		for (int j = 0; j < 4 && j < cur; j++)
-			cout << seq[j];
-		int i;
-		for (i = 1; i < (cur - 1) / 4; i++) {
-			cout << " ";
-			for (int j = 0; j < 4; j++)
-				cout << seq[i * 4 + j];
-		}
-		if (i * 4 < cur) {
-			cout << " ";
-			for (int j = 0; i * 4 + j < cur; j++)
-				cout << seq[i * 4 + j];
+		int p = 1;
+		for(int i = 0; i < cur; i++)
+		{
+			if (p != 1 && p%80 == 0)
+			{
+				cout<<endl;
+				p++;
+			}
+			else if (p%5 == 0)
+			{
+				cout<<" ";
+				p++;
+			}
+			cout<<seq[i];
+			p++;
 		}
 		cout << endl<< cur<< endl;
-		return;
 	}
 	if (tot >= n)
 		return;
-	for (char c = 'A'; c <= l; c++) {
+	for (char c = 'A'; c < l; c++) {
 		seq[cur] = c;
 		if (ishard(cur+1))
 			hardseq(cur+1);
@@ -56,13 +57,13 @@ void hardseq(int cur)
 int main()
 {
 	int t;
-	strcpy(seq, "ABACABCACBABCABACABCACBACABA");
-	for(int i = 0; i < strlen(seq)-1; i++)
-		cout<<ishard(strlen(seq)-i)<<endl;
-	/*
+	//strcpy(seq, "ABACABCACBABCABACABCACBACABA");
+	//for(int i = 0; i < strlen(seq)-1; i++)
+	//	cout<<ishard(strlen(seq)-i)<<endl;
+	
 	while (cin >> n >> t && n) {
 		tot = -1;
 		l = 'A' + t;
 		hardseq(0);
-	}*/
+	}
 }
