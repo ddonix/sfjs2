@@ -1,3 +1,9 @@
+/* uva 1354: 天平难题
+*  思路：枚举二叉树。
+*  难点：剪枝，防止重复枚举.思路：将所有叶子分为左右两个子集，枚举子集。
+*
+*/
+
 #include <iostream>
 #include <iomanip>
 #include <cstring>
@@ -13,10 +19,11 @@ int n;
 struct Node 
 {
 	int w;
-	double e;	
+	bool left;
+	double e;
 	double le;
 	double re;
-	Node():w(0){}
+	Node() : w(0){}
 };
 Node node[maxnode];
 bool vis[maxnode];
@@ -33,14 +40,13 @@ int newNode(int l, int r)
 	node[res].le = max(t1+node[l].le, node[r].le-t2);
 	node[res].re = max(t2+node[r].re, node[l].re-t1);
 	node[res].e = node[res].le + node[res].re;
+	node[res].left = node[l].left;
 	return res;
 }
 
 //删除最后一个结点
 int deleteNode()
 {
-	node[nn].w = 0;
-	node[nn].e = node[nn].le = node[nn].re = 0;
 	vis[nn] = false;
 	return --nn;
 }
@@ -68,13 +74,14 @@ void scale(int residue)
 	{
 		for(int i = 0; i < residue-1; i++)
 		{
-			if (node[v[i]].e >= r)
+			if (node[i].e >= r)
 				continue;
 			for(int j = i+1; j < residue; j++)
 			{
-				if (node[v[j]].e >= r)
+				if (node[i].left != node[j].left || node[j].e >= r)
 					continue;
-				for(int k = 0; k < ((residue > 2) ? 2 : 1); k++)
+
+				for(int k = 0; k < 2; k++)
 				{
 					int l = k ? v[i]:v[j], r = k ? v[j] : v[i];
 					int next = newNode(l, r);
@@ -96,16 +103,32 @@ int main()
 	while (T--) {
 		cin >> r;
 		cin >> n;
-		memset(vis, 0, sizeof(vis));
 		for (int i = 1; i <= n; i++)
 		{
 			cin >> node[i].w;
-			node[i].le = node[i].re = node[i].e = 0;
+			node[i].e = node[i].le = node[i].re = 0;
 			vis[i] = true;
 		}
-		nn = n;
-		ans = -1;
-		scale(n);
-		cout<<setprecision(16)<<setiosflags(ios::fixed)<<ans<<endl;
+		
+		ans = 0;
+		node[n].left = false;			//最后一个元素总是在右子树
+		for(int i = 1; i < (1 << (n-1)); i++)
+		{
+			for(int j = 1; j < n; j++)
+			{
+				if ( (1<<(j-1)) & i)
+					node[j].left = true;
+				else
+					node[j].left = false;
+			}
+			nn = n;
+			memset(vis, 0, sizeof(vis));
+			for (int i = 1; i <= n; i++) vis[i] = true;
+			scale(n);
+		}
+		if (ans == 0)
+			cout<<"-1"<<endl;
+		else
+			cout<<setprecision(16)<<setiosflags(ios::fixed)<<ans<<endl;
 	}
 }

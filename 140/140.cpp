@@ -49,7 +49,15 @@ void georder(int cur)
 				ok = true;
 				od[cur] = i;
 				od2[i] = cur;
-				if (cur >= band) {
+					
+				int m = 0;
+				for(int j = 0; j < g[i].size(); j++)
+					if (!vis[g[i][j]])
+						m++;
+				if (m >= band)
+					ok = false;
+				
+				if (ok && cur >= band) {
 					for (int j = 0; j <= (cur - band); j++)
 						if (G[mp[i]][mp[od[j]]]) {
 							//待加入结点，距离如果大于等于当前最好结果，则剪枝
