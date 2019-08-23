@@ -1,9 +1,3 @@
-/* uva 1354: 天平难题
-*  思路：枚举二叉树。
-*  难点：剪枝，防止重复枚举.思路：将所有叶子分为左右两个子集，枚举子集。
-*
-*/
-
 #include <iostream>
 #include <iomanip>
 #include <cstring>
@@ -19,11 +13,10 @@ int n;
 struct Node 
 {
 	int w;
-	bool left;
-	double e;
+	double e;	
 	double le;
 	double re;
-	Node():w(0), le(0), re(0), e(0), left(true) {}
+	Node():w(0), le(0), re(0), e(0){}
 };
 Node node[maxnode];
 bool vis[maxnode];
@@ -40,7 +33,6 @@ int newNode(int l, int r)
 	node[res].le = max(t1+node[l].le, node[r].le-t2);
 	node[res].re = max(t2+node[r].re, node[l].re-t1);
 	node[res].e = node[res].le + node[res].re;
-	node[res].left = node[l].left;
 	return res;
 }
 
@@ -49,7 +41,6 @@ int deleteNode()
 {
 	node[nn].w = 0;
 	node[nn].e = node[nn].le = node[nn].re = 0;
-	node[nn].left = true;
 	vis[nn] = false;
 	return --nn;
 }
@@ -81,9 +72,8 @@ void scale(int residue)
 				continue;
 			for(int j = i+1; j < residue; j++)
 			{
-				if (node[j].e >= r || node[i].left != node[j].left)
+				if (node[j].e >= r)
 					continue;
-
 				for(int k = 0; k < 2; k++)
 				{
 					int l = k ? v[i]:v[j], r = k ? v[j] : v[i];
