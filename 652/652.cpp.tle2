@@ -1,0 +1,166 @@
+#include <iostream>
+#include <cstring>
+#include <queue>
+#include <stack>
+#include <algorithm>
+
+using namespace std;
+
+int fact[9];
+
+const char direction[]={'l', 'r', 'u', 'd'};
+const int dx[] = {0,  0, -1, 1};
+const int dy[] = {-1, 1,  0, 0};
+
+struct State
+{
+	int data[9];
+	int code;
+	int p;			//position of zero
+	void print()
+	{
+		for(int i = 0; i < 3; i++)
+		{
+			for(int j = 0; j < 3; j++)
+				cout<<data[i*3+j]<<" ";
+			cout<<endl;
+		}
+	}
+	void updatecode()	//update code
+	{
+		int m;
+		code = 0;
+		for(int i = 8; i >= 0; i--)
+		{
+			m = 0;
+			for(int j = 0; j < i; j++)
+				if (data[j] > data[i]) m++;
+			code += fact[i]*m;
+		}
+	}
+	
+	bool next(int d, State & ns)
+	{
+		int xx =  p/3+dx[d];
+		int yy =  p%3+dy[d];
+		if (xx < 0 || xx > 2 || yy < 0 || yy > 2)
+			return false;
+	
+		for(int i = 0; i < 9; i++)
+			ns.data[i] = data[i];
+
+		ns.p = xx*3+yy;
+		ns.data[p] = data[ns.p];
+		ns.data[ns.p] = 0;
+		ns.updatecode();
+		return true;
+	}
+	
+	bool next(int d)
+	{
+		int xx =  p/3+dx[d];
+		int yy =  p%3+dy[d];
+		if (xx < 0 || xx > 2 || yy < 0 || yy > 2)
+			return false;
+
+		int np = xx*3+yy;
+		data[p] = data[np];
+		data[np] = 0;
+		p = np;
+		updatecode();
+		return true;
+	}
+};
+
+State bg, ed;		//begin state , end state
+bool vis[362880];	//9! = 362880
+int fa[362880];		//father	print路径
+int di[362880];		//direction
+
+void init()
+{
+	int b = 1;
+	fact[0] = 0;
+	for(int i = 1; i < 9; i++)
+	{
+		b *=  i;
+		fact[i] = b;
+	}
+	
+	ed.data[8] = 0;
+	for(int i = 0; i < 8; i++)
+		ed.data[i] = i+1;
+	ed.p = 8;
+	ed.updatecode();
+}
+
+
+void bfs()
+{
+	queue<State> q;
+	q.push(bg);
+	vis[bg.code] = true;
+	
+	while(!q.empty())
+	{
+		State s = q.front();
+		State next;
+		q.pop();
+
+		if (s.code == ed.code)
+			break;
+
+		for(int i = 0; i < 4; i++)
+		{
+			if (s.next(i, next))
+			{
+				if (!vis[next.code])
+				{
+					vis[next.code] = true;
+					fa[next.code] = s.code;
+					di[next.code] = i;
+					q.push(next);
+				}
+			}
+		}
+	}
+	if (!vis[ed.code])
+		cout<<"unsolvable"<<endl;
+	else
+	{
+		stack<int> ans;
+		int cur = ed.code;
+		while(cur != bg.code)
+		{
+			ans.push(di[cur]);
+			cur = fa[cur];
+		}
+		while(!ans.empty())
+		{
+			cout<<direction[ans.top()];
+			ans.pop();
+		}
+		cout<<endl;
+	}
+	cout<<endl;
+}
+
+int main()
+{
+	int T;
+	char c;
+	init();
+	cin>>T;
+	while(T--)
+	{
+		for(int i = 0; i < 9; i++)
+		{
+			cin>>c;
+			bg.data[i] = (c == 'x' ? 0 : c-'0');
+		}
+		for(bg.p = 0; bg.data[bg.p] != 0; bg.p++);
+		bg.updatecode();
+		memset(vis, 0, sizeof(vis));
+		bfs();
+	}
+}
