@@ -1,0 +1,176 @@
+/* uva 1601: The Morning of Halloween
+ * 思路：双向bfs
+ *
+ */
+#include <iostream>
+#include <string>
+#include <queue>
+#include <cmath>
+#include <cstring>
+
+using namespace std;
+
+const int maxx = 14;
+const int maxy = 14;
+const int maxn = 3;
+const int maxxy = maxx*maxy;
+const int maxg = maxxy*maxxy*maxxy;
+
+char maze[maxx][maxy];
+
+int G[maxy][5];
+
+int bg[maxn], des[maxn];
+int bgid, desid;
+
+int X, Y, n;
+
+int getid(int *g)
+{
+	int base = 1;//maxx*maxy;
+	int id = 0;
+	for(int i = 0; i < n; i++)
+	{
+		id += g[i]*base;
+		base *= (maxx*maxy);
+	}
+	return id;
+}
+
+int ghost[maxg][maxn];
+int vis[maxg];
+
+void init()
+{
+	for(int i = 0; i < X; i++)
+		for(int j = 0; j < Y; j++)
+		{
+			int id = i*Y+j;
+			if ('#' == maze[i][j])
+				G[id][0] = 0;
+			else
+			{
+				G[id][0] = 1;
+				G[id][1] = id;				//原地不动
+				if(j > 0 && maze[i][j-1] != '#')
+					G[id][1+(G[id][0]++)] = i*Y+(j-1);
+				if(j < Y-1 && maze[i][j+1] != '#')
+					G[id][1+(G[id][0]++)] = i*Y+(j+1);
+				if(i > 0 && maze[i-1][j] != '#')
+					G[id][1+(G[id][0]++)] = (i-1)*Y+j;
+				if(i < X-1 && maze[i+1][j] != '#')
+					G[id][1+(G[id][0]++)] = (i+1)*Y+j;
+			}
+		}
+	bgid = getid(bg);
+	desid = getid(des);
+	for(int i = 0; i < n; i++)
+	{
+		ghost[bgid][i] = bg[i];
+		ghost[desid][i] = des[i];
+	}
+}
+
+int getnextcount(int id)
+{
+	int ncnt = 1;
+	for(int i = 0; i < n; i++)
+		ncnt *= G[ghost[id][i]][0];
+	return ncnt;
+}
+
+int nextg(int id, int d)
+{
+	int ng[maxn];
+	int nid;
+	bool move = false;
+	for(int i = 0; i < n; i++)
+	{	
+		int b1 = 1;
+		for(int j = i+1; j < n; j++)
+			b1 *= G[ghost[id][j]][0];
+		int b2 = b1*G[ghost[id][i]][0];
+		ng[i] = G[ghost[id][i]][1+(d%b2)/b1];
+		if ((d%b2)/b1 != 0)
+			move = true;
+	}
+	if (!move)		//都保持原位
+		return -1;
+	for(int i = 1; i < n; i++)
+		for(int j = 0; j < i; j++)
+			if (ng[j] == ng[i])
+				return -1;
+	for(int i = 0; i < n-1; i++)
+		for(int j = i+1; j < n; j++)
+			if ((ng[i] == ghost[id][j]) && (ng[j] == ghost[id][i]))
+				return -1;
+	nid = getid(ng);
+	if (!vis[nid])
+	{
+		for(int i = 0; i < n; i++)
+			ghost[nid][i] = ng[i];
+	}
+	return nid;
+}
+
+int bfs()
+{
+	queue<int> q;
+	memset(vis, 0, pow(X*Y, n));
+	vis[bgid] = 1;
+	vis[desid] = -1;
+	q.push(bgid);
+	q.push(desid);
+
+	while(!q.empty())
+	{
+		int id = q.front();
+		q.pop();
+
+		int nct = getnextcount(id);
+		for(int i = 0; i < nct; i++)
+		{
+			int nid = nextg(id, i);
+			if (nid >= 0)
+			{
+				if (!vis[nid])
+				{
+					vis[nid] = ((vis[id] > 0) ? vis[id]+1 : vis[id] -1);
+					q.push(nid);
+				}
+				else if (vis[id] > 0 && vis[nid] < 0)//乘法费时
+					return vis[id]-vis[nid]-1;
+				else if (vis[id] < 0 && vis[nid] > 0)//乘法费时
+					return vis[nid]-vis[id]-1;
+			}
+		}
+	}
+	return -1;
+}
+
+int main()
+{
+	int T;
+	while(cin>>Y>>X>>n && X)
+	{
+		string s;
+		X -= 2;
+		Y -= 2; cin.ignore(1024, '\n');
+		getline(cin, s);
+		for(int i = 0; i < X; i++)
+		{
+			getline(cin, s);
+			for(int j = 0;  j < Y; j++)
+			{
+				maze[i][j] = s[j+1];
+				if(maze[i][j] >= 'A' && maze[i][j] <= 'A'+n)
+					des[maze[i][j]-'A'] = i*Y+j;
+				else if(maze[i][j] >= 'a' && maze[i][j] <= 'a'+n)
+					bg[maze[i][j]-'a'] = i*Y+j;
+			}
+		}
+		getline(cin, s);
+		init();
+		cout<<bfs()<<endl;
+	}
+}
