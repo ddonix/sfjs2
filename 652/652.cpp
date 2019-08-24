@@ -11,7 +11,7 @@ using namespace std;
 
 int fact[9];
 
-const char direction[]={'l', 'r', 'u', 'd'};
+const char direction[]={'r', 'l', 'd', 'u'};
 const int dx[] = {0,  0, -1, 1};
 const int dy[] = {-1, 1,  0, 0};
 const int dd[4][3] = {{0,2,3}, {1,2,3}, {0,1,2}, {0,1,3}};
@@ -30,25 +30,12 @@ int encode(int *s)	//encode
 	return code;
 }
 
-int bg[9], ed[9];	//begin state , end state
+int bg[9];		//begin state
 int bgc, edc;
-int vis[362880];	//9! = 362880
+bool vis[362880];	//反向bfs 9! = 362880
 int state[362880][10];	//所有state
-int fa[362880];		//father	print路径
-int di[362880];		//direction
-
-int insertstate(int *s)
-{
-	int code = encode(s);
-	if (state[code][0] < 0)
-	{
-		int i;
-		for(i = 0; s[i]; i++);
-		memcpy(state[code], s, sizeof(int)*9);
-		state[code][9] = i;
-	}
-	return code;
-}
+int fa[362880];		//反向 father	print路径
+int di[362880];		//反向 direction
 
 int nextState(int code, int d)
 {
@@ -73,6 +60,50 @@ int nextState(int code, int d)
 	return ncode;
 }
 
+void printans(int code)
+{
+	char ans[100];
+	int cur;
+	int len = 0;
+	cur = code;
+	while(cur != edc)
+	{
+		printf("%c", direction[di[cur]]);
+		cur = fa[cur];
+	}
+	printf("\n");
+}
+
+
+//打表
+void bfs_r()
+{
+	queue<int> q;
+	q.push(edc);
+	vis[edc] = true;
+	
+	while(!q.empty())
+	{
+		int code;
+		code = q.front();
+		q.pop();
+		
+		int d = di[code];
+		for(int i = 0; i < 3; i++)
+		{
+			int ncode;
+			ncode = nextState(code, dd[d][i]);
+			if (ncode >= 0 && !vis[ncode])
+			{
+				vis[ncode] = true;
+				fa[ncode] = code;
+				di[ncode] = dd[d][i];
+				q.push(ncode);
+			}
+		}
+	}
+}
+
 void init()
 {
 	int b = 1;
@@ -84,83 +115,14 @@ void init()
 	for(int i = 0; i < 362880; i++)
 		state[i][0] = -1;
 	
-	for(int i = 0; i < 8; i++)
-		ed[i] = i+1;
-	ed[8] = 0;
-	edc = insertstate(ed);
-}
-
-void bfs()
-{
-	queue<int> q;
-	bool running = true;
-	int fa1, fa2;
-	int ff;
-	q.push(bgc);
-	q.push(edc);
-	vis[bgc] = 1;
-	vis[edc] = 2;
+	int ed[9] = {1, 2, 3, 4, 5, 6, 7, 8, 0};
+	edc = encode(ed);
+	for(int i = 0; i < 9; i++)
+		state[edc][i] = ed[i];
+	state[edc][9] = 8;
 	
-	while(!q.empty() && running)
-	{
-		int code;
-		code = q.front();
-		q.pop();
-		
-		int d = di[code];
-		for(int i = 0; i < 3 && running; i++)
-		{
-			int ncode;
-			ncode = nextState(code, dd[d][i]);
-			if (ncode >= 0)
-			{
-				if (!vis[ncode])
-				{
-					vis[ncode] = vis[code];
-					fa[ncode] = code;
-					di[ncode] = dd[d][i];
-					q.push(ncode);
-				}
-				else
-				{
-					//喜相逢
-					if (vis[ncode] != vis[code])
-					{
-						running = false;
-						fa1 = (vis[code] == 1) ? code : ncode;
-						fa2 = (vis[code] == 1) ? ncode : code;
-						ff = (vis[code] == 1) ? dd[d][i]:(dd[d][i]+(dd[d][i]%2 ? -1 : 1));
-					}
-				}
-			}
-		}
-	}
-	if (running)
-		printf("unsolvable\n\n");
-	else
-	{
-		char ans[100];
-		int cur;
-		int len = 0;
-		cur = fa1;
-		while(cur != bgc)
-		{
-			ans[len++] = direction[di[cur]];
-			cur = fa[cur];
-		}
-		for(int i = 0; i < len; i++)
-			printf("%c", ans[len-1-i]);
-		printf("%c", direction[ff]);
-		cur = fa2;
-		while(cur != edc)
-		{
-			int dd = di[cur];
-			dd = (dd%2) ? dd-- : dd++;
-			printf("%c", direction[dd]);
-			cur = fa[cur];
-		}
-		printf("\n\n");
-	}
+	memset(vis, 0, sizeof(vis));
+	bfs_r();
 }
 
 int main()
@@ -176,8 +138,12 @@ int main()
 			scanf("%s", c);
 			bg[i] = (c[0] == 'x' ? 0 : c[0]-'0');
 		}
-		bgc = insertstate(bg);
-		memset(vis, 0, sizeof(vis));
-		bfs();
+		bgc = encode(bg);
+		if (!vis[bgc])
+			printf("unsolvable\n");
+		else
+			printans(bgc);
+		if (T)
+			printf("\n");
 	}
 }
