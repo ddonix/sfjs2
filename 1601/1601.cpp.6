@@ -13,30 +13,32 @@ using namespace std;
 const int maxx = 14;
 const int maxy = 14;
 const int maxn = 3;
-const int maxp = maxx*maxy;
-const int maxg = maxp*maxp*maxp;
+const int maxxy = maxx*maxy;
+const int maxg = maxxy*maxxy*maxxy;
 
 char maze[maxx][maxy];
-int G[maxp][6];
+
+int G[maxy][6];
 
 int bg[maxn], des[maxn];
 int bgid, desid;
 
 int X, Y, n;
-int ghost[maxg][maxn];
-int vis[maxg];
 
 int getid(int *g)
 {
-	int base = 1;
+	int base = 1;//maxx*maxy;
 	int id = 0;
 	for(int i = 0; i < n; i++)
 	{
 		id += g[i]*base;
-		base *= (X*Y);
+		base *= (maxx*maxy);
 	}
 	return id;
 }
+
+int ghost[maxg][maxn];
+int vis[maxg];
 
 void init()
 {
@@ -44,24 +46,21 @@ void init()
 	{
 		for(int j = 0; j < Y; j++)
 		{
-			int p = i*Y+j;
+			int id = i*Y+j;
 			if ('#' == maze[i][j])
-				G[p][0] = 0;
+				G[id][0] = 0;
 			else
 			{
-				G[p][0] = 1;
-				G[p][1] = p;				//原地不动
+				G[id][0] = 1;
+				G[id][1] = id;				//原地不动
 				if(j > 0 && maze[i][j-1] != '#')
-				{
-					++G[p][0];
-					G[p][G[p][0]] = p-1;
-				}
+					G[id][1+(G[id][0]++)] = i*Y+(j-1);
 				if(j < Y-1 && maze[i][j+1] != '#')
-					G[p][++G[p][0]] = p+1;
+					G[id][1+(G[id][0]++)] = i*Y+(j+1);
 				if(i > 0 && maze[i-1][j] != '#')
-					G[p][++G[p][0]] = p-Y;
+					G[id][1+(G[id][0]++)] = (i-1)*Y+j;
 				if(i < X-1 && maze[i+1][j] != '#')
-					G[p][++G[p][0]] = p+Y;
+					G[id][1+(G[id][0]++)] = (i+1)*Y+j;
 			}
 		}
 	}
@@ -75,11 +74,12 @@ void init()
 	}
 }
 
-//d > 0 --> !都在原位
+
 int nextg(int id, int d)
 {
 	int ng[maxn];
 	int nid;
+	bool move = false;
 	for(int i = 0; i < n; i++)
 	{	
 		int b1 = 1;
@@ -87,9 +87,13 @@ int nextg(int id, int d)
 			b1 *= G[ghost[id][j]][0];
 		int b2 = b1*G[ghost[id][i]][0];
 		ng[i] = G[ghost[id][i]][1+(d%b2)/b1];
+		if ((d%b2)/b1 != 0)
+			move = true;
 	}
-	for(int i = 0; i < n-1; i++)
-		for(int j = i+1; j < n; j++)
+	if (!move)		//都保持原位
+		return -1;
+	for(int i = 1; i < n; i++)
+		for(int j = 0; j < i; j++)
 			if (ng[j] == ng[i])
 				return -1;
 	for(int i = 0; i < n-1; i++)
@@ -98,21 +102,17 @@ int nextg(int id, int d)
 				return -1;
 	nid = getid(ng);
 	if (!vis[nid])
+	{
 		for(int i = 0; i < n; i++)
 			ghost[nid][i] = ng[i];
+	}
 	return nid;
 }
 
 int bfs()
 {
 	queue<int> q;
-	int z = 1;
-	for(int i = 0; i < n; i++)
-		z *= (X*Y);
-	//不要使用pow函数，丫是浮点运算！！!
-	memset(vis, 0, sizeof(int)*z);
-	
-	
+	memset(vis, 0, pow(X*Y, n));
 	vis[bgid] = 1;
 	vis[desid] = -1;
 	q.push(bgid);
@@ -134,13 +134,13 @@ int bfs()
 			{
 				if (!vis[nid])
 				{
-					vis[nid] = ((vis[id] > 0) ? vis[id]+1 : vis[id]-1);
+					vis[nid] = ((vis[id] > 0) ? vis[id]+1 : vis[id] -1);
 					q.push(nid);
 				}
-				else if (vis[nid] > 0 && vis[id] < 0)//乘法费时
-					return vis[nid]-vis[id]-1;
-				else if (vis[nid] < 0 && vis[id] > 0)//乘法费时
+				else if (vis[id] > 0 && vis[nid] < 0)//乘法费时
 					return vis[id]-vis[nid]-1;
+				else if (vis[id] < 0 && vis[nid] > 0)//乘法费时
+					return vis[nid]-vis[id]-1;
 			}
 		}
 	}

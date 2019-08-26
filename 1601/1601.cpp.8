@@ -106,13 +106,7 @@ int nextg(int id, int d)
 int bfs()
 {
 	queue<int> q;
-	int z = 1;
-	for(int i = 0; i < n; i++)
-		z *= (X*Y);
-	//不要使用pow函数，丫是浮点运算！！!
-	memset(vis, 0, sizeof(int)*z);
-	
-	
+	memset(vis, 0, pow(X*Y, n));
 	vis[bgid] = 1;
 	vis[desid] = -1;
 	q.push(bgid);

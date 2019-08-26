@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+const int maxk = 5;
+int aa, bb, k, T;
+int skip[maxk];
+
+bool egyptianfraction(int a, int b, int f, int d)
+{
+	int t = a*f-b;
+	if (d == 1)
+	{
+		if (t == 0)
+		{
+			cout<<"1/"<<f;
+			return true;
+		}
+		else
+			return false;
+	}
+	else
+	{
+		if (t <= 0)
+			return false;
+		for(int x = f+1; (d-1)*b*f >= t*x; x++)
+		{
+			int i;
+			for(i = 0; i < k && x != skip[i]; i++);
+			if ((i == k) && egyptianfraction(t, b*f, x, d-1) == true)
+			{
+				cout<<" + 1/"<<f;
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
+int main()
+{
+	int ka = 1;
+	cin>>T;
+	for(; ka <= T; ka++)
+	{
+		cin>>aa>>bb>>k;
+		for(int i = 0; i < k; i++)
+			cin>>skip[i];
+		cout<<"Case "<<ka<<": "<<aa<<"/"<<bb<<"=";
+		bool ok = true;
+		for(int d = 1; d < 5 && ok; d++)
+		{
+			for(int f = bb/aa+1; aa*f <= bb*d; f++)
+			{
+				int i;
+				for(i = 0; i < k && skip[i] != f; i++);
+				if ((i == k) && egyptianfraction(aa, bb, f, d))
+				{
+					ok = false;
+					break;
+				}	
+			}
+		}
+		cout<<endl;
+	}
+}

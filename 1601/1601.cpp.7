@@ -13,16 +13,17 @@ using namespace std;
 const int maxx = 14;
 const int maxy = 14;
 const int maxn = 3;
-const int maxp = maxx*maxy;
-const int maxg = maxp*maxp*maxp;
+const int maxxy = maxx*maxy;
+const int maxg = maxxy*maxxy*maxxy;
 
 char maze[maxx][maxy];
-int G[maxp][6];
+int G[maxxy][6];
 
 int bg[maxn], des[maxn];
 int bgid, desid;
 
 int X, Y, n;
+
 int ghost[maxg][maxn];
 int vis[maxg];
 
@@ -106,13 +107,7 @@ int nextg(int id, int d)
 int bfs()
 {
 	queue<int> q;
-	int z = 1;
-	for(int i = 0; i < n; i++)
-		z *= (X*Y);
-	//不要使用pow函数，丫是浮点运算！！!
-	memset(vis, 0, sizeof(int)*z);
-	
-	
+	memset(vis, 0, pow(X*Y, n));
 	vis[bgid] = 1;
 	vis[desid] = -1;
 	q.push(bgid);

@@ -1,0 +1,84 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+const int maxk = 5;
+const int maxd = 10;
+int aa, bb, k, T;
+int skip[maxk];
+
+int best;
+int dd;
+int ans[maxd];
+
+int egyptianfraction(int a, int b, int f, int d)
+{
+	int t = a*f-b;
+	int res = 0x7fffffff;
+	if (d == 1)
+	{
+		if (t == 0)
+		{
+			if (f < best)
+			{
+				ans[dd-1] = f;
+				best = f;
+			}
+			return f;
+		}
+		return res;
+	}
+	else
+	{
+		if (t <= 0)
+			return res;
+		for(int x = f+1; (d-1)*b*f >= t*x; x++)
+		{
+			int i;
+			for(i = 0; i < k && x != skip[i]; i++);
+			if (i == k)
+			{
+				int r = egyptianfraction(t, b*f, x, d-1);
+				if (r < res)
+					res = r;
+				if (r <= best)
+					ans[dd-d] = f;
+			}
+		}
+		return res;
+	}
+}
+
+int main()
+{
+	int ka = 1;
+	cin>>T;
+	for(; ka <= T; ka++)
+	{
+		cin>>aa>>bb>>k;
+		for(int i = 0; i < k; i++)
+			cin>>skip[i];
+		cout<<"Case "<<ka<<": "<<aa<<"/"<<bb<<"=";
+		bool ok = true;
+		int d;
+		for(d = 1; d < maxd && ok; d++)
+		{
+			best = 0x7fffffff;
+			dd = d;
+			for(int f = bb/aa+1; aa*f <= bb*d; f++)
+			{
+				int i;
+				for(i = 0; i < k && skip[i] != f; i++);
+				if (i == k) 
+				{
+					if (egyptianfraction(aa, bb, f, d) < 0x7ffffff)
+						ok = false;
+				}
+			}
+		}
+		cout<<"1/"<<ans[0];
+		for(int i = 1; i < d-1; i++)
+			cout<<"+1/"<<ans[i];
+		cout<<endl;
+	}
+}
