@@ -37,6 +37,7 @@ long long egyptianfraction(long long a, long long b, long long f, int d)
 			return res;
 		long long t3 = b*f/t;
 		long long t2 = (d-1)*b*f/t+1;
+		
 		for(long long x = (t3 > f) ? t3: f+1; x < best && x <= t2; x++)
 		{
 			if(skip.count(x) < 1)

@@ -1,0 +1,148 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int maxn = 10;
+int n;
+
+struct Para
+{
+	int p[maxn+1];
+	int backup[maxn+1];
+	int need;
+	int needb;
+	bool isok()
+	{
+		for(int i = 1; i <= n; i++)
+			if (p[i] != i)
+				return false;
+		return true;
+	}
+
+	void updateneed()
+	{
+		need = 0;
+		for(int i = 1; i < n; i++)
+		{
+			if (p[i+1] != p[i] +1)
+				need++;
+		}
+	}
+	void cut(int b, int e, int d)//剪掉b-e（含b，e）位置，放到d之后, d==0 放到开头
+	{
+		int l[4][2];
+		
+		for(int i = 1; i <= n; i++)
+			backup[i] = p[i];
+		needb = need;
+		
+		if (d == 0)
+		{
+			l[0][0] = b;
+			l[0][1] = e;
+			l[1][0] = 1;
+			l[1][1] = b-1;
+			l[2][0] = e+1;
+			l[2][1] = n;
+		}
+		else if (d == n)
+		{
+			l[0][0] = 1;
+			l[0][1] = b-1;
+			l[1][0] = e+1;
+			l[1][1] = n;
+			l[2][0] = b;
+			l[2][1] = e;
+		}
+		else
+		{
+			if (d < b)
+			{
+				l[0][0] = 1;
+				l[0][1] = d;
+				l[1][0] = b;
+				l[1][1] = e;
+				l[2][0] = d+1;
+				l[2][1] = b-1;
+				l[3][0] = e+1;
+				l[3][1] = n;
+			}
+			else
+			{
+				l[0][0] = 1;
+				l[0][1] = b-1;
+				l[1][0] = e+1;
+				l[1][1] = d;
+				l[2][0] = b;
+				l[2][1] = e;
+				l[3][0] = d+1;
+				l[3][1] = n;
+			}
+		}
+		int k = 1;
+		for(int i = 0; i < 4 && k <= n; i++)
+		{
+			for(int j = l[i][0]; j <= l[i][1] && k <= n; j++)
+			{
+				p[k] = backup[j];
+				k++;
+			}
+		}
+		updateneed();
+	}
+
+	void repair()
+	{
+		for(int i = 1; i <= n; i++)
+			p[i] = backup[i];
+		need = needb;
+	}
+};
+
+Para bg;
+int ans;
+int dd;
+
+bool ida(int d, Para p)
+{
+	if (d == dd)
+		return p.isok();
+	else
+	{
+		if (p.need > 3*(dd-d))
+			return false;
+		for(int i = 1; i <= n; i++)
+			for(int j = i; j <=n; j++)
+			{
+				for(int k = 0; k <= n; k++)
+				{
+					if (k >= (i-1) && k <= j)
+						continue;
+					p.cut(i, j, k);
+					if (ida(d+1, p))
+						return true;
+					p.repair();
+				}
+			}
+	}
+	return false;
+}
+
+int main()
+{
+	int i, ka=0;
+	while(cin>>n && n)
+	{
+		for(i = 1; i <=n; i++)
+			cin>>bg.p[i];
+		bg.updateneed();
+		for(i = 0; i <= n; i++)
+		{
+			dd = i;
+			if (ida(0, bg))
+				break;
+		}
+		cout<<"Case "<<ka++<<": "<<i<<endl;
+	}
+}
