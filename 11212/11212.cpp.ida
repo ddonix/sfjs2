@@ -173,6 +173,6 @@ int main()
 			if (ida(0, bgc))
 				break;
 		}
-		cout<<"Case "<<++ka<<": "<<i<<endl;
+		cout<<"Case "<<ka++<<": "<<i<<endl;
 	}
 }
