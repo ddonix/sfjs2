@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int dd;
+int n;
+
+vector<int> se;
+
+bool ida(int d)
+{
+	if (d == dd)
+	{
+		return binary_search(se.begin(), se.end(), n);
+	}
+	else
+	{
+		if (se[se.size()-1] * (1<<(dd-d)) < n)
+			return false;
+		
+		for(int i = se.size()-1; i >= 0; i--)
+			for(int j = i; j >= 0; j--)
+			{
+				int t = se[i]+se[j];
+				int p = lower_bound(se.begin(), se.end(), t)-se.begin();
+				if (se[p] != t)
+				{
+					se.insert(se.begin()+p, t);
+					if (ida(d+1))
+						return true;
+					se.erase(se.begin()+p);
+				}
+				t = se[i]-se[j];
+				p = lower_bound(se.begin(), se.end(), t)-se.begin();
+				if (se[p] != t)
+				{
+					se.insert(se.begin()+p, t);
+					if (ida(d+1))
+						return true;
+					se.erase(se.begin()+p);
+				}
+			}
+		return false;
+	}
+}
+
+int main()
+{
+	while(cin>>n && n)
+	{
+		se.clear();
+		se.push_back(1);
+		for(dd = 0; dd < n; dd++)
+			if (ida(0))
+				break;
+		cout<<dd<<endl;
+	}
+}
