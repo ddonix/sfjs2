@@ -15,13 +15,21 @@ bool ida(int d, int last, int cmax)
 	{
 		if (cmax*(1<<(dd-d)) < n)
 			return false;
-
+		
+		pair<set<int>::iterator, bool> p;
+		int t = cmax*2;
+		auto it = se.insert(t).first;
+		if (ida(d+1, t, t))
+			return true;
+		se.erase(it);
 		for(auto it1 = se.begin(); it1 != se.end(); it1++)
 		{
+			if (*it1 == cmax && last == cmax)
+				continue;
 			for(int i = 0; i <= 1; i++)
 			{
 				int t = last+(*it1)*(i ? -1 : 1);
-				pair<set<int>::iterator, bool> p = se.insert(t);
+				p = se.insert(t);
 				if (!p.second)		//已存在了
 					continue;
 				if (ida(d+1, t,  t > cmax ? t : cmax))
