@@ -31,17 +31,62 @@ int getneed(int *p)
 
 void cut(int b, int e, int d)
 {
-	int l[3][2];
+	int l[4][2];
 	int temp[maxn];
-	for(int i = b; i <= e; i++)
-		temp[i] = p[i];
-	int k = b;
-	for(int i = e+1; i <= d; i++)
-		p[k++] = p[i];
-	for(int i = b; i <= e; i++)
-		p[k++] = temp[i];
-	for(int i = d+1; i <= n; i++)
-		p[k++] = p[i];
+	if (d == 0)
+	{
+		l[0][0] = b;
+		l[0][1] = e;
+		l[1][0] = 1;
+		l[1][1] = b-1;
+		l[2][0] = e+1;
+		l[2][1] = n;
+	}
+	else if (d == n)
+	{
+		l[0][0] = 1;
+		l[0][1] = b-1;
+		l[1][0] = e+1;
+		l[1][1] = n;
+		l[2][0] = b;
+		l[2][1] = e;
+	}
+	else
+	{
+		if (d < b)
+		{
+			l[0][0] = 1;
+			l[0][1] = d;
+			l[1][0] = b;
+			l[1][1] = e;
+			l[2][0] = d+1;
+			l[2][1] = b-1;
+			l[3][0] = e+1;
+			l[3][1] = n;
+		}
+		else
+		{
+			l[0][0] = 1;
+			l[0][1] = b-1;
+			l[1][0] = e+1;
+			l[1][1] = d;
+			l[2][0] = b;
+			l[2][1] = e;
+			l[3][0] = d+1;
+			l[3][1] = n;
+		}
+	}
+	int k = 1;
+	for(int i = 0; i < 4 && k <= n; i++)
+	{
+		for(int j = l[i][0]; j <= l[i][1] && k <= n; j++)
+		{
+			temp[k] = p[j];
+			k++;
+		}
+	}
+	for(int i = 1; i <= n; i++)
+		p[i] = temp[i];
 }
 
 bool ida(int d)
@@ -65,7 +110,7 @@ bool ida(int d)
 					cut(i, j, k);
 					if (ida(d+1))
 						return true;
-					for(int l = i; l <= n; l++)
+					for(int l = 1; l <= n; l++)
 						p[l] = back[l];
 				}
 			}
@@ -75,15 +120,18 @@ bool ida(int d)
 
 int main()
 {
-	int ka=0;
+	int i, ka=0, b=1;
 	while(cin>>n && n)
 	{
 		p[0] = 0;
-		for(int i = 1; i <=n; i++)
+		for(i = 1; i <=n; i++)
 			cin>>p[i];
-		for(dd = 0; dd <= n; dd++)
+		for(i = 0; i <= n; i++)
+		{
+			dd = i;
 			if (ida(0))
 				break;
-		cout<<"Case "<<++ka<<": "<<dd<<endl;
+		}
+		cout<<"Case "<<++ka<<": "<<i<<endl;
 	}
 }

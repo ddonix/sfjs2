@@ -1,0 +1,187 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <cstring>
+
+using namespace std;
+
+const int maxn = 10;
+const int maxs = 362880;
+int n;
+
+int bit[10];
+int encode(int *p)
+{
+	int code = 0;
+	for(int i = n; i > 1; i--)
+	{
+		int c = 0;
+		for(int j = i-1; j >= 1; j--)
+			if (p[j] < p[i])
+				c++;
+		code += c*bit[i];
+	}
+	return code;
+}
+
+int state[maxs][maxn];
+int need[maxs];
+int vis[maxs];
+
+int bg[maxn], ed[maxn];
+int bgc, edc;
+int ans;
+int dd;
+
+int getneed(int *p)
+{
+	int ne = 0;
+	for(int i = 1; i < n; i++)
+	{
+		if (p[i+1] != p[i] +1)
+			ne++;
+	}
+	return ne;
+}
+
+int copystate(int *p)
+{
+	int code = encode(p);
+	memcpy(state[code], p, sizeof(int)*(n+1));
+	need[code] = getneed(p);
+	return code;
+}
+
+int cut(int s, int b, int e, int d, int *des)
+{
+	int l[4][2];
+	if (d == 0)
+	{
+		l[0][0] = b;
+		l[0][1] = e;
+		l[1][0] = 1;
+		l[1][1] = b-1;
+		l[2][0] = e+1;
+		l[2][1] = n;
+	}
+	else if (d == n)
+	{
+		l[0][0] = 1;
+		l[0][1] = b-1;
+		l[1][0] = e+1;
+		l[1][1] = n;
+		l[2][0] = b;
+		l[2][1] = e;
+	}
+	else
+	{
+		if (d < b)
+		{
+			l[0][0] = 1;
+			l[0][1] = d;
+			l[1][0] = b;
+			l[1][1] = e;
+			l[2][0] = d+1;
+			l[2][1] = b-1;
+			l[3][0] = e+1;
+			l[3][1] = n;
+		}
+		else
+		{
+			l[0][0] = 1;
+			l[0][1] = b-1;
+			l[1][0] = e+1;
+			l[1][1] = d;
+			l[2][0] = b;
+			l[2][1] = e;
+			l[3][0] = d+1;
+			l[3][1] = n;
+		}
+	}
+	int k = 1;
+	for(int i = 0; i < 4 && k <= n; i++)
+	{
+		for(int j = l[i][0]; j <= l[i][1] && k <= n; j++)
+		{
+			des[k] = state[s][j];
+			k++;
+		}
+	}
+	int ncode = encode(des);
+	if (!need[ncode])
+	{
+		memcpy(state[ncode], des, sizeof(int)*(n+1));
+		need[ncode] = getneed(des);
+	}
+	return ncode;
+}
+
+bool bfs()
+{
+	queue<int> q;
+	q.push(bgc);
+	vis[bgc] = 1;
+	
+	while(!q.empty())
+	{
+		int code = q.front();
+		q.pop();
+
+		if (code == edc)
+			return true;
+
+		if (need[code] > 3*(dd-vis[code]+1))
+			continue;
+		
+		for(int i = 1; i <= n; i++)
+			for(int j = i; j <=n; j++)
+			{
+				for(int k = 0; k <= n; k++)
+				{
+					if (k >= (i-1) && k <= j)
+						continue;
+					int temp[maxn];
+					temp[0] = 0;
+					int ncode = cut(code, i, j, k, temp);
+					if (!vis[ncode])
+					{
+						vis[ncode] = vis[code]+1;
+						q.push(ncode);
+					}
+				}
+			}
+		
+	}
+	return false;
+}
+
+int main()
+{
+	int i, ka=0, b=1;
+	while(cin>>n && n)
+	{
+		bg[0] = ed[0] = 0;
+		for(i = 1; i <=n; i++)
+		{
+			cin>>bg[i];
+			ed[i] = i;
+		}
+		bit[1] = 1;
+		bit[2] = 1;
+		for(int i = 3; i <= n; i++)
+		{
+			bit[i] = (i-1)*bit[i-1];
+		}
+		memset(need, 0, sizeof(int)*(maxs+1));
+		bgc = copystate(bg);
+		edc = copystate(ed);
+		for(i = 0; i <= n; i++)
+		{
+			dd = i;
+			memset(vis, 0, sizeof(int)*(maxs+1));
+			if (bfs())
+				break;
+		}
+		cout<<"Case "<<++ka<<": "<<i<<endl;
+	}
+}
