@@ -64,6 +64,11 @@ struct Polyom
 		u = rr-ll;
 		d = 0;
 	}
+
+	bool operator==(const Polyom & b) const
+	{
+		return r == b.r && u == b.u && c == b.c;
+	}
 };
 
 vector<Polyom> se[maxn];

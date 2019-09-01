@@ -1,0 +1,176 @@
+/* 思路：1.判重！！！切片思想.给每个连通块按x,y轴分别切片，并把切片编号.判断是否重合，就看编号是否相同。
+ * 	 2.减少枚举次数！！！对称的，只枚举一边。
+ * 
+*/
+#include <iostream>
+#include <vector>
+#include <set>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+const int maxn = 10;
+
+set<pair<int, int> > normal(const set<pair<int, int> > & a, int l, int d)
+{
+	set<pair<int, int> > b;
+	for(auto it = a.begin(); it != a.end(); it++)
+		b.insert(make_pair((*it).first-l, (*it).second-d));
+	return b;
+}
+
+set<pair<int, int> > normal(const set<pair<int, int> > & a)
+{
+	int l = maxn, d = maxn;
+	for(auto it = a.begin(); it != a.end(); it++)
+	{
+		l = (*it).first < l ? (*it).first : l;
+		d = (*it).second < d ? (*it).second: d;
+	}
+	return normal(a, l, d);
+}
+
+set<pair<int, int> > flip(const set<pair<int, int> > & a)
+{
+	set<pair<int, int> > b;
+	for(auto it = a.begin(); it != a.end(); it++)
+		b.insert(make_pair((*it).first, -(*it).second));
+	return b;
+}
+
+
+set<pair<int, int> > rotate(const set<pair<int, int> > & a)
+{
+	set<pair<int, int> > b;
+	for(auto it = a.begin(); it != a.end(); it++)
+		b.insert(make_pair((*it).second, -(*it).first));
+	return b;
+} 
+
+
+struct Polyom
+{
+	set<pair<int, int> > c;
+	int l, r, u, d;
+	int xr, yr;
+	bool xbalance, ybalance;
+	
+	void swnormal()
+	{
+		c = normal(c, l, d);
+		l = d = maxn;
+		xbalance = ybalance = true;
+		for(auto it = c.begin(); it != c.end(); it++)
+		{
+			l = (*it).first < l ? (*it).first : l;
+			d = (*it).second < d ? (*it).second : d;
+			if (xbalance && c.count(make_pair(l+r-(*it).first, (*it).second)) < 1)
+				xbalance = false;
+			if (ybalance && c.count(make_pair((*it).first, u+d-(*it).second)) < 1)
+				ybalance = false;
+		}
+		r = xr + l - 1;
+		u = yr + d - 1;
+	}
+};
+
+vector<Polyom> se[maxn];
+
+int dx[] = { 0, 0, -1, 1};
+int dy[] = {-1, 1,  0, 0};
+
+void buildtable()
+{
+	se[0].resize(1);
+	Polyom & p1 = se[0][0];
+	p1.c.insert(make_pair(0,0));
+	p1.l = p1.r = p1.u = p1.d = 0;
+	p1.xr = p1.yr = 1;
+	p1.xbalance = p1.ybalance = true;
+	
+	for(int i = 1; i < maxn; i++)
+	{
+		for(auto it = se[i-1].begin(); it != se[i-1].end(); it++)
+		{
+			Polyom & p = *it;
+			for(auto it2 = p.c.begin(); it2 != p.c.end(); it2++)
+			{
+				if (p.xbalance)
+				{
+					if(p.r + p.l <= 0 && (*it2).first < 0)
+						continue;
+					else if(p.r + p.l > 0 && (*it2).first > 0) 
+						continue;
+				}
+				if (p.ybalance)
+				{
+					if(p.u + p.d <= 0 && (*it2).second < 0)
+						continue;
+					else if(p.u + p.d > 0 && (*it2).second > 0)
+						continue;
+				}
+				for(int d = 0; d < 4; d++)
+				{
+					int x = (*it2).first+dx[d], y = (*it2).second+dy[d];
+					Polyom np = p;
+					np.r = (x > np.r) ? x : np.r;
+					np.l = (x < np.l) ? x : np.l;
+					np.u = (y > np.u) ? y : np.u;
+					np.d = (y < np.d) ? y : np.d;
+					
+					np.xr = np.r - np.l + 1;
+					np.yr = np.u - np.d + 1;
+					
+					pair<int, int> pa = make_pair(x,y);
+					if (np.xr != p.xr || np.yr != p.yr)
+						np.c.insert(pa);
+					else if (np.c.count(pa) < 1)
+						np.c.insert(pa);
+					else
+						continue;
+		
+					set<pair<int, int> > b = np.c;
+					bool nf = true;
+					for(int d1 = 0; d1 < 2 && nf && !se[i].empty(); d1++)
+					{
+						for(int j = 0; j < 4 && nf; j++)
+						{
+							set<pair<int, int> > t = normal(rotate(b));
+							for(auto it3 = se[i].begin(); it3 != se[i].end() && nf; it3++)
+								if ((*it3).c == t)
+									nf = false;
+							if(nf)
+								b = rotate(b);
+						}
+						if (nf && d1 == 0)
+							b = flip(np.c);
+					}
+					if (nf)
+					{
+						np.swnormal();
+						se[i].push_back(np);
+					}
+				}
+			}
+		}
+		cout<<i+1<<" "<<se[i].size()<<endl;
+	}
+}
+
+int main()
+{
+	int w,h,n;
+	buildtable();
+	while(cin>>n>>w>>h)
+	{
+		int ans = 0;
+		for(int i = 0; i < se[n-1].size(); i++)
+		{
+			if (se[n-1][i].xr <= w && se[n-1][i].yr <= h)
+				ans++;
+			else if (se[n-1][i].yr <= w && se[n-1][i].xr <= h)
+				ans++;
+		}
+		cout<<ans<<endl;
+	}
+}

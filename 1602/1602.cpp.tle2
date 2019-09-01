@@ -15,22 +15,10 @@ struct Polyom
 {
 	set<pair<int, int> > c;
 	int l, r, u, d;
-	bool xbalance, ybalance;
 
-	void update()
-	{
-		xbalance = ybalance = true;
-		for(auto it = c.begin(); it != c.end() && (xbalance || ybalance); it++)
-		{
-			if (xbalance && c.count(make_pair(l+r-(*it).first, (*it).second)) < 1)
-				xbalance = false;
-			if (ybalance && c.count(make_pair((*it).first, u+d-(*it).second)) < 1)
-				ybalance = false;
-		}
-	}
-	
 	void normal()
 	{
+		
 		set<pair<int, int> > nc;
 		for(auto it = c.begin(); it != c.end(); it++)
 			nc.insert(make_pair((*it).first-l, (*it).second-d));
@@ -64,6 +52,11 @@ struct Polyom
 		u = rr-ll;
 		d = 0;
 	}
+
+	bool operator==(const Polyom & b) const
+	{
+		return r == b.r && u == b.u && c == b.c;
+	}
 };
 
 vector<Polyom> se[maxn];
@@ -77,7 +70,6 @@ void buildtable()
 	Polyom & p1 = se[0][0];
 	p1.c.insert(make_pair(0,0));
 	p1.l = p1.r = p1.u = p1.d = 0;
-	p1.xbalance = p1.ybalance = true;
 	
 	for(int i = 1; i < maxn; i++)
 	{
@@ -86,10 +78,6 @@ void buildtable()
 			Polyom & p = *it;
 			for(auto it2 = p.c.begin(); it2 != p.c.end(); it2++)
 			{
-				if (p.xbalance && (*it2).first < (p.r >> 1))
-					continue;
-				if (p.ybalance && (*it2).second < (p.u >> 1))
-					continue;
 				for(int d = 0; d < 4; d++)
 				{
 					int x = (*it2).first+dx[d], y = (*it2).second+dy[d];
@@ -105,11 +93,11 @@ void buildtable()
 
 					if (se[i].empty())
 					{
-						np.update();
 						np.normal();
 						se[i].push_back(np);
 						continue;
 					}
+					
 					bool nf = true;
 					for(int d1 = 0; d1 < 2 && nf; d1++)
 					{
@@ -127,10 +115,7 @@ void buildtable()
 							np.flip();
 					}
 					if (nf)
-					{
-						np.update();
 						se[i].push_back(np);
-					}
 				}
 			}
 		}

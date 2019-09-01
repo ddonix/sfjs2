@@ -1,0 +1,139 @@
+#include <iostream>
+#include <vector>
+#include <set>
+using namespace std;
+
+const int maxn = 10;
+int w,h, n;
+
+int sx[7][2] = {{-1, 0}, {1,  0}, {-1,  0}, {0, 1}, {0, -1}, {0,  1}, { 0, -1}};
+int sy[7][2] = {{ 0, 1}, {0, -1}, { 0, -1}, {1, 0}, {1,  0}, {-1, 0}, {-1,  0}};
+
+struct Polyom
+{
+	set<pair<int, int> > c;
+	int l, r, u, d;
+	int xr, yr;
+	bool operator!=(const Polyom & r) const
+	{
+		return !(*this == r);
+	}
+
+	Polyom sw(int d) const
+	{
+		Polyom p;
+		p.l = p.d = maxn;
+		p.r = p.u = -maxn;
+		for(auto it = c.begin(); it != c.end(); it++)
+		{
+			pair<int, int> pa = *it;
+			int x = pa.first*sx[d][0]+pa.second*sx[d][1];
+			int y = pa.first*sy[d][0]+pa.second*sy[d][1];
+			p.l = (x < p.l) ? x : p.l;
+			p.r = (x > p.r) ? x : p.r;
+			p.u = (y > p.u) ? y : p.u;
+			p.d = (y < p.d) ? y : p.d;
+			p.c.insert(make_pair(x, y));
+		}
+		p.xr = p.r - p.l + 1;
+		p.yr = p.u - p.d + 1;
+		return p;
+	}
+	
+	bool operator==(const Polyom  & r) const
+	{
+		if(!((xr == r.xr && yr == r.yr) || (xr == r.yr && yr == r.xr)))
+			return false;
+
+		if (strictequal(r))
+			return true;
+		for(int d = 0; d < 7; d++)
+		{
+			Polyom p = sw(d);
+			if (strictequal(p))
+				return true;
+		}
+		return false;
+	}
+
+	bool strictequal(const Polyom & r) const
+	{
+		set<pair<int, int> > c1;
+		set<pair<int, int> > c2;
+		for(auto it = c.begin(); it != c.end(); it++)
+			c1.insert(make_pair((*it).first-l, (*it).second-d));
+		for(auto it = r.c.begin(); it != r.c.end(); it++)
+			c2.insert(make_pair((*it).first-r.l, (*it).second-r.d));
+		return c1 == c2;
+	}
+};
+
+vector<Polyom> se[maxn];
+
+int ans;
+int dx[] = { 0, 0, -1, 1};
+int dy[] = {-1, 1,  0, 0};
+
+void buildtable()
+{
+	Polyom p1;
+	p1.c.insert(make_pair(0,0));
+	p1.l = p1.r = p1.u = p1.d = 0;
+	p1.xr = p1.yr = 1;
+	se[0].push_back(p1);
+
+	for(int i = 1; i < maxn; i++)
+	{
+		for(auto it = se[i-1].begin(); it != se[i-1].end(); it++)
+		{
+			for(auto it2 = (*it).c.begin(); it2 != (*it).c.end(); it2++)
+			{
+				for(int d = 0; d < 4; d++)
+				{
+					int x = (*it2).first+dx[d], y = (*it2).second+dy[d];
+					pair<int, int> pa = make_pair(x,y);
+					if ((*it).c.count(pa))
+						continue;
+					Polyom np;
+				        np = (*it);
+					np.c.insert(pa);
+					np.r = (x > np.r) ? x : np.r;
+					np.l = (x < np.l) ? x : np.l;
+					np.u = (y > np.u) ? y : np.u;
+					np.d = (y < np.d) ? y : np.d;
+					np.xr = np.r - np.l + 1;
+					np.yr = np.u - np.d + 1;
+					int j;
+					for(j = 0; j < se[i].size() && se[i][j] != np; j++);
+					if (j == se[i].size())
+						se[i].push_back(np);
+				}
+			}
+		}
+		cout<<i+1<<" "<<se[i].size()<<endl;
+	}
+}
+
+int main()
+{
+	buildtable();
+	while(cin>>n>>w>>h)
+	{
+		int t;
+		if (w > h)
+		{
+			t = w;
+			w = h;
+			t = t;
+		}
+		ans = 0;
+		for(int i = 0; i < se[n-1].size(); i++)
+		{
+			if (se[n-1][i].xr >= w && se[n-1][i].yr >= h)
+				ans++;
+			else if (se[n-1][i].yr >= w && se[n-1][i].xr >= h)
+				ans++;
+		}
+		cout<<ans<<endl;
+	}
+}
