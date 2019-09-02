@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <set>
 using namespace std;
 
 const int maxn = 5;
@@ -15,7 +16,6 @@ struct SQuare
 	int l;		//the length of square
 	bool v;		//valid flag
 };
-
 
 struct MatchStick
 {
@@ -142,7 +142,10 @@ int ida(int d)
 		
 		if (mtt[0].sq.size() == 1)
 		{
-			
+			set<int> se;
+			for(int i = 0; i < mtt.size(); i++)
+				se.insert(mtt[i].sq[0]);
+			return d+se.size();
 		}
 
 		int r;
