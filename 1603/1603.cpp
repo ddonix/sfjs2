@@ -122,11 +122,10 @@ void initialize()
 	sort(mtt.begin(), mtt.end());
 }
 
-bool ida(int d)
+int ida(int d)
 {
-	return false;
+	return 3;
 }
-
 
 int main()
 {
@@ -147,9 +146,11 @@ int main()
 		initialize();
 		for(dd = 0; dd <= n*(n+1); dd++)
 		{
-			if (ida(0))
-				break;
+			int r = ida(dd);
+			if (!r)
+				continue;
+			cout<<r<<endl;
+			break;
 		}
-		cout<<dd<<endl;
 	}
 }
