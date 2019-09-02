@@ -55,14 +55,14 @@ int cne;
 int n, k;
 int dd;
 
-void itoaxis(int i, int &x, int & y)
+void inline itoaxis(int i, int &x, int & y)
 {
 	int t = i%(2*n+1);
 	x = i/(2*n+1);
 	y = (t < n) ? t : t-n;
 }
 
-int axistoi(int rc, int x, int y)
+int inline axistoi(int rc, int x, int y)
 {
 	return (0 == rc) ? x*(2*n+1)+y : x*(2*n+1)+y+n;
 }
@@ -123,9 +123,26 @@ void initialize()
 }
 
 
-void updatemtt(int p)
+vector<int> updatemtt(int m)
 {
-
+	int p = mtt[m].p;
+	vector<int> sq = mtt[m].sq;
+	
+	for(int i = 0; i < mtt[m].sq.size(); i++)
+		square[mtt[m].sq[i]].v = false;
+	mtt.erase(mtt.begin()+m);
+	for(int i = mtt.size()-1; i >= 0; i--)
+	{
+		for(int j = mtt[i].sq.size()-1; j >= 0; j--)
+		{
+			auto it = find(sq.begin(), sq.end(), mtt[i].sq[j]);
+			if (it != sq.end())
+				mtt[i].sq.erase(mtt[i].sq.begin()+j);
+		}
+		if (mtt[i].sq.empty())
+			mtt.erase(mtt.begin()+i);
+	}
+	return sq;
 }
 
 int ida(int d)
@@ -138,8 +155,6 @@ int ida(int d)
 	}
 	else
 	{
-		vector<MatchStick> mttback = mtt;
-		
 		if (mtt[0].sq.size() == 1)
 		{
 			set<int> se;
@@ -147,18 +162,28 @@ int ida(int d)
 				se.insert(mtt[i].sq[0]);
 			return d+se.size();
 		}
+		int a = 0, k;
+		for(k = 0; k < mtt.size() && a < ns; k++)
+			a += mtt[k].sq.size();
+		if (k+d > dd)
+			return 0;
 
 		int r;
+		vector<MatchStick> mttback = mtt;
 		for(int i = 0; i < mtt.size(); i++)
 		{
 			int p = mtt[i].p;
-			mtv[p] = false;
-			updatemtt(p);
+			vector<int> sq = updatemtt(i);		//正方形破坏
+			mtv[p] = false;				//火柴拿走
+			ns -= sq.size();
 			r = ida(d+1);
 			if (r > 0)
 				return r;
 			mtt = mttback;
 			mtv[p] = true;
+			ns += sq.size();
+			for(int i = 0; i < sq.size(); i++)
+				square[sq[i]].v = true;
 		}
 	}
 	return 0;
@@ -183,7 +208,7 @@ int main()
 		initialize();
 		for(dd = 0; dd <= n*(n+1); dd++)
 		{
-			int r = ida(dd);
+			int r = ida(0);
 			if (!r)
 				continue;
 			cout<<r<<endl;
