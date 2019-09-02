@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+const int maxn = 5;
+
+struct MT
+{
+	int p;		//位置
+	int dt;		//可以破坏几个正方形
+	int sq[100];
+};
+
+MT mt[(2*maxn+1)*maxn + maxn];		//(2*maxn+1)*maxn + maxn == 2*(maxn+1)*maxn
+bool mtv[(2*maxn+1)*maxn + maxn];	
+int ne;
+int cne;
+
+int n, k;
+int dd;
+
+bool ida(int d)
+{
+	return false;
+}
+
+void updatemt()
+{
+	int j = 0;
+	for(int i = 0; i < cne; i++)
+	{
+		for(; j < ne && !mtv[j]; j++);
+		mt[i].p = j;
+		mt[i].dt = 0;
+
+	}
+}
+
+int main()
+{
+	int T,t;
+	cin>>T;
+	while(T--)
+	{
+		cin>>n>>k;
+		ne = 2*(n+1)*n;
+		for(int i = 0; i < ne; i++)
+			mtv[i] = true;
+		for(int i = 0; i < k; i++)
+		{
+			cin>>t;
+			mtv[t-1] = false;
+		}
+		cne = ne - k;
+		for(dd = 0; dd <= n*(n+1); dd++)
+		{
+			if (ida(0))
+				break;
+		}
+		cout<<dd<<endl;
+	}
+	
+}

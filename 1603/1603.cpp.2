@@ -1,0 +1,115 @@
+#include <iostream>
+using namespace std;
+
+const int maxn = 5;
+struct MT
+{
+	int p;		//位置
+	int dt;		//可以破坏几个正方形
+};
+
+MT mt[(2*maxn+1)*maxn + maxn];		//(2*maxn+1)*maxn + maxn == 2*(maxn+1)*maxn
+bool mtv[(2*maxn+1)*maxn + maxn];	
+int ne;
+int cne;
+
+int n, k;
+int dd;
+
+bool ida(int d)
+{
+	return false;
+}
+
+int itoaxis(int i, pair<int, int> & p)
+{
+	int t1, t2;
+	t1 = (i-1)/(2*n+1);
+	t2 = (i-1)%(2*n+1);
+	if (t2 < n)
+	{
+		p.first = t1;
+		p.second = t2;
+		return 0;
+	}
+	else
+	{
+		p.first = t2-n;
+		p.second = t1;
+		return 1;
+	}
+}
+
+int axistoi(int rc, pair<int, int> &p)
+{
+	int i;
+	if (0 == rc)
+		i = 1+p.first*(2*n+1)+p.second;
+	else
+		i = 1+p.second*(2*n+1)+p.first+n;
+	return i;
+}
+
+void updatemt()
+{
+	int j = 0;
+	for(int i = 0; i < cne; i++)
+	{
+		for(; j < ne && !mtv[j]; j++);
+		mt[i].p = j;
+		mt[i].dt = 0;
+		pair<int, int> pa;
+		int rc = itoaxis(j, pa);
+		if (rc == 0)
+		{
+			for(int e = 1; e <= n; e++)
+			{
+				for(int k1 = -(e-1); k <= 0; k++)
+				{
+					bool uf=true, df=true;
+					for(k2 = 0; k2 < e; k2++)
+					{
+						pair<int, int> p1;
+						p1.first = pa.first;
+						p1.second = k1+k2;
+						if (mtv[axistoi(0, p1)])	
+							break;
+						if (mtv[axistoi(0, p1)])	
+							break;
+					}
+					if (k2 == e)
+						mt[i].dt++;
+				}
+			}
+		}
+		else
+		{
+		
+		}
+	}
+}
+
+int main()
+{
+	int T,t;
+	cin>>T;
+	while(T--)
+	{
+		cin>>n>>k;
+		ne = 2*(n+1)*n;
+		for(int i = 0; i < ne; i++)
+			mtv[i] = true;
+		for(int i = 0; i < k; i++)
+		{
+			cin>>t;
+			mtv[t-1] = false;
+		}
+		cne = ne - k;
+		for(dd = 0; dd <= n*(n+1); dd++)
+		{
+			if (ida(0))
+				break;
+		}
+		cout<<dd<<endl;
+	}
+}

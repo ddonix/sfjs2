@@ -1,0 +1,108 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int maxn = 5;
+const int maxsq = maxn*maxn*maxn;
+const int maxm = 2*(maxn+1)*maxn;
+
+//左上顶点,高
+struct SQuare
+{
+	int x;
+	int y;
+	int l;		//the length of square
+	bool v;		//valid flag
+};
+
+bool mtv[maxm];
+SQuare square[maxsq];
+vector<int> mtt[maxm];
+
+int ns;
+int ne;
+int cne;
+
+int n, k;
+int dd;
+
+
+
+void itoaxis(int i, int &x, int & y)
+{
+	int t = i%(2*n+1);
+	x = i/(2*n+1);
+	y = (t < n) ? t : t-n;
+}
+
+int axistoi(int rc, int x, int y)
+{
+	return (0 == rc) ? x*(2*n+1)+y : x*(2*n+1)+y+n;
+}
+
+void initialize()
+{
+	ns = 0;
+	for(int x = 0; x < n; x++)
+		for(int y = 0; y < n; y++)
+		{
+			for(int l = 1; l <= n; l++)
+			{
+				if (x + l > n || y + l > n)
+					continue;
+				bool v = true;
+				for(int k = 0; k < l && v; k++)
+				{
+					if (!((mtv[axistoi(0, x,y+k)] && mtv[axistoi(0, x+l, y+k)] 
+							&& mtv[axistoi(1, x+k, y)] && mtv[axistoi(1, x+k, y+l)])))
+						v = false;
+				}
+				if (!v)
+					continue;
+				square[ns].x = x;
+				square[ns].y = y;
+				square[ns].l = l;
+				square[ns].v = true;
+				for(int k = 0; k < l; k++)
+				{
+					mtt[axistoi(0, x, y+k)].push_back(ns); 
+					mtt[axistoi(0, x+l, y+k)].push_back(ns);
+					mtt[axistoi(1, x+k, y)].push_back(ns);
+				       	mtt[axistoi(1, x+k, y+l)].push_back(ns);
+				}
+				ns++;
+			}
+		}
+}
+
+bool ida(int d)
+{
+	return false;
+}
+
+
+int main()
+{
+	int T,t;
+	cin>>T;
+	while(T--)
+	{
+		cin>>n>>k;
+		ne = 2*(n+1)*n;
+		for(int i = 0; i < ne; i++)
+			mtv[i] = true;
+		for(int i = 0; i < k; i++)
+		{
+			cin>>t;
+			mtv[t-1] = false;
+		}
+		cne = ne - k;
+		initialize();
+		for(dd = 0; dd <= n*(n+1); dd++)
+		{
+			if (ida(0))
+				break;
+		}
+		cout<<dd<<endl;
+	}
+}

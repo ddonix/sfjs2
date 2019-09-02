@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+const int maxn = 5;
+
+bool mtv[(2*maxn+1)*maxn+maxn];
+int grid[5*100][20];
+
+int ne;
+int cne;
+
+int n, k;
+int dd;
+
+void buildgrid()
+{
+	for(int e = 1;e <= n; e++)
+	{
+		int m = (e-1)*100;
+		for(int i = 0; i <= n-e; i++)
+		{
+			for(int j = 0; j <= n-e; j++)
+			{
+				for(int k = 0; k < e; k++)
+				{
+					grid[m][k*4] = i*(2*n+1)+j;
+					grid[m][k*4+1] = (i+1)*(2*n+1)+j;
+					grid[m][k*4+2] = i*(2*n+1)+(n+j);
+					grid[m++][k*4+3] = i*(2*n+1)+(n+j+1);
+				}
+			}
+		}
+	}
+}
+
+bool ida(int d)
+{
+	return false;
+}
+
+int main()
+{
+	int T,t;
+	cin>>T;
+	while(T--)
+	{
+		cin>>n>>k;
+		ne = 2*(n+1)*n;
+		for(int i = 0; i < ne; i++)
+			mtv[i] = true;
+		for(int i = 0; i < k; i++)
+		{
+			cin>>t;
+			mtv[t-1] = false;
+		}
+		cne = ne - k;
+		buildgrid();
+		for(dd = 0; dd <= n*(n+1); dd++)
+		{
+			if (ida(0))
+				break;
+		}
+		cout<<dd<<endl;
+	}
+	
+}
