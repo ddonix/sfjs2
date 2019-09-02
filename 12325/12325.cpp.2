@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+int n, v1, p1, v2, p2;
+int ans;
+
+int bfs()
+{
+	int pp = 0;
+	//2最多0到(v1-1)个
+	if (p1*v1 >= p2*v1)
+	{
+		int t = (n/v2+1) > v1 ? v1 : (n/v2+1);
+		for(int i = 0; i < t; i++)
+		{
+			pp = i*p2;
+			if ((n-i*v2)>=v1)
+				pp +=((n-i*v2)/v1)*p1;
+			if (pp > ans)
+				ans = pp;
+		}
+	}
+	else
+	{
+		int t = (n/v1+1) > v2 ? v2 : (n/v1+1);
+		for(int i = 0; i < t; i++)
+		{
+			pp = i*p1;
+			if ((n-i*v1)>=v2)
+				pp += ((n-i*v1)/v2)*p2;
+			if (pp > ans)
+				ans = pp;
+		}
+	}
+}
+
+int main()
+{
+	int T;
+	cin>>T;
+	for(int ka = 1; ka <= T; ka++)
+	{
+		cin>>n>>v1>>p1>>v2>>p2;
+		ans = 0;
+		bfs();
+		cout<<"Case #"<<ka<<": "<<ans<<endl;
+	}
+}

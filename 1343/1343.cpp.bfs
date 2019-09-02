@@ -1,0 +1,160 @@
+#include <iostream>
+#include <cstring>
+#include <queue>
+using namespace std;
+
+const int maxs = 7354710;	//0 invalid
+const unsigned char bit[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+
+int news;
+unsigned char state[maxs+1][4];
+int head[maxs+1];
+int nexts[maxs+1];
+int vis[maxs+1];
+
+unsigned char bg[4], ed[4];
+int bgc, edc;
+
+int hashf(unsigned char * a)
+{
+	unsigned int c = 0;
+	for(int i = 0; i < 4; i++)
+		c |= (unsigned int)a[i] << 8*i;
+	return c%maxs;
+}
+
+//如果已存在，返回下标。
+//如果不存在，新建并返回下标
+int visit(unsigned char *s)
+{
+	int ha = hashf(s);
+	int h = head[ha];
+	if (!h)
+	{
+		if (news >= maxs)
+		{
+			cout<<"3333333333"<<endl;
+		}
+		head[ha] = ++news;
+		nexts[news] = 0;
+		memcpy(state[news], s, sizeof(unsigned char)*4);
+		return news;
+	}
+	else
+	{
+		while(1)
+		{
+			if (0 == memcmp(state[h], s, sizeof(unsigned char)*4))
+				return h;
+			if (0 == nexts[h])
+				break;
+			h = nexts[h];
+		}
+		if (news >= maxs)
+		{
+			cout<<"dddddddddd"<<endl;
+		}
+		nexts[h] = ++news;
+		nexts[news] = 0;
+		memcpy(state[news], s, sizeof(unsigned char)*4);
+		return news;
+	}
+}
+
+int dd[4][2][3] = {{{2,2,2}, {3,4,2}}, {{2,2,4}, {3,4,4}}, {{0,2,2}, {1,4,2}}, {{0,2,4}, {1,4,4}}};
+
+int nextcode(int code, int d)
+{
+	unsigned char *s = state[code];
+	unsigned char n[4];
+	memcpy(n, s, sizeof(unsigned char)*4);
+	if(d<4)
+	{
+		n[d] = n[d] << 1;
+		if (n[d] & bit[7])
+			n[d] |= bit[0];
+		else
+			n[d] &= ~bit[0];
+	}
+	else
+	{
+		d = d-4;
+		if (n[d] & bit[0])
+			n[d] |= bit[7];
+		else
+			n[d] &= ~bit[7];
+		n[d] = n[d] >> 1;
+	}
+	for(int i = 0; i < 2; i++)
+	{
+		if (n[d] & bit[dd[d][i][1]])
+			n[dd[d][i][0]] |= bit[dd[d][i][2]];
+		else
+			n[dd[d][i][0]] &= ~bit[dd[d][i][2]];
+	}
+	return visit(n);
+}
+
+void init()
+{
+	news = 0;
+	memset(head, 0, sizeof(head));
+	memset(nexts, 0, sizeof(nexts));
+	memset(vis, 0, sizeof(vis));
+	bgc = visit(bg);
+	edc = visit(ed);
+}
+
+int bfs()
+{
+	queue<int> q;
+	q.push(bgc);
+	vis[bgc] = 1;
+	while(!q.empty())
+	{
+		int code = q.front();
+		q.pop();
+
+		if (code == edc)
+			return vis[edc];
+		for(int d = 0; d < 8; d++)
+		{
+			int ncode = nextcode(code, d);
+			if (!vis[ncode])
+			{
+				vis[ncode] = vis[code]+1;
+				q.push(ncode);
+			}
+		}
+	}
+	return -1;
+}
+
+int main()
+{
+	char ori[4][7];
+	int ans, r;
+	
+	for(int i = 0; i < 4; i++)
+		ed[i] = 0x1c;
+	for(int i = 0; i < 4; i++)
+		for(int j = 0; j < 7; j++)
+			cin>>ori[i][j];
+	ans = maxs;
+	for(char b = '1'; b <= '3'; b++)
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			bg[i] = 0;
+			for(int j = 0; j < 7; j++)
+				bg[i] |= ((ori[i][j] == b) ? bit[j] : 0);
+		}
+		init();
+		r = bfs();
+		ans = (r < ans) ? r : ans;
+		if(ans < 1)
+			break;
+	}
+	cout<<ans-1<<endl;
+	return 0;
+}
