@@ -31,7 +31,7 @@ void enumerate(int type, int num)
 
 }
 
-int algo()
+void algo()
 {
 	int pp = 0;
 	int t1, t2;
