@@ -28,7 +28,7 @@ struct Polyom
 				ybalance = false;
 		}
 	}
-	
+
 	void normal()
 	{
 		set<pair<int, int> > nc;
@@ -117,13 +117,11 @@ void buildtable()
 						{
 							np.rotate();
 							for(auto it3 = se[i].begin(); it3 != se[i].end() && nf; it3++)
-								if ((*it3).u == np.u && (*it3).r == np.r)
-								{
-									if ((*it3).c == np.c)
-										nf = false;
-								}
+								if ((*it3).u == np.u && (*it3).r == np.r 
+												&& (*it3).c == np.c)
+									nf = false;
 						}
-						if (nf && d1 == 0)
+						if (nf && !d1)
 							np.flip();
 					}
 					if (nf)
