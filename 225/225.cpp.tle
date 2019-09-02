@@ -51,11 +51,6 @@ void dfs(Point p, int e, string trace)
 	}
 	else
 	{
-		int x = p.x > 0 ? p.x : -p.x;
-		int y = p.y > 0 ? p.y : -p.y;
-		if ((ed-e)*ed < x || (ed-e)*ed < y)
-			return;
-
 		bool df[4] = {true, true, true, true};
 		if (!trace.empty())
 		{

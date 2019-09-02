@@ -2,10 +2,11 @@
 #include <string>
 #include <cstring>
 #include <queue>
-#include <set>
 using namespace std;
 
 const int maxe = 21;
+const int maxb = maxe*(maxe+2);
+const int hmaxb = maxe*(maxe+2)/2;
 
 int ed;
 int bl;
@@ -28,15 +29,36 @@ struct Point
 };
 
 queue<string> ans;
-Point be(0,0);
+Point be(hmaxb,hmaxb);
 
 
 string dir = "ensw";
 int dx[] = {1, 0,  0, -1};
 int dy[] = {0, 1, -1,  0};
 
-set<Point> block;
-set<Point> vis;
+bool vis[maxe*(maxe+2)][maxe*(maxe+2)];
+
+bool visit(Point p, int e, int d)
+{
+	int x = p.x, y=p.y;
+	for(int i = 1; i <= e; i++)
+	{
+		if (x+i*dx[d] == be.x && y+i*dy[d] == be.y && i == e && e == ed)
+			return true;
+		if (vis[x+i*dx[d]][y+i*dy[d]])
+			return false;
+	}
+	for(int i = 1; i <= e; i++)
+		vis[x+i*dx[d]][y+i*dy[d]] = true;
+	return true;
+}
+
+void unvisit(Point p, int e, int d)
+{
+	int x = p.x, y=p.y;
+	for(int i = 1; i <= e; i++)
+		vis[x+i*dx[d]][y+i*dy[d]] = false;
+}
 
 //p:	当前位置
 //e:	当前走了多少步
@@ -51,11 +73,6 @@ void dfs(Point p, int e, string trace)
 	}
 	else
 	{
-		int x = p.x > 0 ? p.x : -p.x;
-		int y = p.y > 0 ? p.y : -p.y;
-		if ((ed-e)*ed < x || (ed-e)*ed < y)
-			return;
-
 		bool df[4] = {true, true, true, true};
 		if (!trace.empty())
 		{
@@ -66,21 +83,12 @@ void dfs(Point p, int e, string trace)
 		}
 		for(int i = 0; i < 4; i++)
 		{
-			if (!df[i]) 
-				continue;
-			Point np = Point(p.x + dx[i]*(e+1), p.y+dy[i]*(e+1));
-			if (vis.count(np) && !(np == be && (e+1) == ed))
-				continue;
-			int j;
-			for(j = 1; j <= (e+1) && !block.count(Point(p.x+dx[i]*j, p.y+dy[i]*j)); j++);
-			if (j <= (e+1))
-				continue;
-
-			auto r = vis.insert(np);
-			string nt = trace+dir[i];
-			dfs(np, e+1, nt);
-			if (r.second)
-				vis.erase(r.first);
+			if (df[i] && visit(p, e+1, i))	//访问
+			{
+				Point np = Point(p.x + dx[i]*(e+1), p.y+dy[i]*(e+1));
+				dfs(np, e+1, trace+dir[i]);
+				unvisit(p, e+1, i);
+			}
 		}
 	}
 }
@@ -91,34 +99,28 @@ int main()
 	cin>>T;
 	while(T--)
 	{
-		block.clear();
-		vis.clear();
-		
-		vis.insert(be);
 		cin>>ed>>bl;
+		memset(vis, 0, sizeof(vis));
 		for(int i = 0; i < bl; i++)
 		{
 			int x,y;
 			cin>>x>>y;
-			block.insert(Point(x,y));
+			vis[be.x + x][be.y + y] = true;
 		}
 
-		if (!(ed == 7 || ed == 8 || ed == 15 || ed == 16))
-			cout<<"Found "<<0<<" golygon(s)."<<endl;
-		else
-		{
-			string s = "";
-			while(!ans.empty()) ans.pop();
+		string s = "";
+		while(!ans.empty()) ans.pop();
 	
-			dfs(be, 0, s);
-			int t = ans.size();
-			while(!ans.empty())
-			{
-				cout<<ans.front()<<endl;
-				ans.pop();
-			}
-			cout<<"Found "<<t<<" golygon(s)."<<endl;
+		vis[be.x][be.y] = true;
+		dfs(be, 0, s);
+		int t = ans.size();
+		while(!ans.empty())
+		{
+			cout<<ans.front()<<endl;
+			ans.pop();
 		}
+		cout<<"Found "<<t<<" golygon(s)."<<endl;
+		cout<<ed<<" * "<<bl<<endl;
 		if(T)
 			cout<<endl;
 	}
