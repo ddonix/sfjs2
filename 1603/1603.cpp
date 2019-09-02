@@ -122,9 +122,43 @@ void initialize()
 	sort(mtt.begin(), mtt.end());
 }
 
+
+void updatemtt(int p)
+{
+
+}
+
 int ida(int d)
 {
-	return 3;
+	if (d == dd)
+	{
+		if (mtt.empty())
+			return dd;
+		return 0;
+	}
+	else
+	{
+		vector<MatchStick> mttback = mtt;
+		
+		if (mtt[0].sq.size() == 1)
+		{
+			
+		}
+
+		int r;
+		for(int i = 0; i < mtt.size(); i++)
+		{
+			int p = mtt[i].p;
+			mtv[p] = false;
+			updatemtt(p);
+			r = ida(d+1);
+			if (r > 0)
+				return r;
+			mtt = mttback;
+			mtv[p] = true;
+		}
+	}
+	return 0;
 }
 
 int main()
