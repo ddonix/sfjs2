@@ -131,13 +131,14 @@ int ida(int d)
 	else
 	{
 		sort(mtt.begin(), mtt.end());
+		/*
 		if (mtt[0].sq.size() == 1)
 		{
 			set<int> se;
-			for(int i = mtt.size()-1; i >= 0; i--)
+			for(int i = mtt.size(); i >= 0; i--)
 				se.insert(mtt[i].sq[0]);
 			return d+se.size();
-		}
+		}*/
 		int a = 0, k;
 		for(k = 0; k < mtt.size() && a < ns; k++)
 			a += mtt[k].sq.size();
