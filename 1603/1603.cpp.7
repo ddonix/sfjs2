@@ -11,8 +11,8 @@ const int maxm = 2*(maxn+1)*maxn;
 
 struct MatchStick
 {
-	int p;			//position
-	vector<int> sq;		//
+	int p;		//position
+	vector<int> sq;	//
 
 	MatchStick(int p_, int sq_)
 	{
@@ -39,7 +39,10 @@ struct Find
 bool mtv[maxm];
 bool square[maxsq];		//每个正方形编个号
 vector<MatchStick> mtt;
+
 int ns;
+int ne;
+int cne;
 
 int n, k;
 int dd;
@@ -69,6 +72,7 @@ void initialize()
 				if (x + l > n || y + l > n)
 					break;
 				bool v = true;
+				int e[4];
 				int k;
 				for(k = 0; k < l; k++)
 					if (!(mtv[axistoi(0, x,y+k)] && mtv[axistoi(0, x+l, y+k)] 
@@ -77,9 +81,8 @@ void initialize()
 				if (k < l)
 					continue;
 				square[ns] = true;
-				for(k = 0; k < l; k++)
+				for(int k = 0; k < l; k++)
 				{
-					int e[4];
 					e[0] = axistoi(0, x,y+k);
 			       		e[1] = axistoi(0, x+l, y+k);
 					e[2] = axistoi(1, x+k, y);
@@ -96,7 +99,9 @@ void initialize()
 				ns++;
 			}
 		}
+	sort(mtt.begin(), mtt.end());
 }
+
 
 vector<int> updatemtt(int m)
 {
@@ -130,11 +135,10 @@ int ida(int d)
 	}
 	else
 	{
-		sort(mtt.begin(), mtt.end());
 		if (mtt[0].sq.size() == 1)
 		{
 			set<int> se;
-			for(int i = mtt.size()-1; i >= 0; i--)
+			for(int i = 0; i < mtt.size(); i++)
 				se.insert(mtt[i].sq[0]);
 			return d+se.size();
 		}
@@ -143,21 +147,20 @@ int ida(int d)
 			a += mtt[k].sq.size();
 		if (k+d > dd)
 			return 0;
-		
+
 		int r;
 		vector<MatchStick> mttback = mtt;
-		int size = mtt.size();
-		for(int i = 0; i < size; i++)
+		for(int i = 0; i < mtt.size(); i++)
 		{
-			int p2 = mtt[i].p;
+			int p = mtt[i].p;
 			vector<int> sq = updatemtt(i);		//正方形破坏
-			mtv[p2] = false;			//火柴拿走
+			mtv[p] = false;				//火柴拿走
 			ns -= sq.size();
 			r = ida(d+1);
 			if (r > 0)
 				return r;
 			mtt = mttback;
-			mtv[p2] = true;
+			mtv[p] = true;
 			ns += sq.size();
 			for(int i = 0; i < sq.size(); i++)
 				square[sq[i]] = true;
@@ -173,7 +176,7 @@ int main()
 	while(T--)
 	{
 		cin>>n>>k;
-		int ne = 2*(n+1)*n;
+		ne = 2*(n+1)*n;
 		for(int i = 0; i < ne; i++)
 			mtv[i] = true;
 		for(int i = 0; i < k; i++)
@@ -181,6 +184,7 @@ int main()
 			cin>>t;
 			mtv[t-1] = false;
 		}
+		cne = ne - k;
 		initialize();
 		for(dd = 0; dd <= n*(n+1); dd++)
 		{
