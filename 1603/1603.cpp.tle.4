@@ -1,0 +1,194 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <cstring>
+using namespace std;
+
+const int maxn = 5;
+const int maxsq = maxn*maxn*maxn;
+const int maxm = 2*(maxn+1)*maxn;
+
+struct MatchStick
+{
+	int p;			//position
+	vector<int> sq;		//
+
+	MatchStick(int p_, int sq_)
+	{
+		p = p_;
+		sq.push_back(sq_);
+	}
+
+	bool operator<(const MatchStick & b) const
+	{
+		return sq.size() > b.sq.size();
+	}
+};
+
+struct Find
+{
+	Find(int p_) : p(p_) {}
+	bool operator()(const MatchStick & b)
+	{
+		return p == b.p;
+	}
+	int p;
+};
+
+bool mtv[maxm];
+bool square[maxsq];		//每个正方形编个号
+vector<MatchStick> mtt;
+int ns;
+
+int n, k;
+int dd;
+
+void inline itoaxis(int i, int &x, int & y)
+{
+	int t = i%(2*n+1);
+	x = i/(2*n+1);
+	y = (t < n) ? t : t-n;
+}
+
+int inline axistoi(int rc, int x, int y)
+{
+	return (0 == rc) ? x*(2*n+1)+y : x*(2*n+1)+y+n;
+}
+
+void initialize()
+{
+	ns = 0;
+	memset(square, 0, sizeof(square));
+	mtt.clear();
+	for(int x = 0; x < n; x++)
+		for(int y = 0; y < n; y++)
+		{
+			for(int l = 1; l <= n; l++)
+			{
+				if (x + l > n || y + l > n)
+					break;
+				bool v = true;
+				int k;
+				for(k = 0; k < l; k++)
+					if (!(mtv[axistoi(0, x,y+k)] && mtv[axistoi(0, x+l, y+k)] 
+								&& mtv[axistoi(1, x+k, y)] && mtv[axistoi(1, x+k, y+l)]))
+						break;
+				if (k < l)
+					continue;
+				square[ns] = true;
+				for(k = 0; k < l; k++)
+				{
+					int e[4];
+					e[0] = axistoi(0, x,y+k);
+			       		e[1] = axistoi(0, x+l, y+k);
+					e[2] = axistoi(1, x+k, y);
+					e[3] = axistoi(1, x+k, y+l);
+					for(int k2 = 0; k2 < 4; k2++)
+					{
+						auto it = find_if(mtt.begin(), mtt.end(), Find(e[k2]));
+						if (it != mtt.end())
+							(*it).sq.push_back(ns);
+						else
+							mtt.push_back(MatchStick(e[k2], ns));
+					}
+				}
+				ns++;
+			}
+		}
+}
+
+vector<int> updatemtt(int m)
+{
+	int p = mtt[m].p;
+	vector<int> sq = mtt[m].sq;
+	
+	for(int i = 0; i < mtt[m].sq.size(); i++)
+		square[mtt[m].sq[i]] = false;
+	mtt.erase(mtt.begin()+m);
+	for(int i = mtt.size()-1; i >= 0; i--)
+	{
+		for(int j = mtt[i].sq.size()-1; j >= 0; j--)
+		{
+			auto it = find(sq.begin(), sq.end(), mtt[i].sq[j]);
+			if (it != sq.end())
+				mtt[i].sq.erase(mtt[i].sq.begin()+j);
+		}
+		if (mtt[i].sq.empty())
+			mtt.erase(mtt.begin()+i);
+	}
+	return sq;
+}
+
+int ida(int d)
+{
+	if (d == dd)
+	{
+		if (mtt.empty())
+			return dd;
+		return 0;
+	}
+	else
+	{
+		sort(mtt.begin(), mtt.end());
+		if (mtt[0].sq.size() == 1)
+		{
+			set<int> se;
+			for(int i = mtt.size()-1; i >= 0; i--)
+				se.insert(mtt[i].sq[0]);
+			return d+se.size();
+		}
+		int a = 0, k;
+		for(k = 0; k < mtt.size() && a < ns; k++)
+			a += mtt[k].sq.size();
+		if (k+d > dd)
+			return 0;
+		
+		int r;
+		vector<MatchStick> mttback = mtt;
+		int size = mtt.size();
+		for(int i = 0; i < size; i++)
+		{
+			int p2 = mtt[i].p;
+			vector<int> sq = updatemtt(i);		//正方形破坏
+			mtv[p2] = false;			//火柴拿走
+			ns -= sq.size();
+			r = ida(d+1);
+			if (r > 0)
+				return r;
+			mtt = mttback;
+			mtv[p2] = true;
+			ns += sq.size();
+			for(int i = 0; i < sq.size(); i++)
+				square[sq[i]] = true;
+		}
+	}
+	return 0;
+}
+
+int main()
+{
+	int T,t;
+	cin>>T;
+	while(T--)
+	{
+		cin>>n>>k;
+		int ne = 2*(n+1)*n;
+		for(int i = 0; i < ne; i++)
+			mtv[i] = true;
+		for(int i = 0; i < k; i++)
+		{
+			cin>>t;
+			mtv[t-1] = false;
+		}
+		initialize();
+		for(dd = 0; dd <= n*(n+1); dd++)
+		{
+			int r = ida(0);
+			if (!r)
+				continue;
+			cout<<r<<endl;
+			break;
+		}
+	}
+}

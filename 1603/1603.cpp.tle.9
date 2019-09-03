@@ -8,13 +8,10 @@ using namespace std;
 
 const int maxn = 5;
 const int maxsq = 55;
-const int maxss[4] = {5, 14, 30, 55};
 const int maxm = 2*(maxn+1)*maxn;
 
 bool mtv[maxm];
-bool mts1[maxm][maxsq];
-int mtss[maxm];
-
+vector<int> mts[maxm];
 vector<int> mtt;
 
 bool square[maxsq];		//每个正方形编个号
@@ -62,10 +59,10 @@ void initializeg()
 void initialize()
 {
 	memset(square, 0, sizeof(square));
-	memset(mts1, 0, sizeof(mts1));
-	memset(mtss, 0, sizeof(mtss));
-	
+	for(int i = 0; i < nm; i++)
+		mts[i].clear();
 	mtt.clear();
+	
 	int ns = 0;
 	as = 0;
 	for(int x = 0; x < n; x++)
@@ -89,48 +86,39 @@ void initialize()
 				as++;
 				for(k = 0; k < l; k++)
 				{
-					mts1[axistoi0(x, y+k)][ns] = true;
-					mtss[axistoi0(x, y+k)]++;
-					
-					mts1[axistoi0(x+l, y+k)][ns] = true;
-					mtss[axistoi0(x+l, y+k)]++;
-					
-					mts1[axistoi1(x+k, y)][ns] = true;
-					mtss[axistoi1(x+k, y)]++;
-					
-					mts1[axistoi1(x+k, y+l)][ns] = true;
-					mtss[axistoi1(x+k, y+l)]++;
+					mts[axistoi0(x, y+k)].push_back(ns);
+					mts[axistoi0(x+l, y+k)].push_back(ns);
+					mts[axistoi1(x+k, y)].push_back(ns);
+					mts[axistoi1(x+k, y+l)].push_back(ns);
 				}
 				ns++;
 			}
 		}
 	for(int i = 0; i < nm; i++)
-		if (mtv[i] && mtss[i])
+		if (mtv[i] && !mts[i].empty())
 			mtt.push_back(i);
 }
 
-void removemt(int mi, map<int, vector<int> > & mp)
+void removemt(int mi, vector<int> & sq, map<int, vector<int> > & mp)
 {
-	int m = mtt[mi];
-	for(int s = 0; mtss[m]; s++)
+	sq = mts[mtt[mi]];
+	mtt.erase(mtt.begin()+mi);
+	
+	for(int i = 0; i < sq.size(); i++)
 	{
-		if (mts1[m][s] == true)
+		square[sq[i]] = false;
+		for(int j = 0; j < smt[n-2][sq[i]].size(); j++)
 		{
-			square[s] = false;
-			as--;
-			for(int j = 0; j < smt[n-2][s].size(); j++)
-			{
-				int m1 = smt[n-2][s][j];
-				if (mp.count(m1) < 1)
-					mp[m1] = vector<int>();
-				mp[m1].push_back(s);
-				mts1[m1][s] = false;
-				mtss[m1]--;
-			}
+			int m = smt[n-2][sq[i]][j];
+			if (mp.count(m) < 1)
+				mp[m] = vector<int>();
+			mp[m].push_back(sq[i]);
+			auto it = find(mts[m].begin(), mts[m].end(), sq[i]);
+			mts[m].erase(it);
 		}
 	}
 	for(int i = mtt.size()-1; i >= 0; i--)
-		if (!mtss[mtt[i]])
+		if (mts[mtt[i]].empty())
 			mtt.erase(mtt.begin()+i);
 }
 
@@ -139,23 +127,14 @@ void recovermt(map<int, vector<int> > & mp)
 	for(auto it = mp.begin(); it != mp.end(); it++)
 	{
 		int m = (*it).first;
-		mtss[m] += (*it).second.size();
 		for(int i = 0; i < (*it).second.size(); i++)
-		{
-			int s = (*it).second[i];
-			mts1[m][s] = true;
-			if (!square[s])
-			{
-				square[s] = true;
-				as++;
-			}
-		}
+			mts[m].push_back((*it).second[i]);
 	}
 }
 
 bool cmp(int a, int b)
 {
-	return mtss[a] > mtss[b];
+	return mts[a].size() > mts[b].size();
 }
 
 int ida(int d)
@@ -169,42 +148,38 @@ int ida(int d)
 	else
 	{
 		sort(mtt.begin(), mtt.end(), cmp);
-		if (mtss[mtt[0]] == 1)
+		if (mts[mtt[0]].size() == 1)
 		{
-			set<int> st;
-			int s=0;
-			for(int i = mtt.size()-1; i >= 0 && d+s <= dd; i--)
-			{
-				int sq;
-				for(sq = 0; !mts1[mtt[i]][sq]; sq++);
-				if (!st.count(sq))
-				{
-					st.insert(sq);
-					s++;
-				}
-			}
-			return  (d+s == dd) ? dd : 0;
+			set<int> se;
+			for(int i = 0; i < mtt.size(); i++)
+				se.insert(mts[mtt[i]][0]);
+			return (d+se.size() == dd) ? dd : 0;
 		}
 		int a = 0, k;
 		for(k = 0; a < as; k++)
-			a += mtss[mtt[k]];
+			a += mts[mtt[k]].size();
 		if (k+d > dd)
 			return 0;
 		
 		vector<int> mttback = mtt;
-		int r, s = mtt.size();
-		cout<<s<<endl;
-		for(int i = 0; i < s; i++)
+		int r;
+		for(int i = 0; i < mtt.size(); i++)
 		{
 			map<int, vector<int> > mp;
-			removemt(i, mp);	//火柴拿走, 正方形破坏
+			vector<int> sq;
+			
+			removemt(i, sq, mp);	//火柴拿走, 正方形破坏
 			mtv[mtt[i]] = false;
+			as -= sq.size();
 			r = ida(d+1);
 			if (r > 0)
 				return r;
 			mtt = mttback;
 			recovermt(mp);
 			mtv[mtt[i]] = true;
+			as += sq.size();
+			for(int i = 0; i < sq.size(); i++)
+				square[sq[i]] = true;
 		}
 	}
 	return 0;

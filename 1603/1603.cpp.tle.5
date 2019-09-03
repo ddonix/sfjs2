@@ -1,0 +1,188 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <map>
+#include <cstring>
+using namespace std;
+
+const int maxn = 5;
+const int maxsq = maxn*maxn*maxn;
+const int maxm = 2*(maxn+1)*maxn;
+
+bool mtv[maxm];
+vector<int> mts[maxm];
+
+vector<int> mtt;
+
+bool square[maxsq];		//每个正方形编个号
+int ns;
+
+int n, nm, k;
+int dd;
+
+void inline itoaxis(int i, int &x, int & y)
+{
+	int t = i%(2*n+1);
+	x = i/(2*n+1);
+	y = (t < n) ? t : t-n;
+}
+
+int inline axistoi(int rc, int x, int y)
+{
+	return (0 == rc) ? x*(2*n+1)+y : x*(2*n+1)+y+n;
+}
+
+void initialize()
+{
+	ns = 0;
+	memset(square, 0, sizeof(square));
+	for(int i = 0; i < nm; i++)
+		mts[i].clear();
+	
+	for(int x = 0; x < n; x++)
+		for(int y = 0; y < n; y++)
+		{
+			for(int l = 1; l <= n; l++)
+			{
+				if (x + l > n || y + l > n)
+					break;
+				bool v = true;
+				int k;
+				for(k = 0; k < l; k++)
+					if (!(mtv[axistoi(0, x,y+k)] && mtv[axistoi(0, x+l, y+k)] 
+							&& mtv[axistoi(1, x+k, y)] && mtv[axistoi(1, x+k, y+l)]))
+						break;
+				if (k < l)
+					continue;
+				square[ns] = true;
+				for(k = 0; k < l; k++)
+				{
+					int e[4];
+					e[0] = axistoi(0, x,y+k);
+			       		e[1] = axistoi(0, x+l, y+k);
+					e[2] = axistoi(1, x+k, y);
+					e[3] = axistoi(1, x+k, y+l);
+					for(int k1 = 0; k1 < 4; k1++)
+						mts[e[k1]].push_back(ns);
+				}
+				ns++;
+			}
+		}
+	mtt.clear();
+	for(int i = 0; i < nm; i++)
+	{
+		if (mtv[i] && !mts[i].empty())
+			mtt.push_back(i);
+	}
+}
+
+void removemt(int mi, map<int, vector<int> > & mp)
+{
+	vector<int> & sq = mts[mtt[mi]];
+	
+	for(int i = 0; i < sq.size(); i++)
+		square[sq[i]] = false;
+	mtt.erase(mtt.begin()+mi);
+	
+	for(int i = mtt.size()-1; i >= 0; i--)
+	{
+		for(int j = mts[mtt[i]].size()-1; j >= 0; j--)
+		{
+			auto it = find(sq.begin(), sq.end(), mts[mtt[i]][j]);
+			if (it != sq.end())
+			{
+				if (mp.count(mtt[i]) < 1)
+					mp[mtt[i]] = vector<int>();
+				mp[mtt[i]].push_back(*it);
+				mts[mtt[i]].erase(mts[mtt[i]].begin()+j);
+			}
+		}
+		if (mts[mtt[i]].empty())
+			mtt.erase(mtt.begin()+i);
+	}
+}
+
+void recovermt(map<int, vector<int> > & mp)
+{
+	for(auto it = mp.begin(); it != mp.end(); it++)
+	{
+		int m = (*it).first;
+		for(int i = 0; i < (*it).second.size(); i++)
+			mts[m].push_back((*it).second[i]);
+	}
+}
+
+bool cmp(int a, int b)
+{
+	return mts[a].size() > mts[b].size();
+}
+
+int ida(int d)
+{
+	if (d == dd)
+	{
+		if (0 == ns)
+			return dd;
+		return 0;
+	}
+	else
+	{
+		sort(mtt.begin(), mtt.end(), cmp);
+		int a = 0, k;
+		for(k = 0; k < mtt.size() && a < ns; k++)
+			a += mts[mtt[k]].size();
+		if (k+d > dd)
+			return 0;
+		
+		int r;
+		vector<int> mttback = mtt;
+		for(int i = 0; i < mtt.size(); i++)
+		{
+			int m = mtt[i];
+			map<int, vector<int> > mp;
+			vector<int> sq = mts[m];
+			
+			removemt(i, mp);	//火柴拿走, 正方形破坏
+			mtv[m] = false;
+			ns -= sq.size();
+			r = ida(d+1);
+			if (r > 0)
+				return r;
+			recovermt(mp);
+			mtt = mttback;
+			mtv[m] = true;
+			ns += sq.size();
+			for(int i = 0; i < sq.size(); i++)
+				square[sq[i]] = true;
+		}
+	}
+	return 0;
+}
+
+int main()
+{
+	int T,t;
+	cin>>T;
+	while(T--)
+	{
+		cin>>n>>k;
+		nm = 2*(n+1)*n;
+		for(int i = 0; i < nm; i++)
+			mtv[i] = true;
+		for(int i = 0; i < k; i++)
+		{
+			cin>>t;
+			mtv[t-1] = false;
+		}
+		initialize();
+		for(dd = 0; dd <= n*(n+1); dd++)
+		{
+			int r = ida(0);
+			if (!r)
+				continue;
+			cout<<r<<endl;
+			break;
+		}
+	}
+}
