@@ -9,27 +9,13 @@ const int domino[29][2] = { {0,0},	{0,0}, {0,1}, {0,2}, {0,3}, {0,4}, {0,5}, {0,
 					{2,3}, {2,4}, {2,5}, {2,6}, {3,3}, {3,4}, {3,5},
 					{3,6}, {4,4}, {4,5}, {4,6}, {5,5}, {5,6}, {6,6}};
 
-int pip[7][8];
-
-void initialize()
-{
-	int n[7];
-	for(int i = 0; i < 7; i++)
-		n[i] = 0;
-	for(int i = 1; i <= 28; i++)
-	{
-		pip[domino[i][0]][n[domino[i][0]]++] = i;
-		pip[domino[i][1]][n[domino[i][1]]++] = i;
-	}
-}
-
 int maze[7][8];
 
 int ans[7][8];		//答案
 int na;			//答案个数
 
-int dx[4] = { 0, 0, -1, 1};
-int dy[4] = {-1, 1,  0, 0};
+int dx[2] = { 0, 1};
+int dy[2] = { 1, 0};
 
 bool vis[29];
 
@@ -46,13 +32,13 @@ void dfs(int p, int d)
 				printf("  %2d", ans[i][j]);
 			printf("\n");
 		}
-		printf("\n\n");
+		printf("\n");
 	}
 	else
 	{
 		int x = p/8;
 		int y = p%8;
-		for(int i = 0; i < 4; i++)
+		for(int i = 0; i < 2; i++)
 		{
 			int nx = x+dx[i];
 		       	int ny = y+dy[i];
@@ -82,8 +68,7 @@ void dfs(int p, int d)
 
 int main()
 {
-	int ka;
-	initialize();
+	int ka=0;
 	while(scanf("%d", &maze[0][0]) == 1)
 	{
 		for(int j = 1; j < 8; j++)
@@ -91,7 +76,9 @@ int main()
 		for(int i = 1; i < 7; i++)
 			for(int j = 0; j < 8; j++)
 				scanf("%d", &maze[i][j]);
-		printf("Layout #%d:\n\n\n", ++ka);
+		if (ka)
+			printf("\n\n\n");
+		printf("Layout #%d:\n\n", ++ka);
 		for(int i = 0; i < 7; i++)
 		{
 			for(int j = 0; j < 8; j++)
@@ -99,12 +86,12 @@ int main()
 			printf("\n");
 		}
 		printf("\n");
-		printf("Maps resulting from layout #%d are:\n\n\n", ka);
+		printf("Maps resulting from layout #%d are:\n\n", ka);
 
 		memset(ans, 0, sizeof(ans));
 		memset(vis, 0, sizeof(vis));
 		na = 0;
 		dfs(0, 0);
-		printf("There are %d solution(s) for layout #%d.\n\n\n\n\n\n", na, ka);
+		printf("There are %d solution(s) for layout #%d.\n", na, ka);
 	}
 }
