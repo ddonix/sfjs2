@@ -10,13 +10,13 @@ const int maxn = 5;
 const int maxm = 2*(maxn+1)*maxn;
 const int maxsq = 55;
 const int maxss[5] = {1, 5, 14, 30, 55};
+
 unsigned long long bits[maxsq];
+unsigned long long square[maxn][maxsq];	//每个正方形对应的火柴编号
+unsigned long long mts[maxn][maxm];	//每个火柴对应的正方形编号
 
 int n;
 int dd;
-
-unsigned long long square[maxn][maxsq];	//每个正方形对应的火柴编号
-unsigned long long mts[maxn][maxm];	//每个火柴对应的正方形编号
 
 int inline axistoi0(int x, int y)
 {
@@ -62,27 +62,42 @@ void initializeg()
 	}
 }
 
-bool ida(int d, unsigned long long sv, unsigned long long mv)
+//d: 当前移动了次数
+//pre: 前一次移动的火柴编号
+//sv: 正方形状态
+//mv: 火柴状态
+bool ida(int d, int pre, unsigned long long sv, unsigned long long mv)
 {
 	if (d == dd)
 		return sv == 0;
 	else
 	{
+		unsigned long long tm = mv;
+		int need = 0;
 		for(int s = 0; s < maxss[n-1]; s++)
 		{
-			unsigned long long nsv, nmv;
+			if((sv & bits[s]) && ((square[n-1][s] & tm) == square[n-1][s]))
+			{
+				need++;
+				tm &= ~square[n-1][s];
+			}
+		}
+		if (need+d > dd)
+			return false;
+		for(int s = 0; s < maxss[n-1]; s++)
+		{
 			if (!(sv & bits[s]))
 				continue;
-			for(int m = 0; m < 2*(n+1)*n; m++)
+			for(int m = pre+1; m < 2*(n+1)*n; m++)
 			{
 				if ((mv & bits[m]) && (square[n-1][s] & bits[m]))
 				{
-					nmv = (mv & ~bits[m]);
-					nsv = sv;
+					unsigned long long nmv = (mv & ~bits[m]);
+					unsigned long long nsv = sv;
 					for(int k = 0; k < maxss[n-1]; k++)
 						if (mts[n-1][m] & bits[k])
 							nsv &= ~bits[k];
-					if (ida(d+1, nsv, nmv))
+					if (ida(d+1, m, nsv, nmv))
 						return true;
 				}
 			}
@@ -103,7 +118,7 @@ int main()
 		unsigned long long sqv = 0;	//正方形状态
 		
 		cin>>n>>k;
-		mtv = (1 << 2*(n+1)*n)-1;
+		mtv = ((unsigned long long)1 << 2*(n+1)*n)-1;
 		for(int i = 0; i < k; i++)
 		{
 			cin>>t;
@@ -114,7 +129,7 @@ int main()
 				sqv |= bits[i];
 		for(dd = 0; dd <= maxss[n-1]; dd++)
 		{
-			if (!ida(0, sqv, mtv))
+			if (!ida(0, -1, sqv, mtv))
 				continue;
 			cout<<dd<<endl;
 			break;
