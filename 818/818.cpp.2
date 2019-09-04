@@ -1,0 +1,63 @@
+#include <iostream>
+#include <queue>
+#include <bitset>
+#include <cstring>
+using namespace std;
+
+const int maxn = 15;
+int n, ans;
+
+unsigned short bits[16] = {	0x1, 	0x2, 	0x4, 	0x8,
+				0x10,	0x20,	0x40,	0x80,
+				0x100,	0x200,	0x400,	0x800,
+				0x1000,	0x2000,	0x4000, 0x8000};
+unsigned short g[maxn];
+
+int vis[maxn];
+
+void bfs()
+{
+	queue<unsigned short> q;
+	q.push(0);
+
+	while(!q.empty())
+	{
+		unsigned short b = q.front();
+		q.pop();
+		
+		cout<<(bitset<16>)b<<endl;
+		int i;
+		for(i = n-1; i >= 0 && !(b & bits[i]); i--);
+
+		for(int j = i+1; j < n; j++)
+		{
+			unsigned short nb = b | bits[j];
+			q.push(nb);
+		}
+	}
+}
+
+int main()
+{
+	int ka = 0;
+	while(cin>>n && n)
+	{
+		int rep = 0;
+		for(int i = 0; i < n; i++)
+			g[i] = 0;
+		int a,b;
+		while(cin>>a>>b && -1 != a)
+		{
+			if ((g[a-1] & bits[b-1]) || (g[b-1] & bits[a-1]))
+				rep++;
+			else
+			{
+				g[a-1] |= bits[b-1];
+				g[b-1] |= bits[a-1];
+			}
+		}
+		memset(vis, 0, sizeof(bool)*n);
+		bfs();
+		cout<<"Set "<<++ka<<":Minimum links to open is "<<ans+rep<<endl;
+	}
+}
