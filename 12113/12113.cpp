@@ -23,6 +23,7 @@ struct  Array
 {
 	unsigned long vis;
 	unsigned long long s;
+	int d;
 
 	Array() {}
 
@@ -30,6 +31,7 @@ struct  Array
 	{
 		Array r;
 		r.vis = vis | bits[p];
+		r.d = d+1;
 
 		int x = p/3, y = p%3;
 		r.s = s;
@@ -62,6 +64,7 @@ void initialize()
 	}
 	be.vis = 0;
 	be.s = 0;
+	be.d = 0;
 }
 
 void tabulation()
@@ -75,7 +78,8 @@ void tabulation()
 		q.pop();
 
 		state[sid++] = arr.s;
-		cout<<sid<<endl;
+		if (arr.d == 6)
+			continue;
 		for(int p = 0; p < 9; p++)
 		{
 			if (arr.vis & bits[p])
@@ -91,16 +95,18 @@ int main()
 	initialize();
 	tabulation();
 	sort(state, state+792100);
-
+		
 	string str;
 	getline(cin, str);
-	while(str.size() > 1)
+
+	while(str[0] != '0')
 	{
-		unsigned long long s = 0;
-		bool rf;
-		int x = 0, y;
-		do
+		unsigned long s = 0;
+		for(int x = 0; x < 5; x++)
 		{
+			bool rf;
+			int y;
+			cout<<str<<endl;
 			for(int i = 0; i < 9; i++)
 			{
 				if (str[i] != ' ')
@@ -111,8 +117,7 @@ int main()
 				}
 			}
 			getline(cin, str);
-		}while(x++ < 5);
-		
+		}
 		auto it = find(state, state+792100, s);
 		if (it == state+792100)
 			cout<<"Case "<<++ka<<": No"<<endl;
