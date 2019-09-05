@@ -22,16 +22,18 @@ int inline axistoi(bool rf, int x, int y)
 struct  Array
 {
 	unsigned long vis;
+	unsigned long a;
 	unsigned long long s;
 
 	Array() {}
 
-	Array newArray(int p)
+	Array newArray(int pos, int p)
 	{
 		Array r;
 		r.vis = vis | bits[p];
+		r.a = a | (((p<<1)+1) << pos);
 
-		int x = p/3, y = p%3;
+		int x = pos/3, y = pos%3;
 		r.s = s;
 
 		r.s |= bits[axistoi(true, x,y)];
@@ -43,10 +45,10 @@ struct  Array
 		r.s |= bits[axistoi(false, x+2,y)];
 		r.s |= bits[axistoi(false, x+2,y+1)];
 		
-		r.s &= ~bits[axistoi(true, x,y+1)];
-		r.s &= ~bits[axistoi(true, x+1,y+1)];
-		r.s &= ~bits[axistoi(false, x+1,y)];
-		r.s &= ~bits[axistoi(false, x+1,y+1)];
+		r.s &= bits[axistoi(true, x,y+1)];
+		r.s &= bits[axistoi(true, x+1,y+1)];
+		r.s &= bits[axistoi(false, x+1,y)];
+		r.s &= bits[axistoi(false, x+1,y+1)];
 		return r;
 	}
 };
@@ -61,11 +63,13 @@ void initialize()
 		b = (b << 1);
 	}
 	be.vis = 0;
+	be.a = 0;
 	be.s = 0;
 }
 
 void tabulation()
 {
+	int i;
 	queue<Array> q;
 	q.push(be);
 
@@ -75,12 +79,15 @@ void tabulation()
 		q.pop();
 
 		state[sid++] = arr.s;
-		cout<<sid<<endl;
+		for(i = 0; i <= 25 && (arr.a & bits[i]); i += 5);
+		if (i > 25)
+			continue;
+		
 		for(int p = 0; p < 9; p++)
 		{
 			if (arr.vis & bits[p])
 				continue;
-			q.push(arr.newArray(p));
+			q.push(arr.newArray(i, p));
 		}
 	}
 }
