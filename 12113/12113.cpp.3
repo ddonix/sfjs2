@@ -94,10 +94,9 @@ void tabulation()
 
 int main()
 {
-	int ka = 0;
 	initialize();
 	tabulation();
-	sort(state, state+792100);
+	//sort(state, state+792100);
 
 	string str;
 	getline(cin, str);
@@ -108,6 +107,7 @@ int main()
 		int x = 0, y;
 		do
 		{
+			cout<<str<<endl;
 			for(int i = 0; i < 9; i++)
 			{
 				if (str[i] != ' ')
@@ -119,11 +119,6 @@ int main()
 			}
 			getline(cin, str);
 		}while(x++ < 5);
-		
-		auto it = find(state, state+792100, s);
-		if (it == state+792100)
-			cout<<"Case "<<++ka<<": No"<<endl;
-		else
-			cout<<"Case "<<++ka<<": Yes"<<endl;
 	}
+	//cout<<sid<<endl;
 }
