@@ -1,5 +1,5 @@
-/* uva 12113: 思路： 	bfs + 打表。状态共有1+A(9,1)+A(9,2)+A(9,3)+A(9,4)+A(9,5)+A(9,6) = 79210种.每个状态64位，
- * 			空间开销79210*8=633680 Byte.状态排序，二分查找。
+/* uva 12113: 思路： 	bfs + 打表。状态共有A(9,1)+A(9,2)+A(9,3)+A(9,4)+A(9,5)+A(9,6) = 79209种.每个状态64位，
+ * 			空间开销79210*8=633680 Byte.状态排序，二分查找。或者使用set结构
  * 
  */
 #include <iostream>
@@ -10,12 +10,9 @@
 
 using namespace std;
 
-int sid = 0;
-set<unsigned long long> sse;
-unsigned long long state[792100];
+set<unsigned long long> sset;
 
 unsigned long bits[32]; 
-
 int inline axistoi(bool rf, int x, int y)
 {
 	return x*(2*4+1)+y+(rf ? 0 : 4);
@@ -39,17 +36,18 @@ struct  Array
 		r.s = s;
 
 		r.s |= bits[axistoi(true, x,y)];
-		r.s |= bits[axistoi(true, x+1,y)];
-		r.s |= bits[axistoi(true, x,y+2)];
-		r.s |= bits[axistoi(true, x+1,y+2)];
-		r.s |= bits[axistoi(false, x,y)];
-		r.s |= bits[axistoi(false, x,y+1)];
-		r.s |= bits[axistoi(false, x+2,y)];
-		r.s |= bits[axistoi(false, x+2,y+1)];
+		r.s |= bits[axistoi(true, x,y+1)];
+		r.s |= bits[axistoi(true, x+2,y)];
+		r.s |= bits[axistoi(true, x+2,y+1)];
 		
-		r.s &= ~bits[axistoi(true, x,y+1)];
+		r.s |= bits[axistoi(false, x,y)];
+		r.s |= bits[axistoi(false, x+1,y)];
+		r.s |= bits[axistoi(false, x,y+2)];
+		r.s |= bits[axistoi(false, x+1,y+2)];
+		
+		r.s &= ~bits[axistoi(true, x+1,y)];
 		r.s &= ~bits[axistoi(true, x+1,y+1)];
-		r.s &= ~bits[axistoi(false, x+1,y)];
+		r.s &= ~bits[axistoi(false, x,y+1)];
 		r.s &= ~bits[axistoi(false, x+1,y+1)];
 		return r;
 	}
@@ -79,8 +77,8 @@ void tabulation()
 		Array arr = q.front();
 		q.pop();
 
-		state[sid++] = arr.s;
-		sse.insert(arr.s);
+		if (arr.d > 0)
+			sset.insert(arr.s);
 		if (arr.d == 6)
 			continue;
 		for(int p = 0; p < 9; p++)
@@ -97,8 +95,6 @@ int main()
 	int ka = 0;
 	initialize();
 	tabulation();
-	sort(state, state+792100);
-	cout<<sse.size()<<endl;
 		
 	string str;
 	getline(cin, str);
@@ -110,20 +106,18 @@ int main()
 		{
 			bool rf;
 			int y;
-			cout<<str<<endl;
 			for(int i = 0; i < 9; i++)
 			{
 				if (str[i] != ' ')
 				{
 					rf = i%2;
 					y = i/2;
-					s |= bits[axistoi(rf, x,y)];
+					s |= bits[axistoi(rf, rf ? x : x-1, y)];
 				}
 			}
 			getline(cin, str);
 		}
-		auto it = find(state, state+792100, s);
-		if (it == state+792100)
+		if (sset.count(s) < 1)
 			cout<<"Case "<<++ka<<": No"<<endl;
 		else
 			cout<<"Case "<<++ka<<": Yes"<<endl;

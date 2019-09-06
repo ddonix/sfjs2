@@ -1,11 +1,20 @@
+/* uva 690: 流水线调度问题：10个任务如何安排开始时间，确保总的完成时间最少。
+ *    思路：10个任务，第0个任务在0时开始，那么有第1和第0个任务,第2和第1个任务
+ *          ...，第9和第8个任务，共计9个时间间隔需要确定。每个时间间隔的取值范围是1到
+ *          一个任务的时间(1-19)。那么共有pow(19,9)个选择。
+ *          暴力枚举所有可能选择。
+ */
 #include <iostream>
 #include <set>
 
 using namespace std;
 
-const int maxn = 20;
-unsigned long rt[5];
-unsigned long task;
+const int maxct = 20;	//最大周期
+const int taskn = 10;	//最大任务数
+const int unitn = 5;	//功能单元数
+const int maxans = maxct*taskn+unitn;
+
+unsigned long rt[unitn];
 int n;
 
 unsigned long bits[20] = {	0x1,	0x2,	0x4,	0x8,
@@ -14,58 +23,13 @@ unsigned long bits[20] = {	0x1,	0x2,	0x4,	0x8,
 				0x1000,	0x2000,	0x4000,	0x8000,
 				0x10000,0x20000,0x40000,0x80000};
 
-int btime[maxn];
+int ans;
 
-bool conflict(const set<int> & a, const set<int> & b)
+void dfs(int d)
 {
-	for(auto it = a.begin(); it != a.end(); it++)
-		if (b.count(*it))
-			return true;
-	return false;
-}
+	if (d >= ans)
+		return;
 
-void add(set<int> & a, const set<int> &b)
-{
-	for(auto it = b.begin(); it != b.end(); it++)
-		a.insert(*it);
-}
-
-int simulation()
-{
-	int ctime = 0;
-	set<int> ub[5];
-	for(int tk = 0; tk < n; tk++)
-		btime[tk] = -1;
-	for(int tk = 0; tk < n;tk++)
-	{
-		set<int> ut[5];
-		while(1)
-		{
-			bool ok = true;
-			int u;
-			for(u = 0; u < 5 && ok; u++)
-			{
-				ut[u].clear();
-				for(int i = 0; i < n && ok; i++)
-				{
-					if(rt[u] & bits[i])
-					{
-						if (ub[u].count(ctime+i))
-							ok = false;
-						else
-							ut[u].insert(ctime+i);
-					}
-				}
-			}
-			if (5 == u)
-				break;
-			ctime++;
-		}
-		btime[tk] = ctime++;
-		for(int u = 0; u < 5; u++)
-			add(ub[u], ut[u]);
-	}
-	return ctime;
 }
 
 int main()
@@ -82,6 +46,8 @@ int main()
 				rt[i] |= (c == 'X') ? bits[j] : 0;
 			}
 		}
-		cout<<simulation()<<endl;
+		ans = maxans;
+		dfs();
+		cout<<ans<<endl;
 	}
 }

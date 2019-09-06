@@ -1,5 +1,5 @@
-/* uva 12113: 思路： 	bfs + 打表。状态共有1+A(9,1)+A(9,2)+A(9,3)+A(9,4)+A(9,5)+A(9,6) = 79210种.每个状态64位，
- * 			空间开销79210*8=633680 Byte.状态排序，二分查找。
+/* uva 12113: 思路： 	bfs + 打表。状态共有A(9,1)+A(9,2)+A(9,3)+A(9,4)+A(9,5)+A(9,6) = 79209种.每个状态64位，
+ * 			空间开销79210*8=633680 Byte.状态排序，二分查找。或者使用set结构
  * 
  */
 #include <iostream>
@@ -12,7 +12,7 @@ using namespace std;
 
 set<unsigned long long> sset;
 
-unsigned long bits[32]; 
+unsigned long long bits[64];
 int inline axistoi(bool rf, int x, int y)
 {
 	return x*(2*4+1)+y+(rf ? 0 : 4);
@@ -56,8 +56,8 @@ struct  Array
 Array be;
 void initialize()
 {
-	unsigned long b = 0x1;
-	for(int i = 0; i < 32; i++)
+	unsigned long long b = 0x1;
+	for(int i = 0; i < 64; i++)
 	{
 		bits[i] = b;
 		b = (b << 1);
@@ -77,7 +77,8 @@ void tabulation()
 		Array arr = q.front();
 		q.pop();
 
-		sset.insert(arr.s);
+		if (arr.d > 0)
+			sset.insert(arr.s);
 		if (arr.d == 6)
 			continue;
 		for(int p = 0; p < 9; p++)
@@ -100,7 +101,7 @@ int main()
 
 	while(str[0] != '0')
 	{
-		unsigned long s = 0;
+		unsigned long long s = 0;
 		for(int x = 0; x < 5; x++)
 		{
 			bool rf;
