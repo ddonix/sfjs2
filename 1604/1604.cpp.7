@@ -141,7 +141,7 @@ void bfs_r()		//反向bfs
 				p |= (1 << 3*j);
 		for(int j = ede+1; j < 9; j++)
 			if (b & bits[j-1])
-				p |= (1 << 3*j);
+				p |= (1 << 3*(j-1));
 		State s = State(ede, p);
 		q.push(make_pair(s.code, -1));
 		vis[s.code] = -1;
@@ -156,7 +156,7 @@ void bfs_r()		//反向bfs
 		int pd = pa.second;
 
 		if (vis[s.code] == -10)
-			break;
+			continue;
 
 		for(int d = 0; d < 4; d++)
 		{
@@ -171,6 +171,13 @@ void bfs_r()		//反向bfs
 			{
 				vis[ns.code] = vis[s.code]-1;
 				q.push(make_pair(ns.code, d));
+			}
+			else
+			{
+				if (vis[ns.code] < vis[s.code]-1)
+				{
+					cout<<"ddd"<<endl;
+				}
 			}
 		}
 	}
@@ -211,7 +218,9 @@ int bfs()
 				q.push(make_pair(ns.code, d));
 			}
 			else if (vis[ns.code] < 0)
+			{
 				return vis[s.code]-vis[ns.code]-1;
+			}
 		}
 	}
 	return -1;
