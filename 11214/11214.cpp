@@ -69,14 +69,14 @@ struct Queen
 	unsigned long long a;
 	int an;
 
-	Queen(int q_, unsigned long long & b)
+	Queen(int q_, unsigned long long a_, int an_)
 	{
 		q = q_;
-		a = (b & queen[q]);
-		an = getsetb(a);
+		a = a_;
+		an = an_;
 	}
 
-	bool operator<(const Queen & right)
+	bool operator<(const Queen & right) const
 	{
 		return an > right.an;
 	}
@@ -96,9 +96,14 @@ bool ida(int d, unsigned long long b)
 		vector<Queen> v;
 		for(int i = 0; i < n*m ; i++)
 			if (!(vis & bits[i]))
-				v.push_back(Queen(i, b));
+			{
+				unsigned long long a = b & queen[i];
+				int an = getsetb(a);
+				if (an > 0)
+					v.push_back(Queen(i, a, an));
+			}
 		
-		sort(v.begin(), v.end());
+		//sort(v.begin(), v.end(), less<Queen>());
 		int rn = getsetb(b);
 		int r = 0;
 		for(int i = 0; i < (dd-d); i++)
