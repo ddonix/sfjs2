@@ -4,11 +4,8 @@
  * 	      1.是否满足条件，即每个标记位置都能被攻击。
  * 	      2.皇后放置的策略，使得能尽早收敛到结果。
  *      思路：1.整体框架ida。
- *            2.运算采用位运算，方便判断是否满足条件.
- *            3.首先根据标记位置，确定待选的位置（能攻击到标记位置的才有可能被选
- *            4.选择策略：每次从待选位置中选择攻击标记数量最多的先选择.
- *            5.剪枝策略: 待选前面几项的数量和，比剩余标记还要少.
- *	      6.棋盘最多81=9*9个位置，用一个128位unsigned long long表示
+ *            2.首先根据标记位置，确定待选的位置（能攻击到标记位置的才有可能被选)
+ *            3.选择策略：按行放置
  */
 #include <iostream>
 #include <vector>
@@ -17,106 +14,57 @@
 using namespace std;
 const int maxn = 9;
 
-unsigned long long bits[maxn*maxn];
-unsigned long long ed;			//标记的棋盘
-unsigned long long queen[maxn*maxn];
+char p[maxn][maxn];
 int n, m;
 int dd;
 
-int getsetb(const unsigned long long &a)
-{
-	int r = 0;
-	for(int i = 0; i < n*m; i++)
-		if (a & bits[i])
-			r++;
-	return r;
-}
+unsigned long bits[20] = {	0x1,	0x2,	0x4,	0x8,
+				0x10,	0x20,	0x40,	0x80,
+				0x100,	0x200,	0x400,	0x800,
+				0x1000,	0x2000,	0x4000,	0x8000,
+				0x10000,0x20000,0x40000,0x80000};
 
-void initialize_g()
-{
-	unsigned long long b = 1;
-	for(int i = 0; i < maxn*maxn; i++)
-	{
-		bits[i] = b;
-		b = (b << 1);
-	}
-}
+//行，列，斜，反斜
+//行（列）：行(列)值相同为一行(列)
+//斜（反斜）：列值加（减）行值相同为一斜（反斜）
+unsigned long xvis, yvis, svis, rsvis;
 
-void initialize()
+bool isok()
 {
-	for(int x = 0; x < n; x++)
-		for(int y = 0; y < m; y++)
-		{
-			unsigned long long a = 0;
-			for(int i = 0; i < m; i++)
-				a |= bits[x*m+i];
-			for(int i = 0; i < n; i++)
-				a |= bits[i*m+y];
-			for(int i = -max(n,m)+1; i < max(n,m); i++)
+	for(int i = 0; i < n; i++)
+		for(int j = 0; j < n; j++)
+			if ('X' == p[i][j])
 			{
-				if (x+i >= 0 && x+i < n && y+i >= 0 && y+i< m)
-					a |= bits[(x+i)*m+(y+i)];
-				if (x+i >= 0 && x+i < n && y-i >= 0 && y-i < m)
-					a |= bits[(x+i)*m+(y-i)];
+				if (!((xvis & bits[i]) || (yvis & bits[j]) || (svis & bits[i+j]) || (rsvis & bits[i-j+maxn])))
+					return false;
 			}
-			queen[x*m+y] = (a & ed);
-		}
+	return true;
 }
 
-struct Queen
-{
-	int q;
-	unsigned long long a;
-	int an;
-
-	Queen(int q_, unsigned long long a_, int an_)
-	{
-		q = q_;
-		a = a_;
-		an = an_;
-	}
-
-	bool operator<(const Queen & right) const
-	{
-		return an > right.an;
-	}
-};
-
-unsigned long long vis;
-bool ida(int d, unsigned long long b)
+bool ida(int d, int x, int y)
 {
 	if (d == dd)
-	{
-		if (b == 0)
-			return (b == 0);
-		return (b == 0);
-	}
+		return isok();
 	else
 	{
-		vector<Queen> v;
-		for(int i = 0; i < n*m ; i++)
-			if (!(vis & bits[i]))
+		for(int i = x; i < n; i++)
+			for(int j = 0; j < m; j++)
 			{
-				unsigned long long a = b & queen[i];
-				int an = getsetb(a);
-				if (an > 0)
-					v.push_back(Queen(i, a, an));
+				if (!((xvis & bits[i]) && (yvis & bits[j]) && (svis & bits[i+j]) && (rsvis & bits[i-j+maxn])))
+				{
+					unsigned long b0 = xvis, b1 = yvis, b2 = svis, b3 = rsvis;
+					xvis |= bits[i];
+					yvis |= bits[j];
+					svis |= bits[i+j];
+					rsvis |= bits[i-j+maxn];
+					if (ida(d+1, i, j))
+						return true;
+					xvis = b0;
+					yvis = b1;
+					svis = b2;
+					rsvis = b3;
+				}
 			}
-		
-		//sort(v.begin(), v.end(), less<Queen>());
-		int rn = getsetb(b);
-		int r = 0;
-		for(int i = 0; i < (dd-d); i++)
-			r += v[i].an;
-		if (r < rn)
-			return false;
-		for(int i = 0; i < v.size(); i++)
-		{
-			vis |= bits[v[i].q];
-			if (ida(d+1, b & (~v[i].a)))
-				return true;
-			vis &= ~bits[v[i].q];
-		}
 		return false;
 	}
 }
@@ -125,24 +73,26 @@ bool ida(int d, unsigned long long b)
 int main()
 {
 	int ka = 0;
-	initialize_g();
 	while(cin>>n && n)
 	{
 		cin>>m;
-		ed = 0;
 		for(int i = 0; i < n; i++)
 		{
 			string s;
 			cin>>s;
 			for(int j = 0; j < m; j++)
-				if ('X' == s[j])
-					ed |= bits[i*m+j];
+				p[i][j] = s[j];
 		}
-		initialize();
-		for(dd = 0; dd < 2*maxn; dd++)
+		xvis = yvis = svis = rsvis = 0;
+		if (isok())
 		{
-			vis = 0;
-			if (ida(0, ed))
+			cout<<"Case "<<++ka<<": "<<1<<endl;
+			continue;
+		}
+		for(dd = 1; dd < 5; dd++)
+		{
+			xvis = yvis = svis = rsvis = 0;
+			if (ida(0, 0, 0))
 				break;
 		}
 		cout<<"Case "<<++ka<<": "<<dd<<endl;
