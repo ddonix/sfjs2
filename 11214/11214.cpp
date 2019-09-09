@@ -4,13 +4,10 @@
  * 	      1.是否满足条件，即每个标记位置都能被攻击。
  * 	      2.皇后放置的策略，使得能尽早收敛到结果。
  *      思路：1.整体框架ida。
- *            2.首先根据标记位置，确定待选的位置（能攻击到标记位置的才有可能被选)
- *            3.选择策略：按行放置
+ *            2.选择策略：放一粒皇后，标记攻击的行列斜反斜，然后每次找还没有被攻击的行列斜反斜放皇后。快速收敛。
  */
 #include <iostream>
-#include <vector>
-#include <cmath>
-#include <algorithm>
+#include <cstring>
 using namespace std;
 const int maxn = 9;
 
@@ -18,26 +15,17 @@ char p[maxn][maxn];
 int n, m;
 int dd;
 
-unsigned long bits[20] = {	0x1,	0x2,	0x4,	0x8,
-				0x10,	0x20,	0x40,	0x80,
-				0x100,	0x200,	0x400,	0x800,
-				0x1000,	0x2000,	0x4000,	0x8000,
-				0x10000,0x20000,0x40000,0x80000};
-
 //行，列，斜，反斜
 //行（列）：行(列)值相同为一行(列)
 //斜（反斜）：列值加（减）行值相同为一斜（反斜）
-unsigned long xvis, yvis, svis, rsvis;
+bool xvis[maxn], yvis[maxn], svis[maxn*2], rsvis[maxn*2];
 
 bool isok()
 {
 	for(int i = 0; i < n; i++)
-		for(int j = 0; j < n; j++)
-			if ('X' == p[i][j])
-			{
-				if (!((xvis & bits[i]) || (yvis & bits[j]) || (svis & bits[i+j]) || (rsvis & bits[i-j+maxn])))
-					return false;
-			}
+		for(int j = 0; j < m; j++)
+			if (('X' == p[i][j]) && (!(xvis[i] || yvis[j] || svis[i+j] || rsvis[i-j+maxn])))
+				return false;
 	return true;
 }
 
@@ -48,21 +36,18 @@ bool ida(int d, int x, int y)
 	else
 	{
 		for(int i = x; i < n; i++)
-			for(int j = 0; j < m; j++)
+			for(int j = (i == x) ? y+1 : 0; j < m; j++)
 			{
-				if (!((xvis & bits[i]) && (yvis & bits[j]) && (svis & bits[i+j]) && (rsvis & bits[i-j+maxn])))
+				if (!(xvis[i] && yvis[j] && svis[i+j] && rsvis[i-j+maxn]))
 				{
-					unsigned long b0 = xvis, b1 = yvis, b2 = svis, b3 = rsvis;
-					xvis |= bits[i];
-					yvis |= bits[j];
-					svis |= bits[i+j];
-					rsvis |= bits[i-j+maxn];
+					bool f0 = xvis[i], f1 = yvis[j], f2 = svis[i+j], f3 = rsvis[i-j+maxn];
+					xvis[i] = yvis[j] = svis[i+j] = rsvis[i-j+maxn] = true;
 					if (ida(d+1, i, j))
 						return true;
-					xvis = b0;
-					yvis = b1;
-					svis = b2;
-					rsvis = b3;
+					xvis[i] = f0;
+					yvis[j] = f1;
+					svis[i+j] = f2;
+					rsvis[i-j+maxn] = f3;
 				}
 			}
 		return false;
@@ -83,7 +68,10 @@ int main()
 			for(int j = 0; j < m; j++)
 				p[i][j] = s[j];
 		}
-		xvis = yvis = svis = rsvis = 0;
+		memset(xvis, 0, sizeof(xvis));
+		memset(yvis, 0, sizeof(yvis));
+		memset(svis, 0, sizeof(svis));
+		memset(rsvis, 0, sizeof(rsvis));
 		if (isok())
 		{
 			cout<<"Case "<<++ka<<": "<<1<<endl;
@@ -91,8 +79,7 @@ int main()
 		}
 		for(dd = 1; dd < 5; dd++)
 		{
-			xvis = yvis = svis = rsvis = 0;
-			if (ida(0, 0, 0))
+			if (ida(0, 0, -1))
 				break;
 		}
 		cout<<"Case "<<++ka<<": "<<dd<<endl;
