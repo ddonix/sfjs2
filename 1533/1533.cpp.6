@@ -1,0 +1,136 @@
+/* uva 1533: Moving Pegs
+ * 	题意：15个格子的跳跳棋盘上，有一个空格，14个弹子。一个弹子可以跳过同一条直线上的一个或者几个弹子，跳到一个洞里去。被跳过的弹子
+ * 	      同时被拾起。要求经过最少的走步，使得棋盘上就只剩下一个弹子，并且弹子在最初的空格上。输出移动的步数，和每一步移动的位置。
+ * 	分析：这是一道水题
+ * 	      15个结点，每个结点有2种状态（有弹子或者没有).最多有pow(2,15)=32768种状态.
+ * 	思路：
+ * 	      1.暴力解法，bfs枚举所有状态.
+ */
+
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <sstream>
+using namespace std;
+
+unsigned long bits[16] = {	0x1,	0x2,	0x4,	0x8, 0x10,	0x20,	0x40,	0x80,
+				0x100,	0x200,	0x400,	0x800, 0x1000,	0x2000,	0x4000,	0x8000};
+
+const int G[9][5] = {	{5, 8, 12},
+			{2, 4, 7, 11},
+			{0, 1, 3, 6, 10},
+			
+			{3, 7, 12},
+			{1, 4, 8, 13},
+			{0, 2, 5, 9, 14},
+			
+			{3, 4, 5},
+			{6, 7, 8, 9},
+			{10, 11, 12, 13, 14}};
+vector<vector<int> > trace[15];
+
+//最后的状态，用来进行结果输出
+int vis[32768];
+int pre[32768];
+int edc;
+int sp;
+
+void initialize()
+{
+	for(int i = 0; i < 9; i++)
+	{
+		int l = 3+i%3;
+		for(int j = 0; j < l; j++)
+		{
+			if (j >= 2)
+			{
+				vector<int> v;
+				for(int k = j-1; k >= 0; k--)
+					v.push_back(G[i][k]);
+				trace[G[i][j]].push_back(v);
+			}
+			if (l-j > 2)
+			{
+				vector<int> v;
+				for(int k = j+1; k < l; k++)
+					v.push_back(G[i][k]);
+				trace[G[i][j]].push_back(v);
+			}
+		}
+	}
+}
+
+void printproc()
+{
+}
+
+int bfs()
+{
+	queue<int> q;
+	int code = 0;
+	for(int i = 0; i < 15; i++)
+		if (i != sp)
+			code |= bits[i];
+	q.push(code);
+	
+	memset(vis, 0, sizeof(vis));
+	memset(pre, 0, sizeof(pre));
+	vis[code] = 1;
+	pre[code] = -1;
+		
+	edc = bits[sp-1];
+	while(!q.empty())
+	{
+		code = q.front();
+		q.pop();
+
+		if (code == edc)
+			return vis[code];
+
+		for(int i = 0; i < 15; i++)
+		{
+			if (code & bits[i])
+				continue;
+			for(int j = 0; j < trace[i].size(); j++)
+			{
+				vector<int> & v = trace[i][j];
+				int k;
+				for(k = 0; k < v.size() && (code & bits[v[k]]); k++);
+				if (k < 2)
+					continue;
+				for(int k1 = k-1; k1 > 0; k1--)
+				{
+					int ncode = code;
+					for(int k2 = k1; k2 >= 0; k2--)
+						ncode &= ~bits[v[k2]];
+					ncode |= bits[i];
+					if (!vis[ncode])
+					{
+						q.push(ncode);
+						vis[ncode] = vis[code]+1;
+						pre[ncode] = code;
+					}
+				}
+			}
+		}
+	}
+	return -1;
+}
+
+int main()
+{
+	int T,r;
+	initialize();
+	cin>>T;
+	while(T--)
+	{
+		cin>>sp;
+		r = bfs();
+		cout<<r<<endl;
+		printproc();
+		cout<<endl;
+	}
+}
