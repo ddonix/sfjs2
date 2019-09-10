@@ -5,7 +5,6 @@
  * 	      15个结点，每个结点有2种状态（有弹子或者没有).最多有pow(2,15)=32768种状态.
  * 	思路：
  * 	      1.暴力解法，bfs枚举所有状态.
- * 	ps:   哪里说多个解输出字典序最小了！！！！坑！！！
  */
 
 #include <iostream>
@@ -31,9 +30,7 @@ const int G[9][5] = {	{5, 8, 12},
 			{3, 4, 5},
 			{6, 7, 8, 9},
 			{10, 11, 12, 13, 14}};
-
-//J[b][e] = v;	b跳到e，需要跳过v。v为空，表示，b不能跳到e.
-vector<int> J[15][15];
+vector<vector<int> > trace[15];
 
 //最后的状态，用来进行结果输出
 int vis[32768];
@@ -42,54 +39,29 @@ int ans[32768][2];
 int edc;
 int sp;
 
-bool isjump(int b, int e, int code, int & ncode)
-{
-	if (!(code & bits[b]) || (code & bits[e]) || J[b][e].empty())
-		return false;
-
-	for(int i = 0; i < J[b][e].size(); i++)
-		if (!(code & bits[J[b][e][i]]))
-			return false;
-	ncode |= bits[e];
-	ncode &= ~bits[b];
-	for(int i = 0; i < J[b][e].size(); i++)
-		ncode &= ~bits[J[b][e][i]];
-	return true;
-}
-
 void initialize()
 {
-	for(int b = 0; b < 15; b++)
-		for(int e = 0; e < 15; e++)
+	for(int i = 0; i < 9; i++)
+	{
+		int l = 3+i%3;
+		for(int j = 0; j < l; j++)
 		{
-			if (e == b)
-				continue;
-			for(int i = 0; i < 9; i++)
+			if (j >= 2)
 			{
-				int b1 = -1, e1 = -1;
-				int l = 3+i%3;
-				for(int j = 0; j < l && (b1 < 0 || e1 < 0); j++)
-				{
-					b1 = (G[i][j] == b) ? j : b1;
-					e1 = (G[i][j] == e) ? j : e1;
-				}
-				int a1 = (b1 < e1) ? b1 : e1;
-				int a2 = (b1 < e1) ? e1 : b1;
-				if (a1 < 0 || (a2 - a1) < 2)
-					continue;
-				for(int j = a1+1; j < a2; j++)
-					J[b][e].push_back(G[i][j]);
-				break;
+				vector<int> v;
+				for(int k = j-1; k >= 0; k--)
+					v.push_back(G[i][k]);
+				trace[G[i][j]].push_back(v);
 			}
-			if (!J[b][e].empty())
+			if (l-j > 2)
 			{
-				cout<<b<<" --> "<<e<<endl;
-				for(int i = 0; i < J[b][e].size();i++)
-					cout<<J[b][e][i]<<" ";
-				cout<<endl;
-				cout<<endl;
+				vector<int> v;
+				for(int k = j+1; k < l; k++)
+					v.push_back(G[i][k]);
+				trace[G[i][j]].push_back(v);
 			}
 		}
+	}
 }
 
 void printproc()
@@ -142,22 +114,28 @@ int bfs()
 
 		for(int i = 0; i < 15; i++)
 		{
-			if (!(code & bits[i]))
+			if (code & bits[i])
 				continue;
-			for(int j = 0; j < 15; j++)
+			for(int j = 0; j < trace[i].size(); j++)
 			{
-				int ncode = code;
-				if (j == i)
+				vector<int> & v = trace[i][j];
+				int k;
+				for(k = 0; k < v.size() && (code & bits[v[k]]); k++);
+				if (k < 2)
 					continue;
-				if (isjump(i, j, code, ncode))
+				for(int k1 = k-1; k1 > 0; k1--)
 				{
+					int ncode = code;
+					for(int k2 = k1; k2 >= 0; k2--)
+						ncode &= ~bits[v[k2]];
+					ncode |= bits[i];
 					if (!vis[ncode])
 					{
 						q.push(ncode);
 						vis[ncode] = vis[code]+1;
 						pre[ncode] = code;
-						ans[ncode][0] = i;
-						ans[ncode][1] = j;
+						ans[ncode][0] = v[k1];
+						ans[ncode][1] = i;
 					}
 				}
 			}
