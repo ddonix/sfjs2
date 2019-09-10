@@ -12,6 +12,7 @@
 #include <cstring>
 #include <string>
 #include <queue>
+#include <stack>
 #include <vector>
 #include <sstream>
 using namespace std;
@@ -19,23 +20,35 @@ using namespace std;
 unsigned long bits[16] = {	0x1,	0x2,	0x4,	0x8, 0x10,	0x20,	0x40,	0x80,
 				0x100,	0x200,	0x400,	0x800, 0x1000,	0x2000,	0x4000,	0x8000};
 
-const int G[9][5] = {	{5, 8, 12}, {2, 4, 7, 11}, {0, 1, 3, 6, 10},
-			{3, 7, 12}, {1, 4, 8, 13}, {0, 2, 5, 9, 14},
-			{3, 4, 5}, {6, 7, 8, 9}, {10, 11, 12, 13, 14}};
+const int G[9][5] = {	{5, 8, 12},
+			{2, 4, 7, 11},
+			{0, 1, 3, 6, 10},
+			
+			{3, 7, 12},
+			{1, 4, 8, 13},
+			{0, 2, 5, 9, 14},
+			
+			{3, 4, 5},
+			{6, 7, 8, 9},
+			{10, 11, 12, 13, 14}};
 
+//J[b][e] = v;	b跳到e，需要跳过v。v为空，表示，b不能跳到e.
+vector<int> J[15][15];
 
-vector<int> J[15][15];	//b跳到e，需要跳过v。v为空，表示b不能跳到e.
+//最后的状态，用来进行结果输出
+int vis[32768];
+int pre[32768];
+int ans[32768][2];
+int edc;
+int sp;
 int table1[15];
 string table2[15];
 
-int vis[32768];
-int pre[32768];		
-int ans[32768][2];
-
-int edc;
-
 bool isjump(int b, int e, int code, int & ncode)
 {
+	if (!(code & bits[b]) || (code & bits[e]) || J[b][e].empty())
+		return false;
+
 	for(int i = 0; i < J[b][e].size(); i++)
 		if (!(code & bits[J[b][e][i]]))
 			return false;
@@ -55,7 +68,8 @@ void initialize()
 				continue;
 			for(int i = 0; i < 9; i++)
 			{
-				int b1 = -1, e1 = -1, l = 3+i%3;
+				int b1 = -1, e1 = -1;
+				int l = 3+i%3;
 				for(int j = 0; j < l && (b1 < 0 || e1 < 0); j++)
 				{
 					b1 = (G[i][j] == b) ? j : b1;
@@ -74,18 +88,27 @@ void initialize()
 
 void printproc(string & s)
 {
-	vector<int> v;
+	stack<int> sta;
 	stringstream ss;
 	int code = edc;
 	while(code != -1)
 	{
-		v.push_back(code);
+		sta.push(code);
 		code = pre[code];
 	}
-	int i = v.size()-2;
-	ss<<ans[v[i]][0]+1<<" "<<ans[v[i]][1]+1;
-	for(i--; i >= 0; i--)
-		ss<<" "<<ans[v[i]][0]+1<<" "<<ans[v[i]][1]+1;
+	
+	sta.pop();
+	bool first = true;
+	while(!sta.empty())
+	{
+		code = sta.top();
+		sta.pop();
+		if(first)
+			first = false;
+		else
+			ss<<" ";
+		ss<<ans[code][0]+1<<" "<<ans[code][1]+1;
+	}
 	s = ss.str();
 }
 
@@ -93,14 +116,17 @@ int bfs()
 {
 	queue<int> q;
 	int code = 0;
-
-	code = 0x7fff & ~edc;
+	for(int i = 0; i < 15; i++)
+		if (i != sp)
+			code |= bits[i];
 	q.push(code);
+	
 	memset(vis, 0, sizeof(vis));
 	memset(pre, 0, sizeof(pre));
 	vis[code] = 1;
 	pre[code] = -1;
-	
+		
+	edc = bits[sp];
 	while(!q.empty())
 	{
 		code = q.front();
@@ -116,9 +142,9 @@ int bfs()
 			for(int j = 0; j < 15; j++)
 			{
 				int ncode = code;
-				if ((j == i) || !(code & bits[i]) || (code & bits[j]) || J[i][j].empty())
+				if (j == i)
 					continue;
-				if (isjump(i, j, code, ncode))	//ncode传引用
+				if (isjump(i, j, code, ncode))
 				{
 					if (!vis[ncode])
 					{
@@ -137,11 +163,11 @@ int bfs()
 
 int main()
 {
-	int T,r,sp;
+	int T,r;
 	initialize();
 	for(int i = 0; i < 15; i++)
 	{
-		edc = bits[i];
+		sp = i;
 		r = bfs();
 		table1[i] = r;
 		printproc(table2[i]);

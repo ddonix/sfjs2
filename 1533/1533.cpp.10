@@ -55,7 +55,8 @@ void initialize()
 				continue;
 			for(int i = 0; i < 9; i++)
 			{
-				int b1 = -1, e1 = -1, l = 3+i%3;
+				int b1 = -1, e1 = -1;
+				int l = 3+i%3;
 				for(int j = 0; j < l && (b1 < 0 || e1 < 0); j++)
 				{
 					b1 = (G[i][j] == b) ? j : b1;
@@ -100,7 +101,7 @@ int bfs()
 	memset(pre, 0, sizeof(pre));
 	vis[code] = 1;
 	pre[code] = -1;
-	
+		
 	while(!q.empty())
 	{
 		code = q.front();
@@ -116,9 +117,11 @@ int bfs()
 			for(int j = 0; j < 15; j++)
 			{
 				int ncode = code;
-				if ((j == i) || !(code & bits[i]) || (code & bits[j]) || J[i][j].empty())
+				if (j == i)
 					continue;
-				if (isjump(i, j, code, ncode))	//ncode传引用
+				if (!(code & bits[i]) || (code & bits[j]) || J[i][j].empty())
+					continue;
+				if (isjump(i, j, code, ncode))
 				{
 					if (!vis[ncode])
 					{
