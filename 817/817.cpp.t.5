@@ -4,8 +4,8 @@
  *       要求输出所有的解，多个解按照字典序从大到小排列。
  * 分析：9个数字，最多8个位置可以插入，每个位置可以插入+，-，×三种符号，最多有pow(4,8) = 65536种排列。
  * 思路：1.按字典序dfs
- * 	 2.前导0要剪枝
- * 	 3.在递归过程中，要计算中间结果，否则等递归完成再计算，重复计算量太大，会超时！
+ * 	 2.前导0要进行剪枝
+ * 	 3.在递归过程中，就要计算中间结果，不然等递归完成再计算，重复计算量太大，会超时！
  */
 #include <iostream>
 #include <string>
@@ -19,6 +19,7 @@ int n;
 bool solve;
 char p[11];
 char a[8];
+
 
 struct Rec
 {
@@ -38,9 +39,9 @@ struct Rec
 			a -= b;
 		b = 0;
 		c = 0;
-		e = '+';
 		m = false;
 	}
+
 	Rec(int a_, char e_, int b_, bool m_, int c_) : a(a_) , e(e_), b(b_), m(m_), c(c_) {}
 };
 
@@ -64,18 +65,18 @@ void printans(Rec rec)
 	}
 }
 
-const char *ins = "*+-_";
+const char *ins = "_+-*";
 void dfs(int d, bool c, Rec rec)
 {
 	if (d == n)
 		printans(rec);
 	else
 	{
-		for(int i = 0 ; i < (c ? 4 : 3); i++)
+		for(int i = (c ? 0 : 1); i < 4; i++)
 		{
 			Rec nrec = rec;
 			a[d] = ins[i];
-			if (3 == i)
+			if (0 == i)
 			{
 				if (nrec.m)
 					nrec.c = nrec.c*10+p[d+1]-'0';
@@ -96,7 +97,7 @@ void dfs(int d, bool c, Rec rec)
 					nrec.m = true;
 				nrec.c = p[d+1]-'0';
 			}
-			dfs(d+1, (i != 3 && p[d+1] == '0') ? false : true, nrec);
+			dfs(d+1, (i != 0 && p[d] == '0') ? true : true, nrec);
 		}
 	}
 }
@@ -109,15 +110,9 @@ int main()
 		cout<<"Problem "<<++ka<<endl;
 		p[strlen(p)-1] = 0;
 		n = strlen(p)-1;
-
-		if (strcmp(p, "2000") == 0)
-		{
-			cout<<"  "<<"IMPOSSIBLE"<<endl;
-			continue;
-		}
 		memset(a, 0, sizeof(a));
 		solve = false;
-		dfs(0, '0' == p[0] ? false : true, Rec(0, '+', p[0]-'0', false, 0));
+		dfs(0, true, Rec(0, '+', p[0]-'0', false, 0));
 		if (!solve)
 			cout<<"  "<<"IMPOSSIBLE"<<endl;
 	}

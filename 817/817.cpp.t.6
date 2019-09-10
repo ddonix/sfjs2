@@ -64,18 +64,18 @@ void printans(Rec rec)
 	}
 }
 
-const char *ins = "*+-_";
+const char *ins = "_+-*";
 void dfs(int d, bool c, Rec rec)
 {
 	if (d == n)
 		printans(rec);
 	else
 	{
-		for(int i = 0 ; i < (c ? 4 : 3); i++)
+		for(int i = (c ? 0 : 1); i < 4; i++)
 		{
 			Rec nrec = rec;
 			a[d] = ins[i];
-			if (3 == i)
+			if (0 == i)
 			{
 				if (nrec.m)
 					nrec.c = nrec.c*10+p[d+1]-'0';
@@ -96,7 +96,7 @@ void dfs(int d, bool c, Rec rec)
 					nrec.m = true;
 				nrec.c = p[d+1]-'0';
 			}
-			dfs(d+1, (i != 3 && p[d+1] == '0') ? false : true, nrec);
+			dfs(d+1, (i != 0 && p[d] == '0') ? true : true, nrec);
 		}
 	}
 }
@@ -109,15 +109,9 @@ int main()
 		cout<<"Problem "<<++ka<<endl;
 		p[strlen(p)-1] = 0;
 		n = strlen(p)-1;
-
-		if (strcmp(p, "2000") == 0)
-		{
-			cout<<"  "<<"IMPOSSIBLE"<<endl;
-			continue;
-		}
 		memset(a, 0, sizeof(a));
 		solve = false;
-		dfs(0, '0' == p[0] ? false : true, Rec(0, '+', p[0]-'0', false, 0));
+		dfs(0, true, Rec(0, '+', p[0]-'0', false, 0));
 		if (!solve)
 			cout<<"  "<<"IMPOSSIBLE"<<endl;
 	}
