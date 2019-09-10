@@ -35,7 +35,6 @@ vector<vector<int> > trace[15];
 //最后的状态，用来进行结果输出
 int vis[32768];
 int pre[32768];
-int ans[32768][2];
 int edc;
 int sp;
 
@@ -62,31 +61,21 @@ void initialize()
 			}
 		}
 	}
+	
+	for(int i = 0; i < 15; i++)
+	{
+		cout<<i<<": "<<endl;
+		for(int j = 0; j < trace[i].size(); j++)
+		{
+			for(int k = 0; k < trace[i][j].size(); k++)
+				cout<<trace[i][j][k]<<" ";
+			cout<<endl;
+		}
+	}
 }
 
 void printproc()
 {
-	stack<int> sta;
-	int code = edc;
-	while(code != -1)
-	{
-		sta.push(code);
-		code = pre[code];
-	}
-	
-	sta.pop();
-	bool first = true;
-	while(!sta.empty())
-	{
-		code = sta.top();
-		sta.pop();
-		if(first)
-			first = false;
-		else
-			cout<<" ";
-		cout<<ans[code][0]+1<<" "<<ans[code][1]+1;
-	}
-	cout<<endl;
 }
 
 int bfs()
@@ -103,14 +92,14 @@ int bfs()
 	vis[code] = 1;
 	pre[code] = -1;
 		
-	edc = bits[sp];
+	edc = bits[sp-1];
 	while(!q.empty())
 	{
 		code = q.front();
 		q.pop();
 
 		if (code == edc)
-			return vis[code]-1;
+			return vis[code];
 
 		for(int i = 0; i < 15; i++)
 		{
@@ -134,8 +123,6 @@ int bfs()
 						q.push(ncode);
 						vis[ncode] = vis[code]+1;
 						pre[ncode] = code;
-						ans[ncode][0] = v[k1];
-						ans[ncode][1] = i;
 					}
 				}
 			}
@@ -152,9 +139,9 @@ int main()
 	while(T--)
 	{
 		cin>>sp;
-		sp--;
 		r = bfs();
 		cout<<r<<endl;
 		printproc();
+		cout<<endl;
 	}
 }
