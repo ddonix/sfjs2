@@ -24,6 +24,8 @@ vector<bool> vis;	//
 
 bool dfs(int s, int r)
 {
+	if(s == n)
+		return true;
 	if (0 == r)
 	{
 		int i;
@@ -73,7 +75,6 @@ int main()
 		for(int i = 0; i < candidate.size(); i++)
 		{
 			ans = candidate[i];
-			cout<<ans<<" "<<candidate.size()<<" "<<candidate[candidate.size()-1]<<endl;
 			for(int i = 0; i < n; i++)
 				vis[i] = false;
 			vis[0] = true;
