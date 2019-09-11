@@ -1,9 +1,13 @@
 /* uva 307: Sticks
  * 	题意：一些长度相同的棍子，被随意砍成n份，每一份的长度都不超过50.
  * 	      要求根据砍断之后的n份小棍子，还原原先棍子可能长度的最小值。
- * 	分析：乍一看水题，仔细分析难题！一根棍子可以被砍成很多段，多跟棍子还原的次数就难以计算了。
- * 	      那么，换一个思路，如果把问题换成，一根棍子最多砍成多少
- * 	思路：ida
+ * 	分析：乍一看水题，仔细分析有难度！一根棍子可以被砍成很多段，多根棍子还原的次数就难以
+ * 	      计算。
+ * 	思路：1.ida
+ * 	      2.深度增加策略：所有的长度，必须大于等于砍断后最长的那根棍子长度，小于等于所有棍子
+ * 	      长度之和。并且，是所有棍子长度之和的约数。
+ * 	      3.判断当前深度是否满足条件：将所有棍子按长到短排序，每次第归组装当前剩余棍子中的
+ * 	      最长棍子.
  */
 #include <iostream>
 #include <vector>
@@ -11,14 +15,43 @@
 using namespace std;
 
 vector<int> stick;
-int n;
+int n;			//棍子数量
+int ac;			//棍子长度总和
+int ans;		//答案，也就是ida的深度
+vector<int> candidate;	//候选答案
+
+bool ida()
+{
+	return true;
+}
+
 int main()
 {
 	while(cin>>n && n)
 	{
 		stick.resize(n);
+		int maxs = 0, t;
+		ac = 0;
 		for(int i = 0; i < n; i++)
-			cin>>stick[i];
+		{
+			cin>>t;
+			maxs = (t > maxs) ? t : maxs;
+			ac += t;
+			stick[i] = t;
+		}
+		
+		candidate.clear();
+		for(int a = maxs; a <= ac; a++)
+			if (ac%a == 0)
+				candidate.push_back(a);
+		
+		for(int i = 0; i < candidate.size(); i++)
+		{
+			ans = candidate[i];
+			if (ida())
+				break;
+		}
+		cout<<ans<<endl;
 	}
 }
 
