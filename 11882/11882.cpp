@@ -60,8 +60,6 @@ void prep()
 					}
 			}
 		}
-		
-
 }
 
 void dfs(int d, string a, int x, int y)
