@@ -40,14 +40,6 @@ bool dfs(int p, char ch)
 					}
 				if (nn == 1 && p1 != -1)
 				{
-					for(int xx = 0; xx < n; xx++)
-					{
-						for(int yy = 0; yy < n; yy++)
-							cout<<ans[xx][yy];
-						cout<<endl;
-					}
-					cout<<endl<<endl;
-					
 					bool f = true;
 					for(int i1 = x; i1 < x+i && f; i1++)
 						for(int j1 = y; j1 < y+j && f; j1++)
@@ -86,7 +78,6 @@ int main()
 		for(int i = 0; i < n; i++)
 			for(int j = 0; j < n; j++)
 					ans[i][j] = '.';
-
 		dfs(0, 'A');
 		for(int i = 0; i < n; i++)
 			cout<<ans[i]<<endl;
