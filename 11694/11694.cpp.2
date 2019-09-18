@@ -1,0 +1,104 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+const int maxn = 7;
+
+int n;
+char maze[maxn+1][maxn+1];
+
+char ans[maxn][maxn];
+
+int dx[4] = {-1, -1, 0,  0};
+int dy[4] = {-1,  0, 0, -1};
+char dc[4] = {'\\', '/', '\\', '/'};
+char ndc[4] = {'/', '\\', '/', '\\'};
+
+void setline(int x, int y, int d, bool con)
+{
+	int nx = x+dx[d], ny = y+dy[d];
+	if (nx >= 0 && nx < n && ny >= 0 && ny < n)
+		ans[nx][ny] = (con ? dc[d] : ndc[d]);
+}
+
+bool iscon(int x, int y, int d)
+{
+	int nx = x+dx[d], ny = y+dy[d];
+	if (nx >= 0 && nx < n && ny >= 0 && ny < n)
+		return ans[x+dx[d]][y+dy[d]] == dc[d];
+	return false;
+}
+
+bool isnul(int x, int y, int d)
+{
+	int nx = x+dx[d], ny = y+dy[d];
+	if (nx >= 0 && nx < n && ny >= 0 && ny < n)
+		return ans[x+dx[d]][y+dy[d]] == '0';
+	return false;
+}
+
+void prepare()
+{
+	for(int i = 0; i < n+1; i++)
+		for(int j = 0; j < n+1; j++)
+		{
+			if ('0' == maze[i][j])
+			{
+				for(int d=0; d < 4; d++)
+					if (isnul(i, j, d))
+						setline(i, j, d, false);
+			}
+		}
+	bool running = true;
+	while(running)
+	{
+		running = false;
+		for(int i = 0; i < n+1; i++)
+			for(int j = 0; j < n+1; j++)
+			{
+				if (maze[i][j] > '0' && maze[i][j] <= '9')
+				{
+					int nu = 0, c = 0;
+					for(int d = 0; d < 4; d++)
+					{
+						nu += isnul(i, j, d) ? 1 : 0;
+						c += iscon(i, j, d) ? 1 : 0;
+					}
+					if (nu > 0 && nu + c == maze[i][j]-'0')
+					{
+						running = true;
+						for(int d = 0; d < 4; d++)
+							if (isnul(i, j, d))
+								setline(i, j, d, true);
+					}
+				}
+			}
+	}
+}
+
+bool dfs()
+{
+	return false;
+}
+
+int main()
+{
+	int T;
+	cin>>T;
+	while(T--)
+	{
+		cin>>n;
+		for(int i = 0; i < n+1; i++)
+			cin>>maze[i];
+		for(int i = 0; i < n; i++)
+			for(int j = 0; j < n; j++)
+				ans[i][j] = '0';
+		prepare();
+		dfs();
+		for(int i = 0; i < n; i++)
+		{
+			for(int j = 0; j < n; j++)
+				cout<<ans[i][j];
+			cout<<endl;
+		}
+	}
+}
