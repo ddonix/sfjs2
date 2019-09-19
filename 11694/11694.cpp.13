@@ -6,7 +6,8 @@ const int maxn = 7;
 int n;
 char maze[maxn+1][maxn+1];
 int need[maxn+1][maxn+1];
-int head[maxn*maxn*2];		// /: x*n+y  \:x*n+y+n*n
+
+int head[maxn*maxn*2];		// /: i*n+j  \:i*n+j+n*n
 
 int dx[4] = {-1, -1, 0,  0};
 int dy[4] = {-1,  0, 0, -1};
@@ -25,7 +26,10 @@ bool iscon(int x, int y, int d)
 {
 	int nx = x+dx[d], ny = y+dy[d];
 	if (nx >= 0 && nx < n && ny >= 0 && ny < n)
-		return -1 != head[nx*n+ny+ ('\\' == dc[d] ? n*n : 0)];
+	{
+		int id = nx*n+ny+ ('\\' == dc[d] ? n*n : 0);
+		return -1 != head[id];
+	}
 	return false;
 }
 
@@ -43,15 +47,24 @@ int gethead(int id)
 
 bool isUnit(int p, char ch, int & h0, int & h1)
 {
+	int id = p + ('/' == ch ? 0 : n*n);
 	int x = p/n, y = p%n;
 	int gx0 = x,   gy0 = ('/' == ch ? y+1 : y);
 	int gx1 = x+1, gy1 = ('/' == ch ? y : y+1);
 	for(int d = 0; d < 4 && (h0 < 0 || h1 < 0); d++)
 	{
 		if (h0 < 0 && iscon(gx0, gy0, d))
-			h0 = gethead((gx0+dx[d])*n+(gy0+dy[d]) + (dc[d] == '/' ? 0 : n*n));
+		{
+			int nid = (gx0+dx[d])*n+(gy0+dy[d]);
+			nid += (dc[d] == '/' ? 0 : n*n);
+			h0 = gethead(nid);
+		}
 		if (h1 < 0 && iscon(gx1, gy1, d))
-			h1 = gethead((gx1+dx[d])*n+(gy1+dy[d]) + (dc[d] == '/' ? 0 : n*n)); 
+		{
+			int nid = (gx1+dx[d])*n+(gy1+dy[d]);
+			nid += (dc[d] == '/' ? 0 : n*n);
+			h1 = gethead(nid); 
+		}
 	}
 	if (h0 > 0 && h1 > 0 && (h0 == h1))
 		return true;
@@ -60,10 +73,19 @@ bool isUnit(int p, char ch, int & h0, int & h1)
 
 bool iskeyneed(int x, int y)
 {
-	bool nf0 = (need[x-dx[2]][y-dy[2]] <= -100 || 0 == need[x-dx[2]][y-dy[2]]) ? true : false;
-	bool nf1 = (y == n - 1) ? ((need[x-dx[3]][y-dy[3]] <= -100 || 0 == need[x-dx[3]][y-dy[3]]) ? true : false) : true;
-	bool nf2 = (x == n - 1) ? ((need[x-dx[1]][y-dy[1]] <= -100 || 0 == need[x-dx[1]][y-dy[1]]) ? true : false) : true;
-	return nf0 && nf1 && nf2;
+	int kx = x-dx[2], ky = y-dy[2];
+	bool nf = (need[kx][ky] <= -100 || 0 == need[kx][ky]) ? true : false;
+	if (y == n-1)
+	{
+		kx = x-dx[3], ky = y-dy[3];
+		nf = (need[kx][ky] <= -100 || 0 == need[kx][ky]) ? nf : false;
+	}
+	if (x == n-1)
+	{
+		kx = x-dx[1], ky = y-dy[1];
+		nf = (need[kx][ky] <= -100 || 0 == need[kx][ky]) ? nf : false;
+	}
+	return nf;
 }
 
 void unsetline(int p, char ch, int & h0, int & h1)
@@ -89,6 +111,7 @@ bool setline(int p, char ch, int & h0, int & h1, bool nf)
 	int x1 = x-(('/' == ch) ? dx[1] : dx[0]), y1 = y-(('/' == ch) ? dy[1] : dy[0]);
 	need[x0][y0]--;
 	need[x1][y1]--;
+
 	if (nf && !iskeyneed(x, y))
 	{
 		need[x0][y0]++;
@@ -160,15 +183,19 @@ bool dfs(int g)
 			return false;
 		return dfs(g+1);
 	}
-	for(int c = 0; c < 2; c++)
+	int h0 = -1, h1 = -1;
+	if (setline(g, '/', h0, h1, true))
 	{
-		int h0 = -1, h1 = -1;
-		if (setline(g, "/\\"[c], h0, h1, true))
-		{
-			if (dfs(g+1))
-				return true;
-			unsetline(g, "/\\"[c], h0, h1);
-		}
+		if (dfs(g+1))
+			return true;
+		unsetline(g, '/', h0, h1);
+	}
+	h0 = h1 = -1;
+	if (setline(g, '\\', h0, h1, true))
+	{
+		if (dfs(g+1))
+			return true;
+		unsetline(g, '\\', h0, h1);
 	}
 	return false;
 }
